@@ -1,6 +1,6 @@
 {
     "name": "react-faust-grid",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Basic Grid-System based on percent-values. Features highly customizable breakpoints and is SSR-ready.",
     "author": "https://github.com/AndreasFaust",
     "license": "MIT",
