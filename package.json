@@ -1,10 +1,10 @@
 {
-    "name": "react-faust-grid",
+    "name": "react-raster",
     "version": "0.0.4",
     "description": "Basic Grid-System based on percent-values. Features highly customizable breakpoints and is SSR-ready.",
     "author": "https://github.com/AndreasFaust",
     "license": "MIT",
-    "repository": "https://github.com/AndreasFaust/react-faust-grid",
+    "repository": "https://github.com/AndreasFaust/react-raster",
     "main": "dist/index.js",
     "module": "dist/index.es.js",
     "jsnext:main": "dist/index.es.js",
@@ -27,8 +27,8 @@
     },
     "peerDependencies": {
         "prop-types": "^15.5.4",
-        "react": "^15.0.0 || ^16.0.0",
-        "react-dom": "^15.0.0 || ^16.0.0"
+        "react": "^16.8.0",
+        "react-dom": "^16.8.0"
     },
     "devDependencies": {
         "@svgr/rollup": "^2.4.1",
