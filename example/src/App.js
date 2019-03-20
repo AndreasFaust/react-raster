@@ -6,7 +6,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <ExampleComponent text='Test!' />
+        <ExampleComponent text='Test!!!!' />
       </div>
     )
   }
