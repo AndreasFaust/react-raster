@@ -1,5 +1,30 @@
-/* body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-} */
+.Box {
+}
+
+.Box--1 .Box__inner {
+  background: lightgrey;
+  opacity: 0.5;
+}
+.Box--2 .content {
+  /* background: lightblue; */
+  opacity: 0.5;
+}
+.Box--3 .content {
+  /* background: pink; */
+  opacity: 0.5;
+}
+.Box--4 .content {
+  background: lightcoral;
+  opacity: 0.5;
+}
+.Box--5 .content {
+  background: lightcyan;
+  opacity: 0.5;
+}
+
+.content {
+  width: 100%;
+  height: 50vh;
+  /* background: pink; */
+  /* background: rgba(255, 0, 0, 0.5); */
+}
