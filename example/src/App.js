@@ -32,7 +32,7 @@ const App = () => {
               }
         `}
       >
-        <Box className='Box--1' cols={[12]}>
+        <Box className='Box--1' cols={[11]}>
           <div className='content'>Welt!</div>
         </Box>
         <Box
