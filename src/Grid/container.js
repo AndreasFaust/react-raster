@@ -31,7 +31,11 @@ const StyledContainer = styled(Container)`
 `
 
 const StyledContainerCustom = styled(StyledContainer)`
-  ${props => props.style}
+  ${props => props.media.map((media, index) => {
+    return media`
+      ${props.style[index]}   
+    `
+  })}
 `
 
 export default StyledContainerCustom

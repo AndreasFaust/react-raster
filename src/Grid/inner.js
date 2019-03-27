@@ -8,6 +8,7 @@ const Inner = ({ className, children }) => {
 const StyledInner = styled(Inner)`  
   display: flex;
   flex-wrap: wrap;
+  position: relative;
   ${props => props.media.map((media, index) => {
     return media`
       width: calc(100% + (${props.gutterX[index]}));
@@ -23,4 +24,12 @@ const StyledInner = styled(Inner)`
   })}
 `
 
-export default StyledInner
+const StyledInnerCustom = styled(StyledInner)`
+  ${props => props.media.map((media, index) => {
+    return media`
+      ${props.style[index]}   
+    `
+  })}
+`
+
+export default StyledInnerCustom

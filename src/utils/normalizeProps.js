@@ -1,4 +1,4 @@
-import isArray from 'lodash/isArray'
+import isArray from './isArray'
 
 function addValues ({ array, breakpointsLength }) {
   const lastKnownValue = array[array.length - 1]

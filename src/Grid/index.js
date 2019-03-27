@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-// import { array, bool, number, node, object, string } from 'prop-types'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Context from '../context'
@@ -27,6 +26,7 @@ const Grid = (props) => {
     position,
     style,
     className,
+    styleContent,
     children
   } = props
   const controlIsVisible = useControl(control)
@@ -43,6 +43,8 @@ const Grid = (props) => {
   const topNormalized = useMemo(() => normalizeProps({ prop: top, breakpoints: breakpointsNormalized }), [top, breakpointsNormalized])
   const bottomNormalized = useMemo(() => normalizeProps({ prop: bottom, breakpoints: breakpointsNormalized }), [bottom, breakpointsNormalized])
   const positionNormalized = useMemo(() => normalizeProps({ prop: position, breakpoints: breakpointsNormalized }), [position, breakpointsNormalized])
+  const styleNormalized = useMemo(() => normalizeProps({ prop: style, breakpoints }), [style, breakpoints])
+  const styleContentNormalized = useMemo(() => normalizeProps({ prop: styleContent, breakpoints }), [styleContent, breakpoints])
 
   return (
     <StyledContainer
@@ -54,11 +56,20 @@ const Grid = (props) => {
       right={rightNormalized}
       top={topNormalized}
       bottom={bottomNormalized}
-      style={style}
+      style={styleNormalized}
       position={positionNormalized}
     >
       {control && controlIsVisible && (
-        <Control {...props} />
+        <Control
+          colspan={colspan}
+          breakpoints={breakpoints}
+          gutterX={gutterX}
+          gutterY={gutterY}
+          left={left}
+          right={right}
+          top={top}
+          bottom={bottom}
+        />
       )}
       <StyledInner
         className='Grid__inner'
@@ -67,6 +78,7 @@ const Grid = (props) => {
         alignX={alignXNormalized}
         alignY={alignYNormalized}
         media={media}
+        style={styleContentNormalized}
       >
         <Context.Provider
           value={{
@@ -90,19 +102,20 @@ const Grid = (props) => {
 
 Grid.propTypes = {
   breakpoints: PropTypes.array,
-  left: PropTypes.string,
-  right: PropTypes.string,
-  top: PropTypes.string,
-  bottom: PropTypes.string,
-  gutterX: PropTypes.string,
-  gutterY: PropTypes.string,
-  alignX: PropTypes.string,
-  alignY: PropTypes.string,
+  left: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  right: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  top: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  bottom: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  gutterX: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  gutterY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  alignX: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  alignY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   colspan: PropTypes.number,
   control: PropTypes.bool,
-  position: PropTypes.string,
-  style: PropTypes.string,
+  position: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   className: PropTypes.string,
+  styleContent: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   children: PropTypes.node
 }
 
@@ -120,6 +133,7 @@ Grid.defaultProps = {
   control: false,
   position: 'relative',
   style: '',
+  styleContent: '',
   className: '',
   children: null
 }

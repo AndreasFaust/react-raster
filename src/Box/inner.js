@@ -25,18 +25,14 @@ const StyledInner = styled(InnerTag)`
 
       align-items: ${props.alignY[index]};
       justify-content: ${props.alignX[index]};    
+    `
+  })}
+`
 
-      ::before {
-        content: '';
-        display: ${props.controlIsVisible ? 'block' : 'none'};
-        position: absolute;
-        z-index: -1;
-        left: calc(${props.gutterX[index]} / 2);
-        right: calc(${props.gutterX[index]} / 2);
-        top: calc(${props.gutterY[index]} / 2);
-        bottom: calc(${props.gutterY[index]} / 2); 
-        background: rgba(0, 100, 255, 0.1); 
-      }    
+const StyledInnerCustom = styled(StyledInner)`
+  ${props => props.media.map((media, index) => {
+    return media`
+      ${props.style[index]}   
     `
   })}
 `
@@ -61,17 +57,32 @@ const StyledContentCustom = styled(StyledContent)`
   })}
 `
 
-function getStylesContentControl (style, controlIsVisible) {
-  return style.map(s => (controlIsVisible
-    ? s + '\n background-color: rgba(0, 100, 255, 0.1);'
-    : s
-  ))
-}
+const StyledControlCustom = styled('div')`
+  position: absolute;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 100, 255, 0.1);
+`
+
+const StyledControlInner = styled('div')`
+  position: absolute;
+  z-index: 10000;
+  background-color: rgba(0, 100, 255, 0.1);
+  ${props => props.media.map((media, index) => {
+    return media`
+      left: calc(${props.gutterX[index]} / 2);
+      right: calc(${props.gutterX[index]} / 2);
+      top: calc(${props.gutterY[index]} / 2);
+      bottom: calc(${props.gutterY[index]} / 2); 
+    `
+  })}
+`
 
 const Inner = ({ reset, media, gutterX, gutterY, alignX, alignY, breakpoints, styleContent, controlIsVisible, children }) => {
   const styleContentNormalized = useMemo(() => normalizeProps({ prop: styleContent, breakpoints }), [styleContent, breakpoints])
-  const styleContentControl = useMemo(() => getStylesContentControl(styleContentNormalized, controlIsVisible)
-    , [styleContentNormalized, controlIsVisible])
 
   return reset
     ? (
@@ -80,13 +91,21 @@ const Inner = ({ reset, media, gutterX, gutterY, alignX, alignY, breakpoints, st
         media={media}
         alignX={alignX}
         alignY={alignY}
-        style={styleContentControl}
+        style={styleContentNormalized}
       >
-        {children}
+        {controlIsVisible
+          ? (
+            <>
+              <StyledControlCustom />
+              {children}
+            </>
+          )
+          : children
+        }
       </StyledContentCustom>
     )
     : (
-      <StyledInner
+      <StyledInnerCustom
         className={`Box__inner`}
         gutterX={gutterX}
         gutterY={gutterY}
@@ -94,9 +113,23 @@ const Inner = ({ reset, media, gutterX, gutterY, alignX, alignY, breakpoints, st
         alignY={alignY}
         media={media}
         controlIsVisible={controlIsVisible}
+        style={styleContentNormalized}
       >
-        {children}
-      </StyledInner>
+        {controlIsVisible
+          ? (
+            <>
+              <StyledControlInner
+                gutterX={gutterX}
+                gutterY={gutterY}
+                media={media}
+              />
+              {children}
+            </>
+          )
+          : children
+        }
+
+      </StyledInnerCustom>
     )
 }
 

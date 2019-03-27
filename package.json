@@ -1,7 +1,7 @@
 {
   "name": "react-raster",
-  "version": "1.0.0",
-  "description": "Raster",
+  "version": "0.0.0",
+  "description": "Advanced Grid-System based on Styled Components, which is highly customizable and ready for server-side-rendering.",
   "author": "AndreasFaust",
   "license": "MIT",
   "repository": "AndreasFaust/react-raster",
@@ -25,6 +25,14 @@
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags",
     "deploy": "gh-pages -d example/build"
   },
+  "keywords": [
+    "React",
+    "Grid",
+    "Layout",
+    "Styled Components",
+    "Server Side Rendering",
+    "Raster"
+  ],
   "peerDependencies": {
     "react": "^16.8.5",
     "styled-components": "^4.2.0"

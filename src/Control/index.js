@@ -10,7 +10,7 @@ const Control = (props) => {
       className='Grid--Control'
       alignY='stretch'
       style={`
-        z-index: -1;
+        z-index: 10000;
         left: 0; 
         top: 0; 
         bottom: 0;
