@@ -19,20 +19,20 @@ const App = () => {
         alignY={'top'}
         control
         styleContent={`
-              ::before {
-                content: '';
-                z-index: -1;
-                display: block;
-                background: yellow;
-                position: absolute;    
-                left: 0;           
-                top: 0;           
-                right: 0;           
-                bottom: 0;           
-              }
+          ::before {
+            content: '';
+            z-index: -1;
+            display: block;
+            background: yellow;
+            position: absolute;    
+            left: 0;           
+            top: 0;           
+            right: 0;           
+            bottom: 0;           
+          }
         `}
       >
-        <Box className='Box--1' cols={[11]}>
+        <Box className='Box--1' cols={[11]} reset={false}>
           <div className='content'>Welt!</div>
         </Box>
         <Box

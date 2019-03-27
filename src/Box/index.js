@@ -21,7 +21,8 @@ const Box = ({
   top = 0,
   bottom = 0,
   style,
-  styleContent
+  styleContent,
+  reset
 }) => {
   const {
     breakpoints,
@@ -36,7 +37,7 @@ const Box = ({
   } = useContext(Context)
   const colsNormalized = useMemo(() => normalizeProps({ prop: cols, defaultProp: parent, breakpoints }), [cols, parent])
   const colsWidth = useMemo(() => getCols({ cols: colsNormalized, parent }), [colsNormalized, parent])
-  const reset = useMemo(() => getResetFromChildren(children), [children])
+  const resetNormalized = useMemo(() => getResetFromChildren(children, reset), [children, reset])
   const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, defaultProp: alignXContext, breakpoints })), [alignX, alignXContext, breakpoints])
   const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, defaultProp: alignYContext, breakpoints })), [alignY, alignYContext, breakpoints])
 
@@ -63,7 +64,7 @@ const Box = ({
         gutterX={gutterX}
         gutterY={gutterY}
         media={media}
-        reset={reset}
+        reset={resetNormalized}
         alignX={alignXNormalized}
         alignY={alignYNormalized}
         styleContent={styleContent}
@@ -103,7 +104,8 @@ Box.propTypes = {
   top: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   bottom: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   style: PropTypes.string,
-  styleContent: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
+  styleContent: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  reset: PropTypes.bool
 }
 
 Box.defaultProps = {
@@ -117,7 +119,8 @@ Box.defaultProps = {
   top: '0',
   bottom: '0',
   style: '',
-  styleContent: ''
+  styleContent: '',
+  reset: undefined
 }
 
 export default Box
