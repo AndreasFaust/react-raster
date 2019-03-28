@@ -16,6 +16,7 @@ const Container = ({
 const StyledContainer = styled(Container)`
   display: flex;
   overflow: hidden;
+  box-sizing: border-box;
   ${props => props.media.map((media, index) => {
     return media`
       width: ${props.cols[index]}%;

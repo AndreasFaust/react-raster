@@ -1,5 +1,5 @@
 import React from 'react'
-import './reset.css'
+// import './reset.css'
 import './index.css'
 import { Grid, Box } from 'react-raster'
 

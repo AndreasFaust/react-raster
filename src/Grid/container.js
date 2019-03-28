@@ -14,10 +14,10 @@ const Container = ({
 }
 
 const StyledContainer = styled(Container)`
-  width: 100%;
   overflow: hidden;
   display: flex;
   align-items: stretch;
+  box-sizing: border-box;
 
   ${props => props.media.map((media, index) => {
     return media`
