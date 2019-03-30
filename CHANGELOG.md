@@ -1,3 +1,10 @@
+### 1.2.0 (2019-03-30)
+
+##### Refactors
+
+*  Change prop reset to hasChildBoxes (5072a8c4)
+*  Improve resetting structure (7b2988e8)
+
 #### 1.1.1 (2019-03-28)
 
 ##### Bug Fixes
