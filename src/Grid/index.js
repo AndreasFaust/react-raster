@@ -6,7 +6,7 @@ import normalizeProps from '../utils/normalizeProps'
 import getMediaQueries from '../utils/getMediaQueries'
 import getAlign from '../utils/getAlign'
 import useControl from '../utils/useControl'
-import StyledInner from './inner'
+import Inner from '../utils/inner'
 import Resetter from '../utils/resetter'
 import StyledContainer from './container'
 import Control from '../Control'
@@ -25,9 +25,9 @@ const Grid = (props) => {
     colspan,
     control,
     position,
-    style,
     className,
-    styleContent,
+    styleOuter,
+    styleInner,
     children
   } = props
   const controlIsVisible = useControl(control)
@@ -44,8 +44,8 @@ const Grid = (props) => {
   const topNormalized = useMemo(() => normalizeProps({ prop: top, breakpoints: breakpointsNormalized }), [top, breakpointsNormalized])
   const bottomNormalized = useMemo(() => normalizeProps({ prop: bottom, breakpoints: breakpointsNormalized }), [bottom, breakpointsNormalized])
   const positionNormalized = useMemo(() => normalizeProps({ prop: position, breakpoints: breakpointsNormalized }), [position, breakpointsNormalized])
-  const styleNormalized = useMemo(() => normalizeProps({ prop: style, breakpoints }), [style, breakpoints])
-  const styleContentNormalized = useMemo(() => normalizeProps({ prop: styleContent, breakpoints }), [styleContent, breakpoints])
+  const styleOuterNormalized = useMemo(() => normalizeProps({ prop: styleOuter, breakpoints }), [styleOuter, breakpoints])
+  const styleInnerNormalized = useMemo(() => normalizeProps({ prop: styleInner, breakpoints }), [styleInner, breakpoints])
 
   return (
     <StyledContainer
@@ -57,7 +57,7 @@ const Grid = (props) => {
       right={rightNormalized}
       top={topNormalized}
       bottom={bottomNormalized}
-      style={styleNormalized}
+      style={styleOuterNormalized}
       position={positionNormalized}
     >
       {control && controlIsVisible && (
@@ -72,14 +72,14 @@ const Grid = (props) => {
           bottom={bottom}
         />
       )}
-      <StyledInner
-        className='Grid__inner'
+      <Inner
+        className='Grid__Inner'
         gutterX={gutterXNormalized}
         gutterY={gutterYNormalized}
         alignX={alignXNormalized}
         alignY={alignYNormalized}
         media={media}
-        style={styleContentNormalized}
+        style={styleInnerNormalized}
       >
         <Resetter
           className='Grid__Resetter'
@@ -89,7 +89,6 @@ const Grid = (props) => {
           alignX={alignXNormalized}
           alignY={alignYNormalized}
           media={media}
-          style={styleContentNormalized}
         >
           <Context.Provider
             value={{
@@ -107,7 +106,7 @@ const Grid = (props) => {
             {children}
           </Context.Provider>
         </Resetter>
-      </StyledInner>
+      </Inner>
     </StyledContainer>
   )
 }
@@ -127,7 +126,7 @@ Grid.propTypes = {
   position: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   className: PropTypes.string,
-  styleContent: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  styleInner: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   children: PropTypes.node
 }
 
@@ -145,7 +144,7 @@ Grid.defaultProps = {
   control: false,
   position: 'relative',
   style: '',
-  styleContent: '',
+  styleInner: '',
   className: '',
   children: null
 }

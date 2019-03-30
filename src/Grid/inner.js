@@ -12,14 +12,6 @@ const StyledInner = styled(Inner)`
   width: 100%;
   ${props => props.media.map((media, index) => {
     return media`
-      
-      // width: calc(100% + (${props.gutterX[index]}));
-      
-      // margin-left: calc(-${props.gutterX[index]} / 2);
-      // margin-right: calc(-${props.gutterX[index]} / 2);
-      // margin-top: calc(-${props.gutterY[index]} / 2);
-      // margin-bottom: calc(-${props.gutterY[index]} / 2);
-
       align-items: ${props => props.alignY[index]};
       justify-content: ${props => props.alignX[index]};    
     `

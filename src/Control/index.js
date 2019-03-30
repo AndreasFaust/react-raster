@@ -9,7 +9,7 @@ const Control = (props) => {
       position='absolute'
       className='Grid--Control'
       alignY='stretch'
-      style={`
+      styleOuter={`
         width: 100%;
         z-index: 10000;
         left: 0; 
@@ -21,7 +21,9 @@ const Control = (props) => {
         <Box
           key={index}
           cols={1}
-          styleContent={`background-color: rgba(0, 100, 255, 0.1);`}
+          styleInner={`
+            background-color: rgba(0, 100, 255, 0.1);
+          `}
         />
       ))}
     </Grid>

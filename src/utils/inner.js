@@ -19,6 +19,7 @@ const StyledInner = styled(InnerTag)`
     `
   })}
 `
+
 const StyledInnerCustom = styled(StyledInner)`
   ${props => props.media.map((media, index) => {
     return media`
@@ -42,6 +43,7 @@ const Inner = ({
   media,
   gutterX,
   gutterY,
+  className,
   alignX,
   alignY,
   breakpoints,
@@ -51,7 +53,7 @@ const Inner = ({
 }) => {
   return (
     <StyledInnerCustom
-      className={`Box__content`}
+      className={className}
       media={media}
       alignX={alignX}
       alignY={alignY}

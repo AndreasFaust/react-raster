@@ -18,7 +18,7 @@ const App = () => {
         alignX={'left'}
         alignY={'top'}
         control
-        styleContent={`
+        styleInner={`
           background: yellow;
           // ::before {
           //   content: '';
@@ -44,7 +44,7 @@ const App = () => {
           className='Box--2'
           cols={[6]}
           left={[1, 1, 2]}
-          // styleContent={[`
+          // styleInner={[`
           //   border: 10px solid red;
           //   &::after {
           //     content: '';
@@ -63,19 +63,19 @@ const App = () => {
         <Box
           className='Box--3'
           cols={[6]}
-          styleContent={[`
-            background: pink;
+          styleInner={[`
+            // background: pink;
           `]}
         >
           <Box
             cols={[6, 6, 6, 3]}
-            styleContent={[`
+            styleInner={[`
               background: blue;
             `]}
           >
             <div className='content'>Welt!</div>
           </Box>
-          <Box cols={[3]}>
+          <Box cols={[3]} left={1}>
             <div className='content'>Welt!</div>
           </Box>
         </Box>
