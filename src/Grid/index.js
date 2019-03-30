@@ -7,6 +7,7 @@ import getMediaQueries from '../utils/getMediaQueries'
 import getAlign from '../utils/getAlign'
 import useControl from '../utils/useControl'
 import StyledInner from './inner'
+import Resetter from '../utils/resetter'
 import StyledContainer from './container'
 import Control from '../Control'
 
@@ -80,21 +81,32 @@ const Grid = (props) => {
         media={media}
         style={styleContentNormalized}
       >
-        <Context.Provider
-          value={{
-            breakpoints: breakpointsNormalized,
-            gutterX: gutterXNormalized,
-            gutterY: gutterYNormalized,
-            alignX: alignXNormalized,
-            alignY: alignYNormalized,
-            media,
-            colspan,
-            parent,
-            controlIsVisible
-          }}
+        <Resetter
+          className='Grid__Resetter'
+          reset
+          gutterX={gutterXNormalized}
+          gutterY={gutterYNormalized}
+          alignX={alignXNormalized}
+          alignY={alignYNormalized}
+          media={media}
+          style={styleContentNormalized}
         >
-          {children}
-        </Context.Provider>
+          <Context.Provider
+            value={{
+              breakpoints: breakpointsNormalized,
+              gutterX: gutterXNormalized,
+              gutterY: gutterYNormalized,
+              alignX: alignXNormalized,
+              alignY: alignYNormalized,
+              media,
+              colspan,
+              parent,
+              controlIsVisible
+            }}
+          >
+            {children}
+          </Context.Provider>
+        </Resetter>
       </StyledInner>
     </StyledContainer>
   )

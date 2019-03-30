@@ -8,6 +8,7 @@ import normalizeProps from '../utils/normalizeProps'
 import getAlign from '../utils/getAlign'
 import getCols from '../utils/getCols'
 import Inner from './inner'
+import Resetter from '../utils/resetter'
 import StyledContainer from './container'
 
 const Box = ({
@@ -71,21 +72,34 @@ const Box = ({
         breakpoints={breakpoints}
         controlIsVisible={controlIsVisible}
       >
-        <Context.Provider
-          value={{
-            breakpoints,
-            gutterX,
-            gutterY,
-            alignX: alignXNormalized,
-            alignY: alignYNormalized,
-            colspan,
-            media,
-            parent: colsNormalized,
-            controlIsVisible
-          }}
+        <Resetter
+          className='Box__Resetter'
+          reset={resetNormalized}
+          gutterX={gutterX}
+          gutterY={gutterY}
+          media={media}
+          alignX={alignXNormalized}
+          alignY={alignYNormalized}
+          styleContent={styleContent}
+          breakpoints={breakpoints}
+          controlIsVisible={controlIsVisible}
         >
-          {children}
-        </Context.Provider>
+          <Context.Provider
+            value={{
+              breakpoints,
+              gutterX,
+              gutterY,
+              alignX: alignXNormalized,
+              alignY: alignYNormalized,
+              colspan,
+              media,
+              parent: colsNormalized,
+              controlIsVisible
+            }}
+          >
+            {children}
+          </Context.Provider>
+        </Resetter>
       </Inner>
     </StyledContainer>
   )
