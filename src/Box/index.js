@@ -23,7 +23,7 @@ const Box = ({
   bottom,
   styleOuter,
   styleInner,
-  reset
+  hasChildBoxes
 }) => {
   const {
     breakpoints,
@@ -36,10 +36,11 @@ const Box = ({
     media,
     controlIsVisible
   } = useContext(Context)
+  const resetNormalized = useMemo(() => getResetFromChildren(children, hasChildBoxes), [children, hasChildBoxes])
 
-  const colsNormalized = useMemo(() => normalizeProps({ prop: cols, defaultProp: parent, breakpoints }), [cols, parent])
+  const colsNormalized = useMemo(() => normalizeProps({ prop: cols, defaultProp: parent, breakpoints }), [cols, parent, breakpoints])
   const colsWidth = useMemo(() => getCols({ cols: colsNormalized, parent }), [colsNormalized, parent])
-  const resetNormalized = useMemo(() => getResetFromChildren(children, reset), [children, reset])
+
   const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, defaultProp: alignXContext, breakpoints })), [alignX, alignXContext, breakpoints])
   const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, defaultProp: alignYContext, breakpoints })), [alignY, alignYContext, breakpoints])
 

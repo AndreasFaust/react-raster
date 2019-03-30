@@ -10,6 +10,7 @@ import Inner from '../utils/inner'
 import Resetter from '../utils/resetter'
 import StyledContainer from './container'
 import Control from '../Control'
+import getResetFromChildren from '../utils/getResetFromChildren'
 
 const Grid = (props) => {
   const {
@@ -28,9 +29,11 @@ const Grid = (props) => {
     className,
     styleOuter,
     styleInner,
-    children
+    children,
+    hasChildBoxes
   } = props
   const controlIsVisible = useControl(control)
+  const resetNormalized = useMemo(() => getResetFromChildren(children, hasChildBoxes), [children, hasChildBoxes])
 
   const breakpointsNormalized = useMemo(() => breakpoints, [breakpoints])
   const gutterXNormalized = useMemo(() => normalizeProps({ prop: gutterX, breakpoints: breakpointsNormalized }), [gutterX, breakpointsNormalized])
@@ -83,7 +86,7 @@ const Grid = (props) => {
       >
         <Resetter
           className='Grid__Resetter'
-          reset
+          reset={resetNormalized}
           gutterX={gutterXNormalized}
           gutterY={gutterYNormalized}
           alignX={alignXNormalized}

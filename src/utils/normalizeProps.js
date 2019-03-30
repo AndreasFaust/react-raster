@@ -9,7 +9,10 @@ function addValues ({ array, breakpointsLength }) {
 }
 
 function getArray (prop, defaultProp) {
-  if (!prop) return [defaultProp]
+  if (!prop) {
+    if (isArray(defaultProp)) return defaultProp
+    return [defaultProp]
+  }
   if (!isArray(prop)) return [prop]
   return prop
 }
@@ -17,6 +20,7 @@ function getArray (prop, defaultProp) {
 export default ({ prop, defaultProp, breakpoints }) => {
   const breakpointsLength = breakpoints.length
   let array = getArray(prop, defaultProp)
+
   if (array.length < breakpointsLength) array = addValues({ array, breakpointsLength })
   if (array.length > breakpointsLength) array = array.splice(breakpointsLength)
   return array

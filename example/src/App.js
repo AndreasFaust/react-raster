@@ -3,6 +3,15 @@ import React from 'react'
 import './index.css'
 import { Grid, Box } from 'react-raster'
 
+const ChildBox = () => (
+  <Box
+    className='Box--1'
+    cols={[8]}
+  >
+    <div className='content'>Welt!</div>
+  </Box>
+)
+
 const App = () => {
   return (
     <>
@@ -33,30 +42,26 @@ const App = () => {
           // }
         `}
       >
-        <Box
+        {/* <Box
           className='Box--1'
           cols={[11]}
           // reset={false}
         >
           <div className='content'>Welt!</div>
-        </Box>
+        </Box> */}
         <Box
+          className='Box--1'
+          hasChildBoxes
+          styleInner={`
+            background: grey;
+          `}
+        >
+          <ChildBox />
+        </Box>
+        {/* <Box
           className='Box--2'
           cols={[6]}
           left={[1, 1, 2]}
-          // styleInner={[`
-          //   border: 10px solid red;
-          //   &::after {
-          //     content: '';
-          //     width: 10px;
-          //     height: 100px;
-          //     background: red;
-          //     display: block;
-          //     position: absolute;
-          //     left: 0;
-          //     top: 0;
-          //   }
-          // `, 'border: 20px solid green;']}
         >
           <div className='content'>Welt!</div>
         </Box>
@@ -78,7 +83,7 @@ const App = () => {
           <Box cols={[3]} left={1}>
             <div className='content'>Welt!</div>
           </Box>
-        </Box>
+        </Box> */}
       </Grid>
     </>
   )
