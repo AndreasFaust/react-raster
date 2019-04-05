@@ -2,8 +2,9 @@
 
 [![NPM](https://img.shields.io/npm/v/react-raster.svg)](https://www.npmjs.com/package/react-raster) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-**React Raster** is an advanced grid-system based on **Styled Components**. It is highly customizable while being very easy to use. It has no further dependencies and does not force you into a Ui-Framework, you don't want to use.
-React Raster uses React Hooks and Context API.
+**React Raster** is an advanced grid-system based on **Styled Components**. It is highly customizable while being very easy to use. It has no further dependencies and does only one thing: making layouting easy. Regardless, if your grid is simple or complex: React Raster will save you a lot of time.
+
+React Raster is built with Hooks and Context API.
 
 **React Raster provides:**
 
@@ -296,7 +297,7 @@ const Example = () => {
 
 ## Contributing
 
-Every contribution is very much appreciated!
+Every contribution is very much appreciated.
 
 **If you like react-raster, don't hesitate to star it on [GitHub](https://github.com/AndreasFaust/react-raster).**
 
