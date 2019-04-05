@@ -58,8 +58,8 @@ If the array is shorter than the breakpoints-array, the last element's value is 
 
 This example defines the following left Grid-padding:
 
-- 0 — 500px: 3vw
-- 501px — 1000px: 2vw
+- 0 — 499px: 3vw
+- 500px — 999px: 2vw
 - 1000px — infinite: 3vw
 
 Look up the props at the component-specification below to check, if a prop supports this feature.
@@ -71,7 +71,7 @@ Either a Box/Grid contains Boxes or regular elements/components.
 
 ### Group Boxes inside custom components
 
-React Raster automatically detects, if a Grid or Box contains other Boxes. This is important to keep the grid adjusted. If you want to combine certain Boxes or groupings of Boxes into a custom component, you have to tell react-raster, that this component contains Boxes. This is done by setting **hasChildBoxes**.
+React Raster automatically detects, if a Grid or Box contains other Boxes. This is important to keep the grid adjusted. If you want to combine certain Boxes or groupings of Boxes into a custom component, you have to tell react-raster, that this component contains Boxes. This is done by setting **hasChildBoxes** on the parent Grid/Box:
 
 ```jsx
   const MyChildBoxes = () => (
@@ -145,6 +145,7 @@ const Example = () => (
   >
     <Box
       className="Testgrid__Box"
+      tag="article"
       cols={[12, 12, 6]}
       top={1}
       left={[0, 0, 3]}
