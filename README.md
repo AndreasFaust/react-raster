@@ -74,12 +74,11 @@ Look up the props at the component-specification below to check, if a prop suppo
 Avoid mixing Boxes with other components inside Grids or Boxes.
 Either a Box/Grid contains other Boxes or regular elements.
 
-### Grouping Boxes with custom components
+### Group Boxes inside custom components
 
 React Raster automatically detects, if a Grid or Box contains other Boxes. This is important to keep the grid adjusted. If you want to combine certain Boxes or groupings into a custom component, you have to tell react-raster, that this component contains Boxes. This is done by setting **hasChildBoxes**.
 
 ```jsx
-
   const MyChildBoxes = () => (
     <>
       <Box cols={3}>
@@ -211,12 +210,12 @@ const Example = () => {
   alignX
   // String or Array. Horizontal Align.
   // Values: Anything that works with "justify-content".
-  //         Additionally shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
+  //         Shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
   // Default: 'flex-start'
   alignY
   // String or Array. Vertical Align.
   // Values: Anything that works with "align-items".
-  //         Additionally shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
+  //         Shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
   // Default: 'flex-start'
   control
   // Bool. Enable visual control via ESC-Key.
@@ -238,7 +237,7 @@ const Example = () => {
   // Default: ''
   hasChildBoxes
   // Boolean. Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.
-  // See the topic "Grouping Boxes with custom components" for more information. If the Boxes are nested inside other components react-raster does not know, that you are sitll using its grid.
+  // See the topic "Group Boxes inside custom components" for more information. If the Boxes are nested inside other components react-raster does not know, that you are sitll using its grid.
   // Default: undefined
 />
 ```
@@ -269,12 +268,12 @@ const Example = () => {
   alignX
   // String or Array. Horizontal Align.
   // Values: Anything that works with "justify-content".
-  //         Additionally shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
+  //         Shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
   // Default: 'flex-start'
   alignY
   // String or Array. Vertical Align.
   // Values: Anything that works with "align-items".
-  //         Additionally shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
+  //         Shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
   // Default: 'flex-start'
   className
   // String. Custom class for the Box-Outer-Container-Tag.
@@ -290,7 +289,7 @@ const Example = () => {
   // Default: ''
   hasChildBoxes
   // Boolean. Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.
-  // See the topic "Grouping Boxes with custom components" for more information. If the Boxes are nested inside other components react-raster does not know, that you are sitll using its grid.
+  // See the topic "Group Boxes inside custom components" for more information. If the Boxes are nested inside other components react-raster does not know, that you are sitll using its grid.
   // Default: undefined
 />
 ```
