@@ -30,19 +30,13 @@ React Raster has only two components: Grid and Box.
 You can freely nest them inside each other.
 
 ```jsx
-<Grid
-  breakpoints={[0, 400, 800, 1200]}
-  colspan={6}
->
+<Grid breakpoints={[0, 400, 800, 1200]} colspan={6}>
   <Box cols={[6, 6, 3]}>
-    <h1>Hello World!<h1>
+    <h1>Hello World!</h1>
   </Box>
   <Box cols={[6, 6, 3]}>
-    <Box
-      cols={[4, 4, 2]}
-      left={[2, 2, 1]}
-    >
-      <h2>Stop wars!<h2>
+    <Box cols={[4, 4, 2]} left={[2, 2, 1]}>
+      <h2>Stop wars!</h2>
     </Box>
   </Box>
 </Grid>
