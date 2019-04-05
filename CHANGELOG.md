@@ -1,3 +1,9 @@
+#### 1.3.2 (2019-04-05)
+
+##### Documentation Changes
+
+*  Fix examples. (6379ef86)
+
 #### 1.3.1 (2019-04-05)
 
 ##### Documentation Changes
