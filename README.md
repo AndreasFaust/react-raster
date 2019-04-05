@@ -15,9 +15,6 @@ React Raster uses React Hooks and Context API.
 - Visual control via ESC-key
 - Ready for server-side-rendering
 
-**React Raster is under development.**
-**A detailed documentation with examples is about to follow.**
-
 ## Install
 
 Install all dependencies via Yarn or NPM.
@@ -29,7 +26,26 @@ yarn add react-raster styled-components react react-dom
 ## Usage
 
 React Raster has only two components: Grid and Box.
-You can freely nest them inside each other. Only be sure, that you don't
+You can freely nest them inside each other.
+
+```jsx
+<Grid
+  breakpoints={[0, 400, 800, 1200]}
+  colspan={6}
+>
+  <Box cols={[6, 6, 3]}>
+    <h1>Hello World!<h1>
+  </Box>
+  <Box cols={[6, 6, 3]}>
+    <Box
+      cols={[4, 4, 2]}
+      left={[2, 2, 1]}
+    >
+      <h2>Stop wars!<h2>
+    </Box>
+  </Box>
+</Grid>
+```
 
 ### Props matching Breakpoints
 
@@ -46,9 +62,10 @@ If the array is shorter than the breakpoints-array, the last element's value is 
 ```
 
 This example defines the folling left Grid-padding:
-0 – 500px: 3vw
-501px — 1000px: 2vw
-1000px – infinite: 3vw
+
+- 0 – 500px: 3vw
+- 501px — 1000px: 2vw
+- 1000px – infinite: 3vw
 
 Look up the props at the component-specification below to check, if a prop supports this feature.
 
@@ -64,14 +81,14 @@ React Raster automatically detects, if a Grid or Box contains other Boxes. This 
 ```jsx
 
   const MyChildBoxes = () => (
-    </>
+    <>
       <Box cols={3}>
         Hello!
       <Box>
       <Box cols={3}>
         World!
       <Box>
-    <>
+    </>
   )
 
   const MySpecialBox = () => (
@@ -93,7 +110,7 @@ React Raster automatically detects, if a Grid or Box contains other Boxes. This 
   )
 ```
 
-## Example
+## Advanced Example
 
 ```jsx
 import React from "react";
