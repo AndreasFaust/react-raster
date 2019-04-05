@@ -1,3 +1,9 @@
+#### 1.3.5 (2019-04-05)
+
+##### Documentation Changes
+
+*  Some details. (72c0a401)
+
 #### 1.3.4 (2019-04-05)
 
 ##### Documentation Changes
