@@ -35,7 +35,7 @@ const StyledInnerControl = styled('div')`
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 100, 255, 0.1);
+  background-color: ${props => props.controlColor};
 `
 
 const Inner = ({
@@ -49,6 +49,7 @@ const Inner = ({
   breakpoints,
   style,
   controlIsVisible,
+  controlColor,
   children
 }) => {
   return (
@@ -62,7 +63,7 @@ const Inner = ({
       {controlIsVisible
         ? (
             <>
-              <StyledInnerControl />
+              <StyledInnerControl controlColor={controlColor} />
               {children}
             </>
         )

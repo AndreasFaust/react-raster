@@ -22,7 +22,7 @@ const Control = (props) => {
           key={index}
           cols={1}
           styleInner={`
-            background-color: rgba(0, 100, 255, 0.1);
+            background-color: ${props.controlColor};
           `}
         />
       ))}

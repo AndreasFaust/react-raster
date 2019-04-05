@@ -1,17 +1,5 @@
-import React from 'react'
 import styled from 'styled-components'
-
-const Container = ({
-  className,
-  children,
-  tag = 'div'
-}) => (
-  React.createElement(
-    tag,
-    { className },
-    children
-  )
-)
+import Container from '../utils/container'
 
 const StyledContainer = styled(Container)`
   display: flex;

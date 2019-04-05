@@ -25,6 +25,7 @@ const Grid = (props) => {
     alignY,
     colspan,
     control,
+    controlColor,
     position,
     className,
     styleOuter,
@@ -73,6 +74,7 @@ const Grid = (props) => {
           right={right}
           top={top}
           bottom={bottom}
+          controlColor={controlColor}
         />
       )}
       <Inner
@@ -83,6 +85,7 @@ const Grid = (props) => {
         alignY={alignYNormalized}
         media={media}
         style={styleInnerNormalized}
+        controlColor={controlColor}
       >
         <Resetter
           className='Grid__Resetter'
@@ -103,7 +106,8 @@ const Grid = (props) => {
               media,
               colspan,
               parent,
-              controlIsVisible
+              controlIsVisible,
+              controlColor
             }}
           >
             {children}
@@ -126,11 +130,13 @@ Grid.propTypes = {
   alignY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   colspan: PropTypes.number,
   control: PropTypes.bool,
+  controlColor: PropTypes.string,
   position: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   className: PropTypes.string,
   styleInner: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  children: PropTypes.node
+  children: PropTypes.node,
+  hasChildBoxes: PropTypes.bool
 }
 
 Grid.defaultProps = {
@@ -145,11 +151,13 @@ Grid.defaultProps = {
   alignY: 'top',
   colspan: 1,
   control: false,
+  controlColor: 'rgba(0, 100, 255, 0.1)',
   position: 'relative',
   style: '',
   styleInner: '',
   className: '',
-  children: null
+  children: null,
+  hasChildBoxes: undefined
 }
 
 export default Grid

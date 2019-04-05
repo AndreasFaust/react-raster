@@ -34,7 +34,8 @@ const Box = ({
     colspan,
     parent,
     media,
-    controlIsVisible
+    controlIsVisible,
+    controlColor
   } = useContext(Context)
   const resetNormalized = useMemo(() => getResetFromChildren(children, hasChildBoxes), [children, hasChildBoxes])
 
@@ -77,6 +78,7 @@ const Box = ({
         style={styleInnerNormalized}
         breakpoints={breakpoints}
         controlIsVisible={controlIsVisible}
+        controlColor={controlColor}
       >
         <Resetter
           className='Box__Resetter'
@@ -123,7 +125,8 @@ Box.propTypes = {
   bottom: PropTypes.oneOfType([PropTypes.array, PropTypes.number]),
   style: PropTypes.string,
   styleInner: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  reset: PropTypes.bool
+  reset: PropTypes.bool,
+  hasChildBoxes: PropTypes.bool
 }
 
 Box.defaultProps = {
@@ -138,7 +141,8 @@ Box.defaultProps = {
   bottom: 0,
   style: '',
   styleInner: '',
-  reset: undefined
+  reset: undefined,
+  hasChildBoxes: undefined
 }
 
 export default Box

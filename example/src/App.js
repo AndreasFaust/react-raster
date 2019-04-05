@@ -27,6 +27,7 @@ const App = () => {
         alignX={'left'}
         alignY={'top'}
         control
+        controlColor='rgba(200,255,200,0.3)'
         styleInner={`
           background: yellow;
           // ::before {
