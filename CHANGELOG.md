@@ -1,3 +1,9 @@
+#### 1.3.1 (2019-04-05)
+
+##### Documentation Changes
+
+*  Fix examples. (e7ef84b4)
+
 ### 1.3.0 (2019-04-05)
 
 ##### New Features
