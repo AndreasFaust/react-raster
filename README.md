@@ -4,8 +4,6 @@
 
 **React Raster** is an advanced grid-system based on **Styled Components**. It is highly customizable while being very easy to use. It has no further dependencies and does only one thing: making layouting easy. Regardless, if your grid is simple or complex: React Raster will save you a lot of time.
 
-React Raster is built with Hooks and Context API.
-
 **React Raster provides:**
 
 - Custom Breakpoints
@@ -15,6 +13,8 @@ React Raster is built with Hooks and Context API.
 - Lightweight and performant architecture
 - Visual control via ESC-key
 - Ready for server-side-rendering
+
+React Raster uses Hooks and Context API.
 
 ## Install
 
@@ -62,22 +62,22 @@ If the array is shorter than the breakpoints-array, the last element's value is 
   />
 ```
 
-This example defines the folling left Grid-padding:
+This example defines the following left Grid-padding:
 
-- 0 – 500px: 3vw
+- 0 — 500px: 3vw
 - 501px — 1000px: 2vw
-- 1000px – infinite: 3vw
+- 1000px — infinite: 3vw
 
 Look up the props at the component-specification below to check, if a prop supports this feature.
 
 ### Avoid mixing Boxes with other components
 
 Avoid mixing Boxes with other components inside Grids or Boxes.
-Either a Box/Grid contains other Boxes or regular elements.
+Either a Box/Grid contains Boxes or regular elements/components.
 
 ### Group Boxes inside custom components
 
-React Raster automatically detects, if a Grid or Box contains other Boxes. This is important to keep the grid adjusted. If you want to combine certain Boxes or groupings into a custom component, you have to tell react-raster, that this component contains Boxes. This is done by setting **hasChildBoxes**.
+React Raster automatically detects, if a Grid or Box contains other Boxes. This is important to keep the grid adjusted. If you want to combine certain Boxes or groupings of Boxes into a custom component, you have to tell react-raster, that this component contains Boxes. This is done by setting **hasChildBoxes**.
 
 ```jsx
   const MyChildBoxes = () => (
@@ -112,69 +112,75 @@ React Raster automatically detects, if a Grid or Box contains other Boxes. This 
 
 ## Advanced Example
 
+The following code gives you a more detailed example of what you can do with react-raster:
+
 ```jsx
 import React from "react";
 import { Grid, Box } from "react-raster";
 
-const Example = () => {
-  return (
-    <Grid
-      className="Testgrid"
-      tag="section"
-      breakpoints={[0, 500, 800, 1025, 1200, 1400]}
-      colspan={12}
-      left={["3vw", "3vw", "3vw", "2vw"]}
-      right={["3vw", "3vw", "3vw", "2vw"]}
-      top={"10vw"}
-      bottom={"20vw"}
-      gutterX={["1.5vw", "1.5vw", "2vw"]}
-      gutterY={"3vw"}
-      control
-      controlColor="rgba(0, 100, 255, 0.1)"
-      styleOuter={`
-        width: 80%;
-      `}
-      styleInner={[`background: red;`, `background: red;`, `background: blue;`]}
-    >
-      <Box
-        className="Testgrid__Box"
-        cols={[12, 12, 6]}
-        top={1}
-        left={[0, 0, 3]}
-        styleInner={`
-          background: pink;
+const MyCustomChildBox = ({ children }) => (
+  <Box
+    className="Testgrid__ChildBox"
+    cols={6}
+    top={[2, 1]}
+    alignX={"center"}
+    alignY={"center"}
+  >
+    {children}
+  </Box>
+);
 
-          ::after {
-            content: 'Hallo!';
-            position: absolute;
-            left: 50%;
-            top: 50%;
-          }
-        `}
-      >
-        <Box
-          className="Testgrid__ChildBox"
-          cols={[6]}
-          alignX={"center"}
-          alignY={"center"}
-        >
-          Hello!
-        </Box>
-        <Box
-          className="Testgrid__ChildBox"
-          cols={[6]}
-          alignX={"center"}
-          alignY={"center"}
-        >
-          World!
-        </Box>
-      </Box>
-    </Grid>
-  );
-};
+const Example = () => (
+  <Grid
+    className="Testgrid"
+    tag="section"
+    breakpoints={[0, 500, 800, 1025, 1200, 1400]}
+    colspan={12}
+    left={["3vw", "3vw", "3vw", "2vw"]}
+    right={["3vw", "3vw", "3vw", "2vw"]}
+    top={"10vw"}
+    bottom={"20vw"}
+    gutterX={["1.5vw", "1.5vw", "2vw"]}
+    gutterY={"3vw"}
+    control
+    controlColor="rgba(0, 100, 255, 0.1)"
+    styleOuter={`
+      width: 80%;
+    `}
+    styleInner={[`background: red;`, `background: red;`, `background: blue;`]}
+  >
+    <Box
+      className="Testgrid__Box"
+      cols={[12, 12, 6]}
+      top={1}
+      left={[0, 0, 3]}
+      styleInner={`
+        background: pink;
+
+        ::after {
+          content: 'Hallo!';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+        }
+      `}
+      hasChildBoxes
+    >
+      <MyCustomChildBox>
+        <h2>Hello</h2>
+      </MyCustomChildBox>
+
+      <MyCustomChildBox>
+        <h2>World</h2>
+      </MyCustomChildBox>
+    </Box>
+  </Grid>
+);
 ```
 
 ## Grid
+
+List of all props of the Grid-Component:
 
 ```jsx
 <Grid
@@ -209,12 +215,12 @@ const Example = () => {
   // Unit: any CSS unit
   // Default: '0'
   alignX
-  // String or Array. Horizontal Align.
+  // String or Array. Horizontal Align of child elements.
   // Values: Anything that works with "justify-content".
   //         Shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
   // Default: 'flex-start'
   alignY
-  // String or Array. Vertical Align.
+  // String or Array. Vertical Align of child elements.
   // Values: Anything that works with "align-items".
   //         Shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
   // Default: 'flex-start'
@@ -245,6 +251,8 @@ const Example = () => {
 
 ## Box
 
+List of all props of the Box-Component:
+
 ```jsx
 <Box
   cols
@@ -267,12 +275,12 @@ const Example = () => {
   // Unit: any CSS unit
   // Default: '0'
   alignX
-  // String or Array. Horizontal Align.
+  // String or Array. Horizontal Align of child elements.
   // Values: Anything that works with "justify-content".
   //         Shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
   // Default: 'flex-start'
   alignY
-  // String or Array. Vertical Align.
+  // String or Array. Vertical Align of child elements.
   // Values: Anything that works with "align-items".
   //         Shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
   // Default: 'flex-start'
