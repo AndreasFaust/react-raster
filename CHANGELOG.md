@@ -1,3 +1,9 @@
+#### 1.3.3 (2019-04-05)
+
+##### Documentation Changes
+
+*  Change opening description. (3a66984d)
+
 #### 1.3.2 (2019-04-05)
 
 ##### Documentation Changes
