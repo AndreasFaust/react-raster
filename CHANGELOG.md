@@ -1,3 +1,9 @@
+#### 1.3.6 (2019-04-05)
+
+##### Documentation Changes
+
+*  Small fixes. (9bb4c2b4)
+
 #### 1.3.5 (2019-04-05)
 
 ##### Documentation Changes
