@@ -1,3 +1,9 @@
+#### 1.3.9 (2019-04-06)
+
+##### Documentation Changes
+
+*  Fix some details. (bd958e22)
+
 #### 1.3.8 (2019-04-06)
 
 ##### Other Changes
