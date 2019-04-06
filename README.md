@@ -63,7 +63,7 @@ You can achieve this by defining an **array** instead of single string or number
 An array-element’s index matches the index of the breakpoint.
 If the prop-array is shorter than the breakpoints-array, the last value is adapted for all larger breakpoints.
 
-This simple example defines the following left padding of the grid:
+This simple example defines a grid with a left padding:
 
 ```jsx
 <Grid breakpoints={[0, 500, 1000, 1200, 1400]} left={["3vw", "2vw", "1vw"]} />
@@ -71,9 +71,9 @@ This simple example defines the following left padding of the grid:
 
 - 0px — 499px: left: 3vw
 - 500px — 999px: 2vw
-- 1000px — infinite: 3vw
+- 1000px — infinite: 1vw
 
-Almost all props support this feature.
+**Almost all props support this feature.**
 Look up the props-specification for `Grid` and `Box` below.
 
 ### Avoid mixing Boxes with other components
@@ -309,6 +309,12 @@ List of all props of the Box-Component:
   // Default: undefined
 />
 ```
+
+## To-Do
+
+- [ ] Nice documentation with live examples (using Docz)
+- [ ] Stricter type-checking / props validation
+- [ ] automated testing
 
 ## Contributing
 
