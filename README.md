@@ -1,10 +1,10 @@
-# React Raster 😽
+![react-raster Logo](react-raster-logo.svg)
+
+**react-raster** is an advanced grid-system based on **styled-components**. It is highly customizable while being very easy to use. It has no further dependencies and does only one thing: making layouting easy. Regardless, if your grid is simple or complex: react-raster will save you a lot of time.
 
 [![NPM](https://img.shields.io/npm/v/react-raster.svg)](https://www.npmjs.com/package/react-raster) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-**React Raster** is an advanced grid-system based on **Styled Components**. It is highly customizable while being very easy to use. It has no further dependencies and does only one thing: making layouting easy. Regardless, if your grid is simple or complex: React Raster will save you a lot of time.
-
-**React Raster provides:**
+**react-raster provides:**
 
 - Custom Breakpoints
 - Custom colspan
@@ -14,7 +14,7 @@
 - Visual control via ESC-key
 - Ready for server-side-rendering
 
-React Raster uses Hooks and Context API.
+react-raster uses Hooks and Context API.
 
 ## Install
 
@@ -26,7 +26,7 @@ yarn add react-raster styled-components react react-dom
 
 ## Usage
 
-React Raster has only two components: Grid and Box.
+react-raster has only two components: Grid and Box.
 You can freely nest them inside each other.
 
 ```jsx
@@ -71,7 +71,7 @@ Either a Box/Grid contains Boxes or regular elements/components.
 
 ### Group Boxes inside custom components
 
-React Raster automatically detects, if a Grid or Box contains other Boxes. This is important to keep the grid adjusted. If you want to combine certain Boxes or groupings of Boxes into a custom component, you have to tell react-raster, that this component contains Boxes. This is done by setting **hasChildBoxes** on the parent Grid/Box:
+react-raster automatically detects, if a Grid or Box contains other Boxes. This is important to keep the grid adjusted. If you want to combine certain Boxes or groupings of Boxes into a custom component, you have to tell react-raster, that this component contains Boxes. This is done by setting **hasChildBoxes** on the parent Grid/Box:
 
 ```jsx
   const MyChildBoxes = () => (
