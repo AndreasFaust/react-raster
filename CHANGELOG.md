@@ -1,3 +1,9 @@
+#### 1.3.7 (2019-04-06)
+
+##### Other Changes
+
+*  Add logo. (79596737)
+
 #### 1.3.6 (2019-04-05)
 
 ##### Documentation Changes
