@@ -1,10 +1,8 @@
 ![react-raster Logo](react-raster-logo.svg)
 
-**react-raster** is an advanced grid-system based on **styled-components**. It is highly customizable while being very easy to use. It has no further dependencies and does only one thing: making layouting easy. Regardless, if your grid is simple or complex: react-raster will save you a lot of time.
+**react-raster** is an advanced grid-system based on **styled-components**. It is highly customizable while being easy to use. Regardless, if your grid is simple or complex: react-raster simplifies layouting. 😽
 
 [![NPM](https://img.shields.io/npm/v/react-raster.svg)](https://www.npmjs.com/package/react-raster) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-**react-raster provides:**
 
 - Custom Breakpoints
 - Custom colspan
@@ -27,10 +25,21 @@ yarn add react-raster styled-components react react-dom
 ## Usage
 
 react-raster has only two components: Grid and Box.
-You can freely nest them inside each other.
+**Grid** is the wrapper, that defines the grid’s basics like gutter, breakpoints and other things.
+**Box** is the element, that gets positioned inside the Grid. Boxes and Grids can be freely nested inside each other.
 
 ```jsx
-<Grid breakpoints={[0, 400, 800, 1200]} colspan={6}>
+<Grid
+  breakpoints={[0, 400, 800, 1200]}
+  colspan={6}
+  left={"2vw"}
+  right={"2vw"}
+  top={"2vw"}
+  bottom={"2vw"}
+  gutterX={"2vw"}
+  gutterY={"2vw"}
+  control
+>
   <Box cols={[6, 6, 3]}>
     <h1>Hello World!</h1>
   </Box>
@@ -42,27 +51,30 @@ You can freely nest them inside each other.
 </Grid>
 ```
 
+### Defining Breakpoints
+
+Breakpoints is an array of numbers starting with `0`.
+Every number defines a `min-width`.
+
 ### Props matching Breakpoints
 
 Often you want to bind props to certain breakpoints.
-You can achieve this by defining an array instead of single string or number.
+You can achieve this by defining an **array** instead of single string or number for your prop.
 An array-element’s index matches the index of the breakpoint.
-If the array is shorter than the breakpoints-array, the last element's value is adapted for all larger breakpoints, too.
+If the prop-array is shorter than the breakpoints-array, the last value is adapted for all larger breakpoints.
+
+This simple example defines the following left padding of the grid:
 
 ```jsx
-  <Grid
-    breakpoints=[0, 500, 1000, 1200, 1400]
-    left=["3vw", "2vw", "1vw"]
-  />
+<Grid breakpoints={[0, 500, 1000, 1200, 1400]} left={["3vw", "2vw", "1vw"]} />
 ```
 
-This example defines the following left Grid-padding:
-
-- 0 — 499px: 3vw
+- 0px — 499px: left: 3vw
 - 500px — 999px: 2vw
 - 1000px — infinite: 3vw
 
-Look up the props at the component-specification below to check, if a prop supports this feature.
+Almost all props support this feature.
+Look up the props-specification for `Grid` and `Box` below.
 
 ### Avoid mixing Boxes with other components
 
