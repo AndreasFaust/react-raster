@@ -1,4 +1,4 @@
-![react-raster Logo](react-raster-logo.svg)
+![react-raster Logo](assets/react-raster-logo.svg)
 
 **react-raster** is an advanced grid-system based on **styled-components**. It is highly customizable while being easy to use. Regardless, if your grid is simple or complex: react-raster simplifies layouting. 😽
 
@@ -59,15 +59,13 @@ Every number defines a `min-width`.
 ### Props matching Breakpoints
 
 Often you want to bind props to certain breakpoints.
-You can achieve this by defining an **array** instead of single string or number for your prop.
+You can achieve this by defining an **array** instead of a single string or number for your prop.
 An array-element’s index matches the index of the breakpoint.
 If the prop-array is shorter than the breakpoints-array, the last value is adapted for all larger breakpoints.
 
 This simple example defines a grid with a left padding:
 
-```jsx
-<Grid breakpoints={[0, 500, 1000, 1200, 1400]} left={["3vw", "2vw", "1vw"]} />
-```
+![Graphic to illustrate how the elements of an props-array match breakpoints.](assets/graphic-breakpoints.png)
 
 - 0px — 499px: 3vw
 - 500px — 999px: 2vw
