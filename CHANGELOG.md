@@ -1,3 +1,9 @@
+### 1.4.0 (2019-04-07)
+
+##### New Features
+
+*  encapsulate breakpoint mediaqueries with max-width (9d43afc0)
+
 #### 1.3.9 (2019-04-06)
 
 ##### Documentation Changes
