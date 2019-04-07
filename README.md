@@ -1,4 +1,4 @@
-![react-raster Logo](assets/react-raster-logo.svg)
+![react-raster Logo](https://github.com/andreasfaust/react-raster/raw/master/assets/react-raster-logo.svg)
 
 **react-raster** is an advanced grid-system based on **styled-components**. It is highly customizable while being easy to use. Regardless, if your grid is simple or complex: react-raster simplifies layouting. 😽
 
@@ -65,7 +65,7 @@ If the prop-array is shorter than the breakpoints-array, the last value is adapt
 
 This simple example defines a grid with a left padding:
 
-![Graphic to illustrate how the elements of an props-array match breakpoints.](assets/graphic-breakpoints.png)
+![Graphic to illustrate how the elements of an props-array match breakpoints.](https://github.com/andreasfaust/react-raster/raw/master/assets/graphic-breakpoints.png)
 
 - 0px — 499px: 3vw
 - 500px — 999px: 2vw
