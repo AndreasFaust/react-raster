@@ -1,4 +1,4 @@
-![react-raster Logo](https://github.com/andreasfaust/react-raster/blob/master/assets/react-raster-logo.svg?sanitize=true)
+![react-raster Logo](https://raw.github.com/andreasfaust/react-raster/master/assets/react-raster-logo.svg?sanitize=true)
 
 **react-raster** is an advanced grid-system based on **styled-components**. It is highly customizable while being easy to use. Regardless, if your grid is simple or complex: react-raster simplifies layouting. 😽
 
