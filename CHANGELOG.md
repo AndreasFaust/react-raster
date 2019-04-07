@@ -1,3 +1,9 @@
+#### 1.4.5 (2019-04-07)
+
+##### Bug Fixes
+
+*  Remove overflow:hidden; Change default breakpoints. (b460725b)
+
 #### 1.4.4 (2019-04-07)
 
 #### 1.4.3 (2019-04-07)
