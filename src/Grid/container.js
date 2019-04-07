@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import Container from '../utils/container'
 
 const StyledContainer = styled(Container)`
-  overflow: hidden;
   display: flex;
   align-items: stretch;
   box-sizing: border-box;

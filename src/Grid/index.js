@@ -140,7 +140,7 @@ Grid.propTypes = {
 }
 
 Grid.defaultProps = {
-  breakpoints: [0, 500, 800, 1025, 1200, 1400],
+  breakpoints: [0, 432, 800, 1025, 1200, 1400],
   left: '0',
   right: '0',
   top: '0',
