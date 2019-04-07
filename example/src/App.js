@@ -6,7 +6,7 @@ import { Grid, Box } from 'react-raster'
 const ChildBox = () => (
   <Box
     className='Box--1'
-    cols={[8]}
+    cols={[8, 7, 6, 5, 4, 3]}
   >
     <div className='content'>Welt!</div>
   </Box>
@@ -51,8 +51,9 @@ const App = () => {
           <div className='content'>Welt!</div>
         </Box> */}
         <Box
-          className='Box--1'
+          className='Box--3'
           hasChildBoxes
+          cols={[8, 7, 6, 5, 4, 3]}
           styleInner={`
             background: grey;
           `}

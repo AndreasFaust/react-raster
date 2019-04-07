@@ -69,7 +69,7 @@ This simple example defines a grid with a left padding:
 <Grid breakpoints={[0, 500, 1000, 1200, 1400]} left={["3vw", "2vw", "1vw"]} />
 ```
 
-- 0px — 499px: left: 3vw
+- 0px — 499px: 3vw
 - 500px — 999px: 2vw
 - 1000px — infinite: 1vw
 
@@ -148,7 +148,7 @@ const Example = () => (
     bottom={"20vw"}
     gutterX={["1.5vw", "1.5vw", "2vw"]}
     gutterY={"3vw"}
-    control
+    control={process.env.NODE_ENV !== "production"}
     controlColor="rgba(0, 100, 255, 0.1)"
     styleOuter={`
       width: 80%;
