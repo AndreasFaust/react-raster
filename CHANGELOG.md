@@ -1,3 +1,9 @@
+#### 1.4.1 (2019-04-07)
+
+##### Other Changes
+
+*  Add illustration for breakpoints. (7dffd8cb)
+
 ### 1.4.0 (2019-04-07)
 
 ##### New Features
