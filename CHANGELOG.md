@@ -1,3 +1,9 @@
+#### 1.4.6 (2019-04-07)
+
+##### Bug Fixes
+
+*  Change align defaults to empty string. (5d9b9519)
+
 #### 1.4.5 (2019-04-07)
 
 ##### Bug Fixes
