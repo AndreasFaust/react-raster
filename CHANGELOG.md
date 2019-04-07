@@ -1,3 +1,9 @@
+#### 1.4.2 (2019-04-07)
+
+##### Other Changes
+
+*  Add absolute links for documentation images. (c79a9ed9)
+
 #### 1.4.1 (2019-04-07)
 
 ##### Other Changes
