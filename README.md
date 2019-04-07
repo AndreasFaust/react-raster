@@ -223,12 +223,12 @@ List of all props of the Grid-Component:
   // String or Array. Horizontal Align of child elements.
   // Values: Anything that works with "justify-content".
   //         Shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
-  // Default: 'flex-start'
+  // Default: ''
   alignY
   // String or Array. Vertical Align of child elements.
   // Values: Anything that works with "align-items".
   //         Shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
-  // Default: 'flex-start'
+  // Default: ''
   control
   // Bool. Enable visual control via ESC-Key.
   // Default: false
@@ -283,12 +283,12 @@ List of all props of the Box-Component:
   // String or Array. Horizontal Align of child elements.
   // Values: Anything that works with "justify-content".
   //         Shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
-  // Default: 'flex-start'
+  // Default: ''
   alignY
   // String or Array. Vertical Align of child elements.
   // Values: Anything that works with "align-items".
   //         Shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
-  // Default: 'flex-start'
+  // Default: ''
   className
   // String. Custom class for the Box-Outer-Container-Tag.
   // Default: ''

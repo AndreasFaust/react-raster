@@ -132,8 +132,8 @@ Box.propTypes = {
 Box.defaultProps = {
   className: '',
   cols: undefined,
-  alignX: 'left',
-  alignY: 'top',
+  alignX: '',
+  alignY: '',
   children: null,
   left: 0,
   right: 0,

@@ -54,6 +54,7 @@ const App = () => {
           className='Box--3'
           hasChildBoxes
           cols={[8, 7, 6, 5, 4, 3]}
+          alignY={'top'}
           styleInner={`
             background: grey;
           `}
