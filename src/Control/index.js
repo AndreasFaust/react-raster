@@ -1,6 +1,6 @@
 import React from 'react'
-import Grid from '../Grid'
-import Box from '../Box'
+import { Grid } from '../Grid'
+import { Box } from '../Box'
 
 const Control = (props) => {
   return (
