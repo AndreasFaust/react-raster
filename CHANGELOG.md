@@ -1,3 +1,9 @@
+#### 1.4.7 (2019-04-15)
+
+##### Bug Fixes
+
+*  Rewire Components for docs. (a6e82d75)
+
 #### 1.4.6 (2019-04-07)
 
 ##### Bug Fixes
