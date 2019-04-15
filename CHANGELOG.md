@@ -1,3 +1,9 @@
+#### 1.4.8 (2019-04-15)
+
+##### Bug Fixes
+
+*  Fix imports in Control. (f330363d)
+
 #### 1.4.7 (2019-04-15)
 
 ##### Bug Fixes
