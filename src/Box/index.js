@@ -145,4 +145,4 @@ Box.defaultProps = {
   hasChildBoxes: undefined
 }
 
-export default Box
+export { Box }

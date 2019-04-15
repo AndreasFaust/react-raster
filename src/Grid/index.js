@@ -160,4 +160,4 @@ Grid.defaultProps = {
   hasChildBoxes: undefined
 }
 
-export default Grid
+export { Grid }
