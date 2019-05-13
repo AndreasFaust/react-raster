@@ -1,3 +1,9 @@
+#### 2.0.3 (2019-05-13)
+
+##### Bug Fixes
+
+*  Remove dependency. (9c6dae1b)
+
 #### 2.0.2 (2019-05-13)
 
 ##### Documentation Changes
