@@ -14,8 +14,7 @@
         "npm": ">=5"
     },
     "dependencies": {
-        "prop-types": "^15.7.2",
-        "react-raster": "^1.4.8"
+        "prop-types": "^15.7.2"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0",
