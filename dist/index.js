@@ -1979,8 +1979,9 @@ var Box = function Box(_ref) {
       controlIsVisible: controlIsVisible,
       cssMode: cssMode,
       register: function register() {
-        setHasChildBoxes(true);
-        console.log('REGISTER!');
+        if (!hasChildBoxesRegistered) {
+          setHasChildBoxes(true);
+        }
       }
     }
   }, children))));
