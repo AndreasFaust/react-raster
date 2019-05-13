@@ -1,3 +1,9 @@
+#### 2.0.2 (2019-05-13)
+
+##### Documentation Changes
+
+*  Fix. (362f41c7)
+
 #### 2.0.1 (2019-05-13)
 
 ##### Documentation Changes
