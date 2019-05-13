@@ -3,14 +3,13 @@
     "title": "React Raster",
     "description": "Advanced Grid-System based on Styled Components, which is highly customizable and ready for server-side-rendering.",
     "menu": [],
-    "version": "1.4.8",
+    "version": "2.0.0",
     "repository": "https://github.com/AndreasFaust/react-raster",
     "native": false,
     "codeSandbox": true,
     "themeConfig": {},
     "separator": "-"
   },
-  "props": [],
   "entries": [
     {
       "key": "src/pages/Box.mdx",
@@ -84,5 +83,6 @@
         ]
       }
     }
-  ]
+  ],
+  "props": []
 }

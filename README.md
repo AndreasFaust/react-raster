@@ -12,6 +12,8 @@
 -   Ready for server-side-rendering
 -   Uses CSS-grid-layout in newer and flexbox in legacy browsers.
 
+✍️ [See the Documentation!](https://andreasfaust.github.io/react-raster)
+
 ## Install
 
 Install all dependencies via Yarn or NPM.
@@ -77,41 +79,6 @@ Look up the props-specification for `Grid` and `Box` below.
 Avoid mixing Boxes with other components inside Grids or Boxes.
 Either a Box/Grid contains Boxes or regular elements/components.
 
-### Group Boxes inside custom components
-
-react-raster automatically detects, if a Grid or Box contains other Boxes. This is important to keep the grid adjusted. If you want to combine certain Boxes or groupings of Boxes into a custom component, you have to tell react-raster, that this component contains Boxes. This is done by setting **hasChildBoxes** on the parent Grid/Box:
-
-```jsx
-  const MyChildBoxes = () => (
-    <>
-      <Box cols={3}>
-        Hello!
-      <Box>
-      <Box cols={3}>
-        World!
-      <Box>
-    </>
-  )
-
-  const MySpecialBox = () => (
-    <Box
-      top={3}
-      hasChildBoxes
-    >
-      <MyChildBoxes />
-    <Box>
-  )
-
-  const Component = () => (
-    <Grid
-      colspan={6}
-      hasChildBoxes
-    >
-      <MySpecialBox />
-    </Grid>
-  )
-```
-
 ## Advanced Example
 
 The following code gives you a more detailed example of what you can do with react-raster:
@@ -147,8 +114,8 @@ const Example = () => (
         control={process.env.NODE_ENV !== "production"}
         controlColor="rgba(0, 100, 255, 0.1)"
         styleOuter={`
-      width: 80%;
-    `}
+          width: 80%;
+        `}
         styleInner={[
             `background: red;`,
             `background: red;`,
@@ -162,16 +129,15 @@ const Example = () => (
             top={1}
             left={[0, 0, 3]}
             styleInner={`
-        background: pink;
+              background: pink;
 
-        ::after {
-          content: 'Hallo!';
-          position: absolute;
-          left: 50%;
-          top: 50%;
-        }
-      `}
-            hasChildBoxes
+              ::after {
+                content: 'Hallo!';
+                position: absolute;
+                left: 50%;
+                top: 50%;
+              }
+            `}
         >
             <MyCustomChildBox>
                 <h2>Hello</h2>
@@ -185,134 +151,8 @@ const Example = () => (
 );
 ```
 
-## Grid
-
-List of all props of the Grid-Component:
-
-```jsx
-<Grid
-    breakpoints
-    // Array of integers. Should start with zero and be in ascending order.
-    // Default: [0, 500, 800, 1025, 1200, 1400]
-    // Unit: Pixels
-    colspan
-    // Integer. Number of columns.
-    // Default: 1
-    left
-    // String or Array. Left padding of the Grid.
-    // Default: '0'
-    right
-    // String or Array. Right padding of the Grid.
-    // Unit: any CSS unit
-    // Default: '0'
-    top
-    // String or Array. Top padding of the Grid.
-    // Unit: any CSS unit
-    // Default: '0'
-    bottom
-    // String or Array. Bottom padding of the Grid.
-    // Unit: any CSS unit
-    // Default: '0'
-    gutterX
-    // String or Array. Horizontal Gutter.
-    // Unit: any CSS unit
-    // Default: '0'
-    gutterY
-    // String or Array. Vertical Gutter.
-    // Unit: any CSS unit
-    // Default: '0'
-    alignX
-    // String or Array. Horizontal Align of child elements.
-    // Values: Anything that works with "justify-content".
-    //         Shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
-    // Default: ''
-    alignY
-    // String or Array. Vertical Align of child elements.
-    // Values: Anything that works with "align-items".
-    //         Shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
-    // Default: ''
-    control
-    // Bool. Enable visual control via ESC-Key.
-    // Default: false
-    controlColor
-    // String. Customize color of the grid-control.
-    // Default: 'rgba(0, 100, 255, 0.1)'
-    className
-    // String. Custom class for the Grid-Outer-Container-Tag.
-    // Default: ''
-    tag
-    // String. Define HTML-Tag of the Grid-Outer-Container-Tag.
-    // Default: 'div'
-    styleOuter
-    // String or Array. Define styles of the Grid-Outer-Container-Tag.
-    // Default: ''
-    styleInner
-    // String or Array. Define styles of the Grid-Inner-Container-Tag.
-    // Default: ''
-    hasChildBoxes
-    // Boolean. Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.
-    // See the topic "Group Boxes inside custom components" for more information. If the Boxes are nested inside other components react-raster does not know, that you are sitll using its grid.
-    // Default: undefined
-/>
-```
-
-## Box
-
-List of all props of the Box-Component:
-
-```jsx
-<Box
-    cols
-    // Integer or Array. Width of the Box.
-    // Default: Width of parent Box or Grid
-    // Unit: Grid columns defined with the prop "colspan"
-    left
-    // String or Array. Left margin of the Box.
-    // Default: '0'
-    right
-    // String or Array. Right margin of the Box.
-    // Unit: any CSS unit
-    // Default: '0'
-    top
-    // String or Array. Top margin of the Box.
-    // Unit: any CSS unit
-    // Default: '0'
-    bottom
-    // String or Array. Bottom margin of the Box.
-    // Unit: any CSS unit
-    // Default: '0'
-    alignX
-    // String or Array. Horizontal Align of child elements.
-    // Values: Anything that works with "justify-content".
-    //         Shortcuts 'left' for 'flex-start' and 'right' for 'flex-end'.
-    // Default: ''
-    alignY
-    // String or Array. Vertical Align of child elements.
-    // Values: Anything that works with "align-items".
-    //         Shortcuts 'top' for 'flex-start' and 'bottom' for 'flex-end'.
-    // Default: ''
-    className
-    // String. Custom class for the Box-Outer-Container-Tag.
-    // Default: ''
-    tag
-    // String. Define HTML-Tag of the Box-Outer-Container-Tag.
-    // Default: 'div'
-    styleOuter
-    // String or Array. Define styles of the Box-Outer-Container-Tag.
-    // Default: ''
-    styleInner
-    // String or Array. Define styles of the Box-Inner-Container-Tag.
-    // Default: ''
-    hasChildBoxes
-    // Boolean. Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.
-    // See the topic "Group Boxes inside custom components" for more information. If the Boxes are nested inside other components react-raster does not know, that you are sitll using its grid.
-    // Default: undefined
-/>
-```
-
 ## To-Do
 
--   [ ] Nice documentation with live examples (using Docz)
 -   [ ] Stricter type-checking / props validation
 -   [ ] automated testing
 
@@ -325,7 +165,3 @@ Every contribution is very much appreciated.
 ## License
 
 MIT © [AndreasFaust](https://github.com/AndreasFaust)
-
-## Thanks
-
-This Library is created using [create-react-hook](https://github.com/hermanya/create-react-hook), which is based on [create-react-library](https://github.com/transitive-bullshit/create-react-library).

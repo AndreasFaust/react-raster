@@ -5,6 +5,7 @@
     "author": "AndreasFaust",
     "license": "MIT",
     "repository": "AndreasFaust/react-raster",
+    "homepage": "https://andreasfaust.github.io/react-raster/",
     "main": "dist/index.js",
     "module": "dist/index.es.js",
     "jsnext:main": "dist/index.es.js",
