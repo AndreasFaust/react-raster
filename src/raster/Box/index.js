@@ -127,8 +127,9 @@ const Box = ({
               controlIsVisible,
               cssMode,
               register: () => {
-                setHasChildBoxes(true)
-                console.log(('REGISTER!'))
+                if (!hasChildBoxesRegistered) {
+                  setHasChildBoxes(true)
+                }
               }
             }}
           >
