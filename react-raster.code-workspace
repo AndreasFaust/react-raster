@@ -2,12 +2,6 @@
   "folders": [
     {
       "path": "."
-    },
-    {
-      "path": "example/src"
-    },
-    {
-      "path": "src"
     }
   ]
 }

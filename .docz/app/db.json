@@ -1,0 +1,88 @@
+{
+  "config": {
+    "title": "React Raster",
+    "description": "Advanced Grid-System based on Styled Components, which is highly customizable and ready for server-side-rendering.",
+    "menu": [],
+    "version": "1.4.8",
+    "repository": "https://github.com/AndreasFaust/react-raster",
+    "native": false,
+    "codeSandbox": true,
+    "themeConfig": {},
+    "separator": "-"
+  },
+  "props": [],
+  "entries": [
+    {
+      "key": "src/pages/Box.mdx",
+      "value": {
+        "name": "Box",
+        "route": "/box",
+        "id": "e60c6526321514b094c80c62a0916fec",
+        "filepath": "src/pages/Box.mdx",
+        "link": "https://github.com/AndreasFaust/react-raster/edit/master/src/pages/Box.mdx",
+        "slug": "src-pages-box",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "box",
+            "depth": 1,
+            "value": "Box"
+          },
+          {
+            "slug": "basic-usage",
+            "depth": 2,
+            "value": "Basic usage"
+          }
+        ]
+      }
+    },
+    {
+      "key": "src/pages/Grid.mdx",
+      "value": {
+        "name": "Grid",
+        "route": "/grid",
+        "id": "2aeb0dbdfa89e5c40f8abd9df9ba8ed6",
+        "filepath": "src/pages/Grid.mdx",
+        "link": "https://github.com/AndreasFaust/react-raster/edit/master/src/pages/Grid.mdx",
+        "slug": "src-pages-grid",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "grid",
+            "depth": 1,
+            "value": "Grid"
+          },
+          {
+            "slug": "basic-usage",
+            "depth": 2,
+            "value": "Basic usage"
+          }
+        ]
+      }
+    },
+    {
+      "key": "src/pages/index.mdx",
+      "value": {
+        "name": "Getting Started",
+        "route": "/",
+        "id": "522b7407e210088f3588b943aec44115",
+        "filepath": "src/pages/index.mdx",
+        "link": "https://github.com/AndreasFaust/react-raster/edit/master/src/pages/index.mdx",
+        "slug": "src-pages-index",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "react-raster",
+            "depth": 1,
+            "value": "react-raster"
+          },
+          {
+            "slug": "basic-usage",
+            "depth": 2,
+            "value": "Basic usage"
+          }
+        ]
+      }
+    }
+  ]
+}

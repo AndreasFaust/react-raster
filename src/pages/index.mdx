@@ -1,0 +1,115 @@
+---
+name: Getting Started
+route: /
+---
+
+import { Playground } from "docz";
+import { Grid, Box } from "../raster";
+import image1 from "../images/image-1.jpg";
+import image2 from "../images/image-2.jpg";
+import image3 from "../images/image-3.jpg";
+import image4 from "../images/image-4.jpg";
+import image5 from "../images/image-5.jpg";
+
+# react-raster
+
+An advanced grid-system based on styled-components; highly customizable while being easy to use.
+Regardless, if your grid is simple or complex: react-raster simplifies layouting.
+
+It combines features from `Flexbox` and `Grid Layout` to provide a simple yet flexible layout-interface.
+On current browsers it uses the benefits of `Grid Layout`. On legacy browsers it automatically falls back to plain `Flexbox` (almost) without any changes (see Section **Flexbox**).
+
+## Basic usage
+
+**Scale your viewport** to see the layout changing.
+
+Press `ESC` to see the visual control.
+
+<Playground>
+    <Grid 
+      left={'3vw'}
+      right={'3vw'}
+      top={'1rem'}
+      bottom={'2rem'}
+      gutterX={'1.5vw'}
+      gutterY={'10px'}
+      colspan={12}
+      alignX={'right'}
+      alignY={'top'}
+      control
+      style={`background-image: linear-gradient(lightblue, coral);`}
+    >
+        <Box
+          top={1}
+          cols={[3,3,3,6]}
+          style={`
+            background: pink;
+            img { width: 100%; display: block; }
+          `}
+        >
+            <div className='image-wrapper'>
+              <img src={image1} alt="Sample Image" />
+            </div>
+        </Box>
+        <Box
+          top={1}
+          cols={[3,3,3,6]}
+          style={`
+            background: pink;
+            align-self: end;
+            img { width: 100%; display: block; }
+          `}
+        >
+          <div className='image-wrapper'>
+            <img src={image2} alt="Sample Image" />
+          </div>
+        </Box>
+        <Box
+          top={1}
+          left={[2,2,2,0]}
+          cols={4}
+          style={`
+            background: pink;
+            img { width: 100%; display: block; }
+          `}
+        >
+          <div className='image-wrapper'>
+            <img src={image3} alt="Sample Image" />
+          </div>
+        </Box>
+        <Box
+          cols={[12, 12, 12, 8]}
+          left={0}
+          top={1}
+          alignY='center'
+          style={`
+            background-image: linear-gradient(lightblue, yellow);
+          `}
+        >
+          <Box
+            cols={[5, 5, 5, 9]}
+            style={`
+              background: yellow;
+              img { width: 100%; display: block; }
+            `}
+          >
+            <div className='image-wrapper'>
+              <img src={image4} alt="Sample Image" />
+            </div>
+          </Box>
+          <Box
+            cols={[5, 5, 5, 9]}
+            left={2}
+            style={`
+              background: yellow;
+              img { width: 100%; display: block; }
+            `}
+          >
+            <div className='image-wrapper'>
+              <img src={image5} alt="Sample Image" />
+            </div>
+          </Box>
+        </Box>
+    </Grid>
+
+</Playground>
