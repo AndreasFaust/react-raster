@@ -1,3 +1,9 @@
+#### 3.0.1 (2019-06-07)
+
+##### Bug Fixes
+
+*  forgot build. (faf8c304)
+
 ## 3.0.0 (2019-06-07)
 
 ##### New Features
