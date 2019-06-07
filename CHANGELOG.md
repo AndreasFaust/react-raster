@@ -1,3 +1,10 @@
+## 3.0.0 (2019-06-07)
+
+##### New Features
+
+*  Add ref to Grid. (e32cc1ed)
+*  Add ref to Box. (5b54d0c4)
+
 #### 2.0.5 (2019-05-13)
 
 ##### Bug Fixes
