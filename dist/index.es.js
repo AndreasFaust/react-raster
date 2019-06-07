@@ -1567,15 +1567,16 @@ var useCssMode = (function (initialValue) {
   return cssMode;
 });
 
-var Container = function Container(_ref) {
+var Container = React.forwardRef(function (_ref, ref) {
   var className = _ref.className,
       children = _ref.children,
       _ref$tag = _ref.tag,
       tag = _ref$tag === void 0 ? 'div' : _ref$tag;
   return React.createElement(tag, {
-    className: className
+    className: className,
+    ref: ref
   }, children);
-};
+});
 
 function _templateObject4$1() {
   var data = _taggedTemplateLiteral(["\n      position: ", ";\n      padding-left: ", ";\n      padding-right: ", ";\n      padding-top: ", ";\n      padding-bottom: ", ";\n      ", "\n    "]);
@@ -1638,12 +1639,16 @@ var FlexContainer = styled(Container)(_templateObject3$1(), function (props) {
     }, props.left[index], props.right[index], props.top[index], props.bottom[index], props.style[index]);
   });
 });
-var StyledContainer = (function (props) {
+var StyledContainer = React.forwardRef(function (props, ref) {
   if (props.cssMode === 'flex') {
-    return React.createElement(FlexContainer, props);
+    return React.createElement(FlexContainer, _extends({}, props, {
+      ref: ref
+    }));
   }
 
-  return React.createElement(GridContainer, props);
+  return React.createElement(GridContainer, _extends({}, props, {
+    ref: ref
+  }));
 });
 
 var getReset = (function (hasChildBoxesFromProps, hasChildBoxesFromRegister) {
@@ -1766,15 +1771,19 @@ var FlexContainer$1 = styled(Container)(_templateObject4$2(), function (props) {
     return media(_templateObject5$1(), props.cols[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.style[index]);
   });
 });
-var StyledContainer$1 = (function (props) {
+var StyledContainer$1 = React.forwardRef(function (props, ref) {
   if (props.cssMode === 'flex') {
-    return React.createElement(FlexContainer$1, props);
+    return React.createElement(FlexContainer$1, _extends({}, props, {
+      ref: ref
+    }));
   }
 
-  return React.createElement(GridContainer$1, props);
+  return React.createElement(GridContainer$1, _extends({}, props, {
+    ref: ref
+  }));
 });
 
-var Box = function Box(_ref) {
+var Box = React.forwardRef(function (_ref, ref) {
   var className = _ref.className,
       cols = _ref.cols,
       alignX = _ref.alignX,
@@ -1787,7 +1796,8 @@ var Box = function Box(_ref) {
       style = _ref.style,
       styleInner = _ref.styleInner,
       styleOuter = _ref.styleOuter,
-      hasChildBoxes = _ref.hasChildBoxes;
+      hasChildBoxes = _ref.hasChildBoxes,
+      refCallback = _ref.refCallback;
 
   var _useContext = useContext(Context),
       cssMode = _useContext.cssMode,
@@ -1935,7 +1945,8 @@ var Box = function Box(_ref) {
     right: rightPercent,
     top: topPercent,
     bottom: bottomPercent,
-    style: cssMode === 'grid' ? styleNormalized : styleOuterNormalized
+    style: cssMode === 'grid' ? styleNormalized : styleOuterNormalized,
+    ref: ref
   }, React.createElement(Inner, {
     cssMode: cssMode,
     className: "Box__Inner",
@@ -1977,8 +1988,7 @@ var Box = function Box(_ref) {
       }
     }
   }, children))));
-};
-
+});
 Box.displayName = 'Box';
 Box.propTypes = {
   /**  Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid columns defined with the prop "colspan" */
@@ -2049,7 +2059,7 @@ var Control = function Control(props) {
   }));
 };
 
-var Grid = function Grid(props) {
+var Grid = React.forwardRef(function (props, ref) {
   var breakpoints = props.breakpoints,
       left = props.left,
       right = props.right,
@@ -2171,7 +2181,8 @@ var Grid = function Grid(props) {
     bottom: bottomNormalized,
     position: positionNormalized,
     tag: tag,
-    style: cssModeNormalized === 'grid' ? styleNormalized : styleOuterNormalized
+    style: cssModeNormalized === 'grid' ? styleNormalized : styleOuterNormalized,
+    ref: ref
   }, control && controlIsVisible && React.createElement(Control, {
     cssMode: cssModeNormalized,
     colspan: colspan,
@@ -2217,8 +2228,7 @@ var Grid = function Grid(props) {
       controlColor: controlColor
     }
   }, children))));
-};
-
+});
 Grid.propTypes = {
   /** Breakpoints in Pixels, in ascending order starting with zero. */
   breakpoints: propTypes.array,
