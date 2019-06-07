@@ -42,9 +42,11 @@ const ImageBox = () => (
 )
 
 const IndexPage = () => {
-  const ref = useRef()
+  const boxRef = useRef()
+  const gridRef = useRef()
   useEffect(() => {
-    console.log(ref.current)
+    console.log(boxRef.current)
+    console.log(gridRef.current)
   }, [])
   return (
     <Grid
@@ -65,9 +67,10 @@ const IndexPage = () => {
     align-items: center;
   `}
       cssMode='flex'
+      ref={gridRef}
     >
       <Box
-        ref={ref}
+        ref={boxRef}
         className='Box--1'
         cols={[5]}
         left={[0]}

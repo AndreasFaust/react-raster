@@ -13,7 +13,7 @@ import StyledContainer from './container'
 import Control from '../Control'
 import mergeStyles from '../utils/mergeStyles'
 
-const Grid = (props) => {
+const Grid = React.forwardRef((props, ref) => {
   const {
     breakpoints,
     left,
@@ -76,6 +76,7 @@ const Grid = (props) => {
         ? styleNormalized
         : styleOuterNormalized
       }
+      ref={ref}
     >
       {control && controlIsVisible && (
         <Control
@@ -133,7 +134,7 @@ const Grid = (props) => {
       </Inner>
     </StyledContainer>
   )
-}
+})
 
 Grid.propTypes = {
   /** Breakpoints in Pixels, in ascending order starting with zero. */
