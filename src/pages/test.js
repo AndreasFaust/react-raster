@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'gatsby'
 import { Grid, Box } from '../raster'
 import image1 from '../images/image-1.jpg'
@@ -41,38 +41,44 @@ const ImageBox = () => (
   </Box>
 )
 
-const IndexPage = () => (
-  <Grid
-    tag='section'
-    breakpoints={[0, 500, 800, 1025, 1200, 1400]}
-    left={'1.5vw'}
-    right={'3vw'}
-    top={'10vw'}
-    bottom={'20vw'}
-    gutterX={'1.5vw'}
-    gutterY={'3vw'}
-    colspan={12}
-    alignX={'center'}
-    alignY={'center'}
-    control
-    styleOuter={`
+const IndexPage = () => {
+  const ref = useRef()
+  useEffect(() => {
+    console.log(ref.current)
+  }, [])
+  return (
+    <Grid
+      tag='section'
+      breakpoints={[0, 500, 800, 1025, 1200, 1400]}
+      left={'1.5vw'}
+      right={'3vw'}
+      top={'10vw'}
+      bottom={'20vw'}
+      gutterX={'1.5vw'}
+      gutterY={'3vw'}
+      colspan={12}
+      alignX={'center'}
+      alignY={'center'}
+      control
+      styleOuter={`
     background: blue;
     align-items: center;
   `}
-    cssMode='flex'
-  >
-    <Box
-      className='Box--1'
-      cols={[5]}
-      left={[0]}
-      top={[2]}
-      styleInner={`
+      cssMode='flex'
+    >
+      <Box
+        ref={ref}
+        className='Box--1'
+        cols={[5]}
+        left={[0]}
+        top={[2]}
+        styleInner={`
         background: yellow;
       `}
-    >
-      <ImageBox />
-    </Box>
-    {/* <Box
+      >
+        <ImageBox />
+      </Box>
+      {/* <Box
       className='Box--1'
       cols={[5]}
       left={[2]}
@@ -94,7 +100,7 @@ const IndexPage = () => (
       </Box>
     </Box> */}
 
-    {/* <Box
+      {/* <Box
     className='Box--3'
     hasChildBoxes
     cols={[8, 7, 6, 5, 4, 3]}
@@ -105,7 +111,7 @@ const IndexPage = () => (
   >
     <ChildBox />
   </Box> */}
-    {/* <Box
+      {/* <Box
     className='Box--2'
     cols={[6]}
     left={[1, 1, 2]}
@@ -131,8 +137,8 @@ const IndexPage = () => (
       <div className='content'>Welt!</div>
     </Box>
   </Box> */}
-  </Grid>
+    </Grid>
 
-)
-
+  )
+}
 export default IndexPage

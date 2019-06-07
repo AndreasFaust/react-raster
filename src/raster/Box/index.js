@@ -13,7 +13,7 @@ import Resetter from '../utils/resetter'
 import mergeStyles from '../utils/mergeStyles'
 import StyledContainer from './container'
 
-const Box = ({
+const Box = React.forwardRef(({
   className,
   cols,
   alignX,
@@ -26,8 +26,9 @@ const Box = ({
   style,
   styleInner,
   styleOuter,
-  hasChildBoxes
-}) => {
+  hasChildBoxes,
+  refCallback
+}, ref) => {
   const {
     cssMode,
     breakpoints,
@@ -89,6 +90,7 @@ const Box = ({
         ? styleNormalized
         : styleOuterNormalized
       }
+      ref={ref}
     >
       <Inner
         cssMode={cssMode}
@@ -139,7 +141,7 @@ const Box = ({
       </Inner>
     </StyledContainer>
   )
-}
+})
 
 Box.displayName = 'Box'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import Grid from '../Grid'
 import Box from '../Box'
-import { css } from 'styled-components'
+// import { css } from 'styled-components'
 
 const styleOuter = `
   width: 100%;

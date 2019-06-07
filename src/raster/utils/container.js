@@ -1,15 +1,15 @@
 import React from 'react'
 
-const Container = ({
+const Container = React.forwardRef(({
   className,
   children,
   tag = 'div'
-}) => {
+}, ref) => {
   return React.createElement(
     tag,
-    { className },
+    { className, ref },
     children
   )
-}
+})
 
 export default Container

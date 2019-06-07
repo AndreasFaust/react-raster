@@ -52,9 +52,9 @@ const FlexContainer = styled(Container)`
 }
 `
 
-export default (props) => {
+export default React.forwardRef((props, ref) => {
   if (props.cssMode === 'flex') {
-    return <FlexContainer {...props} />
+    return <FlexContainer {...props} ref={ref} />
   }
-  return <GridContainer {...props} />
-}
+  return <GridContainer {...props} ref={ref} />
+})
