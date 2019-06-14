@@ -151,6 +151,49 @@ const Example = () => (
 );
 ```
 
+## Grid
+
+| **Name**     | **Type** | **Default**                       | **Description**                                                                           |
+| :----------- | :------- | :-------------------------------- | :---------------------------------------------------------------------------------------- |
+| **breakpoints** | Array   | `[0, 432, 800, 1025, 1200, 1400]`                            | Breakpoints in Pixels, in ascending order starting with zero.                                                   |
+| **colspan** | Number   | `1`                            | Number of columns.                                                   |
+| **left** | String or Array of Strings   | `'0'`                            | Left padding of the Grid.                                                   |
+| **right** | String or Array of Strings   | `'0'`                            | Right padding of the Grid.                                                   |
+| **top** | String or Array of Strings   | `'0'`                            | Top padding of the Grid.                                                   |
+| **bottom** | String or Array of Strings   | `'0'`                            | Bottom padding of the Grid.                                                   |
+| **gutterX** | String or Array of Strings   | `'0'`                            | Horizontal gutter.                                                   |
+| **gutterY** | String or Array of Strings   | `'0'`                            | Verical gutter.                                                   |
+| **alignX** | String or Array of Strings   | `''`                            | Horizontal align of child elements.                                                   |
+| **alignY** | String or Array of Strings   | `''`                            | Vertical align of child elements.                                                   |
+| **control** | Boolean   | `false`                            | Enable visual control via ESC-Key.                                                   |
+| **controlColor** | Boolean   | `'rgba(0, 0, 0, 0.2)'`                            | Custom color for the grid-control.                                                   |
+| **position** | String or Array of Strings   | `'relative'`                            | CSS-position                                                   |
+| **className** | String   | `''`                            | CSS-Class(es)                                                   |
+| **style** | String or Array of Strings   | `''`                            | cssMode={grid} only! Custom styles with styled-components.                                                   |
+| **styleOuter** | String or Array of Strings   | `''`                            | cssMode={flex} only! Styles Grid-Outer-Container with styled-components.                                                 |
+| **styleInner** | String or Array of Strings   | `''`                            | cssMode={flex} only! Styles Grid-Outer-Container with styled-components. |
+| **cssMode** | String | `undefined`                            | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support.                                                 |
+| **tag** | String | `'div'`                            | HTML-Tag                                                 |
+| **ref** | React-Ref | `null`                            | Pass a ref.                                                 |
+
+## Box
+
+| **Name**     | **Type** | **Default**                       | **Description**                                                                           |
+| :----------- | :------- | :-------------------------------- | :---------------------------------------------------------------------------------------- |
+| **cols** | Number or Array of Numbers   | `undefined`                            | Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid-columns defined with the prop "colspan".                                                   |
+| **left** | Number or Array of Numbers   | `0`                            | Left margin of the Box. Unit: Grid-columns.                                                   |
+| **right** | Number or Array of Numbers   | `0`                            | Right margin of the Box. Unit: Grid-columns.                                                   |
+| **top** | Number or Array of Numbers   | `0`                            | Top margin of the Box. Unit: Grid-columns.                                                   |
+| **bottom** | Number or Array of Numbers   | `0`                            | Bottom margin of the Box. Unit: Grid-columns.                                                   |
+| **alignX** | String or Array of Strings   | `0`                            | cssMode={flex} only! Horizontal Align of child elements.                                                   |
+| **alignY** | String or Array of Strings   | `0`                            | Vertical Align of child elements.                                                   |
+| **style** | String or Array of Strings   | `''`                            | cssMode={grid} only! Custom styles with styled-components.                                                   |
+| **styleOuter** | String or Array of Strings   | `''`                            | cssMode={flex} only! Styles Box-Outer-Container with styled-components.                                                 |
+| **styleInner** | String or Array of Strings   | `''`                            | cssMode={flex} only! Styles Box-Inner-Container with styled-components. |
+| **hasChildBoxes** | Boolean   | `undefined`                            | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. See the topic "Resetting Boxes". |
+| **ref** | React-Ref | `null`                            | Pass a ref.                                                 |
+
+
 ## To-Do
 
 -   [ ] Stricter type-checking / props validation
