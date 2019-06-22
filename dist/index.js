@@ -1358,8 +1358,8 @@ var getMediaQueries = (function (breakpoints) {
   });
 });
 
-var getAlign = (function (align, cssMode) {
-  return cssMode === 'grid' ? align.map(function (al) {
+var getAlign = (function (align, cssMode, hasChildBoxes) {
+  return cssMode === 'grid' && hasChildBoxes ? align.map(function (al) {
     switch (al) {
       case 'left':
         return 'start';
@@ -2109,13 +2109,13 @@ var Grid = React__default.forwardRef(function (props, ref) {
     return getAlign(normalizeProps({
       prop: alignX,
       breakpoints: breakpointsNormalized
-    }), cssModeNormalized);
+    }), cssModeNormalized, true);
   }, [alignX, breakpointsNormalized, cssModeNormalized]);
   var alignYNormalized = React.useMemo(function () {
     return getAlign(normalizeProps({
       prop: alignY,
       breakpoints: breakpointsNormalized
-    }), cssModeNormalized);
+    }), cssModeNormalized, true);
   }, [alignY, breakpointsNormalized, cssModeNormalized]);
   var media = React.useMemo(function () {
     return getMediaQueries(breakpointsNormalized);

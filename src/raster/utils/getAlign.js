@@ -1,5 +1,5 @@
-export default (align, cssMode) => {
-  return cssMode === 'grid'
+export default (align, cssMode, hasChildBoxes) => {
+  return cssMode === 'grid' && hasChildBoxes
     ? align.map(al => {
       switch (al) {
         case 'left': return 'start'

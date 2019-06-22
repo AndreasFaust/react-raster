@@ -12,32 +12,29 @@ const ImageBox = () => (
     top={1}
     left={1}
     cols={3}
+    alignY={'bottom'}
     style={`
       background: pink;
+      height: 300px;
 
       img { 
         display: block;
         width: 100%; 
-        width: 100% !important;
-        height: auto !important;
-      
       }
     `}
-    styleInner={`
-      background: pink;
+    // styleInner={`
+    //   background: pink;
 
-      img { 
-        display: block;
-        width: 100%; 
-        width: 100% !important;
-        height: auto !important;
-      
-      }
-    `}
+    //   img {
+    //     display: block;
+    //     width: 100%;
+    //     width: 100% !important;
+    //     height: auto !important;
+
+    //   }
+    // `}
   >
-    <div>
-      <img src={image2} alt='Sample Image' />
-    </div>
+    <img src={image2} alt='Sample Image' />
   </Box>
 )
 
@@ -62,11 +59,11 @@ const IndexPage = () => {
       alignX={'center'}
       alignY={'center'}
       control
-      styleOuter={`
-    background: blue;
-    align-items: center;
-  `}
-      cssMode='flex'
+      style={`
+        background: blue;
+        align-items: center;
+      `}
+      // cssMode='flex'
       ref={gridRef}
     >
       <Box
@@ -74,8 +71,7 @@ const IndexPage = () => {
         className='Box--1'
         cols={[5]}
         left={[0]}
-        top={[2]}
-        styleInner={`
+        style={`
         background: yellow;
       `}
       >

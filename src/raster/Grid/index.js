@@ -42,8 +42,8 @@ const Grid = React.forwardRef((props, ref) => {
   const breakpointsNormalized = useMemo(() => breakpoints, [breakpoints])
   const gutterXNormalized = useMemo(() => normalizeProps({ prop: gutterX, breakpoints: breakpointsNormalized }), [gutterX, breakpointsNormalized])
   const gutterYNormalized = useMemo(() => normalizeProps({ prop: gutterY, breakpoints: breakpointsNormalized }), [gutterY, breakpointsNormalized])
-  const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, breakpoints: breakpointsNormalized }), cssModeNormalized), [alignX, breakpointsNormalized, cssModeNormalized])
-  const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, breakpoints: breakpointsNormalized }), cssModeNormalized), [alignY, breakpointsNormalized, cssModeNormalized])
+  const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, breakpoints: breakpointsNormalized }), cssModeNormalized, true), [alignX, breakpointsNormalized, cssModeNormalized])
+  const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, breakpoints: breakpointsNormalized }), cssModeNormalized, true), [alignY, breakpointsNormalized, cssModeNormalized])
 
   const media = useMemo(() => getMediaQueries(breakpointsNormalized), [breakpointsNormalized])
   const parent = useMemo(() => normalizeProps({ prop: colspan, breakpoints: breakpointsNormalized }), [colspan, breakpointsNormalized])
