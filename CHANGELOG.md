@@ -1,3 +1,9 @@
+#### 3.0.3 (2019-06-22)
+
+##### Bug Fixes
+
+*  fix align. (5a1e98dc)
+
 #### 3.0.2 (2019-06-14)
 
 ##### Documentation Changes
