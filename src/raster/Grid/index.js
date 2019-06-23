@@ -190,7 +190,7 @@ Grid.defaultProps = {
   alignY: '',
   colspan: 1,
   control: false,
-  controlColor: 'rgba(0, 0, 0, 0.2)',
+  controlColor: 'rgba(0, 0, 0, 0.1)',
   position: 'relative',
   style: '',
   styleOuter: '',

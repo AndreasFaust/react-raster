@@ -6,6 +6,7 @@ const GridContainer = styled(Container)`
   display: grid;
   grid-template-columns: repeat(${props => props.colspan}, 1fr);
   grid-auto-columns: ${props => props.colspan}fr;
+  grid-auto-rows: min-content;
   box-sizing: border-box;
 
   ${props => props.media.map((media, index) => {

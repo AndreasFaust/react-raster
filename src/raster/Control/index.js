@@ -23,6 +23,9 @@ const Control = (props) => {
         ? styleOuter
         : styleOuter + 'margin: 0;'
       }
+      styleInner={`
+        grid-auto-rows: auto;
+      `}
     >
       {[...Array(props.colspan)].map((col, index) => (
         <Box

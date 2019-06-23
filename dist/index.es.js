@@ -1609,7 +1609,7 @@ function _templateObject2$2() {
 }
 
 function _templateObject$3() {
-  var data = _taggedTemplateLiteral(["\n  display: grid;\n  grid-template-columns: repeat(", ", 1fr);\n  grid-auto-columns: ", "fr;\n  box-sizing: border-box;\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: grid;\n  grid-template-columns: repeat(", ", 1fr);\n  grid-auto-columns: ", "fr;\n  grid-auto-rows: min-content;\n  box-sizing: border-box;\n\n  ", "\n"]);
 
   _templateObject$3 = function _templateObject() {
     return data;
@@ -1729,7 +1729,7 @@ function _templateObject3$2() {
 }
 
 function _templateObject2$3() {
-  var data = _taggedTemplateLiteral(["\n      grid-template-columns: repeat(", ", 1fr);\n      grid-auto-columns: ", "fr;\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n    "]);
+  var data = _taggedTemplateLiteral(["\n      grid-template-columns: repeat(", ", 1fr);\n      grid-auto-columns: ", "fr;\n      grid-auto-rows: min-content;\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n    "]);
 
   _templateObject2$3 = function _templateObject2() {
     return data;
@@ -2049,7 +2049,8 @@ var Control = function Control(props) {
     position: "absolute",
     className: "Grid--Control",
     alignY: "stretch",
-    styleOuter: props.cssMode === 'grid' ? styleOuter : styleOuter + 'margin: 0;'
+    styleOuter: props.cssMode === 'grid' ? styleOuter : styleOuter + 'margin: 0;',
+    styleInner: "\n        grid-auto-rows: auto;\n      "
   }), _toConsumableArray(Array(props.colspan)).map(function (col, index) {
     return React.createElement(Box, {
       key: index,
@@ -2299,7 +2300,7 @@ Grid.defaultProps = {
   alignY: '',
   colspan: 1,
   control: false,
-  controlColor: 'rgba(0, 0, 0, 0.2)',
+  controlColor: 'rgba(0, 0, 0, 0.1)',
   position: 'relative',
   style: '',
   styleOuter: '',

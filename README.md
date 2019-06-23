@@ -166,7 +166,7 @@ const Example = () => (
 | **alignX** | String or Array of Strings   | `''`                            | Horizontal align of child elements.                                                   |
 | **alignY** | String or Array of Strings   | `''`                            | Vertical align of child elements.                                                   |
 | **control** | Boolean   | `false`                            | Enable visual control via ESC-Key.                                                   |
-| **controlColor** | Boolean   | `'rgba(0, 0, 0, 0.2)'`                            | Custom color for the grid-control.                                                   |
+| **controlColor** | Boolean   | `'rgba(0, 0, 0, 0.1)'`                            | Custom color for the grid-control.                                                   |
 | **position** | String or Array of Strings   | `'relative'`                            | CSS-position                                                   |
 | **className** | String   | `''`                            | CSS-Class(es)                                                   |
 | **style** | String or Array of Strings   | `''`                            | cssMode={grid} only! Custom styles with styled-components.                                                   |

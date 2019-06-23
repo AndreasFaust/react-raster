@@ -10,6 +10,7 @@ const GridContainer = styled(Container)`
     return media`
       grid-template-columns: repeat(${props => props.colspan[index]}, 1fr);
       grid-auto-columns: ${props => props.colspan[index]}fr;
+      grid-auto-rows: min-content;
       grid-column-gap: ${props.gutterX[index]};
       grid-row-gap: ${props.gutterY[index]};
     `
