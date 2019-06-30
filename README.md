@@ -107,7 +107,6 @@ const MyCustomChildBox = ({ children }) => (
         className="Testgrid__ChildBox"
         cols={6}
         top={[2, 1]}
-        alignX={"center"}
         alignY={"center"}
     >
         {children}
@@ -118,7 +117,7 @@ const Example = () => (
     <Grid
         className="Testgrid"
         tag="section"
-        breakpoints={[0, 500, 800, 1025, 1200, 1400]}
+        breakpoints={[0, 432, 768, 1024, 1200, 1400]}
         colspan={12}
         left={["3vw", "3vw", "3vw", "2vw"]}
         right={["3vw", "3vw", "3vw", "2vw"]}
@@ -128,13 +127,25 @@ const Example = () => (
         gutterY={"3vw"}
         control={process.env.NODE_ENV !== "production"}
         controlColor="rgba(0, 100, 255, 0.1)"
-        styleOuter={`
-          width: 70%;
+        // use the "bp-"-classes to limit styles to certain breakpoints…
+        style={`
+            &.bp-0, 
+            &.bp-432, 
+            &.bp-768 {
+                background: red;
+            }
+            &.bp-1024, 
+            &.bp-1200, 
+            &.bp-1400 {
+                background: blue;
+            }
         `}
-        styleInner={[
+        // … or use an array of strings, to address certain breakpoints
+        style={[
             `background: red;`,
             `background: red;`,
-            `background: blue;`
+            `background: red;`,
+            `background: blue;` // from width 1024 on, the background is blue
         ]}
     >
         <Box
@@ -143,8 +154,12 @@ const Example = () => (
             cols={[12, 12, 6]}
             top={1}
             left={[0, 0, 3]}
-            styleInner={`
+            style={`
               background: pink;
+
+              .bp-1024 &, .bp-1200 &, .bp-1400 & {
+                background: red;
+              }
 
               ::after {
                 content: 'Hallo!';

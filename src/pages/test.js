@@ -62,6 +62,9 @@ const IndexPage = () => {
       // styleOuter={`width: 80%;`}
       style={`
         background: blue;
+        &.bp-768 {
+          background: black;
+        }
         // align-items: center;
         // justify-items: center;
         // justify-content: center;
@@ -79,6 +82,10 @@ const IndexPage = () => {
         style={`
         background: yellow;
         height: 400px;
+        
+        .bp-768 & {
+          background: black;
+        }
       `}
       >
         <ImageBox />

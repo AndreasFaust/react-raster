@@ -357,17 +357,6 @@
       ]
     },
     {
-      "key": "src/pages/test.js",
-      "value": [
-        {
-          "description": "",
-          "displayName": "IndexPage",
-          "methods": [],
-          "actualName": "IndexPage"
-        }
-      ]
-    },
-    {
       "key": "src/raster/Grid/index.js",
       "value": [
         {
@@ -692,6 +681,17 @@
               }
             }
           }
+        }
+      ]
+    },
+    {
+      "key": "src/pages/test.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "IndexPage",
+          "methods": [],
+          "actualName": "IndexPage"
         }
       ]
     }
