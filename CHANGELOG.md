@@ -1,3 +1,9 @@
+### 4.1.0 (2019-06-30)
+
+##### New Features
+
+*  0 cols sets display: none; (fb31a51d)
+
 ## 4.0.0 (2019-06-30)
 
 ##### Breaking Changes
