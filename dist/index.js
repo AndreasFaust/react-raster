@@ -1607,7 +1607,7 @@ function _templateObject3$1() {
 }
 
 function _templateObject2$2() {
-  var data = _taggedTemplateLiteral(["\n      position: ", ";\n      padding-left: ", ";\n      padding-right: ", ";\n      padding-top: ", ";\n      padding-bottom: ", ";\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n      ", "\n      align-items: ", ";\n      justify-content: ", ";\n    "]);
+  var data = _taggedTemplateLiteral(["\n      position: ", ";\n      padding-left: ", ";\n      padding-right: ", ";\n      padding-top: ", ";\n      padding-bottom: ", ";\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n      ", "\n      align-content: ", ";\n      align-items: ", ";\n      // justify-content: ", ";\n    "]);
 
   _templateObject2$2 = function _templateObject2() {
     return data;
@@ -1634,6 +1634,8 @@ var GridContainer = styled__default(Container)(_templateObject$3(), function (pr
     return media(_templateObject2$2(), function (props) {
       return props.position[index];
     }, props.left[index], props.right[index], props.top[index], props.bottom[index], props.gutterX[index], props.gutterY[index], props.style[index], function (props) {
+      return props.alignY[index];
+    }, function (props) {
       return props.alignY[index];
     }, function (props) {
       return props.alignX[index];
@@ -1667,12 +1669,13 @@ var getReset = (function (hasChildBoxesFromProps, hasChildBoxesFromRegister) {
 var getColsPercent = (function (_ref) {
   var cols = _ref.cols,
       left = _ref.left,
+      right = _ref.right,
       parent = _ref.parent,
       cssMode = _ref.cssMode;
 
   if (cssMode === 'grid') {
     return cols.map(function (col, index) {
-      return col + left[index];
+      return col + left[index] + right[index];
     });
   }
 
@@ -1690,13 +1693,12 @@ var getMarginsPercent = (function (_ref) {
 
   if (cssMode === 'grid') {
     return margin.map(function (mar, index) {
-      return "calc(((100% + ".concat(gutterX[index], ") / ").concat(cols[index], ") * ").concat(mar, ")");
+      return mar ? "calc(((100% + ".concat(gutterX[index], ") / ").concat(cols[index], ") * ").concat(mar, ")") : undefined;
     });
   }
 
   return margin.map(function (mar, index) {
-    var percentValue = mar * 100 / parent[index];
-    return "".concat(percentValue, "%");
+    return mar ? "".concat(mar * 100 / parent[index], "%") : undefined;
   });
 });
 
@@ -1727,7 +1729,7 @@ function _templateObject4$2() {
 }
 
 function _templateObject3$2() {
-  var data = _taggedTemplateLiteral(["\n      grid-column: auto / span ", ";\n      margin-left: ", ";\n      margin-right: ", ";\n      margin-top: ", ";\n      margin-bottom: ", ";\n      ", "\n\n      align-items: ", ";\n      justify-content: ", ";    \n    "]);
+  var data = _taggedTemplateLiteral(["\n      grid-column: auto / span ", ";\n      margin-left: ", ";\n      margin-right: ", ";\n      margin-top: ", ";\n      margin-bottom: ", ";\n      ", "\n\n      align-content: ", ";\n      align-items: ", ";\n      // justify-content: ", ";    \n    "]);
 
   _templateObject3$2 = function _templateObject3() {
     return data;
@@ -1768,6 +1770,8 @@ var GridContainer$1 = styled__default(Container)(_templateObject$4(), function (
 }, function (props) {
   return props.media.map(function (media, index) {
     return media(_templateObject3$2(), props.cols[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.style[index], function (props) {
+      return props.alignY[index];
+    }, function (props) {
       return props.alignY[index];
     }, function (props) {
       return props.alignX[index];
@@ -1878,10 +1882,11 @@ var Box = React__default.forwardRef(function (_ref, ref) {
     return getColsPercent({
       cols: colsNormalized,
       left: leftNormalized,
+      right: rightNormalized,
       parent: parent,
       cssMode: cssMode
     });
-  }, [colsNormalized, leftNormalized, parent, cssMode]);
+  }, [colsNormalized, leftNormalized, rightNormalized, parent, cssMode]);
   var leftPercent = React.useMemo(function () {
     return getMarginsPercent({
       margin: leftNormalized,
@@ -2068,6 +2073,33 @@ var Control = function Control(props) {
   }));
 };
 
+var useCurrentBreakpoint = (function (breakpoints) {
+  var _useState = React.useState(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      currentBp = _useState2[0],
+      setCurrentBp = _useState2[1];
+
+  React.useEffect(function () {
+    function onResize() {
+      var w = window.innerWidth;
+      var bp = 0;
+      breakpoints.forEach(function (breakpoint) {
+        if (breakpoint <= w) {
+          bp = breakpoint;
+        }
+      });
+      setCurrentBp(bp);
+    }
+
+    onResize();
+    window.addEventListener('resize', onResize);
+    return function () {
+      return window.removeEventListener('resize', onResize);
+    };
+  }, []);
+  return currentBp;
+});
+
 var Grid = React__default.forwardRef(function (props, ref) {
   var breakpoints = props.breakpoints,
       left = props.left,
@@ -2094,6 +2126,7 @@ var Grid = React__default.forwardRef(function (props, ref) {
   var breakpointsNormalized = React.useMemo(function () {
     return breakpoints;
   }, [breakpoints]);
+  var currentBreakpoint = useCurrentBreakpoint(breakpointsNormalized);
   var gutterXNormalized = React.useMemo(function () {
     return normalizeProps({
       prop: gutterX,
@@ -2178,7 +2211,7 @@ var Grid = React__default.forwardRef(function (props, ref) {
   return React__default.createElement(StyledContainer, {
     cssMode: cssModeNormalized,
     colspan: colspan,
-    className: classnames(['Grid', className]),
+    className: classnames(['Grid', "bp-".concat(currentBreakpoint), className]),
     gutterX: gutterXNormalized,
     gutterY: gutterYNormalized,
     alignX: alignXNormalized,
@@ -2297,7 +2330,7 @@ Grid.propTypes = {
 
 };
 Grid.defaultProps = {
-  breakpoints: [0, 432, 800, 1025, 1200, 1400],
+  breakpoints: [0, 432, 768, 1024, 1200, 1400],
   left: '0',
   right: '0',
   top: '0',
