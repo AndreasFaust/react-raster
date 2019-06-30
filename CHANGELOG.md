@@ -1,3 +1,17 @@
+## 4.0.0 (2019-06-30)
+
+##### Breaking Changes
+
+*  Change breakpoint defaults (9fa065fd)
+
+##### New Features
+
+*  add breakpoint-classes to Grid (0b7b7f66)
+
+##### Bug Fixes
+
+*  Fix prop 'right' (7fe66f90)
+
 #### 3.0.4 (2019-06-23)
 
 #### 3.0.3 (2019-06-22)
