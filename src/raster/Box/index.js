@@ -74,6 +74,7 @@ const Box = React.forwardRef(({
       breakpoints={breakpoints}
       className={classNames(['Box', className])}
       cols={colsPercent}
+      colsNumber={colsNormalized}
       media={media}
       gutterX={gutterX}
       gutterY={gutterY}

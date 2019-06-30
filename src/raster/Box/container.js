@@ -17,6 +17,7 @@ const GridContainer = styled(Container)`
   })}
   ${props => props.media.map((media, index) => {
     return media`
+      ${!props.colsNumber[index] ? 'display: none;' : ''}
       grid-column: auto / span ${props.cols[index]};
       margin-left: ${props.left[index]};
       margin-right: ${props.right[index]};

@@ -1729,7 +1729,7 @@ function _templateObject4$2() {
 }
 
 function _templateObject3$2() {
-  var data = _taggedTemplateLiteral(["\n      grid-column: auto / span ", ";\n      margin-left: ", ";\n      margin-right: ", ";\n      margin-top: ", ";\n      margin-bottom: ", ";\n      ", "\n\n      align-content: ", ";\n      align-items: ", ";\n      // justify-content: ", ";    \n    "]);
+  var data = _taggedTemplateLiteral(["\n      ", "\n      grid-column: auto / span ", ";\n      margin-left: ", ";\n      margin-right: ", ";\n      margin-top: ", ";\n      margin-bottom: ", ";\n      ", "\n\n      align-content: ", ";\n      align-items: ", ";\n      // justify-content: ", ";    \n    "]);
 
   _templateObject3$2 = function _templateObject3() {
     return data;
@@ -1769,7 +1769,7 @@ var GridContainer$1 = styled__default(Container)(_templateObject$4(), function (
   });
 }, function (props) {
   return props.media.map(function (media, index) {
-    return media(_templateObject3$2(), props.cols[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.style[index], function (props) {
+    return media(_templateObject3$2(), !props.colsNumber[index] ? 'display: none;' : '', props.cols[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.style[index], function (props) {
       return props.alignY[index];
     }, function (props) {
       return props.alignY[index];
@@ -1947,6 +1947,7 @@ var Box = React__default.forwardRef(function (_ref, ref) {
     breakpoints: breakpoints,
     className: classnames(['Box', className]),
     cols: colsPercent,
+    colsNumber: colsNormalized,
     media: media,
     gutterX: gutterX,
     gutterY: gutterY,

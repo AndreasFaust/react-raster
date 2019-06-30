@@ -63,11 +63,8 @@ const IndexPage = () => {
       style={`
         background: blue;
         &.bp-768 {
-          background: black;
+          // background: black;
         }
-        // align-items: center;
-        // justify-items: center;
-        // justify-content: center;
       `}
       // cssMode='flex'
       ref={gridRef}
