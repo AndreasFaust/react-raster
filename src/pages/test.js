@@ -9,10 +9,10 @@ import image5 from '../images/image-5.jpg'
 
 const ImageBox = () => (
   <Box
-    top={1}
-    left={1}
-    cols={3}
-    alignY={'bottom'}
+    // top={0.5}
+    // left={0.5}
+    cols={2}
+    alignY={'center'}
     style={`
       background: pink;
       height: 300px;
@@ -59,9 +59,12 @@ const IndexPage = () => {
       alignX={'center'}
       alignY={'center'}
       control
+      // styleOuter={`width: 80%;`}
       style={`
         background: blue;
-        align-items: center;
+        // align-items: center;
+        // justify-items: center;
+        // justify-content: center;
       `}
       // cssMode='flex'
       ref={gridRef}
@@ -69,11 +72,36 @@ const IndexPage = () => {
       <Box
         ref={boxRef}
         className='Box--1'
-        cols={[5]}
-        left={[0]}
+        cols={[4]}
+        left={[2]}
+        right={[1]}
+        alignY='center'
         style={`
         background: yellow;
+        height: 400px;
       `}
+      >
+        <ImageBox />
+        <Box
+          className='Box--3'
+          cols={[1]}
+          left={[1]}
+          alignY='center'
+          style={`
+            background: green;
+            height: 150px;
+          `}
+        />
+      </Box>
+      <Box
+        ref={boxRef}
+        className='Box--2'
+        cols={[4]}
+        left={[0]}
+        style={`
+          background: yellow;
+          height: 200px;
+        `}
       >
         <ImageBox />
       </Box>

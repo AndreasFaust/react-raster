@@ -12,6 +12,7 @@ import useCssMode from '../utils/useCssMode'
 import StyledContainer from './container'
 import Control from '../Control'
 import mergeStyles from '../utils/mergeStyles'
+import useCurrentBreakpoint from '../utils/useCurrentBreakpoint'
 
 const Grid = React.forwardRef((props, ref) => {
   const {
@@ -40,6 +41,7 @@ const Grid = React.forwardRef((props, ref) => {
   const cssModeNormalized = useCssMode(cssMode || 'grid')
 
   const breakpointsNormalized = useMemo(() => breakpoints, [breakpoints])
+  const currentBreakpoint = useCurrentBreakpoint(breakpointsNormalized)
   const gutterXNormalized = useMemo(() => normalizeProps({ prop: gutterX, breakpoints: breakpointsNormalized }), [gutterX, breakpointsNormalized])
   const gutterYNormalized = useMemo(() => normalizeProps({ prop: gutterY, breakpoints: breakpointsNormalized }), [gutterY, breakpointsNormalized])
   const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, breakpoints: breakpointsNormalized }), cssModeNormalized, true), [alignX, breakpointsNormalized, cssModeNormalized])
@@ -60,7 +62,7 @@ const Grid = React.forwardRef((props, ref) => {
     <StyledContainer
       cssMode={cssModeNormalized}
       colspan={colspan}
-      className={classNames(['Grid', className])}
+      className={classNames(['Grid', 'bp-', className])}
       gutterX={gutterXNormalized}
       gutterY={gutterYNormalized}
       alignX={alignXNormalized}

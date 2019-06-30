@@ -79,6 +79,21 @@ Look up the props-specification for `Grid` and `Box` below.
 Avoid mixing Boxes with other components inside Grids or Boxes.
 Either a Box/Grid contains Boxes or regular elements/components.
 
+## What about cssMode `grid` and `flex`?
+`cssMode` is the prop, that defines what CSS-layout-engine `react-raster` should use. 
+`grid` uses Grid-Layout, `flex` the older Flexbox. `grid` is default, but if the user’s browser does not support it, it automatically falls back to `flex`.
+
+### Grid-Layout is not always the better solution!
+Grid-Layout is not the holy grail of layouting unfortunately. It's very flexible, while it lacks two basic functionalities: You cannot position your grid-items generally (like let’s say "center all children") or add margins to them. This limitation makes Grid-Layout within its overcomplicated flexibility stiff and unhandy.
+`react-raster` tries to compensate this as much as possible. 
+
+### Differences
+- `grid` renders a clean DOM-structure, while `flex` needs stacked divs to position everything right.
+With `flex` you can **horizontally center** your grid-items, with `grid` you can not. 
+- `grid` does not accept the prop `alignX`.
+- `grid` has the single prop `style` for styling. `flex` has `styleOuter` for its outer and `styleInner` for the inner container. If you want to use `flex` as fallback, use only `styleOuter` and `styleOuter`, as they are automatically merged into `style`. 
+
+
 ## Advanced Example
 
 The following code gives you a more detailed example of what you can do with react-raster:
@@ -114,7 +129,7 @@ const Example = () => (
         control={process.env.NODE_ENV !== "production"}
         controlColor="rgba(0, 100, 255, 0.1)"
         styleOuter={`
-          width: 80%;
+          width: 70%;
         `}
         styleInner={[
             `background: red;`,
@@ -163,15 +178,15 @@ const Example = () => (
 | **bottom** | String or Array of Strings   | `'0'`                            | Bottom padding of the Grid.                                                   |
 | **gutterX** | String or Array of Strings   | `'0'`                            | Horizontal gutter.                                                   |
 | **gutterY** | String or Array of Strings   | `'0'`                            | Verical gutter.                                                   |
-| **alignX** | String or Array of Strings   | `''`                            | Horizontal align of child elements.                                                   |
+| **alignX** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Horizontal align of child elements.                                                   |
 | **alignY** | String or Array of Strings   | `''`                            | Vertical align of child elements.                                                   |
 | **control** | Boolean   | `false`                            | Enable visual control via ESC-Key.                                                   |
 | **controlColor** | Boolean   | `'rgba(0, 0, 0, 0.1)'`                            | Custom color for the grid-control.                                                   |
 | **position** | String or Array of Strings   | `'relative'`                            | CSS-position                                                   |
 | **className** | String   | `''`                            | CSS-Class(es)                                                   |
-| **style** | String or Array of Strings   | `''`                            | cssMode={grid} only! Custom styles with styled-components.                                                   |
-| **styleOuter** | String or Array of Strings   | `''`                            | cssMode={flex} only! Styles Grid-Outer-Container with styled-components.                                                 |
-| **styleInner** | String or Array of Strings   | `''`                            | cssMode={flex} only! Styles Grid-Outer-Container with styled-components. |
+| **style** | String or Array of Strings   | `''`                            | `cssMode={grid}` only! Custom styles with styled-components.                                                   |
+| **styleOuter** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Styles Grid-Outer-Container with styled-components.                                                 |
+| **styleInner** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Styles Grid-Outer-Container with styled-components. |
 | **cssMode** | String | `undefined`                            | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support.                                                 |
 | **tag** | String | `'div'`                            | HTML-Tag                                                 |
 | **ref** | React-Ref | `null`                            | Pass a ref.                                                 |
@@ -185,12 +200,12 @@ const Example = () => (
 | **right** | Number or Array of Numbers   | `0`                            | Right margin of the Box. Unit: Grid-columns.                                                   |
 | **top** | Number or Array of Numbers   | `0`                            | Top margin of the Box. Unit: Grid-columns.                                                   |
 | **bottom** | Number or Array of Numbers   | `0`                            | Bottom margin of the Box. Unit: Grid-columns.                                                   |
-| **alignX** | String or Array of Strings   | `0`                            | cssMode={flex} only! Horizontal Align of child elements.                                                   |
+| **alignX** | String or Array of Strings   | `0`                            | `cssMode={flex}` only! Horizontal Align of child elements.                                                   |
 | **alignY** | String or Array of Strings   | `0`                            | Vertical Align of child elements.                                                   |
-| **style** | String or Array of Strings   | `''`                            | cssMode={grid} only! Custom styles with styled-components.                                                   |
-| **styleOuter** | String or Array of Strings   | `''`                            | cssMode={flex} only! Styles Box-Outer-Container with styled-components.                                                 |
-| **styleInner** | String or Array of Strings   | `''`                            | cssMode={flex} only! Styles Box-Inner-Container with styled-components. |
-| **hasChildBoxes** | Boolean   | `undefined`                            | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. See the topic "Resetting Boxes". |
+| **style** | String or Array of Strings   | `''`                            | `cssMode={grid}` only! Custom styles with styled-components.                                                   |
+| **styleOuter** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Styles Box-Outer-Container with styled-components.                                                 |
+| **styleInner** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Styles Box-Inner-Container with styled-components. |
+| **hasChildBoxes** | Boolean   | `undefined`                            | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. |
 | **ref** | React-Ref | `null`                            | Pass a ref.                                                 |
 
 

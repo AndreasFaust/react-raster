@@ -19,8 +19,9 @@ const GridContainer = styled(Container)`
       grid-column-gap: ${props.gutterX[index]};
       grid-row-gap: ${props.gutterY[index]};
       ${props.style[index]}
+      align-content: ${props => props.alignY[index]};
       align-items: ${props => props.alignY[index]};
-      justify-content: ${props => props.alignX[index]};
+      // justify-content: ${props => props.alignX[index]};
     `
   })}
 `
