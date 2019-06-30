@@ -48,7 +48,7 @@ const IndexPage = () => {
   return (
     <Grid
       tag='section'
-      breakpoints={[0, 500, 800, 1025, 1200, 1400]}
+      breakpoints={[0, 500, 768, 1024, 1200, 1400]}
       left={'1.5vw'}
       right={'3vw'}
       top={'10vw'}

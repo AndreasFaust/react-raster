@@ -170,7 +170,7 @@ const Example = () => (
 
 | **Name**     | **Type** | **Default**                       | **Description**                                                                           |
 | :----------- | :------- | :-------------------------------- | :---------------------------------------------------------------------------------------- |
-| **breakpoints** | Array   | `[0, 432, 800, 1025, 1200, 1400]`                            | Breakpoints in Pixels, in ascending order starting with zero.                                                   |
+| **breakpoints** | Array   | `[0, 432, 768, 1024, 1200, 1400]`                            | Breakpoints in Pixels, in ascending order starting with zero.                                                   |
 | **colspan** | Number   | `1`                            | Number of columns.                                                   |
 | **left** | String or Array of Strings   | `'0'`                            | Left padding of the Grid.                                                   |
 | **right** | String or Array of Strings   | `'0'`                            | Right padding of the Grid.                                                   |

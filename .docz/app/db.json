@@ -382,7 +382,7 @@
               "required": false,
               "description": "Breakpoints in Pixels, in ascending order starting with zero.",
               "defaultValue": {
-                "value": "[0, 432, 800, 1025, 1200, 1400]",
+                "value": "[0, 432, 768, 1024, 1200, 1400]",
                 "computed": false
               }
             },

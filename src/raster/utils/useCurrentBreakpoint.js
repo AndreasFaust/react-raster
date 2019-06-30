@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 export default (breakpoints) => {
   const [currentBp, setCurrentBp] = useState(0)
@@ -7,11 +7,10 @@ export default (breakpoints) => {
       const w = window.innerWidth
       let bp = 0
       breakpoints.forEach(breakpoint => {
-        if (w > breakpoint) {
+        if (breakpoint <= w) {
           bp = breakpoint
         }
       })
-      console.log(bp)
       setCurrentBp(bp)
     }
     onResize()
