@@ -1,3 +1,9 @@
+#### 4.1.1 (2019-09-04)
+
+##### Bug Fixes
+
+*  upgrade dependencies. (abc9383a)
+
 ### 4.1.0 (2019-06-30)
 
 ##### New Features
