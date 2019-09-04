@@ -1,13 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: `react-raster`,
-    siteUrl: `https://andreasfaust.github.io/react-raster/`,
-    description: `react-raster is an advanced grid-system based on styled-components.`
+    title: 'react-raster',
+    siteUrl: 'https://andreasfaust.github.io/react-raster/',
+    description: 'react-raster is an advanced grid-system based on styled-components.'
   },
-  pathPrefix: `/react-raster`,
-  __experimentalThemes: ['gatsby-theme-docz'],
+  pathPrefix: '/react-raster',
   plugins: [
-    // 'gatsby-plugin-layout',
+    'gatsby-theme-docz',
     {
       resolve: 'gatsby-plugin-sass',
       options: {
