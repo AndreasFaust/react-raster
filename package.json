@@ -14,6 +14,7 @@
         "npm": ">=5"
     },
     "dependencies": {
+        "classnames": "^2.2.6",
         "prop-types": "^15.7.2"
     },
     "devDependencies": {
@@ -23,36 +24,42 @@
         "@babel/plugin-transform-runtime": "^7.5.5",
         "@babel/preset-env": "^7.5.5",
         "@babel/preset-react": "^7.0.0",
+        "@typescript-eslint/eslint-plugin": "2.x",
+        "@typescript-eslint/parser": "2.x",
+        "babel-eslint": "10.x",
         "babel-plugin-macros": "^2.6.1",
-        "docz": "^2.0.0-rc.32",
+        "docz": "^2.0.0-rc.55",
         "docz-theme-default": "^1.2.0",
+        "eslint": "6.x",
+        "eslint-config-react-app": "^5.0.2",
+        "eslint-plugin-flowtype": "3.x",
+        "eslint-plugin-import": "2.x",
+        "eslint-plugin-jsx-a11y": "6.x",
+        "eslint-plugin-react": "7.x",
+        "eslint-plugin-react-hooks": "1.x",
         "gatsby": "^2.15.6",
         "gatsby-plugin-layout": "^1.1.6",
         "gatsby-plugin-react-helmet": "^3.1.6",
         "gatsby-plugin-sass": "^2.1.13",
         "gatsby-plugin-typescript": "^2.1.6",
-        "gatsby-theme-docz": "^2.0.0-rc.32",
+        "gatsby-theme-docz": "^2.0.0-rc.55",
         "generate-changelog": "^1.8.0",
         "gh-pages": "^2.1.1",
         "node-sass": "^4.12.0",
         "react": "^16.9.0",
         "react-dom": "^16.9.0",
-        "react-select": "^3.0.4",
-        "react-spring": "^8.0.27",
         "rollup": "^1.20.3",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-peer-deps-external": "^2.2.0",
         "rollup-plugin-url": "^2.2.2",
-        "standard": "^14.1.0",
         "styled-components": "^4.3.2",
         "to-style": "^1.3.3"
     },
     "peerDependencies": {
         "react": "^16.8.5",
         "react-dom": "^16.8.5",
-        "react-spring": "^8.0.0",
         "styled-components": "^4.2.0"
     },
     "keywords": [
@@ -66,10 +73,10 @@
     "scripts": {
         "dev": "gatsby develop",
         "start": "yarn dev",
-        "build": "rollup -c && gatsby build --prefix-paths",
-        "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags && yarn publish",
-        "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags && yarn publish",
-        "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags && yarn publish",
-        "deploy": "gh-pages -d public"
+        "build": "rollup -c",
+        "release:major": "yarn build && yarn add . && changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags && yarn publish",
+        "release:minor": "yarn build && yarn add . && changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags && yarn publish",
+        "release:patch": "yarn build && yarn add . && changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags && yarn publish",
+        "deploy": "gatsby build --prefix-paths && gh-pages -d public"
     }
 }

@@ -21,6 +21,76 @@ On current browsers it uses the benefits of `Grid Layout`. On legacy browsers it
 
 ## Basic usage
 
-**Scale your viewport** to see the layout changing.
+**Resize your viewport** to see the layout changing.
 
 Press `ESC` to see the visual control.
+
+<Playground>
+
+  <Grid
+    tag='section'
+    breakpoints={[0, 500, 768, 1024, 1200, 1400]}
+    left={'1.5vw'}
+    right={'3vw'}
+    top={'10vw'}
+    bottom={'20vw'}
+    gutterX={'1.5vw'}
+    gutterY={'3vw'}
+    colspan={12}
+    alignX={'center'}
+    alignY={'center'}
+    control
+    style={`
+      background: blue;
+      &.bp-768 {
+        // background: black;
+      }
+    `}
+  >
+    <Box
+      className='Box--1'
+      cols={[6, 3, 2]}
+      cols={[6, 3, 3, 3, 2]}
+      left={[0, 1]}
+      right={[0, 1]}
+      alignY='center'
+      style={`
+        background: yellow;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+      `}
+    >
+      Hallo
+    </Box>
+    <Box
+      className='Box--2'
+      cols={[6, 3, 3, 3, 2]}
+      left={[0, 1]}
+      right={[1]}
+      alignY='center'
+      style={`
+        background: yellow;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+      `}
+    >
+      World
+    </Box>
+    <Box
+      className='Box--3'
+      cols={[6, 3, 3, 3, 12]}
+      left={[0, 1, 1, 1, 0]}
+      alignY='center'
+      style={`
+        background: yellow;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+      `}
+    >
+      !!!
+    </Box>
+  </Grid>
+</Playground>
