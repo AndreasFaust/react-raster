@@ -1,3 +1,10 @@
+#### 4.1.2 (2019-10-12)
+
+##### Bug Fixes
+
+*  fix package.json (3fcf34b5)
+*  update repos (eddfafab)
+
 #### 4.1.1 (2019-09-04)
 
 ##### Bug Fixes
