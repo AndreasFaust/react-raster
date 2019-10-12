@@ -13771,7 +13771,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var docz__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! docz */ "./node_modules/docz/dist/index.esm.js");
 /* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/get */ "lodash/get");
 /* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_get__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/docz-theme-default/node_modules/styled-components/dist/styled-components.esm.js");
 /* harmony import */ var _chunk_esm_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk.esm.js */ "./node_modules/docz-theme-default/dist/chunk.esm.js");
 /* harmony import */ var react_codemirror2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-codemirror2 */ "./node_modules/react-codemirror2/index.js");
 /* harmony import */ var react_codemirror2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_codemirror2__WEBPACK_IMPORTED_MODULE_5__);
