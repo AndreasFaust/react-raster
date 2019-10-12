@@ -74,9 +74,9 @@
         "dev": "gatsby develop",
         "start": "yarn dev",
         "build": "rollup -c",
-        "release:major": "yarn build && yarn add . && changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags && yarn publish",
-        "release:minor": "yarn build && yarn add . && changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags && yarn publish",
-        "release:patch": "yarn build && yarn add . && changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags && yarn publish",
+        "release:major": "yarn build && git add . && changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags && yarn publish",
+        "release:minor": "yarn build && git add . && changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags && yarn publish",
+        "release:patch": "yarn build && git add . && changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags && yarn publish",
         "deploy": "gatsby build --prefix-paths && gh-pages -d public"
     }
 }
