@@ -3,12 +3,14 @@ import React from 'react'
 const Container = React.forwardRef(({
   className,
   children,
+  src,
+  alt,
   tag = 'div'
 }, ref) => {
   return React.createElement(
     tag,
-    { className, ref },
-    children
+    { className, src, alt, ref },
+    tag !== 'img' ? children : undefined
   )
 })
 

@@ -6,14 +6,14 @@ module.exports = {
   },
   pathPrefix: '/react-raster',
   plugins: [
-    'gatsby-theme-docz',
     {
       resolve: 'gatsby-plugin-sass',
       options: {
         includePaths: [
           'src/components',
           'src/layout',
-          'src/transitions'
+          'src/pages',
+          'src/scss',
         ]
       }
     }

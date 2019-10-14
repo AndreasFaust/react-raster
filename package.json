@@ -28,8 +28,6 @@
         "@typescript-eslint/parser": "2.x",
         "babel-eslint": "10.x",
         "babel-plugin-macros": "^2.6.1",
-        "docz": "^2.0.0-rc.55",
-        "docz-theme-default": "^1.2.0",
         "eslint": "6.x",
         "eslint-config-react-app": "^5.0.2",
         "eslint-plugin-flowtype": "3.x",
@@ -42,7 +40,6 @@
         "gatsby-plugin-react-helmet": "^3.1.6",
         "gatsby-plugin-sass": "^2.1.13",
         "gatsby-plugin-typescript": "^2.1.6",
-        "gatsby-theme-docz": "^2.0.0-rc.55",
         "generate-changelog": "^1.8.0",
         "gh-pages": "^2.1.1",
         "node-sass": "^4.12.0",
@@ -54,13 +51,12 @@
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-peer-deps-external": "^2.2.0",
         "rollup-plugin-url": "^2.2.2",
-        "styled-components": "^4.3.2",
-        "to-style": "^1.3.3"
+        "styled-components": "^5.0.0-beta.9"
     },
     "peerDependencies": {
         "react": "^16.8.5",
         "react-dom": "^16.8.5",
-        "styled-components": "^4.2.0"
+        "styled-components": "^4.4.0"
     },
     "keywords": [
         "React",

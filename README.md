@@ -221,6 +221,7 @@ const Example = () => (
 | **styleOuter** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Styles Box-Outer-Container with styled-components.                                                 |
 | **styleInner** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Styles Box-Inner-Container with styled-components. |
 | **hasChildBoxes** | Boolean   | `undefined`                            | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. |
+| **tag** | String | `'div'`                            | HTML-Tag                                                 |
 | **ref** | React ref-object | `null`                            | Pass a ref.                                                 |
 
 

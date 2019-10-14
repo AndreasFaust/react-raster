@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Header from './header'
 
-// import './reset.scss'
+import './scss/reset.scss'
 import './index.scss'
 
 const Layout = ({

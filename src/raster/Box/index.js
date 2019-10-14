@@ -27,6 +27,9 @@ const Box = React.forwardRef(({
   styleInner,
   styleOuter,
   hasChildBoxes,
+  tag,
+  src,
+  alt,
   refCallback
 }, ref) => {
   const {
@@ -82,7 +85,7 @@ const Box = React.forwardRef(({
       hasChildBoxes={hasChildBoxesNormalized}
       alignX={alignXNormalized}
       alignY={alignYNormalized}
-
+      tag={tag}
       left={leftPercent}
       right={rightPercent}
       top={topPercent}
@@ -92,6 +95,8 @@ const Box = React.forwardRef(({
         : styleOuterNormalized
       }
       ref={ref}
+      src={src}
+      alt={alt}
     >
       <Inner
         cssMode={cssMode}
@@ -168,6 +173,9 @@ Box.propTypes = {
   /**  cssMode={flex} only! Styles Box-Outer-Container with styled-components. */
   styleOuter: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   /**  Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. See the topic "Resetting Boxes" */
+  tag: PropTypes.string,
+  src: PropTypes.string,
+  alt: PropTypes.string,
   hasChildBoxes: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node
@@ -186,7 +194,10 @@ Box.defaultProps = {
   style: '',
   styleInner: '',
   styleOuter: '',
-  hasChildBoxes: undefined
+  hasChildBoxes: undefined,
+  tag: 'div',
+  src: undefined,
+  alt: undefined,
 }
 
 export default Box
