@@ -35,7 +35,8 @@ const Grid = React.forwardRef((props, ref) => {
     styleOuter,
     children,
     cssMode,
-    tag
+    tag,
+    attrs
   } = props
   const controlIsVisible = useControl(control)
   const cssModeNormalized = useCssMode(cssMode || 'grid')
@@ -74,6 +75,7 @@ const Grid = React.forwardRef((props, ref) => {
       bottom={bottomNormalized}
       position={positionNormalized}
       tag={tag}
+      attrs={attrs}
       style={cssModeNormalized === 'grid'
         ? styleNormalized
         : styleOuterNormalized
@@ -175,7 +177,8 @@ Grid.propTypes = {
   children: PropTypes.node,
   /**  Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support. */
   cssMode: PropTypes.string,
-  tag: PropTypes.string
+  tag: PropTypes.string,
+  attrs: PropTypes.object
   /**  cssMode={flex} only!  Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. See the topic "Group Boxes inside custom components" for more information. If the Boxes are nested inside other components react-raster does not know, that you are sitll using its grid. */
   // reset: PropTypes.bool
 }
@@ -200,7 +203,8 @@ Grid.defaultProps = {
   className: '',
   children: null,
   cssMode: undefined,
-  tag: 'div'
+  tag: 'div',
+  attrs: {}
   // reset: undefined
 }
 

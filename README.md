@@ -176,6 +176,17 @@ const Example = () => (
             <MyCustomChildBox>
                 <h2>World</h2>
             </MyCustomChildBox>
+
+            <Box
+                className="Testgrid__Image"
+                tag="img"
+                cols={12}
+                top={1}
+                attr={{
+                    src: 'https://my-image-source.io",
+                    alt: 'A box can be an image, too!'
+                }}
+            >
         </Box>
     </Grid>
 );
@@ -204,6 +215,7 @@ const Example = () => (
 | **styleInner** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Styles Grid-Outer-Container with styled-components. |
 | **cssMode** | String | `undefined`                            | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support.                                                 |
 | **tag** | String | `'div'`                            | HTML-Tag                                                 |
+| **attrs** | Object | `{}`                            | Attributes of the HTML-Tag                                                 |
 | **ref** | React ref-object | `null`                            | Pass a ref.                                                 |
 
 ## Box
@@ -222,6 +234,7 @@ const Example = () => (
 | **styleInner** | String or Array of Strings   | `''`                            | `cssMode={flex}` only! Styles Box-Inner-Container with styled-components. |
 | **hasChildBoxes** | Boolean   | `undefined`                            | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. |
 | **tag** | String | `'div'`                            | HTML-Tag                                                 |
+| **attrs** | Object | `{}`                            | Attributes of the HTML-Tag                                                 |
 | **ref** | React ref-object | `null`                            | Pass a ref.                                                 |
 
 

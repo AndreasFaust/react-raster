@@ -30,6 +30,9 @@ export default () => (
       //   // background: black;
       // }
     `}
+    attrs={{
+      tabIndex: 0
+    }}
   >
     <Box
       className='header'
@@ -40,8 +43,10 @@ export default () => (
         cols={[10, 8, 8, 6]}
         left={[1, 2, 2, 3]}
         tag='img'
-        src={logo}
-        alt="Logo"
+        attrs={{
+          src: logo,
+          alt: "Logo"
+        }}
       />
       <Box
         className='Box--1'
