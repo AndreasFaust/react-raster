@@ -32,9 +32,6 @@ const GridContainer = styled(Container)`
   })}
   ${props => {
     if (props.controlIsVisible) {
-      console.log(props.tag)
-      console.log(props.controlColor)
-      console.log('-----')
       return props.tag !== 'img'
         ? `
           position: relative; 

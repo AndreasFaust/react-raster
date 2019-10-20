@@ -23,6 +23,7 @@ export default () => (
     gutterX={'1.5vw'}
     gutterY={'3vw'}
     alignY={'center'}
+    alignX={'center'}
     control
     style={`
       // background: blue;
@@ -34,13 +35,41 @@ export default () => (
     }}
   >
     <Box
+      className='Logo'
+      cols={[10, 8, 8, 6]}
+      tag='img'
+      attrs={{
+        src: logo,
+        alt: "Logo"
+      }}
+    />
+    <Box
+      className='Logo'
+      cols={[10, 8, 8, 6]}
+      tag='img'
+      attrs={{
+        src: logo,
+        alt: "Logo"
+      }}
+    />
+    <Box
+      className='Logo'
+      cols={[10, 8, 8, 6]}
+      tag='img'
+      attrs={{
+        src: logo,
+        alt: "Logo"
+      }}
+    />
+
+    {/* <Box
       className='header'
       tag='header'
     >
       <Box
         className='Logo'
         cols={[10, 8, 8, 6]}
-        left={[1, 2, 2, 3]}
+        // left={[1, 2, 2, 3]}
         tag='img'
         attrs={{
           src: logo,
@@ -69,7 +98,7 @@ export default () => (
     >
       <p>Scale your Viewport to see the layout changing!</p>
       <p>Press <span>ESC</span> to see the column-grid</p>
-    </Box>
+    </Box> */}
 
   </Grid >
 )

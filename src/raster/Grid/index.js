@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Context from '../context'
@@ -13,6 +13,72 @@ import StyledContainer from './container'
 import Control from '../Control'
 import mergeStyles from '../utils/mergeStyles'
 import useCurrentBreakpoint from '../utils/useCurrentBreakpoint'
+
+
+function restructureWidths(breakpoints, childWidths) {
+  const widthsRestructured = []
+  breakpoints.forEach((_, bpIndex) => {
+    const widthAtBreakpoint = []
+    childWidths.forEach(({ id, width }) => {
+      widthAtBreakpoint.push({ id, width: width[bpIndex] })
+    })
+    widthsRestructured.push(widthAtBreakpoint)
+  })
+  return widthsRestructured
+}
+
+function getAlignmentXRest(breakpoints, childWidths, colspan, alignX) {
+  const widthsRestructured = restructureWidths(breakpoints, childWidths)
+  widthsRestructured.forEach(breakpoint => {
+    if (!breakpoint.length) return
+    let totalWidth = 0
+    let currentFirstElement = null
+    for (let i = 0; i < breakpoint.length + 1; i++) {
+      const element = breakpoint[i]
+      if (!totalWidth) currentFirstElement = element
+      if (element) {
+        if (totalWidth + element.width > colspan) {
+          currentFirstElement.rest = colspan - totalWidth
+          currentFirstElement = element
+          totalWidth = 0
+        }
+        if (totalWidth + element.width === colspan) {
+          currentFirstElement.rest = 0
+          currentFirstElement = element
+          totalWidth = 0
+        }
+        totalWidth += element.width
+      } else {
+        currentFirstElement.rest = colspan - totalWidth
+      }
+    }
+  })
+
+  const rests = {}
+  widthsRestructured.forEach((breakpoint, index) => {
+    const alignmentX = alignX[index]
+
+    breakpoint.forEach(element => {
+      let rest = element.rest || 0
+      switch (alignmentX) {
+        case 'left':
+          rest = 0
+          break
+        case 'center':
+          rest /= 2
+          break
+        default:
+      }
+
+      if (!rests[element.id]) {
+        rests[element.id] = [rest]
+      } else {
+        rests[element.id] = [...rests[element.id], rest]
+      }
+    })
+  })
+  return rests
+}
 
 const Grid = React.forwardRef((props, ref) => {
   const {
@@ -58,6 +124,9 @@ const Grid = React.forwardRef((props, ref) => {
   const styleOuterNormalized = useMemo(() => normalizeProps({ prop: styleOuter, breakpoints }), [styleOuter, breakpoints])
   const styleInnerNormalized = useMemo(() => normalizeProps({ prop: styleInner, breakpoints }), [styleInner, breakpoints])
   const styleNormalized = useMemo(() => mergeStyles(normalizeProps({ prop: style, breakpoints }), styleInnerNormalized, styleOuterNormalized), [style, breakpoints, styleInnerNormalized, styleOuterNormalized])
+
+  const [childWidths, reportChildWidth] = useState([])
+  const alignmentXRest = useMemo(() => getAlignmentXRest(breakpoints, childWidths, colspan, alignXNormalized), [breakpoints, childWidths, colspan, alignXNormalized])
 
   return (
     <StyledContainer
@@ -129,7 +198,9 @@ const Grid = React.forwardRef((props, ref) => {
               colspan,
               parent,
               controlIsVisible,
-              controlColor
+              controlColor,
+              reportChildWidth,
+              alignmentXRest
             }}
           >
             {children}
@@ -141,46 +212,27 @@ const Grid = React.forwardRef((props, ref) => {
 })
 
 Grid.propTypes = {
-  /** Breakpoints in Pixels, in ascending order starting with zero. */
   breakpoints: PropTypes.array,
-  /** Number of columns. */
   colspan: PropTypes.number,
-  /**  Left padding of the Grid. */
   left: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Right padding of the Grid. */
   right: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Top padding of the Grid. */
   top: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Bottom padding of the Grid. */
   bottom: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Horizontal gutter. */
   gutterX: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Verical gutter. */
   gutterY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Horizontal align of child elements. Works only when: cssMode={flex}  */
   alignX: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Vertical align of child elements. */
   alignY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Enable visual control via ESC-Key. */
   control: PropTypes.bool,
-  /**  Custom color for the grid-control. */
   controlColor: PropTypes.string,
-  /**  CSS-position. */
   position: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   className: PropTypes.string,
-  /**  cssMode={grid} only! Custom styles with styled-components. */
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  cssMode={flex} only! Styles Grid-Inner-Container with styled-components. */
   styleInner: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  cssMode={flex} only! Styles Grid-Outer-Container with styled-components. */
   styleOuter: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   children: PropTypes.node,
-  /**  Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support. */
   cssMode: PropTypes.string,
   tag: PropTypes.string,
   attrs: PropTypes.object
-  /**  cssMode={flex} only!  Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. See the topic "Group Boxes inside custom components" for more information. If the Boxes are nested inside other components react-raster does not know, that you are sitll using its grid. */
-  // reset: PropTypes.bool
 }
 
 Grid.defaultProps = {
@@ -205,7 +257,6 @@ Grid.defaultProps = {
   cssMode: undefined,
   tag: 'div',
   attrs: {}
-  // reset: undefined
 }
 
 export default Grid
