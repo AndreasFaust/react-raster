@@ -31,7 +31,6 @@ export default () => (
       // }
     `}
     attrs={{
-      tabIndex: 0
     }}
   >
     <Box

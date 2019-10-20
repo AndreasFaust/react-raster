@@ -29,7 +29,6 @@ const Box = React.forwardRef(({
   hasChildBoxes,
   tag,
   attrs,
-  refCallback
 }, ref) => {
   const {
     cssMode,
@@ -68,6 +67,7 @@ const Box = React.forwardRef(({
   const styleOuterNormalized = useMemo(() => normalizeProps({ prop: styleOuter, breakpoints }), [styleOuter, breakpoints])
   const styleInnerNormalized = useMemo(() => normalizeProps({ prop: styleInner, breakpoints }), [styleInner, breakpoints])
   const styleNormalized = useMemo(() => mergeStyles(normalizeProps({ prop: style, breakpoints }), styleInnerNormalized, styleOuterNormalized), [style, breakpoints, styleInnerNormalized, styleOuterNormalized])
+
   if (register) register()
 
   return (
@@ -89,6 +89,8 @@ const Box = React.forwardRef(({
       right={rightPercent}
       top={topPercent}
       bottom={bottomPercent}
+      controlIsVisible={controlIsVisible}
+      controlColor={controlColor}
       style={cssMode === 'grid'
         ? styleNormalized
         : styleOuterNormalized
@@ -131,6 +133,7 @@ const Box = React.forwardRef(({
               media,
               parent: colsNormalized,
               controlIsVisible,
+              controlColor,
               cssMode,
               register: () => {
                 if (!hasChildBoxesRegistered) {
@@ -150,27 +153,16 @@ const Box = React.forwardRef(({
 Box.displayName = 'Box'
 
 Box.propTypes = {
-  /**  Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid columns defined with the prop "colspan" */
   cols: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  /**  Left margin of the Box. Unit: Grid-columns. */
   left: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  /**  Right margin of the Box. Unit: Grid-columns. */
   right: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  /**  Top margin of the Box. Unit: Grid-columns. */
   top: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  /**  Bottom margin of the Box. Unit: Grid-columns. */
   bottom: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  /**  cssMode={flex} only! Horizontal Align of child elements. */
   alignX: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Vertical Align of child elements. */
   alignY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  cssMode={grid} only! Custom styles with styled-components. */
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  cssMode={flex} only! Styles Box-Inner-Container with styled-components. */
   styleInner: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  cssMode={flex} only! Styles Box-Outer-Container with styled-components. */
   styleOuter: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  /**  Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. See the topic "Resetting Boxes" */
   tag: PropTypes.string,
   attrs: PropTypes.object,
   hasChildBoxes: PropTypes.bool,

@@ -30,6 +30,31 @@ const GridContainer = styled(Container)`
       // justify-content: ${props => props.alignX[index]};    
     `
   })}
+  ${props => {
+    if (props.controlIsVisible) {
+      console.log(props.tag)
+      console.log(props.controlColor)
+      console.log('-----')
+      return props.tag !== 'img'
+        ? `
+          position: relative; 
+          
+          ::after { 
+            content: '';
+            display: block;
+            position: absolute;
+            background: ${props.controlColor};
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+            pointer-events: none;
+          }
+        `
+        : `box-shadow: 0 0 200vw 200vw ${props.controlColor} inset;`
+    }
+  }}
 `
 
 const FlexContainer = styled(Container)`
