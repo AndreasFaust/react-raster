@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useRef } from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Context from '../context'
@@ -61,8 +61,12 @@ const Grid = React.forwardRef((props, ref) => {
   const styleInnerNormalized = useMemo(() => normalizeProps({ prop: styleInner, breakpoints }), [styleInner, breakpoints])
   const styleNormalized = useMemo(() => mergeStyles(normalizeProps({ prop: style, breakpoints }), styleInnerNormalized, styleOuterNormalized), [style, breakpoints, styleInnerNormalized, styleOuterNormalized])
 
-  const [childWidths, reportChildWidth] = useState([])
-  const alignmentXRest = useMemo(() => getAlignmentXRest(breakpoints, childWidths, colspan, alignXNormalized), [breakpoints, childWidths, colspan, alignXNormalized])
+  const alignmentXRest = useMemo(() => getAlignmentXRest({
+    children,
+    breakpoints,
+    colsTotal: colspan,
+    alignX: alignXNormalized
+  }), [alignXNormalized, breakpoints, children, colspan])
 
   return (
     <StyledContainer
@@ -135,11 +139,15 @@ const Grid = React.forwardRef((props, ref) => {
               parent,
               controlIsVisible,
               controlColor,
-              reportChildWidth,
-              alignmentXRest
             }}
           >
-            {children}
+            {
+              React.Children.map(children, (child, index) => {
+                return React.cloneElement(child, {
+                  rest: alignmentXRest[index]
+                })
+              })
+            }
           </Context.Provider>
         </Resetter>
       </Inner>

@@ -1,21 +1,24 @@
+import React from 'react'
+import normalizeProps from './normalizeProps'
+
 function restructureWidths(breakpoints, childWidths) {
   const widthsRestructured = []
   breakpoints.forEach((_, bpIndex) => {
     const widthAtBreakpoint = []
-    childWidths.forEach(({ id, width }) => {
-      widthAtBreakpoint.push({ id, width: width[bpIndex] })
+    childWidths.forEach((width) => {
+      widthAtBreakpoint.push({ width: width[bpIndex] })
     })
     widthsRestructured.push(widthAtBreakpoint)
   })
   return widthsRestructured
 }
 
-function buildRestObject(restArray, alignX) {
-  const rests = {}
-  restArray.forEach((breakpoint, index) => {
+function buildRestArray(restArrayGroupedByBreakpoint, alignX) {
+  const rests = []
+  restArrayGroupedByBreakpoint.forEach((breakpoint, index) => {
     const alignmentX = alignX[index]
 
-    breakpoint.forEach(element => {
+    breakpoint.forEach((element, bpIndex) => {
       let rest = element.rest || 0
       switch (alignmentX) {
         case 'left':
@@ -26,10 +29,10 @@ function buildRestObject(restArray, alignX) {
           break
         default:
       }
-      if (!rests[element.id]) {
-        rests[element.id] = [rest]
+      if (!rests[bpIndex]) {
+        rests[bpIndex] = [rest]
       } else {
-        rests[element.id] = [...rests[element.id], rest]
+        rests[bpIndex] = [...rests[bpIndex], rest]
       }
     })
   })
@@ -42,25 +45,43 @@ function applyRestToStack(elementStack, rest) {
   })
 }
 
-export default (breakpoints, childWidths, colspan, alignX) => {
-  const widthsRestructured = restructureWidths(breakpoints, childWidths)
+function sumup(a, b, c) {
+  return a.map((el, i) => el + b[i] + c[i])
+}
 
-  const restArray = widthsRestructured.map(breakpoint => {
+function getChildWidths(children, breakpoints, colsTotal) {
+  const childWidths = []
+  React.Children.forEach(children, ({ props }) => {
+    const left = normalizeProps({ prop: props.left, breakpoints })
+    const right = normalizeProps({ prop: props.right, breakpoints })
+    const cols = normalizeProps({ prop: props.cols, defaultProp: colsTotal, breakpoints })
+    childWidths.push(sumup(cols, left, right))
+  })
+  return childWidths
+}
+
+export default ({ children, breakpoints, colsTotal, alignX }) => {
+  // if (!children || !children.length) return []
+
+  const childWidths = getChildWidths(children, breakpoints, colsTotal)
+  const widthsGroupedByBreakpoint = restructureWidths(breakpoints, childWidths)
+  console.log(widthsGroupedByBreakpoint)
+
+  const restArrayGroupedByBreakpoint = widthsGroupedByBreakpoint.map(breakpoint => {
     if (!breakpoint.length) return breakpoint
     let totalWidth = 0
     let elementStack = []
     for (let i = 0; i < breakpoint.length + 1; i++) {
       let current = breakpoint[i]
-      // if (!totalWidth) elementStack = []
       if (current) {
-        if (totalWidth + current.width > colspan) {
-          applyRestToStack(elementStack, colspan - totalWidth)
+        if (totalWidth + current.width > colsTotal) {
+          applyRestToStack(elementStack, colsTotal - totalWidth)
           elementStack = [current]
           totalWidth = 0
           totalWidth += current.width
           continue
         }
-        if (totalWidth + current.width === colspan) {
+        if (totalWidth + current.width === colsTotal) {
           applyRestToStack(elementStack, 0)
           elementStack = []
           totalWidth = 0
@@ -70,13 +91,11 @@ export default (breakpoints, childWidths, colspan, alignX) => {
         totalWidth += current.width
       } else {
         if (totalWidth) {
-          applyRestToStack(elementStack, colspan - totalWidth)
+          applyRestToStack(elementStack, colsTotal - totalWidth)
         }
       }
     }
     return breakpoint
   })
-
-  console.log(restArray)
-  return buildRestObject(restArray, alignX)
+  return buildRestArray(restArrayGroupedByBreakpoint, alignX)
 }

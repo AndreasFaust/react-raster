@@ -36,31 +36,18 @@ export default () => (
   >
     <Box
       className='Logo'
-      cols={[10, 8, 8]}
-      tag='img'
-      attrs={{
-        src: logo,
-        alt: "Logo"
-      }}
-    />
-    <Box
-      className='Logo'
-      cols={[10, 8, 6]}
-      tag='img'
-      attrs={{
-        src: logo,
-        alt: "Logo"
-      }}
-    />
-    <Box
-      className='Logo'
-      cols={[10, 8, 3]}
-      tag='img'
-      attrs={{
-        src: logo,
-        alt: "Logo"
-      }}
-    />
+      cols={[10]}
+      alignX={'center'}
+    >
+      <Box
+        cols={4}
+        style={`
+          height: 200px;
+          background: red;
+        `}
+      />
+    </Box>
+
 
     {/* <Box
       className='header'
