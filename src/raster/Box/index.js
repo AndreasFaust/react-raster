@@ -26,7 +26,6 @@ function sumup(a, b, c) {
 }
 
 function sumUpRest(left, rest) {
-  console.log(rest)
   if (!rest) return left
   return left.map((l, i) => l + rest[i])
 }
@@ -78,6 +77,7 @@ const Box = React.forwardRef(({
 
   const leftNormalized = useMemo(() => normalizeProps({ prop: left, breakpoints }), [left, breakpoints])
   const rightNormalized = useMemo(() => normalizeProps({ prop: right, breakpoints }), [right, breakpoints])
+
   const topNormalized = useMemo(() => normalizeProps({ prop: top, breakpoints }), [top, breakpoints])
   const bottomNormalized = useMemo(() => normalizeProps({ prop: bottom, breakpoints }), [bottom, breakpoints])
 

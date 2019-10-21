@@ -36,7 +36,7 @@ export default () => (
   >
     <Box
       className='Logo'
-      cols={[10, 8, 8, 6]}
+      cols={[10, 8, 8]}
       tag='img'
       attrs={{
         src: logo,
@@ -45,7 +45,7 @@ export default () => (
     />
     <Box
       className='Logo'
-      cols={[10, 8, 8, 6]}
+      cols={[10, 8, 6]}
       tag='img'
       attrs={{
         src: logo,
@@ -54,7 +54,7 @@ export default () => (
     />
     <Box
       className='Logo'
-      cols={[10, 8, 8, 6]}
+      cols={[10, 8, 3]}
       tag='img'
       attrs={{
         src: logo,

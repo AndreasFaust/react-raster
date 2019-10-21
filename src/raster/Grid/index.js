@@ -13,72 +13,8 @@ import StyledContainer from './container'
 import Control from '../Control'
 import mergeStyles from '../utils/mergeStyles'
 import useCurrentBreakpoint from '../utils/useCurrentBreakpoint'
+import getAlignmentXRest from '../utils/getAlignmentXRest'
 
-
-function restructureWidths(breakpoints, childWidths) {
-  const widthsRestructured = []
-  breakpoints.forEach((_, bpIndex) => {
-    const widthAtBreakpoint = []
-    childWidths.forEach(({ id, width }) => {
-      widthAtBreakpoint.push({ id, width: width[bpIndex] })
-    })
-    widthsRestructured.push(widthAtBreakpoint)
-  })
-  return widthsRestructured
-}
-
-function getAlignmentXRest(breakpoints, childWidths, colspan, alignX) {
-  const widthsRestructured = restructureWidths(breakpoints, childWidths)
-  widthsRestructured.forEach(breakpoint => {
-    if (!breakpoint.length) return
-    let totalWidth = 0
-    let currentFirstElement = null
-    for (let i = 0; i < breakpoint.length + 1; i++) {
-      const element = breakpoint[i]
-      if (!totalWidth) currentFirstElement = element
-      if (element) {
-        if (totalWidth + element.width > colspan) {
-          currentFirstElement.rest = colspan - totalWidth
-          currentFirstElement = element
-          totalWidth = 0
-        }
-        if (totalWidth + element.width === colspan) {
-          currentFirstElement.rest = 0
-          currentFirstElement = element
-          totalWidth = 0
-        }
-        totalWidth += element.width
-      } else {
-        currentFirstElement.rest = colspan - totalWidth
-      }
-    }
-  })
-
-  const rests = {}
-  widthsRestructured.forEach((breakpoint, index) => {
-    const alignmentX = alignX[index]
-
-    breakpoint.forEach(element => {
-      let rest = element.rest || 0
-      switch (alignmentX) {
-        case 'left':
-          rest = 0
-          break
-        case 'center':
-          rest /= 2
-          break
-        default:
-      }
-
-      if (!rests[element.id]) {
-        rests[element.id] = [rest]
-      } else {
-        rests[element.id] = [...rests[element.id], rest]
-      }
-    })
-  })
-  return rests
-}
 
 const Grid = React.forwardRef((props, ref) => {
   const {
