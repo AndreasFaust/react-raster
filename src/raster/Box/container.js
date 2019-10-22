@@ -7,19 +7,20 @@ const GridContainer = styled(Container)`
   display: ${props => props.hasChildBoxes ? 'grid' : 'flex'};
 
   ${props => props.hasChildBoxes && props.media.map((media, index) => {
-    return media`
+  return media`
       grid-template-columns: repeat(${props => props.colspan[index]}, 1fr);
       grid-auto-columns: ${props => props.colspan[index]}fr;
       grid-auto-rows: min-content;
       grid-column-gap: ${props.gutterX[index]};
       grid-row-gap: ${props.gutterY[index]};
     `
-  })}
+})}
   ${props => props.media.map((media, index) => {
-    return media`
+  return media`
       ${!props.colsNumber[index] ? 'display: none;' : ''}
+      position: relative;
       grid-column: auto / span ${props.cols[index]};
-      margin-left: ${props.left[index]};
+      left: ${props.left[index]};
       margin-right: ${props.right[index]};
       margin-top: ${props.top[index]};
       margin-bottom: ${props.bottom[index]};
@@ -29,7 +30,7 @@ const GridContainer = styled(Container)`
       align-items: ${props => props.alignY[index]};
       // justify-content: ${props => props.alignX[index]};    
     `
-  })}
+})}
   ${props => {
     if (props.controlIsVisible) {
       return props.tag !== 'img'
@@ -59,7 +60,7 @@ const FlexContainer = styled(Container)`
   box-sizing: border-box;
   
   ${props => props.media.map((media, index) => {
-    return media`
+  return media`
       width: ${props.cols[index]}%;
       
       padding-left: calc(${props.gutterX[index]} / 2);
@@ -73,8 +74,8 @@ const FlexContainer = styled(Container)`
       margin-bottom: ${props.bottom[index]};
       ${props.style[index]}
     `
-  })
-}
+})
+  }
 `
 
 export default React.forwardRef((props, ref) => {

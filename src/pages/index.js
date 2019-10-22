@@ -36,6 +36,7 @@ export default () => (
   >
     <Box
       cols={4}
+      left={1}
       style={`
           height: 200px;
           background: red;
@@ -44,7 +45,8 @@ export default () => (
       <h1>Hallo!</h1>
     </Box>
     <Box
-      cols={4}
+      cols={5}
+      left={1}
       style={`
           height: 200px;
           background: red;

@@ -67,7 +67,7 @@ const Box = React.forwardRef(({
   const bottomNormalized = useMemo(() => normalizeProps({ prop: bottom, breakpoints }), [bottom, breakpoints])
 
   const leftWithRest = useMemo(() => sumUpRest(leftNormalized, rest), [leftNormalized, rest])
-  const colsPercent = useMemo(() => getColsPercent({ cols: colsNormalized, left: leftWithRest, right: rightNormalized, parent, cssMode }), [colsNormalized, leftWithRest, rightNormalized, parent, cssMode])
+  const colsPercent = useMemo(() => getColsPercent({ cols: colsNormalized, left: leftNormalized, right: rightNormalized, parent, cssMode }), [colsNormalized, leftNormalized, rightNormalized, parent, cssMode])
 
   const leftPercent = useMemo(() => getMarginsPercent({ margin: leftWithRest, cols: colsPercent, gutterX, parent, cssMode }), [leftWithRest, colsPercent, gutterX, parent, cssMode])
   const rightPercent = useMemo(() => getMarginsPercent({ margin: rightNormalized, cols: colsPercent, gutterX, parent, cssMode }), [rightNormalized, colsPercent, gutterX, parent, cssMode])
