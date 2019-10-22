@@ -81,9 +81,9 @@ const Box = React.forwardRef(({
   const alignmentXRest = useMemo(() => getAlignmentXRest({
     children,
     breakpoints,
-    colsTotal: parent,
+    colsTotal: colsNormalized,
     alignX: alignXNormalized
-  }), [alignXNormalized, breakpoints, children, parent])
+  }), [alignXNormalized, breakpoints, children, colsNormalized])
 
   useEffect(() => {
     if (register) register()
@@ -165,7 +165,7 @@ const Box = React.forwardRef(({
             {
               React.Children.map(children, (child, index) => {
                 return React.cloneElement(child, {
-                  rest: alignmentXRest[index]
+                  rest: alignmentXRest && alignmentXRest[index]
                 })
               })
             }
@@ -213,7 +213,7 @@ Box.defaultProps = {
   hasChildBoxes: undefined,
   tag: 'div',
   attrs: {},
-  rest: []
+  rest: null
 }
 
 export default Box

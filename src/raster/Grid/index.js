@@ -64,7 +64,7 @@ const Grid = React.forwardRef((props, ref) => {
   const alignmentXRest = useMemo(() => getAlignmentXRest({
     children,
     breakpoints,
-    colsTotal: colspan,
+    colsTotal: normalizeProps({ prop: colspan, breakpoints }),
     alignX: alignXNormalized
   }), [alignXNormalized, breakpoints, children, colspan])
 
@@ -144,7 +144,7 @@ const Grid = React.forwardRef((props, ref) => {
             {
               React.Children.map(children, (child, index) => {
                 return React.cloneElement(child, {
-                  rest: alignmentXRest[index]
+                  rest: alignmentXRest && alignmentXRest[index]
                 })
               })
             }

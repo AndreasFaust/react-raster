@@ -35,9 +35,28 @@ export default () => (
     }}
   >
     <Box
+      cols={4}
+      style={`
+          height: 200px;
+          background: red;
+        `}
+    >
+      <h1>Hallo!</h1>
+    </Box>
+    <Box
+      cols={4}
+      style={`
+          height: 200px;
+          background: red;
+        `}
+    >
+      <h1>Hallo!</h1>
+    </Box>
+
+    <Box
       className='Logo'
       cols={[10]}
-      alignX={'center'}
+    // alignX={'center'}
     >
       <Box
         cols={4}
@@ -45,7 +64,18 @@ export default () => (
           height: 200px;
           background: red;
         `}
-      />
+      >
+        <h1>Hallo!</h1>
+      </Box>
+      <Box
+        cols={4}
+        style={`
+          height: 200px;
+          background: red;
+        `}
+      >
+        <h1>Hallo!</h1>
+      </Box>
     </Box>
 
 
