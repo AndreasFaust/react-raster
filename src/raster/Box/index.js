@@ -61,15 +61,17 @@ const Box = React.forwardRef(({
 
   const leftNormalized = useMemo(() => normalizeProps({ prop: left, breakpoints }), [left, breakpoints])
   const rightNormalized = useMemo(() => normalizeProps({ prop: right, breakpoints }), [right, breakpoints])
+  const restNormalized = useMemo(() => normalizeProps({ prop: rest, breakpoints }), [rest, breakpoints])
   const colsNormalized = useMemo(() => normalizeProps({ prop: cols, defaultProp: parent, breakpoints }), [cols, parent, breakpoints])
 
   const topNormalized = useMemo(() => normalizeProps({ prop: top, breakpoints }), [top, breakpoints])
   const bottomNormalized = useMemo(() => normalizeProps({ prop: bottom, breakpoints }), [bottom, breakpoints])
 
-  const leftWithRest = useMemo(() => sumUpRest(leftNormalized, rest), [leftNormalized, rest])
+  // const leftWithRest = useMemo(() => sumUpRest(leftNormalized, rest), [leftNormalized, rest])
   const colsPercent = useMemo(() => getColsPercent({ cols: colsNormalized, left: leftNormalized, right: rightNormalized, parent, cssMode }), [colsNormalized, leftNormalized, rightNormalized, parent, cssMode])
 
-  const leftPercent = useMemo(() => getMarginsPercent({ margin: leftWithRest, cols: colsPercent, gutterX, parent, cssMode }), [leftWithRest, colsPercent, gutterX, parent, cssMode])
+  const restPercent = useMemo(() => getMarginsPercent({ margin: restNormalized, cols: colsPercent, gutterX, parent, cssMode }), [restNormalized, colsPercent, gutterX, parent, cssMode])
+  const leftPercent = useMemo(() => getMarginsPercent({ margin: leftNormalized, cols: colsPercent, gutterX, parent, cssMode }), [leftNormalized, colsPercent, gutterX, parent, cssMode])
   const rightPercent = useMemo(() => getMarginsPercent({ margin: rightNormalized, cols: colsPercent, gutterX, parent, cssMode }), [rightNormalized, colsPercent, gutterX, parent, cssMode])
   const topPercent = useMemo(() => getMarginsPercent({ margin: topNormalized, cols: colsPercent, gutterX, parent, cssMode }), [topNormalized, colsPercent, gutterX, parent, cssMode])
   const bottomPercent = useMemo(() => getMarginsPercent({ margin: bottomNormalized, cols: colsPercent, gutterX, parent, cssMode }), [bottomNormalized, colsPercent, gutterX, parent, cssMode])
@@ -96,6 +98,7 @@ const Box = React.forwardRef(({
       breakpoints={breakpoints}
       className={classNames(['Box', className])}
       cols={colsPercent}
+      rest={restPercent}
       colsNumber={colsNormalized}
       media={media}
       gutterX={gutterX}
@@ -213,7 +216,7 @@ Box.defaultProps = {
   hasChildBoxes: undefined,
   tag: 'div',
   attrs: {},
-  rest: null
+  rest: [0]
 }
 
 export default Box

@@ -34,53 +34,32 @@ export default () => (
     attrs={{
     }}
   >
-    <Box
-      cols={4}
-      left={1}
-      style={`
-          height: 200px;
-          background: red;
-        `}
-    >
-      <h1>Hallo!</h1>
-    </Box>
-    <Box
-      cols={5}
-      left={1}
-      style={`
-          height: 200px;
-          background: red;
-        `}
-    >
-      <h1>Hallo!</h1>
-    </Box>
-
-    <Box
-      className='Logo'
-      cols={[10]}
-    // alignX={'center'}
-    >
+    <Box cols={10}>
       <Box
-        cols={4}
+        cols={3}
+        left={1}
+        style={`
+          height: 100px;
+          background: red;
+        `}
+      />
+      <Box
+        cols={3}
+        left={1}
+        right={1}
         style={`
           height: 200px;
-          background: red;
+          background: blue;
         `}
-      >
-        <h1>Hallo!</h1>
-      </Box>
+      />
       <Box
-        cols={4}
+        cols={5}
         style={`
-          height: 200px;
-          background: red;
+          height: 100px;
+          background: green;
         `}
-      >
-        <h1>Hallo!</h1>
-      </Box>
+      />
     </Box>
-
-
     {/* <Box
       className='header'
       tag='header'
