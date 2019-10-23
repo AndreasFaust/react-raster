@@ -46,7 +46,7 @@ function getElements(children, breakpoints, colsTotal) {
 }
 
 function getRest({ stack, rest, alignX }) {
-  return stack.map((_, index) => {
+  return stack.map(() => {
     switch (alignX) {
       case 'left':
         return 0
@@ -81,17 +81,17 @@ export default ({ children, breakpoints, colsTotal, alignX }) => {
           elementStack = [current]
           totalWidth = 0
           totalWidth += current.total
-          continue
-        }
-        if (totalWidth + current.total === colsTotal[index]) {
+
+        } else if (totalWidth + current.total === colsTotal[index]) {
           elementStack.push(current)
           newBreakpoint = [...newBreakpoint, ...elementStack.map(() => 0)]
           elementStack = []
           totalWidth = 0
-          continue
+
+        } else {
+          elementStack.push(current)
+          totalWidth += current.total
         }
-        elementStack.push(current)
-        totalWidth += current.total
       } else {
         if (totalWidth) {
           newBreakpoint = [...newBreakpoint, ...getRest({

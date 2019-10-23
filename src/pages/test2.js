@@ -34,13 +34,40 @@ export default () => (
     attrs={{
     }}
   >
-    <Box
+    <Box cols={10}>
+      <Box
+        cols={3}
+        left={1}
+        style={`
+          height: 100px;
+          background: red;
+        `}
+      />
+      <Box
+        cols={3}
+        left={1}
+        right={1}
+        style={`
+          height: 200px;
+          background: blue;
+        `}
+      />
+      <Box
+        cols={5}
+        style={`
+          height: 100px;
+          background: green;
+        `}
+      />
+    </Box>
+    {/* <Box
       className='header'
       tag='header'
     >
       <Box
         className='Logo'
         cols={[10, 8, 8, 6]}
+        // left={[1, 2, 2, 3]}
         tag='img'
         attrs={{
           src: logo,
@@ -69,7 +96,7 @@ export default () => (
     >
       <p>Scale your Viewport to see the layout changing!</p>
       <p>Press <span>ESC</span> to see the column-grid</p>
-    </Box>
+    </Box> */}
 
   </Grid >
 )

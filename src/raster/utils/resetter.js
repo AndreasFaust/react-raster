@@ -6,8 +6,8 @@ const ResetterTag = ({ reset, className, children }) => {
 }
 
 const StyledResetter = styled(ResetterTag)`  
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
   position: relative;
   ${props => props.media.map((media, index) => {
     return media`
@@ -18,8 +18,8 @@ const StyledResetter = styled(ResetterTag)`
       margin-top: calc(-${props.gutterY[index]} / 2);
       margin-bottom: calc(-${props.gutterY[index]} / 2);
 
-      align-items: ${props => props.alignY[index]};
-      justify-content: ${props => props.alignX[index]};    
+      // align-items: ${props => props.alignY[index]};
+      // justify-content: ${props => props.alignX[index]};    
     `
   })}
 `

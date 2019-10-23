@@ -43,8 +43,8 @@ const Box = React.forwardRef(({
     breakpoints,
     gutterX,
     gutterY,
-    alignX: alignXContext,
-    alignY: alignYContext,
+    // alignX: alignXContext,
+    // alignY: alignYContext,
     colspan,
     parent,
     media,
@@ -56,8 +56,8 @@ const Box = React.forwardRef(({
   const [hasChildBoxesRegistered, setHasChildBoxes] = useState(undefined)
   const hasChildBoxesNormalized = useMemo(() => getReset(hasChildBoxes, hasChildBoxesRegistered), [hasChildBoxes, hasChildBoxesRegistered])
 
-  const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, defaultProp: alignXContext, breakpoints }), cssMode), [alignX, alignXContext, breakpoints, cssMode])
-  const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, defaultProp: alignYContext, breakpoints }), cssMode), [alignY, alignYContext, breakpoints, cssMode])
+  const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, breakpoints }), cssMode), [alignX, breakpoints, cssMode])
+  const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, breakpoints }), cssMode), [alignY, breakpoints, cssMode])
 
   const leftNormalized = useMemo(() => normalizeProps({ prop: left, breakpoints }), [left, breakpoints])
   const rightNormalized = useMemo(() => normalizeProps({ prop: right, breakpoints }), [right, breakpoints])
@@ -67,7 +67,6 @@ const Box = React.forwardRef(({
   const topNormalized = useMemo(() => normalizeProps({ prop: top, breakpoints }), [top, breakpoints])
   const bottomNormalized = useMemo(() => normalizeProps({ prop: bottom, breakpoints }), [bottom, breakpoints])
 
-  // const leftWithRest = useMemo(() => sumUpRest(leftNormalized, rest), [leftNormalized, rest])
   const colsPercent = useMemo(() => getColsPercent({ cols: colsNormalized, left: leftNormalized, right: rightNormalized, parent, cssMode }), [colsNormalized, leftNormalized, rightNormalized, parent, cssMode])
 
   const restPercent = useMemo(() => getMarginsPercent({ margin: restNormalized, cols: colsPercent, gutterX, parent, cssMode }), [restNormalized, colsPercent, gutterX, parent, cssMode])
@@ -150,8 +149,8 @@ const Box = React.forwardRef(({
               breakpoints,
               gutterX,
               gutterY,
-              alignX: alignXNormalized,
-              alignY: alignYNormalized,
+              // alignX: alignXNormalized,
+              // alignY: alignYNormalized,
               colspan,
               media,
               parent: colsNormalized,
@@ -203,8 +202,8 @@ Box.propTypes = {
 Box.defaultProps = {
   className: '',
   cols: undefined,
-  alignX: '',
-  alignY: '',
+  alignX: 'left',
+  alignY: 'top',
   children: null,
   left: 0,
   right: 0,
