@@ -88,7 +88,7 @@ export default () => {
           justify-content: center;
         `}
         >
-          <h1><pre>react-raster</pre> is an advanced grid-system based on styled-components. <span role="img" aria-label="kissing cat">😽</span></h1>
+          <h1><pre>react-raster</pre> is an advanced grid-<br />system based on styled-components. <br /><span role="img" aria-label="kissing cat">😽</span></h1>
         </Box>
         <Box
           className='hints'

@@ -83,8 +83,8 @@ Avoid mixing Boxes with other components inside Grids or Boxes.
 Either a Box/Grid contains Boxes or regular elements/components.
 
 ## What about cssMode `grid` and `flex`?
-`cssMode` is the prop, that defines what CSS-layout-engine `react-raster` should use. 
-`grid` uses Grid-Layout, `flex` the older Flexbox. `grid` is default, but if the user’s browser does not support it, it automatically falls back to `flex`.
+`cssMode` is the prop, that defines which CSS-layout-engine `react-raster` should use. 
+`grid` uses Grid-Layout, `flex` the older Flexbox. `grid` is default, but if the user’s browser does not support it, it automatically falls back to `flex`. 
 
 ## Advanced Example
 
@@ -132,6 +132,19 @@ const Example = () => (
                 background: blue;
             }
         `}
+        // the "bp-"-classes have also an index-based indication
+        style={`
+            &.bp-1, 
+            &.bp-2, 
+            &.bp-3 {
+                background: red;
+            }
+            &.bp-4, 
+            &.bp-5, 
+            &.bp-6 {
+                background: blue;
+            }
+        `}
         // … or use an array of strings, to address certain breakpoints
         style={[
             `background: red;`,
@@ -175,7 +188,7 @@ const Example = () => (
                 cols={12}
                 top={1}
                 attr={{
-                    src: 'https://my-image-source.io",
+                    src: 'https://my-image-source.io',
                     alt: 'A box can be an image, too!'
                 }}
             >
@@ -225,11 +238,6 @@ const Example = () => (
 | **attrs** | Object | `{}`                            | Attributes of the HTML-Tag                                                 |
 | **ref** | React ref-object | `null`                            | Pass a ref.                                                 |
 
-
-## To-Do
-
--   [ ] Stricter type-checking / props validation
--   [ ] automated testing
 
 ## Contributing
 
