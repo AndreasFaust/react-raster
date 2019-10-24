@@ -3,13 +3,13 @@ import { Grid, Box } from '../raster'
 import '../scss/reset.scss'
 import '../scss/index.scss'
 
-import image1 from "../images/image-1.jpg"
+import image1 from "../images/header-bg.jpg"
 import image2 from "../images/image-2.jpg"
 import image3 from "../images/image-3.jpg"
 import image4 from "../images/image-4.jpg"
 import image5 from "../images/image-5.jpg"
 
-import logo from "../images/react-raster-logo.svg"
+import logo from "../images/react-raster-logo-white.svg"
 
 export default () => (
   <Grid
