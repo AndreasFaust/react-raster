@@ -191,7 +191,7 @@ const Example = () => (
                     src: 'https://my-image-source.io',
                     alt: 'A box can be an image, too!'
                 }}
-            >
+            />
         </Box>
     </Grid>
 );
