@@ -4,6 +4,8 @@ import '../scss/reset.scss'
 import '../scss/index.scss'
 
 import headerImage from "../images/header-bg.jpg"
+import esc from "../images/esc.svg"
+import scale from "../images/scale.svg"
 import GitHub from "../components/github-logo"
 import Select from 'react-select'
 
@@ -60,7 +62,7 @@ export default () => {
       >
         <Box
           className='Logo'
-          cols={[10, 6, 4, 4, 3, 2]}
+          cols={[8, 6, 4, 4, 3, 2]}
           tag='img'
           attrs={{
             src: logo,
@@ -81,7 +83,6 @@ export default () => {
       `}
       >
         <Box
-          className='Box--1'
           cols={[12, 10, 8, 6]}
           style={`
           justify-content: center;
@@ -90,15 +91,28 @@ export default () => {
           <h1><pre>react-raster</pre> is an advanced grid-system based on styled-components. <span role="img" aria-label="kissing cat">😽</span></h1>
         </Box>
         <Box
-          className='Box--1'
-          cols={[12, 10, 8, 12]}
-          top={1}
-          style={`
-            justify-content: center;
-          `}
+          className='hints'
+          cols={[12]}
+          top={0.5}
+          alignX='center'
         >
-          <p>Scale your Viewport to see the layout changing!</p>
-          <p>Press <span>ESC</span> to see the column-grid</p>
+          <Box
+            className='hint'
+            cols={[12, 12, 6, 4]}
+            left={[0, 0, 0, 1]}
+            alignX={['center', 'center', 'right']}
+          >
+            <img className="hintIcon" src={scale} alt="Scale icon" />
+            <small>Scale your Viewport to see the layout changing!</small>
+          </Box>
+          <Box
+            className='hint'
+            cols={[12, 12, 6, 4]}
+            alignX={['center', 'center', 'left']}
+          >
+            <img className="hintIcon" src={esc} alt="Escape icon" />
+            <small>Press <pre>ESC</pre> to see the column-grid</small>
+          </Box>
         </Box>
       </Grid>
 

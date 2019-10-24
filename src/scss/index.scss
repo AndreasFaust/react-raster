@@ -35,6 +35,22 @@ pre {
 
 h1 {
     text-align: center;
+    .bp-1 & {
+        font-size: 1.5rem;
+    }
+    .bp-2 & {
+        font-size: 1.75rem;
+    }
+    .bp-3 & {
+        font-size: 2rem;
+    }
+    .bp-4 & {
+        font-size: 2.25rem;
+    }
+    .bp-5 &,
+    .bp-6 & {
+        font-size: 2.5rem;
+    }
 }
 
 .topnav {
@@ -60,4 +76,32 @@ h1 {
 
 .modeSelect {
     min-width: 10rem;
+}
+
+.hint {
+    display: flex;
+    align-items: center;
+}
+.hintIcon {
+    padding: 0.25rem;
+    background: hsla(0, 0%, 0%, 0.1);
+    border-radius: 0.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 0.75rem 0 0;
+}
+
+small {
+    letter-spacing: 0.025em;
+
+    .bp-1 &,
+    .bp-2 & {
+        font-size: 0.9rem;
+    }
+    .bp-3 &,
+    .bp-4 &,
+    .bp-5 &,
+    .bp-6 & {
+        font-size: 1rem;
+    }
 }

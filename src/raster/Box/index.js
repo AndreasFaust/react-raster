@@ -86,7 +86,10 @@ const Box = React.forwardRef(({
     <StyledContainer
       cssMode={cssMode}
       breakpoints={breakpoints}
-      className={classNames(['Box', className])}
+      className={cssMode === 'grid'
+        ? classNames(['Box', className])
+        : 'Box'
+      }
       cols={colsPercent}
       rest={restPercent}
       colsNumber={colsNormalized}
@@ -104,18 +107,19 @@ const Box = React.forwardRef(({
       bottom={bottomPercent}
       controlIsVisible={controlIsVisible}
       controlColor={controlColor}
-      style={cssMode === 'grid' && styleNormalized}
+      style={cssMode === 'grid' && styleNormalized
+      }
       ref={ref}
       attrs={attrs}
     >
       <Inner
         cssMode={cssMode}
-        className='Box__Inner'
         media={media}
         alignX={alignXNormalized}
         alignY={alignYNormalized}
         style={styleNormalized}
         hasChildBoxes={hasChildBoxes}
+        className={classNames(['Box__Inner', className])}
       >
         {controlIsVisible && <ControlBox controlColor={controlColor} />}
         <Resetter
@@ -157,7 +161,7 @@ const Box = React.forwardRef(({
           </Context.Provider>
         </Resetter>
       </Inner>
-    </StyledContainer>
+    </StyledContainer >
   )
 })
 

@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 
 export default (breakpoints) => {
-  const [currentBp, setCurrentBp] = useState(0)
+  const [currentBp, setCurrentBp] = useState({ index: 1, value: 0 })
   useEffect(() => {
-    function onResize () {
+    function onResize() {
       const w = window.innerWidth
-      let bp = 0
-      breakpoints.forEach(breakpoint => {
+      let bp = { index: 1, value: 0 }
+      breakpoints.forEach((breakpoint, index) => {
         if (breakpoint <= w) {
-          bp = breakpoint
+          bp = { index: index + 1, value: breakpoint }
         }
       })
       setCurrentBp(bp)
@@ -16,6 +16,6 @@ export default (breakpoints) => {
     onResize()
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [])
+  }, [breakpoints])
   return currentBp
 }

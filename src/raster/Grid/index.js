@@ -69,7 +69,7 @@ const Grid = React.forwardRef((props, ref) => {
     <StyledContainer
       cssMode={cssModeNormalized}
       colspan={colspan}
-      className={classNames(['Grid', `bp-${currentBreakpoint}`, className])}
+      className={classNames(['Grid', `bp-${currentBreakpoint.index}`, `bp-${currentBreakpoint.value}`, className])}
       gutterX={gutterXNormalized}
       gutterY={gutterYNormalized}
       alignX={alignXNormalized}

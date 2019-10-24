@@ -5,7 +5,7 @@ import Container from '../utils/container'
 
 const GridContainer = styled(Container)`
   box-sizing: border-box;
-  display: ${props => props.hasChildBoxes ? 'grid' : 'block'};
+  ${props => props.hasChildBoxes && 'display: grid;'};
 
   ${props => props.hasChildBoxes && props.media.map((media, index) => {
     return media`
