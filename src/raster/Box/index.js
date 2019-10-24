@@ -111,15 +111,11 @@ const Box = React.forwardRef(({
       <Inner
         cssMode={cssMode}
         className='Box__Inner'
-        gutterX={gutterX}
-        gutterY={gutterY}
         media={media}
         alignX={alignXNormalized}
         alignY={alignYNormalized}
         style={styleNormalized}
-        breakpoints={breakpoints}
-        controlIsVisible={controlIsVisible}
-        controlColor={controlColor}
+        hasChildBoxes={hasChildBoxes}
       >
         {controlIsVisible && <ControlBox controlColor={controlColor} />}
         <Resetter

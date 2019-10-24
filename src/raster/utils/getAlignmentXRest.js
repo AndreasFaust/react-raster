@@ -36,13 +36,14 @@ function getElements(children, breakpoints, colsTotal) {
   function sumup(a, b, c) {
     return a.map((el, i) => el + b[i] + c[i])
   }
-  return React.Children.map(children, ({ props }) => {
+  return React.Children.map(children, ({ type: { displayName }, props }) => {
+    if (displayName !== 'Box') return null
     const left = normalizeProps({ prop: props.left, breakpoints })
     const right = normalizeProps({ prop: props.right, breakpoints })
     const cols = normalizeProps({ prop: props.cols, defaultProp: colsTotal, breakpoints })
     const total = sumup(cols, left, right)
     return { left, right, cols, total }
-  })
+  }).filter(el => el !== null)
 }
 
 function getRest({ stack, rest, alignX }) {

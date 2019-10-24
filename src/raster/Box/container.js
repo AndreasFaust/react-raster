@@ -19,9 +19,9 @@ const GridContainer = styled(Container)`
   ${props => !props.hasChildBoxes && props.media.map((media, index) => {
     if (props.alignX[index] === 'flex-start' && props.alignY[index] === 'flex-start') return ''
     return media`
-      display: flex;
-      align-items ${props.alignY[index]};
-      justify-content ${props.alignX[index]};
+      ${(props.alignX[index] || props.alignY[index]) && `display: flex;`}
+      ${props.alignX[index] && `justify-content: ${props.alignX[index]};`}
+      ${props.alignY[index] && `align-items: ${props.alignY[index]};`}
     `
   })}
   ${props => props.media.map((media, index) => {
@@ -34,14 +34,13 @@ const GridContainer = styled(Container)`
       margin-right: ${props.right[index]};
       margin-top: ${props.top[index]};
       margin-bottom: ${props.bottom[index]};
+      align-content: ${props.alignY[index]};
+      align-items: ${props.alignY[index]};
       ${props.style[index]}
-
-      align-content: ${props => props.alignY[index]};
-      align-items: ${props => props.alignY[index]};
     `
   })}
 
-  ${props => props.tag === 'img' && `
+  ${props => props.tag === 'img' && props.controlIsVisible && `
     box-shadow: 0 0 999em ${props.controlColor} inset;
   `}
 `

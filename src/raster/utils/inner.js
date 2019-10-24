@@ -8,14 +8,27 @@ const InnerTag = ({ className, children }) => (
 )
 
 const StyledInner = styled(InnerTag)`  
-  display: flex;
   position: relative;
-  flex-wrap: wrap;
   width: 100%;
+  
+  ${props => props.media.map((media, index) => {
+    return props.hasChildBoxes
+      ? media`
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+      `
+      : media`
+        ${(props.alignX[index] || props.alignY[index]) && `
+          display: flex;
+          flex-wrap: wrap;
+        `}
+        ${props.alignX[index] && `justify-content: ${props.alignX[index]};`}
+        ${props.alignY[index] && `align-items: ${props.alignY[index]};`}
+      `
+  })}
   ${props => props.media.map((media, index) => {
     return media`
-      align-items: ${props.alignY[index]};
-      justify-content: ${props.alignX[index]};
       ${props.style && props.style[index]}   
     `
   })}
@@ -28,6 +41,7 @@ const Inner = ({
   alignY,
   style,
   children,
+  hasChildBoxes,
   cssMode
 }) => {
   if (cssMode === 'grid') return children
@@ -38,6 +52,7 @@ const Inner = ({
       alignX={alignX}
       alignY={alignY}
       style={style}
+      hasChildBoxes={hasChildBoxes}
     >
       {children}
     </StyledInner>

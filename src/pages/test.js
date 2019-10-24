@@ -1,11 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'gatsby'
 import { Grid, Box } from '../raster'
-import image1 from '../images/image-1.jpg'
-import image2 from '../images/image-2.jpg'
-import image3 from '../images/image-3.jpg'
-import image4 from '../images/image-4.jpg'
-import image5 from '../images/image-5.jpg'
 
 const ImageBox = () => (
   <Box
@@ -31,10 +26,10 @@ const ImageBox = () => (
     //     width: 100% !important;
     //     height: auto !important;
 
-    //   }
-    // `}
+  //   }
+  // `}
   >
-    <img src={image2} alt='Sample Image' />
+    {/* <img src={image2} alt='Sample Image' /> */}
   </Box>
 )
 

@@ -1,11 +1,21 @@
+
+@font-face {
+    font-family: "Italic";
+    src: url("./alegreya-italic.woff2") format("woff2");
+}
+
+@font-face {
+font-family: "Plex";
+    src: url("./plex-mono.woff") format("woff");
+}
+
 html {
-    font-family: sans-serif;
+    font-family: Italic, serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }
 body {
     margin: 0;
-    font-weight: bold;
 }
 
 img {
@@ -15,13 +25,39 @@ img {
 
 pre {
     display: inline;
-    font-size: 110%;
+    font-family: Plex;
+    font-size: 75%;
     padding: 0.1em 0.3em 0.15em;
     margin-right: 0.15em;
     border-radius: 0.15em;
-    background:#efefef;
+    background: hsla(0, 0%, 0%, 0.1);
 }
 
 h1 {
     text-align: center;
+}
+
+.topnav {
+    position: fixed;
+    top: 0;
+    left: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.gitHub {
+    display: block;
+    width: 3rem;
+    height: 3rem;
+
+    &:hover {
+        path {fill: #000;}
+    }
+}
+
+.modeSelect {
+    min-width: 10rem;
 }
