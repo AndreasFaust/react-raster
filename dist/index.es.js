@@ -1484,7 +1484,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n        ", "\n        ", "\n        ", "\n      "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -1494,7 +1494,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n      align-items: ", ";\n      justify-content: ", ";    \n    "]);
+  var data = _taggedTemplateLiteral(["\n        display: flex;\n        align-items: stretch;\n        justify-content: stretch;\n      "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -1504,7 +1504,7 @@ function _templateObject2() {
 }
 
 function _templateObject$1() {
-  var data = _taggedTemplateLiteral(["  \n  display: flex;\n  position: relative;\n  flex-wrap: wrap;\n  width: 100%;\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["  \n  position: relative;\n  width: 100%;\n  \n  ", "\n  ", "\n"]);
 
   _templateObject$1 = function _templateObject() {
     return data;
@@ -1523,12 +1523,11 @@ var InnerTag = function InnerTag(_ref) {
 
 var StyledInner = styled(InnerTag)(_templateObject$1(), function (props) {
   return props.media.map(function (media, index) {
-    return media(_templateObject2(), props.alignY[index], props.alignX[index]);
+    return props.hasChildBoxes ? media(_templateObject2()) : media(_templateObject3(), (props.alignX[index] || props.alignY[index]) && "\n          display: flex;\n          flex-wrap: wrap;\n        ", props.alignX[index] && "justify-content: ".concat(props.alignX[index], ";"), props.alignY[index] && "align-items: ".concat(props.alignY[index], ";"));
   });
-});
-var StyledInnerCustom = styled(StyledInner)(_templateObject3(), function (props) {
+}, function (props) {
   return props.media.map(function (media, index) {
-    return media(_templateObject4(), props.style[index]);
+    return media(_templateObject4(), props.style && props.style[index]);
   });
 });
 
@@ -1539,14 +1538,16 @@ var Inner = function Inner(_ref2) {
       alignY = _ref2.alignY,
       style = _ref2.style,
       children = _ref2.children,
+      hasChildBoxes = _ref2.hasChildBoxes,
       cssMode = _ref2.cssMode;
   if (cssMode === 'grid') return children;
-  return React.createElement(StyledInnerCustom, {
+  return React.createElement(StyledInner, {
     className: className,
     media: media,
     alignX: alignX,
     alignY: alignY,
-    style: style
+    style: style,
+    hasChildBoxes: hasChildBoxes
   }, children);
 };
 
@@ -1622,7 +1623,7 @@ var Container = React.forwardRef(function (_ref, ref) {
 });
 
 function _templateObject4$1() {
-  var data = _taggedTemplateLiteral(["\n      position: ", ";\n      padding-left: ", ";\n      padding-right: ", ";\n      padding-top: ", ";\n      padding-bottom: ", ";\n    "]);
+  var data = _taggedTemplateLiteral(["\n      position: ", ";\n      padding-left: ", ";\n      padding-right: ", ";\n      padding-top: ", ";\n      padding-bottom: ", ";\n      ", "\n    "]);
 
   _templateObject4$1 = function _templateObject4() {
     return data;
@@ -1682,7 +1683,7 @@ var FlexContainer = styled(Container)(_templateObject3$1(), function (props) {
   return props.media.map(function (media, index) {
     return media(_templateObject4$1(), function (props) {
       return props.position[index];
-    }, props.left[index], props.right[index], props.top[index], props.bottom[index]);
+    }, props.left[index], props.right[index], props.top[index], props.bottom[index], props.style[index]);
   });
 }, function (props) {
   return props.isControl && controlStyles;
@@ -1781,7 +1782,9 @@ function getElements(children, breakpoints, colsTotal) {
   }
 
   return React.Children.map(children, function (_ref) {
-    var props = _ref.props;
+    var displayName = _ref.type.displayName,
+        props = _ref.props;
+    if (displayName !== 'Box') return null;
     var left = normalizeProps({
       prop: props.left,
       breakpoints: breakpoints
@@ -1802,6 +1805,8 @@ function getElements(children, breakpoints, colsTotal) {
       cols: cols,
       total: total
     };
+  }).filter(function (el) {
+    return el !== null;
   });
 }
 
@@ -1828,8 +1833,9 @@ var getAlignmentXRest = (function (_ref3) {
       cssMode = _ref3.cssMode,
       breakpoints = _ref3.breakpoints,
       colsTotal = _ref3.colsTotal,
-      alignX = _ref3.alignX;
-  if (!children || cssMode === 'flex') return null;
+      alignX = _ref3.alignX,
+      alignXRaw = _ref3.alignXRaw;
+  if (!children || cssMode === 'flex' || !alignXRaw) return null;
   var elements = getElements(children, breakpoints, colsTotal);
   var elementsGroupedByBreakpoint = groupElementsByBreakpoint(breakpoints, elements);
   var restArrayGroupedByBreakpoint = elementsGroupedByBreakpoint.map(function (breakpoint, index) {
@@ -1899,7 +1905,7 @@ function _templateObject5() {
 }
 
 function _templateObject4$2() {
-  var data = _taggedTemplateLiteral(["\n      ", "\n      position: relative;\n      grid-column: auto / span ", ";\n      left: ", ";\n      margin-left: ", ";\n      margin-right: ", ";\n      margin-top: ", ";\n      margin-bottom: ", ";\n      ", "\n\n      align-content: ", ";\n      align-items: ", ";\n    "]);
+  var data = _taggedTemplateLiteral(["\n      ", "\n      position: relative;\n      grid-column: auto / span ", ";\n      left: ", ";\n      margin-left: ", ";\n      margin-right: ", ";\n      margin-top: ", ";\n      margin-bottom: ", ";\n      align-content: ", ";\n      align-items: ", ";\n      ", "\n    "]);
 
   _templateObject4$2 = function _templateObject4() {
     return data;
@@ -1909,7 +1915,7 @@ function _templateObject4$2() {
 }
 
 function _templateObject3$2() {
-  var data = _taggedTemplateLiteral(["\n      display: flex;\n      align-items ", ";\n      justify-content ", ";\n    "]);
+  var data = _taggedTemplateLiteral(["\n      ", "\n      ", "\n      ", "\n    "]);
 
   _templateObject3$2 = function _templateObject3() {
     return data;
@@ -1929,7 +1935,7 @@ function _templateObject2$3() {
 }
 
 function _templateObject$4() {
-  var data = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  display: ", ";\n\n  ", "\n  ", "\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  ", ";\n\n  ", "\n  ", "\n  ", "\n\n  ", "\n"]);
 
   _templateObject$4 = function _templateObject() {
     return data;
@@ -1938,7 +1944,7 @@ function _templateObject$4() {
   return data;
 }
 var GridContainer$1 = styled(Container)(_templateObject$4(), function (props) {
-  return props.hasChildBoxes ? 'grid' : 'block';
+  return props.hasChildBoxes && 'display: grid;';
 }, function (props) {
   return props.hasChildBoxes && props.media.map(function (media, index) {
     return media(_templateObject2$3(), function (props) {
@@ -1950,16 +1956,14 @@ var GridContainer$1 = styled(Container)(_templateObject$4(), function (props) {
 }, function (props) {
   return !props.hasChildBoxes && props.media.map(function (media, index) {
     if (props.alignX[index] === 'flex-start' && props.alignY[index] === 'flex-start') return '';
-    return media(_templateObject3$2(), props.alignY[index], props.alignX[index]);
+    return media(_templateObject3$2(), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: ".concat(props.alignX[index], ";"), props.alignY[index] && "align-items: ".concat(props.alignY[index], ";"));
   });
 }, function (props) {
   return props.media.map(function (media, index) {
-    return media(_templateObject4$2(), !props.colsNumber[index] ? 'display: none;' : '', props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.style[index], function (props) {
-      return props.alignY[index];
-    }, function (props) {
-      return props.alignY[index];
-    });
+    return media(_templateObject4$2(), !props.colsNumber[index] ? 'display: none;' : '', props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.style[index]);
   });
+}, function (props) {
+  return props.tag === 'img' && props.controlIsVisible && "\n    box-shadow: 0 0 999em ".concat(props.controlColor, " inset;\n  ");
 });
 var FlexContainer$1 = styled(Container)(_templateObject5(), function (props) {
   return props.media.map(function (media, index) {
@@ -2131,16 +2135,17 @@ var Box = React.forwardRef(function (_ref, ref) {
       breakpoints: breakpoints,
       cssMode: cssMode,
       colsTotal: colsNormalized,
-      alignX: alignXNormalized
+      alignX: alignXNormalized,
+      alignXRaw: alignX
     });
-  }, [alignXNormalized, breakpoints, children, colsNormalized, cssMode]);
+  }, [alignX, alignXNormalized, breakpoints, children, colsNormalized, cssMode]);
   useEffect(function () {
     if (register) register(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return React.createElement(StyledContainer$1, {
     cssMode: cssMode,
     breakpoints: breakpoints,
-    className: classnames(['Box', className]),
+    className: cssMode === 'grid' ? classnames(['Box', className]) : 'Box',
     cols: colsPercent,
     rest: restPercent,
     colsNumber: colsNormalized,
@@ -2163,16 +2168,12 @@ var Box = React.forwardRef(function (_ref, ref) {
     attrs: attrs
   }, React.createElement(Inner, {
     cssMode: cssMode,
-    className: "Box__Inner",
-    gutterX: gutterX,
-    gutterY: gutterY,
     media: media,
     alignX: alignXNormalized,
     alignY: alignYNormalized,
     style: styleNormalized,
-    breakpoints: breakpoints,
-    controlIsVisible: controlIsVisible,
-    controlColor: controlColor
+    hasChildBoxes: hasChildBoxes,
+    className: classnames(['Box__Inner', className])
   }, controlIsVisible && React.createElement(ControlBox, {
     controlColor: controlColor
   }), React.createElement(Resetter, {
@@ -2228,8 +2229,8 @@ Box.propTypes = {
 Box.defaultProps = {
   className: '',
   cols: undefined,
-  alignX: 'left',
-  alignY: 'top',
+  alignX: '',
+  alignY: '',
   children: null,
   left: 0,
   right: 0,
@@ -2276,7 +2277,10 @@ var ControlBox = function ControlBox(props) {
 };
 
 var useCurrentBreakpoint = (function (breakpoints) {
-  var _useState = useState(0),
+  var _useState = useState({
+    index: 1,
+    value: 0
+  }),
       _useState2 = _slicedToArray(_useState, 2),
       currentBp = _useState2[0],
       setCurrentBp = _useState2[1];
@@ -2284,10 +2288,16 @@ var useCurrentBreakpoint = (function (breakpoints) {
   useEffect(function () {
     function onResize() {
       var w = window.innerWidth;
-      var bp = 0;
-      breakpoints.forEach(function (breakpoint) {
+      var bp = {
+        index: 1,
+        value: 0
+      };
+      breakpoints.forEach(function (breakpoint, index) {
         if (breakpoint <= w) {
-          bp = breakpoint;
+          bp = {
+            index: index + 1,
+            value: breakpoint
+          };
         }
       });
       setCurrentBp(bp);
@@ -2298,7 +2308,7 @@ var useCurrentBreakpoint = (function (breakpoints) {
     return function () {
       return window.removeEventListener('resize', onResize);
     };
-  }, []);
+  }, [breakpoints]);
   return currentBp;
 });
 
@@ -2406,13 +2416,15 @@ var Grid = React.forwardRef(function (props, ref) {
         prop: colspan,
         breakpoints: breakpoints
       }),
-      alignX: alignXNormalized
+      alignX: alignXNormalized,
+      cssMode: cssMode,
+      alignXRaw: alignX
     });
-  }, [alignXNormalized, breakpoints, children, colspan]);
+  }, [alignX, alignXNormalized, breakpoints, children, colspan, cssMode]);
   return React.createElement(StyledContainer, {
     cssMode: cssModeNormalized,
     colspan: colspan,
-    className: classnames(['Grid', "bp-".concat(currentBreakpoint), className]),
+    className: classnames(['Grid', "bp-".concat(currentBreakpoint.index), "bp-".concat(currentBreakpoint.value), className]),
     gutterX: gutterXNormalized,
     gutterY: gutterYNormalized,
     alignX: alignXNormalized,
@@ -2425,7 +2437,7 @@ var Grid = React.forwardRef(function (props, ref) {
     position: positionNormalized,
     tag: tag,
     attrs: attrs,
-    style: cssModeNormalized === 'grid' && styleNormalized,
+    style: styleNormalized,
     ref: ref,
     isControl: isControl
   }, control && controlIsVisible && React.createElement(ControlGrid, {
@@ -2447,7 +2459,6 @@ var Grid = React.forwardRef(function (props, ref) {
     alignX: alignXNormalized,
     alignY: alignYNormalized,
     media: media,
-    style: styleNormalized,
     controlColor: controlColor
   }, React.createElement(Resetter, {
     cssMode: cssModeNormalized,
@@ -2470,11 +2481,11 @@ var Grid = React.forwardRef(function (props, ref) {
       controlIsVisible: controlIsVisible,
       controlColor: controlColor
     }
-  }, React.Children.map(children, function (child, index) {
+  }, alignmentXRest ? React.Children.map(children, function (child, index) {
     return React.cloneElement(child, {
       rest: alignmentXRest && alignmentXRest[index]
     });
-  })))));
+  }) : children))));
 });
 Grid.propTypes = {
   breakpoints: propTypes.array,

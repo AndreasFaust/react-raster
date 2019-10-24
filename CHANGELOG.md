@@ -1,3 +1,32 @@
+## 5.0.0 (2019-10-24)
+
+##### Breaking Changes
+
+*  remove styleInner and styleOuter. (28a01f42)
+*  don’t inherit alignment anymore (c70cff1b)
+
+##### Documentation Changes
+
+*  add attr to readme (e412fab6)
+
+##### New Features
+
+*  add horizontal centering to grid-mode (106a29b0)
+*  implement additional attributes src or alt (057befb0)
+
+##### Bug Fixes
+
+*  fix className in flex-mode (adba96c7)
+*  fix alignment in flex-mode (5caef7e7)
+*  improve control. (2f13b28c)
+*  improve performance (8f767577)
+*  centering-bugs. (bf104d53)
+
+##### Other Changes
+
+*  update readme (ca84990a)
+*  make control work as expected. (0f6bf279)
+
 #### 4.1.2 (2019-10-12)
 
 ##### Bug Fixes
