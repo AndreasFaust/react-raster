@@ -6,20 +6,19 @@ const ResetterTag = ({ reset, className, children }) => {
 }
 
 const StyledResetter = styled(ResetterTag)`  
-  // display: flex;
-  // flex-wrap: wrap;
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
   ${props => props.media.map((media, index) => {
     return media`
-      width: calc(100% + (${props.gutterX[index]}));
-      
+      width: calc(100% + (${props.gutterX[index]}));      
       margin-left: calc(-${props.gutterX[index]} / 2);
       margin-right: calc(-${props.gutterX[index]} / 2);
       margin-top: calc(-${props.gutterY[index]} / 2);
       margin-bottom: calc(-${props.gutterY[index]} / 2);
 
-      // align-items: ${props => props.alignY[index]};
-      // justify-content: ${props => props.alignX[index]};    
+      align-items: ${props.alignY[index]};
+      justify-content: ${props.alignX[index]};    
     `
   })}
 `

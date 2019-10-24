@@ -4,7 +4,7 @@ import Container from '../utils/container'
 
 const GridContainer = styled(Container)`
   box-sizing: border-box;
-  display: ${props => props.hasChildBoxes ? 'grid' : 'flex'};
+  display: ${props => props.hasChildBoxes ? 'grid' : 'block'};
 
   ${props => props.hasChildBoxes && props.media.map((media, index) => {
     return media`
@@ -13,6 +13,14 @@ const GridContainer = styled(Container)`
       grid-auto-rows: min-content;
       grid-column-gap: ${props.gutterX[index]};
       grid-row-gap: ${props.gutterY[index]};
+    `
+  })}
+  ${props => !props.hasChildBoxes && props.media.map((media, index) => {
+    if (props.alignX[index] === 'flex-start' && props.alignY[index] === 'flex-start') return ''
+    return media`
+      display: flex;
+      align-items ${props.alignY[index]};
+      justify-content ${props.alignX[index]};
     `
   })}
   ${props => props.media.map((media, index) => {
@@ -71,15 +79,16 @@ const FlexContainer = styled(Container)`
       margin-right: ${props.right[index]};
       margin-top: ${props.top[index]};
       margin-bottom: ${props.bottom[index]};
-      ${props.style[index]}
     `
   })
 }
 `
 
 export default React.forwardRef((props, ref) => {
-  if (props.cssMode === 'flex') {
-    return <FlexContainer {...props} ref={ref} />
+  switch (props.cssMode) {
+    case 'flex':
+      return <FlexContainer {...props} ref={ref} />
+    case 'grid':
+      return <GridContainer {...props} ref={ref} />
   }
-  return <GridContainer {...props} ref={ref} />
 })

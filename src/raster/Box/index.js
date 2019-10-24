@@ -9,16 +9,10 @@ import getColsPercent from '../utils/getColsPercent'
 import getMarginsPercent from '../utils/getMarginsPercent'
 import Inner from '../utils/inner'
 import Resetter from '../utils/resetter'
-import mergeStyles from '../utils/mergeStyles'
 import getAlignmentXRest from '../utils/getAlignmentXRest'
 
 import Context from '../context'
 import StyledContainer from './container'
-
-function sumUpRest(left, rest) {
-  if (!rest) return left
-  return left.map((l, i) => l + rest[i])
-}
 
 const Box = React.forwardRef(({
   className,
@@ -31,8 +25,6 @@ const Box = React.forwardRef(({
   top,
   bottom,
   style,
-  styleInner,
-  styleOuter,
   hasChildBoxes,
   tag,
   attrs,
@@ -43,8 +35,6 @@ const Box = React.forwardRef(({
     breakpoints,
     gutterX,
     gutterY,
-    // alignX: alignXContext,
-    // alignY: alignYContext,
     colspan,
     parent,
     media,
@@ -56,8 +46,8 @@ const Box = React.forwardRef(({
   const [hasChildBoxesRegistered, setHasChildBoxes] = useState(undefined)
   const hasChildBoxesNormalized = useMemo(() => getReset(hasChildBoxes, hasChildBoxesRegistered), [hasChildBoxes, hasChildBoxesRegistered])
 
-  const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, breakpoints }), cssMode), [alignX, breakpoints, cssMode])
-  const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, breakpoints }), cssMode), [alignY, breakpoints, cssMode])
+  const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, breakpoints }), cssMode, hasChildBoxesNormalized), [alignX, breakpoints, cssMode, hasChildBoxesNormalized])
+  const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, breakpoints }), cssMode, hasChildBoxesNormalized), [alignY, breakpoints, cssMode, hasChildBoxesNormalized])
 
   const leftNormalized = useMemo(() => normalizeProps({ prop: left, breakpoints }), [left, breakpoints])
   const rightNormalized = useMemo(() => normalizeProps({ prop: right, breakpoints }), [right, breakpoints])
@@ -75,9 +65,7 @@ const Box = React.forwardRef(({
   const topPercent = useMemo(() => getMarginsPercent({ margin: topNormalized, cols: colsPercent, gutterX, parent, cssMode }), [topNormalized, colsPercent, gutterX, parent, cssMode])
   const bottomPercent = useMemo(() => getMarginsPercent({ margin: bottomNormalized, cols: colsPercent, gutterX, parent, cssMode }), [bottomNormalized, colsPercent, gutterX, parent, cssMode])
 
-  const styleOuterNormalized = useMemo(() => normalizeProps({ prop: styleOuter, breakpoints }), [styleOuter, breakpoints])
-  const styleInnerNormalized = useMemo(() => normalizeProps({ prop: styleInner, breakpoints }), [styleInner, breakpoints])
-  const styleNormalized = useMemo(() => mergeStyles(normalizeProps({ prop: style, breakpoints }), styleInnerNormalized, styleOuterNormalized), [style, breakpoints, styleInnerNormalized, styleOuterNormalized])
+  const styleNormalized = useMemo(() => normalizeProps({ prop: style, breakpoints }), [style, breakpoints])
 
   const alignmentXRest = useMemo(() => getAlignmentXRest({
     children,
@@ -113,10 +101,7 @@ const Box = React.forwardRef(({
       bottom={bottomPercent}
       controlIsVisible={controlIsVisible}
       controlColor={controlColor}
-      style={cssMode === 'grid'
-        ? styleNormalized
-        : styleOuterNormalized
-      }
+      style={cssMode === 'grid' && styleNormalized}
       ref={ref}
       attrs={attrs}
     >
@@ -128,7 +113,7 @@ const Box = React.forwardRef(({
         media={media}
         alignX={alignXNormalized}
         alignY={alignYNormalized}
-        style={styleInnerNormalized}
+        style={styleNormalized}
         breakpoints={breakpoints}
         controlIsVisible={controlIsVisible}
         controlColor={controlColor}
@@ -149,8 +134,6 @@ const Box = React.forwardRef(({
               breakpoints,
               gutterX,
               gutterY,
-              // alignX: alignXNormalized,
-              // alignY: alignYNormalized,
               colspan,
               media,
               parent: colsNormalized,
@@ -189,8 +172,6 @@ Box.propTypes = {
   alignX: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   alignY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  styleInner: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  styleOuter: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   tag: PropTypes.string,
   attrs: PropTypes.object,
   hasChildBoxes: PropTypes.bool,
@@ -210,8 +191,6 @@ Box.defaultProps = {
   top: 0,
   bottom: 0,
   style: '',
-  styleInner: '',
-  styleOuter: '',
   hasChildBoxes: undefined,
   tag: 'div',
   attrs: {},

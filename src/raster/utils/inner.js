@@ -60,10 +60,10 @@ const Inner = ({
     >
       {controlIsVisible
         ? (
-            <>
-              <StyledInnerControl controlColor={controlColor} />
-              {children}
-            </>
+          <>
+            <StyledInnerControl controlColor={controlColor} />
+            {children}
+          </>
         )
         : children
       }

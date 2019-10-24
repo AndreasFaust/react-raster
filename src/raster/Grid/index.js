@@ -11,10 +11,8 @@ import Resetter from '../utils/resetter'
 import useCssMode from '../utils/useCssMode'
 import StyledContainer from './container'
 import Control from '../Control'
-import mergeStyles from '../utils/mergeStyles'
 import useCurrentBreakpoint from '../utils/useCurrentBreakpoint'
 import getAlignmentXRest from '../utils/getAlignmentXRest'
-
 
 const Grid = React.forwardRef((props, ref) => {
   const {
@@ -33,12 +31,11 @@ const Grid = React.forwardRef((props, ref) => {
     position,
     className,
     style,
-    styleInner,
-    styleOuter,
     children,
     cssMode,
     tag,
-    attrs
+    attrs,
+    isControl
   } = props
   const controlIsVisible = useControl(control)
   const cssModeNormalized = useCssMode(cssMode || 'grid')
@@ -57,9 +54,7 @@ const Grid = React.forwardRef((props, ref) => {
   const topNormalized = useMemo(() => normalizeProps({ prop: top, breakpoints: breakpointsNormalized }), [top, breakpointsNormalized])
   const bottomNormalized = useMemo(() => normalizeProps({ prop: bottom, breakpoints: breakpointsNormalized }), [bottom, breakpointsNormalized])
   const positionNormalized = useMemo(() => normalizeProps({ prop: position, breakpoints: breakpointsNormalized }), [position, breakpointsNormalized])
-  const styleOuterNormalized = useMemo(() => normalizeProps({ prop: styleOuter, breakpoints }), [styleOuter, breakpoints])
-  const styleInnerNormalized = useMemo(() => normalizeProps({ prop: styleInner, breakpoints }), [styleInner, breakpoints])
-  const styleNormalized = useMemo(() => mergeStyles(normalizeProps({ prop: style, breakpoints }), styleInnerNormalized, styleOuterNormalized), [style, breakpoints, styleInnerNormalized, styleOuterNormalized])
+  const styleNormalized = useMemo(() => normalizeProps({ prop: style, breakpoints }), [style, breakpoints])
 
   const alignmentXRest = useMemo(() => getAlignmentXRest({
     children,
@@ -85,11 +80,9 @@ const Grid = React.forwardRef((props, ref) => {
       position={positionNormalized}
       tag={tag}
       attrs={attrs}
-      style={cssModeNormalized === 'grid'
-        ? styleNormalized
-        : styleOuterNormalized
-      }
+      style={cssModeNormalized === 'grid' && styleNormalized}
       ref={ref}
+      isControl
     >
       {control && controlIsVisible && (
         <Control
@@ -113,7 +106,7 @@ const Grid = React.forwardRef((props, ref) => {
         alignX={alignXNormalized}
         alignY={alignYNormalized}
         media={media}
-        style={styleInnerNormalized}
+        style={styleNormalized}
         controlColor={controlColor}
       >
         <Resetter
@@ -132,8 +125,6 @@ const Grid = React.forwardRef((props, ref) => {
               breakpoints: breakpointsNormalized,
               gutterX: gutterXNormalized,
               gutterY: gutterYNormalized,
-              // alignX: alignXNormalized,
-              // alignY: alignYNormalized,
               media,
               colspan,
               parent,
@@ -171,12 +162,11 @@ Grid.propTypes = {
   position: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   className: PropTypes.string,
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  styleInner: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  styleOuter: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   children: PropTypes.node,
   cssMode: PropTypes.string,
   tag: PropTypes.string,
-  attrs: PropTypes.object
+  attrs: PropTypes.object,
+  isControl: PropTypes.bool
 }
 
 Grid.defaultProps = {
@@ -194,13 +184,12 @@ Grid.defaultProps = {
   controlColor: 'rgba(0, 0, 0, 0.1)',
   position: 'relative',
   style: '',
-  styleOuter: '',
-  styleInner: '',
   className: '',
   children: null,
   cssMode: undefined,
   tag: 'div',
-  attrs: {}
+  attrs: {},
+  isControl: false
 }
 
 export default Grid

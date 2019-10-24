@@ -48,7 +48,7 @@ function getElements(children, breakpoints, colsTotal) {
 function getRest({ stack, rest, alignX }) {
   return stack.map(() => {
     switch (alignX) {
-      case 'left':
+      case 'start':
         return 0
       case 'center':
         return rest / 2

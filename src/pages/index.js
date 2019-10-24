@@ -37,7 +37,9 @@ export default () => (
     <Box
       className='header'
       tag='header'
+      alignX={'center'}
     >
+
       <Box
         className='Logo'
         cols={[10, 8, 8, 6]}
@@ -50,7 +52,6 @@ export default () => (
       <Box
         className='Box--1'
         cols={[12, 10, 8, 6]}
-        left={[0, 1, 2, 3]}
         style={`
           justify-content: center;
         `}
@@ -58,11 +59,9 @@ export default () => (
         <h1><pre>react-raster</pre> is an advanced grid-system based on styled-components. <span role="img" aria-label="kissing cat">😽</span></h1>
       </Box>
     </Box>
-
     <Box
       className='Box--1'
       cols={[12, 10, 8, 6]}
-      left={[0, 1, 2, 3]}
       style={`
         justify-content: center;
       `}

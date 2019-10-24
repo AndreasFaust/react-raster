@@ -25,11 +25,12 @@ export default () => (
     alignY={'center'}
     alignX={'center'}
     control
-    style={`
-      // background: blue;
-      // &.bp-768 {
-      //   // background: black;
-      // }
+    cssMode={'flex'}
+    styleInner={`
+      background: blue;
+      &.bp-768 {
+        // background: black;
+      }
     `}
     attrs={{
     }}
@@ -47,11 +48,14 @@ export default () => (
         cols={3}
         left={1}
         right={1}
+        alignY={'center'}
         style={`
           height: 200px;
           background: blue;
         `}
-      />
+      >
+        <h1>Test</h1>
+      </Box>
       <Box
         cols={5}
         style={`
