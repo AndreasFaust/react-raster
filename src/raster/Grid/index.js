@@ -10,7 +10,7 @@ import Inner from '../utils/inner'
 import Resetter from '../utils/resetter'
 import useCssMode from '../utils/useCssMode'
 import StyledContainer from './container'
-import Control from '../Control'
+import { ControlGrid } from '../control'
 import useCurrentBreakpoint from '../utils/useCurrentBreakpoint'
 import getAlignmentXRest from '../utils/getAlignmentXRest'
 
@@ -60,8 +60,10 @@ const Grid = React.forwardRef((props, ref) => {
     children,
     breakpoints,
     colsTotal: normalizeProps({ prop: colspan, breakpoints }),
-    alignX: alignXNormalized
-  }), [alignXNormalized, breakpoints, children, colspan])
+    alignX: alignXNormalized,
+    cssMode,
+    alignXRaw: alignX,
+  }), [alignX, alignXNormalized, breakpoints, children, colspan, cssMode])
 
   return (
     <StyledContainer
@@ -80,12 +82,12 @@ const Grid = React.forwardRef((props, ref) => {
       position={positionNormalized}
       tag={tag}
       attrs={attrs}
-      style={cssModeNormalized === 'grid' && styleNormalized}
+      style={styleNormalized}
       ref={ref}
-      isControl
+      isControl={isControl}
     >
       {control && controlIsVisible && (
-        <Control
+        <ControlGrid
           cssMode={cssModeNormalized}
           colspan={colspan}
           breakpoints={breakpoints}
@@ -106,7 +108,6 @@ const Grid = React.forwardRef((props, ref) => {
         alignX={alignXNormalized}
         alignY={alignYNormalized}
         media={media}
-        style={styleNormalized}
         controlColor={controlColor}
       >
         <Resetter
@@ -133,11 +134,13 @@ const Grid = React.forwardRef((props, ref) => {
             }}
           >
             {
-              React.Children.map(children, (child, index) => {
-                return React.cloneElement(child, {
-                  rest: alignmentXRest && alignmentXRest[index]
+              alignmentXRest
+                ? React.Children.map(children, (child, index) => {
+                  return React.cloneElement(child, {
+                    rest: alignmentXRest && alignmentXRest[index]
+                  })
                 })
-              })
+                : children
             }
           </Context.Provider>
         </Resetter>

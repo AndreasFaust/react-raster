@@ -23,13 +23,16 @@ export default () => (
     gutterX={'1.5vw'}
     gutterY={'3vw'}
     alignY={'center'}
-    alignX={'center'}
+    // alignX={'center'}
     control
+    cssMode='flex'
     style={`
       // background: blue;
       // &.bp-768 {
       //   // background: black;
       // }
+      background-image: url(${image1});
+      background-size: cover;
     `}
     attrs={{
     }}
@@ -37,13 +40,18 @@ export default () => (
     <Box
       className='header'
       tag='header'
-      alignX={'center'}
+      // alignX={'center'}
+      cols={[12, 12, 10, 10]}
     >
 
       <Box
         className='Logo'
         cols={[10, 8, 8, 6]}
         tag='img'
+        // style={`
+        //   background-image: url(${logo});
+        //   height: 200px;
+        // `}
         attrs={{
           src: logo,
           alt: "Logo"

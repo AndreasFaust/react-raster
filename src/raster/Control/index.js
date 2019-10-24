@@ -1,8 +1,10 @@
 import React from 'react'
-import Grid from '../Grid'
-import Box from '../Box'
+import styled from 'styled-components'
 
-const Control = (props) => {
+import Grid from '../grid'
+import Box from '../box'
+
+const ControlGrid = (props) => {
   return (
     <Grid
       {...props}
@@ -24,4 +26,19 @@ const Control = (props) => {
   )
 }
 
-export default Control
+const StyledControlBox = styled('div')`
+  position: absolute;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${props => props.controlColor};
+  pointer-events: none;
+`
+
+const ControlBox = (props) => {
+  return <StyledControlBox {...props} />
+}
+
+export { ControlGrid, ControlBox }

@@ -58,12 +58,11 @@ function getRest({ stack, rest, alignX }) {
   })
 }
 
-export default ({ children, breakpoints, colsTotal, alignX }) => {
-  if (!children) return null
+export default ({ children, cssMode, breakpoints, colsTotal, alignX, alignXRaw }) => {
+  if (!children || cssMode === 'flex' || !alignXRaw) return null
 
   const elements = getElements(children, breakpoints, colsTotal)
   const elementsGroupedByBreakpoint = groupElementsByBreakpoint(breakpoints, elements)
-
   const restArrayGroupedByBreakpoint = elementsGroupedByBreakpoint.map((breakpoint, index) => {
     if (!breakpoint.length) return breakpoint
     let totalWidth = 0

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import Container from '../utils/container'
 
 const GridContainer = styled(Container)`
@@ -37,29 +38,12 @@ const GridContainer = styled(Container)`
 
       align-content: ${props => props.alignY[index]};
       align-items: ${props => props.alignY[index]};
-      // justify-content: ${props => props.alignX[index]};    
     `
   })}
-  ${props => {
-    if (props.controlIsVisible) {
-      return props.tag !== 'img'
-        ? `
-          ::after { 
-            content: '';
-            display: block;
-            position: absolute;
-            background: ${props.controlColor};
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 100;
-            pointer-events: none;
-          }
-        `
-        : `box-shadow: 0 0 200vw 200vw ${props.controlColor} inset;`
-    }
-  }}
+
+  ${props => props.tag === 'img' && `
+    box-shadow: 0 0 999em ${props.controlColor} inset;
+  `}
 `
 
 const FlexContainer = styled(Container)`
@@ -80,8 +64,7 @@ const FlexContainer = styled(Container)`
       margin-top: ${props.top[index]};
       margin-bottom: ${props.bottom[index]};
     `
-  })
-}
+  })}
 `
 
 export default React.forwardRef((props, ref) => {

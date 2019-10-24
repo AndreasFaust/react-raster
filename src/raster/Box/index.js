@@ -13,6 +13,7 @@ import getAlignmentXRest from '../utils/getAlignmentXRest'
 
 import Context from '../context'
 import StyledContainer from './container'
+import { ControlBox } from '../control'
 
 const Box = React.forwardRef(({
   className,
@@ -70,9 +71,11 @@ const Box = React.forwardRef(({
   const alignmentXRest = useMemo(() => getAlignmentXRest({
     children,
     breakpoints,
+    cssMode,
     colsTotal: colsNormalized,
-    alignX: alignXNormalized
-  }), [alignXNormalized, breakpoints, children, colsNormalized])
+    alignX: alignXNormalized,
+    alignXRaw: alignX,
+  }), [alignX, alignXNormalized, breakpoints, children, colsNormalized, cssMode])
 
   useEffect(() => {
     if (register) register()
@@ -118,6 +121,7 @@ const Box = React.forwardRef(({
         controlIsVisible={controlIsVisible}
         controlColor={controlColor}
       >
+        {controlIsVisible && <ControlBox controlColor={controlColor} />}
         <Resetter
           cssMode={cssMode}
           className='Box__Resetter'
@@ -183,8 +187,8 @@ Box.propTypes = {
 Box.defaultProps = {
   className: '',
   cols: undefined,
-  alignX: 'left',
-  alignY: 'top',
+  alignX: '',
+  alignY: '',
   children: null,
   left: 0,
   right: 0,

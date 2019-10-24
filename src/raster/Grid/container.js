@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import Container from '../utils/container'
 
 const controlStyles = `
@@ -49,6 +50,7 @@ const FlexContainer = styled(Container)`
       padding-right: ${props.right[index]};
       padding-top: ${props.top[index]};
       padding-bottom: ${props.bottom[index]};
+      ${props.style[index]}
     `
   })}
   ${props => props.isControl && controlStyles}

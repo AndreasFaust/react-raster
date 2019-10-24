@@ -15,27 +15,10 @@ const StyledInner = styled(InnerTag)`
   ${props => props.media.map((media, index) => {
     return media`
       align-items: ${props.alignY[index]};
-      justify-content: ${props.alignX[index]};    
+      justify-content: ${props.alignX[index]};
+      ${props.style && props.style[index]}   
     `
   })}
-`
-
-const StyledInnerCustom = styled(StyledInner)`
-  ${props => props.media.map((media, index) => {
-    return media`
-      ${props.style[index]}   
-    `
-  })}
-`
-
-const StyledInnerControl = styled('div')`
-  position: absolute;
-  z-index: 10000;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: ${props => props.controlColor};
 `
 
 const Inner = ({
@@ -44,30 +27,20 @@ const Inner = ({
   alignX,
   alignY,
   style,
-  controlIsVisible,
-  controlColor,
   children,
   cssMode
 }) => {
   if (cssMode === 'grid') return children
   return (
-    <StyledInnerCustom
+    <StyledInner
       className={className}
       media={media}
       alignX={alignX}
       alignY={alignY}
       style={style}
     >
-      {controlIsVisible
-        ? (
-          <>
-            <StyledInnerControl controlColor={controlColor} />
-            {children}
-          </>
-        )
-        : children
-      }
-    </StyledInnerCustom>
+      {children}
+    </StyledInner>
   )
 }
 
