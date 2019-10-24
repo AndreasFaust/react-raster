@@ -57,6 +57,7 @@ export default () => {
         background-image: url(${headerImage});
         background-size: cover;
         background-position: center bottom;
+        background-repeat: no-repeat;
         height: 66.666vh;
       `}
       >
