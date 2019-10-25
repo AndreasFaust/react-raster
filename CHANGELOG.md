@@ -1,3 +1,14 @@
+#### 5.0.1 (2019-10-25)
+
+##### Bug Fixes
+
+*  remove flex-wrap from inner-container. (3df1787c)
+
+##### Other Changes
+
+*  fix readme (1a1464ce)
+*  fix readme (4f068bc6)
+
 ## 5.0.0 (2019-10-24)
 
 ##### Breaking Changes

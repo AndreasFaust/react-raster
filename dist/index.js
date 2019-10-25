@@ -1531,7 +1531,7 @@ var InnerTag = function InnerTag(_ref) {
 
 var StyledInner = styled__default(InnerTag)(_templateObject$1(), function (props) {
   return props.media.map(function (media, index) {
-    return props.hasChildBoxes ? media(_templateObject2()) : media(_templateObject3(), (props.alignX[index] || props.alignY[index]) && "\n          display: flex;\n          flex-wrap: wrap;\n        ", props.alignX[index] && "justify-content: ".concat(props.alignX[index], ";"), props.alignY[index] && "align-items: ".concat(props.alignY[index], ";"));
+    return props.hasChildBoxes ? media(_templateObject2()) : media(_templateObject3(), (props.alignX[index] || props.alignY[index]) && "\n          display: flex;\n        ", props.alignX[index] && "justify-content: ".concat(props.alignX[index], ";"), props.alignY[index] && "align-items: ".concat(props.alignY[index], ";"));
   });
 }, function (props) {
   return props.media.map(function (media, index) {
