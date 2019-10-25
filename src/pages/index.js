@@ -62,7 +62,7 @@ export default () => {
       `}
       >
         <Box
-          className='Logo'
+          className='logo'
           cols={[8, 6, 4, 4, 3, 2]}
           tag='img'
           attrs={{
@@ -84,12 +84,12 @@ export default () => {
       `}
       >
         <Box
-          cols={[12, 10, 8, 6]}
+          cols={[12, 8, 7, 6]}
           style={`
           justify-content: center;
         `}
         >
-          <h1><pre>react-raster</pre> is an advanced grid-<br />system based on styled-components. <br /><span role="img" aria-label="kissing cat">😽</span></h1>
+          <h1><pre>react-raster</pre> is an advanced grid-system based on styled-components. <br /><span role="img" aria-label="kissing cat">😽</span></h1>
         </Box>
         <Box
           className='hints'
@@ -99,7 +99,7 @@ export default () => {
         >
           <Box
             className='hint'
-            cols={[12, 12, 6, 4]}
+            cols={[12, 12, 5, 4]}
             left={[0, 0, 0, 1]}
             alignX={['center', 'center', 'right']}
           >
@@ -108,7 +108,7 @@ export default () => {
           </Box>
           <Box
             className='hint'
-            cols={[12, 12, 6, 4]}
+            cols={[12, 12, 5, 4]}
             alignX={['center', 'center', 'left']}
           >
             <img className="hintIcon" src={esc} alt="Escape icon" />

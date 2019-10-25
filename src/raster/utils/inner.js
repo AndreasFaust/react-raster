@@ -21,7 +21,6 @@ const StyledInner = styled(InnerTag)`
       : media`
         ${(props.alignX[index] || props.alignY[index]) && `
           display: flex;
-          flex-wrap: wrap;
         `}
         ${props.alignX[index] && `justify-content: ${props.alignX[index]};`}
         ${props.alignY[index] && `align-items: ${props.alignY[index]};`}
