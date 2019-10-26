@@ -76,20 +76,22 @@ export default () => {
         {...gridProps}
         alignX={'center'}
         alignY={'center'}
-        cssMode={mode}
+        cssMode={'flex'}
         key={mode + 'section-1'}
         bottom='5vh'
         style={`
-        min-height: 33.333vh;
-      `}
+          min-height: 33.333vh;
+        `}
       >
         <Box
+          tag='h1'
           cols={[12, 8, 7, 6]}
           style={`
-          justify-content: center;
-        `}
+            justify-content: center;
+          `}
         >
-          <h1><pre>react-raster</pre> is an advanced grid-system based on styled-components. <br /><span role="img" aria-label="kissing cat">😽</span></h1>
+          <pre>react-raster</pre> is an advanced grid-system based on styled-components.
+          <br /><span role="img" aria-label="kissing cat">😽</span>
         </Box>
         <Box
           className='hints'

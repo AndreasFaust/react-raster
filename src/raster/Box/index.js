@@ -107,8 +107,7 @@ const Box = React.forwardRef(({
       bottom={bottomPercent}
       controlIsVisible={controlIsVisible}
       controlColor={controlColor}
-      style={cssMode === 'grid' && styleNormalized
-      }
+      style={cssMode === 'grid' && styleNormalized}
       ref={ref}
       attrs={attrs}
     >
@@ -152,15 +151,17 @@ const Box = React.forwardRef(({
             }}
           >
             {
-              React.Children.map(children, (child, index) => {
-                return React.cloneElement(child, {
-                  rest: alignmentXRest && alignmentXRest[index]
-                })
+              React.Children.toArray(children).map((child, index) => {
+                return child.type && child.type.displayName === 'Box'
+                  ? React.cloneElement(child, {
+                    rest: alignmentXRest && alignmentXRest[index]
+                  })
+                  : child
               })
             }
           </Context.Provider>
         </Resetter>
-      </Inner>
+      </Inner >
     </StyledContainer >
   )
 })
