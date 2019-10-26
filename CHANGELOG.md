@@ -1,3 +1,9 @@
+#### 5.0.2 (2019-10-26)
+
+##### Bug Fixes
+
+*  convert box-children to array. (c33a4dd5)
+
 #### 5.0.1 (2019-10-25)
 
 ##### Bug Fixes

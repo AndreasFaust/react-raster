@@ -2211,10 +2211,10 @@ var Box = React__default.forwardRef(function (_ref, ref) {
         }
       }
     }
-  }, React__default.Children.map(children, function (child, index) {
-    return React__default.cloneElement(child, {
+  }, React__default.Children.toArray(children).map(function (child, index) {
+    return child.type && child.type.displayName === 'Box' ? React__default.cloneElement(child, {
       rest: alignmentXRest && alignmentXRest[index]
-    });
+    }) : child;
   })))));
 });
 Box.displayName = 'Box';

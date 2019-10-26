@@ -2203,10 +2203,10 @@ var Box = React.forwardRef(function (_ref, ref) {
         }
       }
     }
-  }, React.Children.map(children, function (child, index) {
-    return React.cloneElement(child, {
+  }, React.Children.toArray(children).map(function (child, index) {
+    return child.type && child.type.displayName === 'Box' ? React.cloneElement(child, {
       rest: alignmentXRest && alignmentXRest[index]
-    });
+    }) : child;
   })))));
 });
 Box.displayName = 'Box';
