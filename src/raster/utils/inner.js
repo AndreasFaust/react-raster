@@ -43,6 +43,7 @@ const Inner = ({
   hasChildBoxes,
   cssMode
 }) => {
+  // console.log(cssMode)
   if (cssMode === 'grid') return children
   return (
     <StyledInner

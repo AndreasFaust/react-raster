@@ -76,7 +76,7 @@ export default () => {
         {...gridProps}
         alignX={'center'}
         alignY={'center'}
-        cssMode={'flex'}
+        cssMode={mode}
         key={mode + 'section-1'}
         bottom='5vh'
         style={`
