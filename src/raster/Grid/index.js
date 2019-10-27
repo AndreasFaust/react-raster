@@ -37,7 +37,7 @@ const Grid = React.forwardRef((props, ref) => {
     attrs,
     isControl
   } = props
-  console.log(cssMode)
+
   const controlIsVisible = useControl(control)
   const cssModeNormalized = useCssMode(cssMode || 'grid')
 
