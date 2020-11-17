@@ -1,6 +1,6 @@
 {
   "name": "react-raster",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "description": "Advanced Grid-System based on Styled Components, which is highly customizable and ready for server-side-rendering.",
   "author": "AndreasFaust",
   "license": "MIT",
