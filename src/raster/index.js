@@ -1,2 +1,2 @@
-export { default as Grid } from './grid'
-export { default as Box } from './box'
+export { default as Grid } from "./Grid";
+export { default as Box } from "./Box";

@@ -2,59 +2,63 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
 var React = require('react');
-var React__default = _interopDefault(React);
 var styled = require('styled-components');
-var styled__default = _interopDefault(styled);
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
 
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
-var reactIs_production_min = createCommonjsModule(function (module, exports) {
-Object.defineProperty(exports,"__esModule",{value:!0});
-var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?Symbol.for("react.suspense_list"):
-60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.fundamental"):60117,w=b?Symbol.for("react.responder"):60118,x=b?Symbol.for("react.scope"):60119;function y(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function z(a){return y(a)===m}
-exports.typeOf=y;exports.AsyncMode=l;exports.ConcurrentMode=m;exports.ContextConsumer=k;exports.ContextProvider=h;exports.Element=c;exports.ForwardRef=n;exports.Fragment=e;exports.Lazy=t;exports.Memo=r;exports.Portal=d;exports.Profiler=g;exports.StrictMode=f;exports.Suspense=p;
-exports.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===v||a.$$typeof===w||a.$$typeof===x)};exports.isAsyncMode=function(a){return z(a)||y(a)===l};exports.isConcurrentMode=z;exports.isContextConsumer=function(a){return y(a)===k};exports.isContextProvider=function(a){return y(a)===h};
-exports.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};exports.isForwardRef=function(a){return y(a)===n};exports.isFragment=function(a){return y(a)===e};exports.isLazy=function(a){return y(a)===t};exports.isMemo=function(a){return y(a)===r};exports.isPortal=function(a){return y(a)===d};exports.isProfiler=function(a){return y(a)===g};exports.isStrictMode=function(a){return y(a)===f};exports.isSuspense=function(a){return y(a)===p};
-});
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
+Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
+function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}var AsyncMode=l;var ConcurrentMode=m;var ContextConsumer=k;var ContextProvider=h;var Element=c;var ForwardRef=n;var Fragment=e;var Lazy=t;var Memo=r;var Portal=d;
+var Profiler=g;var StrictMode=f;var Suspense=p;var isAsyncMode=function(a){return A(a)||z(a)===l};var isConcurrentMode=A;var isContextConsumer=function(a){return z(a)===k};var isContextProvider=function(a){return z(a)===h};var isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};var isForwardRef=function(a){return z(a)===n};var isFragment=function(a){return z(a)===e};var isLazy=function(a){return z(a)===t};
+var isMemo=function(a){return z(a)===r};var isPortal=function(a){return z(a)===d};var isProfiler=function(a){return z(a)===g};var isStrictMode=function(a){return z(a)===f};var isSuspense=function(a){return z(a)===p};
+var isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};var typeOf=z;
 
-unwrapExports(reactIs_production_min);
-var reactIs_production_min_1 = reactIs_production_min.typeOf;
-var reactIs_production_min_2 = reactIs_production_min.AsyncMode;
-var reactIs_production_min_3 = reactIs_production_min.ConcurrentMode;
-var reactIs_production_min_4 = reactIs_production_min.ContextConsumer;
-var reactIs_production_min_5 = reactIs_production_min.ContextProvider;
-var reactIs_production_min_6 = reactIs_production_min.Element;
-var reactIs_production_min_7 = reactIs_production_min.ForwardRef;
-var reactIs_production_min_8 = reactIs_production_min.Fragment;
-var reactIs_production_min_9 = reactIs_production_min.Lazy;
-var reactIs_production_min_10 = reactIs_production_min.Memo;
-var reactIs_production_min_11 = reactIs_production_min.Portal;
-var reactIs_production_min_12 = reactIs_production_min.Profiler;
-var reactIs_production_min_13 = reactIs_production_min.StrictMode;
-var reactIs_production_min_14 = reactIs_production_min.Suspense;
-var reactIs_production_min_15 = reactIs_production_min.isValidElementType;
-var reactIs_production_min_16 = reactIs_production_min.isAsyncMode;
-var reactIs_production_min_17 = reactIs_production_min.isConcurrentMode;
-var reactIs_production_min_18 = reactIs_production_min.isContextConsumer;
-var reactIs_production_min_19 = reactIs_production_min.isContextProvider;
-var reactIs_production_min_20 = reactIs_production_min.isElement;
-var reactIs_production_min_21 = reactIs_production_min.isForwardRef;
-var reactIs_production_min_22 = reactIs_production_min.isFragment;
-var reactIs_production_min_23 = reactIs_production_min.isLazy;
-var reactIs_production_min_24 = reactIs_production_min.isMemo;
-var reactIs_production_min_25 = reactIs_production_min.isPortal;
-var reactIs_production_min_26 = reactIs_production_min.isProfiler;
-var reactIs_production_min_27 = reactIs_production_min.isStrictMode;
-var reactIs_production_min_28 = reactIs_production_min.isSuspense;
+var reactIs_production_min = {
+	AsyncMode: AsyncMode,
+	ConcurrentMode: ConcurrentMode,
+	ContextConsumer: ContextConsumer,
+	ContextProvider: ContextProvider,
+	Element: Element,
+	ForwardRef: ForwardRef,
+	Fragment: Fragment,
+	Lazy: Lazy,
+	Memo: Memo,
+	Portal: Portal,
+	Profiler: Profiler,
+	StrictMode: StrictMode,
+	Suspense: Suspense,
+	isAsyncMode: isAsyncMode,
+	isConcurrentMode: isConcurrentMode,
+	isContextConsumer: isContextConsumer,
+	isContextProvider: isContextProvider,
+	isElement: isElement,
+	isForwardRef: isForwardRef,
+	isFragment: isFragment,
+	isLazy: isLazy,
+	isMemo: isMemo,
+	isPortal: isPortal,
+	isProfiler: isProfiler,
+	isStrictMode: isStrictMode,
+	isSuspense: isSuspense,
+	isValidElementType: isValidElementType,
+	typeOf: typeOf
+};
 
 var reactIs_development = createCommonjsModule(function (module, exports) {
 
@@ -62,8 +66,6 @@ var reactIs_development = createCommonjsModule(function (module, exports) {
 
 if (process.env.NODE_ENV !== "production") {
   (function() {
-
-Object.defineProperty(exports, '__esModule', { value: true });
 
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
@@ -84,69 +86,15 @@ var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
 var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
 var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
 var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
 var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
 var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
 var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
 
 function isValidElementType(type) {
   return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE);
+  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
 }
-
-/**
- * Forked from fbjs/warning:
- * https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/__forks__/warning.js
- *
- * Only change is we use console.warn instead of console.error,
- * and do nothing when 'console' is not supported.
- * This really simplifies the code.
- * ---
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-var lowPriorityWarningWithoutStack = function () {};
-
-{
-  var printWarning = function (format) {
-    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    var argIndex = 0;
-    var message = 'Warning: ' + format.replace(/%s/g, function () {
-      return args[argIndex++];
-    });
-
-    if (typeof console !== 'undefined') {
-      console.warn(message);
-    }
-
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-
-  lowPriorityWarningWithoutStack = function (condition, format) {
-    if (format === undefined) {
-      throw new Error('`lowPriorityWarningWithoutStack(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (!condition) {
-      for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-        args[_key2 - 2] = arguments[_key2];
-      }
-
-      printWarning.apply(void 0, [format].concat(args));
-    }
-  };
-}
-
-var lowPriorityWarningWithoutStack$1 = lowPriorityWarningWithoutStack;
 
 function typeOf(object) {
   if (typeof object === 'object' && object !== null) {
@@ -208,8 +156,9 @@ var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecat
 function isAsyncMode(object) {
   {
     if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-      hasWarnedAboutDeprecatedIsAsyncMode = true;
-      lowPriorityWarningWithoutStack$1(false, 'The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
     }
   }
 
@@ -252,7 +201,6 @@ function isSuspense(object) {
   return typeOf(object) === REACT_SUSPENSE_TYPE;
 }
 
-exports.typeOf = typeOf;
 exports.AsyncMode = AsyncMode;
 exports.ConcurrentMode = ConcurrentMode;
 exports.ContextConsumer = ContextConsumer;
@@ -266,7 +214,6 @@ exports.Portal = Portal;
 exports.Profiler = Profiler;
 exports.StrictMode = StrictMode;
 exports.Suspense = Suspense;
-exports.isValidElementType = isValidElementType;
 exports.isAsyncMode = isAsyncMode;
 exports.isConcurrentMode = isConcurrentMode;
 exports.isContextConsumer = isContextConsumer;
@@ -280,39 +227,39 @@ exports.isPortal = isPortal;
 exports.isProfiler = isProfiler;
 exports.isStrictMode = isStrictMode;
 exports.isSuspense = isSuspense;
+exports.isValidElementType = isValidElementType;
+exports.typeOf = typeOf;
   })();
 }
 });
-
-unwrapExports(reactIs_development);
-var reactIs_development_1 = reactIs_development.typeOf;
-var reactIs_development_2 = reactIs_development.AsyncMode;
-var reactIs_development_3 = reactIs_development.ConcurrentMode;
-var reactIs_development_4 = reactIs_development.ContextConsumer;
-var reactIs_development_5 = reactIs_development.ContextProvider;
-var reactIs_development_6 = reactIs_development.Element;
-var reactIs_development_7 = reactIs_development.ForwardRef;
-var reactIs_development_8 = reactIs_development.Fragment;
-var reactIs_development_9 = reactIs_development.Lazy;
-var reactIs_development_10 = reactIs_development.Memo;
-var reactIs_development_11 = reactIs_development.Portal;
-var reactIs_development_12 = reactIs_development.Profiler;
-var reactIs_development_13 = reactIs_development.StrictMode;
-var reactIs_development_14 = reactIs_development.Suspense;
-var reactIs_development_15 = reactIs_development.isValidElementType;
-var reactIs_development_16 = reactIs_development.isAsyncMode;
-var reactIs_development_17 = reactIs_development.isConcurrentMode;
-var reactIs_development_18 = reactIs_development.isContextConsumer;
-var reactIs_development_19 = reactIs_development.isContextProvider;
-var reactIs_development_20 = reactIs_development.isElement;
-var reactIs_development_21 = reactIs_development.isForwardRef;
-var reactIs_development_22 = reactIs_development.isFragment;
-var reactIs_development_23 = reactIs_development.isLazy;
-var reactIs_development_24 = reactIs_development.isMemo;
-var reactIs_development_25 = reactIs_development.isPortal;
-var reactIs_development_26 = reactIs_development.isProfiler;
-var reactIs_development_27 = reactIs_development.isStrictMode;
-var reactIs_development_28 = reactIs_development.isSuspense;
+var reactIs_development_1 = reactIs_development.AsyncMode;
+var reactIs_development_2 = reactIs_development.ConcurrentMode;
+var reactIs_development_3 = reactIs_development.ContextConsumer;
+var reactIs_development_4 = reactIs_development.ContextProvider;
+var reactIs_development_5 = reactIs_development.Element;
+var reactIs_development_6 = reactIs_development.ForwardRef;
+var reactIs_development_7 = reactIs_development.Fragment;
+var reactIs_development_8 = reactIs_development.Lazy;
+var reactIs_development_9 = reactIs_development.Memo;
+var reactIs_development_10 = reactIs_development.Portal;
+var reactIs_development_11 = reactIs_development.Profiler;
+var reactIs_development_12 = reactIs_development.StrictMode;
+var reactIs_development_13 = reactIs_development.Suspense;
+var reactIs_development_14 = reactIs_development.isAsyncMode;
+var reactIs_development_15 = reactIs_development.isConcurrentMode;
+var reactIs_development_16 = reactIs_development.isContextConsumer;
+var reactIs_development_17 = reactIs_development.isContextProvider;
+var reactIs_development_18 = reactIs_development.isElement;
+var reactIs_development_19 = reactIs_development.isForwardRef;
+var reactIs_development_20 = reactIs_development.isFragment;
+var reactIs_development_21 = reactIs_development.isLazy;
+var reactIs_development_22 = reactIs_development.isMemo;
+var reactIs_development_23 = reactIs_development.isPortal;
+var reactIs_development_24 = reactIs_development.isProfiler;
+var reactIs_development_25 = reactIs_development.isStrictMode;
+var reactIs_development_26 = reactIs_development.isSuspense;
+var reactIs_development_27 = reactIs_development.isValidElementType;
+var reactIs_development_28 = reactIs_development.typeOf;
 
 var reactIs = createCommonjsModule(function (module) {
 
@@ -1217,7 +1164,7 @@ var classnames = createCommonjsModule(function (module) {
 }());
 });
 
-var Context = React__default.createContext();
+var Context = /*#__PURE__*/React__default['default'].createContext();
 
 var isArray = (function (prop) {
   if (!prop) return false;
@@ -1340,19 +1287,15 @@ function _taggedTemplateLiteral(strings, raw) {
 }
 
 function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
 
 function _arrayWithHoles(arr) {
@@ -1360,14 +1303,11 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
 
 function _iterableToArrayLimit(arr, i) {
-  if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-    return;
-  }
-
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
   var _arr = [];
   var _n = true;
   var _d = false;
@@ -1393,12 +1333,29 @@ function _iterableToArrayLimit(arr, i) {
   return _arr;
 }
 
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function _templateObject() {
@@ -1524,12 +1481,12 @@ function _templateObject$1() {
 var InnerTag = function InnerTag(_ref) {
   var className = _ref.className,
       children = _ref.children;
-  return React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: className
   }, children);
 };
 
-var StyledInner = styled__default(InnerTag)(_templateObject$1(), function (props) {
+var StyledInner = styled__default['default'](InnerTag)(_templateObject$1(), function (props) {
   return props.media.map(function (media, index) {
     return props.hasChildBoxes ? media(_templateObject2()) : media(_templateObject3(), (props.alignX[index] || props.alignY[index]) && "\n          display: flex;\n        ", props.alignX[index] && "justify-content: ".concat(props.alignX[index], ";"), props.alignY[index] && "align-items: ".concat(props.alignY[index], ";"));
   });
@@ -1550,7 +1507,7 @@ var Inner = function Inner(_ref2) {
       cssMode = _ref2.cssMode;
   // console.log(cssMode)
   if (cssMode === 'grid') return children;
-  return React__default.createElement(StyledInner, {
+  return /*#__PURE__*/React__default['default'].createElement(StyledInner, {
     className: className,
     media: media,
     alignX: alignX,
@@ -1584,12 +1541,12 @@ var ResetterTag = function ResetterTag(_ref) {
   var reset = _ref.reset,
       className = _ref.className,
       children = _ref.children;
-  return React__default.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: className
   }, children);
 };
 
-var StyledResetter = styled__default(ResetterTag)(_templateObject$2(), function (props) {
+var StyledResetter = styled__default['default'](ResetterTag)(_templateObject$2(), function (props) {
   return props.media.map(function (media, index) {
     return media(_templateObject2$1(), props.gutterX[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.alignY[index], props.alignX[index]);
   });
@@ -1597,7 +1554,7 @@ var StyledResetter = styled__default(ResetterTag)(_templateObject$2(), function 
 
 var Resetter = function Resetter(props) {
   if (props.cssMode === 'grid') return props.children;
-  return props.hasChildBoxes ? React__default.createElement(StyledResetter, props) : props.children;
+  return props.hasChildBoxes ? /*#__PURE__*/React__default['default'].createElement(StyledResetter, props) : props.children;
 };
 
 var useCssMode = (function (initialValue) {
@@ -1618,14 +1575,14 @@ var useCssMode = (function (initialValue) {
   return cssMode;
 });
 
-var Container = React__default.forwardRef(function (_ref, ref) {
+var Container = /*#__PURE__*/React__default['default'].forwardRef(function (_ref, ref) {
   var className = _ref.className,
       children = _ref.children,
       _ref$attrs = _ref.attrs,
       attrs = _ref$attrs === void 0 ? {} : _ref$attrs,
       _ref$tag = _ref.tag,
       tag = _ref$tag === void 0 ? 'div' : _ref$tag;
-  return React__default.createElement(tag, _objectSpread2({}, attrs, {
+  return /*#__PURE__*/React__default['default'].createElement(tag, _objectSpread2(_objectSpread2({}, attrs), {}, {
     className: className,
     ref: ref
   }), tag !== 'img' ? children : undefined);
@@ -1671,7 +1628,7 @@ function _templateObject$3() {
   return data;
 }
 var controlStyles = "\n  width: 100%;\n  z-index: 10000;\n  left: 0; \n  top: 0; \n  bottom: 0;\n  margin: 0;\n  grid-auto-rows: auto;\n  pointer-events: none;\n";
-var GridContainer = styled__default(Container)(_templateObject$3(), function (props) {
+var GridContainer = styled__default['default'](Container)(_templateObject$3(), function (props) {
   return props.colspan;
 }, function (props) {
   return props.colspan;
@@ -1688,7 +1645,7 @@ var GridContainer = styled__default(Container)(_templateObject$3(), function (pr
 }, function (props) {
   return props.isControl && controlStyles;
 });
-var FlexContainer = styled__default(Container)(_templateObject3$1(), function (props) {
+var FlexContainer = styled__default['default'](Container)(_templateObject3$1(), function (props) {
   return props.media.map(function (media, index) {
     return media(_templateObject4$1(), function (props) {
       return props.position[index];
@@ -1697,15 +1654,15 @@ var FlexContainer = styled__default(Container)(_templateObject3$1(), function (p
 }, function (props) {
   return props.isControl && controlStyles;
 });
-var StyledContainer = React__default.forwardRef(function (props, ref) {
+var StyledContainer = /*#__PURE__*/React__default['default'].forwardRef(function (props, ref) {
   switch (props.cssMode) {
     case 'flex':
-      return React__default.createElement(FlexContainer, _extends({}, props, {
+      return /*#__PURE__*/React__default['default'].createElement(FlexContainer, _extends({}, props, {
         ref: ref
       }));
 
     case 'grid':
-      return React__default.createElement(GridContainer, _extends({}, props, {
+      return /*#__PURE__*/React__default['default'].createElement(GridContainer, _extends({}, props, {
         ref: ref
       }));
   }
@@ -1790,7 +1747,7 @@ function getElements(children, breakpoints, colsTotal) {
     });
   }
 
-  return React__default.Children.map(children, function (_ref) {
+  return React__default['default'].Children.map(children, function (_ref) {
     var displayName = _ref.type.displayName,
         props = _ref.props;
     if (displayName !== 'Box') return null;
@@ -1952,7 +1909,7 @@ function _templateObject$4() {
 
   return data;
 }
-var GridContainer$1 = styled__default(Container)(_templateObject$4(), function (props) {
+var GridContainer$1 = styled__default['default'](Container)(_templateObject$4(), function (props) {
   return props.hasChildBoxes && 'display: grid;';
 }, function (props) {
   return props.hasChildBoxes && props.media.map(function (media, index) {
@@ -1974,26 +1931,26 @@ var GridContainer$1 = styled__default(Container)(_templateObject$4(), function (
 }, function (props) {
   return props.tag === 'img' && props.controlIsVisible && "\n    box-shadow: 0 0 999em ".concat(props.controlColor, " inset;\n  ");
 });
-var FlexContainer$1 = styled__default(Container)(_templateObject5(), function (props) {
+var FlexContainer$1 = styled__default['default'](Container)(_templateObject5(), function (props) {
   return props.media.map(function (media, index) {
     return media(_templateObject6(), props.cols[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.left[index], props.right[index], props.top[index], props.bottom[index]);
   });
 });
-var StyledContainer$1 = React__default.forwardRef(function (props, ref) {
+var StyledContainer$1 = /*#__PURE__*/React__default['default'].forwardRef(function (props, ref) {
   switch (props.cssMode) {
     case 'flex':
-      return React__default.createElement(FlexContainer$1, _extends({}, props, {
+      return /*#__PURE__*/React__default['default'].createElement(FlexContainer$1, _extends({}, props, {
         ref: ref
       }));
 
     case 'grid':
-      return React__default.createElement(GridContainer$1, _extends({}, props, {
+      return /*#__PURE__*/React__default['default'].createElement(GridContainer$1, _extends({}, props, {
         ref: ref
       }));
   }
 });
 
-var Box = React__default.forwardRef(function (_ref, ref) {
+var Box = /*#__PURE__*/React__default['default'].forwardRef(function (_ref, ref) {
   var className = _ref.className,
       cols = _ref.cols,
       alignX = _ref.alignX,
@@ -2151,7 +2108,7 @@ var Box = React__default.forwardRef(function (_ref, ref) {
   React.useEffect(function () {
     if (register) register(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return React__default.createElement(StyledContainer$1, {
+  return /*#__PURE__*/React__default['default'].createElement(StyledContainer$1, {
     cssMode: cssMode,
     breakpoints: breakpoints,
     className: cssMode === 'grid' ? classnames(['Box', className]) : 'Box',
@@ -2175,7 +2132,7 @@ var Box = React__default.forwardRef(function (_ref, ref) {
     style: cssMode === 'grid' && styleNormalized,
     ref: ref,
     attrs: attrs
-  }, React__default.createElement(Inner, {
+  }, /*#__PURE__*/React__default['default'].createElement(Inner, {
     cssMode: cssMode,
     media: media,
     alignX: alignXNormalized,
@@ -2183,9 +2140,9 @@ var Box = React__default.forwardRef(function (_ref, ref) {
     style: styleNormalized,
     hasChildBoxes: hasChildBoxes,
     className: classnames(['Box__Inner', className])
-  }, controlIsVisible && React__default.createElement(ControlBox, {
+  }, controlIsVisible && /*#__PURE__*/React__default['default'].createElement(ControlBox, {
     controlColor: controlColor
-  }), React__default.createElement(Resetter, {
+  }), /*#__PURE__*/React__default['default'].createElement(Resetter, {
     cssMode: cssMode,
     className: "Box__Resetter",
     hasChildBoxes: hasChildBoxesNormalized,
@@ -2195,7 +2152,7 @@ var Box = React__default.forwardRef(function (_ref, ref) {
     alignX: alignXNormalized,
     alignY: alignYNormalized,
     breakpoints: breakpoints
-  }, React__default.createElement(Context.Provider, {
+  }, /*#__PURE__*/React__default['default'].createElement(Context.Provider, {
     value: {
       breakpoints: breakpoints,
       gutterX: gutterX,
@@ -2212,8 +2169,8 @@ var Box = React__default.forwardRef(function (_ref, ref) {
         }
       }
     }
-  }, React__default.Children.toArray(children).map(function (child, index) {
-    return child.type && child.type.displayName === 'Box' ? React__default.cloneElement(child, {
+  }, React__default['default'].Children.toArray(children).map(function (child, index) {
+    return child.type && child.type.displayName === 'Box' ? /*#__PURE__*/React__default['default'].cloneElement(child, {
       rest: alignmentXRest && alignmentXRest[index]
     }) : child;
   })))));
@@ -2263,13 +2220,13 @@ function _templateObject$5() {
 }
 
 var ControlGrid = function ControlGrid(props) {
-  return React__default.createElement(Grid, _extends({}, props, {
+  return /*#__PURE__*/React__default['default'].createElement(Grid, _extends({}, props, {
     position: "absolute",
     className: "Grid--Control",
     alignY: "stretch",
     isControl: true
   }), _toConsumableArray(Array(props.colspan)).map(function (col, index) {
-    return React__default.createElement(Box, {
+    return /*#__PURE__*/React__default['default'].createElement(Box, {
       key: index,
       cols: 1,
       style: "\n            background-color: ".concat(props.controlColor, ";\n          ")
@@ -2277,12 +2234,12 @@ var ControlGrid = function ControlGrid(props) {
   }));
 };
 
-var StyledControlBox = styled__default('div')(_templateObject$5(), function (props) {
+var StyledControlBox = styled__default['default']('div')(_templateObject$5(), function (props) {
   return props.controlColor;
 });
 
 var ControlBox = function ControlBox(props) {
-  return React__default.createElement(StyledControlBox, props);
+  return /*#__PURE__*/React__default['default'].createElement(StyledControlBox, props);
 };
 
 var useCurrentBreakpoint = (function (breakpoints) {
@@ -2321,7 +2278,7 @@ var useCurrentBreakpoint = (function (breakpoints) {
   return currentBp;
 });
 
-var Grid = React__default.forwardRef(function (props, ref) {
+var Grid = /*#__PURE__*/React__default['default'].forwardRef(function (props, ref) {
   var breakpoints = props.breakpoints,
       left = props.left,
       right = props.right,
@@ -2430,7 +2387,7 @@ var Grid = React__default.forwardRef(function (props, ref) {
       alignXRaw: alignX
     });
   }, [alignX, alignXNormalized, breakpoints, children, colspan, cssMode]);
-  return React__default.createElement(StyledContainer, {
+  return /*#__PURE__*/React__default['default'].createElement(StyledContainer, {
     cssMode: cssModeNormalized,
     colspan: colspan,
     className: classnames(['Grid', "bp-".concat(currentBreakpoint.index), "bp-".concat(currentBreakpoint.value), className]),
@@ -2449,7 +2406,7 @@ var Grid = React__default.forwardRef(function (props, ref) {
     style: styleNormalized,
     ref: ref,
     isControl: isControl
-  }, control && controlIsVisible && React__default.createElement(ControlGrid, {
+  }, control && controlIsVisible && /*#__PURE__*/React__default['default'].createElement(ControlGrid, {
     cssMode: cssModeNormalized,
     colspan: colspan,
     breakpoints: breakpoints,
@@ -2460,7 +2417,7 @@ var Grid = React__default.forwardRef(function (props, ref) {
     top: top,
     bottom: bottom,
     controlColor: controlColor
-  }), React__default.createElement(Inner, {
+  }), /*#__PURE__*/React__default['default'].createElement(Inner, {
     cssMode: cssModeNormalized,
     className: "Grid__Inner",
     gutterX: gutterXNormalized,
@@ -2469,7 +2426,7 @@ var Grid = React__default.forwardRef(function (props, ref) {
     alignY: alignYNormalized,
     media: media,
     controlColor: controlColor
-  }, React__default.createElement(Resetter, {
+  }, /*#__PURE__*/React__default['default'].createElement(Resetter, {
     cssMode: cssModeNormalized,
     className: "Grid__Resetter",
     hasChildBoxes: true,
@@ -2478,7 +2435,7 @@ var Grid = React__default.forwardRef(function (props, ref) {
     alignX: alignXNormalized,
     alignY: alignYNormalized,
     media: media
-  }, React__default.createElement(Context.Provider, {
+  }, /*#__PURE__*/React__default['default'].createElement(Context.Provider, {
     value: {
       cssMode: cssModeNormalized,
       breakpoints: breakpointsNormalized,
@@ -2490,8 +2447,8 @@ var Grid = React__default.forwardRef(function (props, ref) {
       controlIsVisible: controlIsVisible,
       controlColor: controlColor
     }
-  }, alignmentXRest ? React__default.Children.map(children, function (child, index) {
-    return React__default.cloneElement(child, {
+  }, alignmentXRest ? React__default['default'].Children.map(children, function (child, index) {
+    return /*#__PURE__*/React__default['default'].cloneElement(child, {
       rest: alignmentXRest && alignmentXRest[index]
     });
   }) : children))));

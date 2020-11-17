@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Grid from '../grid'
-import Box from '../box'
+import Grid from '../Grid'
+import Box from '../Box'
 
 const ControlGrid = (props) => {
   return (
