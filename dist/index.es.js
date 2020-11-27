@@ -1852,7 +1852,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n  \n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n\n  ", "\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -1901,7 +1901,7 @@ function _templateObject$4() {
   return data;
 }
 var GridContainer$1 = styled(Container)(_templateObject$4(), function (props) {
-  return props.hasChildBoxes && 'display: grid;';
+  return props.hasChildBoxes && "display: grid;";
 }, function (props) {
   return props.hasChildBoxes && props.media.map(function (media, index) {
     return media(_templateObject2$3(), function (props) {
@@ -1912,15 +1912,15 @@ var GridContainer$1 = styled(Container)(_templateObject$4(), function (props) {
   });
 }, function (props) {
   return !props.hasChildBoxes && props.media.map(function (media, index) {
-    if (props.alignX[index] === 'flex-start' && props.alignY[index] === 'flex-start') return '';
+    if (props.alignX[index] === "flex-start" && props.alignY[index] === "flex-start") return "";
     return media(_templateObject3$2(), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: ".concat(props.alignX[index], ";"), props.alignY[index] && "align-items: ".concat(props.alignY[index], ";"));
   });
 }, function (props) {
   return props.media.map(function (media, index) {
-    return media(_templateObject4$2(), !props.colsNumber[index] ? 'display: none;' : '', props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.style[index]);
+    return media(_templateObject4$2(), !props.colsNumber[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.style[index]);
   });
 }, function (props) {
-  return props.tag === 'img' && props.controlIsVisible && "\n    box-shadow: 0 0 999em ".concat(props.controlColor, " inset;\n  ");
+  return props.tag === "img" && props.controlIsVisible && "\n    box-shadow: 0 0 999em ".concat(props.controlColor, " inset;\n  ");
 });
 var FlexContainer$1 = styled(Container)(_templateObject5(), function (props) {
   return props.media.map(function (media, index) {
@@ -1929,33 +1929,35 @@ var FlexContainer$1 = styled(Container)(_templateObject5(), function (props) {
 });
 var StyledContainer$1 = /*#__PURE__*/React.forwardRef(function (props, ref) {
   switch (props.cssMode) {
-    case 'flex':
+    case "flex":
       return /*#__PURE__*/React.createElement(FlexContainer$1, _extends({}, props, {
         ref: ref
       }));
 
-    case 'grid':
+    case "grid":
       return /*#__PURE__*/React.createElement(GridContainer$1, _extends({}, props, {
         ref: ref
       }));
   }
 });
 
-var Box = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
-  var className = _ref.className,
-      cols = _ref.cols,
-      alignX = _ref.alignX,
-      alignY = _ref.alignY,
-      children = _ref.children,
-      left = _ref.left,
-      right = _ref.right,
-      top = _ref.top,
-      bottom = _ref.bottom,
-      style = _ref.style,
-      hasChildBoxes = _ref.hasChildBoxes,
-      tag = _ref.tag,
-      attrs = _ref.attrs,
-      rest = _ref.rest;
+var Box = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var className = props.className,
+      cols = props.cols,
+      alignX = props.alignX,
+      alignY = props.alignY,
+      children = props.children,
+      left = props.left,
+      right = props.right,
+      top = props.top,
+      bottom = props.bottom,
+      style = props.style,
+      hasChildBoxes = props.hasChildBoxes,
+      tag = props.tag,
+      attrs = props.attrs,
+      rest = props.rest,
+      href = props.href,
+      onClick = props.onClick;
 
   var _useContext = useContext(Context),
       cssMode = _useContext.cssMode,
@@ -2102,7 +2104,7 @@ var Box = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
   return /*#__PURE__*/React.createElement(StyledContainer$1, {
     cssMode: cssMode,
     breakpoints: breakpoints,
-    className: cssMode === 'grid' ? classnames(['Box', className]) : 'Box',
+    className: cssMode === "grid" ? classnames(["Box", className]) : "Box",
     cols: colsPercent,
     rest: restPercent,
     colsNumber: colsNormalized,
@@ -2120,9 +2122,12 @@ var Box = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
     bottom: bottomPercent,
     controlIsVisible: controlIsVisible,
     controlColor: controlColor,
-    style: cssMode === 'grid' && styleNormalized,
+    style: cssMode === "grid" && styleNormalized,
     ref: ref,
-    attrs: attrs
+    attrs: _objectSpread2(_objectSpread2({}, attrs), {}, {
+      href: href,
+      onClick: onClick
+    })
   }, /*#__PURE__*/React.createElement(Inner, {
     cssMode: cssMode,
     media: media,
@@ -2130,7 +2135,7 @@ var Box = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
     alignY: alignYNormalized,
     style: styleNormalized,
     hasChildBoxes: hasChildBoxes,
-    className: classnames(['Box__Inner', className])
+    className: classnames(["Box__Inner", className])
   }, controlIsVisible && /*#__PURE__*/React.createElement(ControlBox, {
     controlColor: controlColor
   }), /*#__PURE__*/React.createElement(Resetter, {
@@ -2161,12 +2166,12 @@ var Box = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
       }
     }
   }, React.Children.toArray(children).map(function (child, index) {
-    return child.type && child.type.displayName === 'Box' ? /*#__PURE__*/React.cloneElement(child, {
+    return child.type && child.type.displayName === "Box" ? /*#__PURE__*/React.cloneElement(child, {
       rest: alignmentXRest && alignmentXRest[index]
     }) : child;
   })))));
 });
-Box.displayName = 'Box';
+Box.displayName = "Box";
 Box.propTypes = {
   cols: propTypes.oneOfType([propTypes.arrayOf(propTypes.number), propTypes.number]),
   left: propTypes.oneOfType([propTypes.arrayOf(propTypes.number), propTypes.number]),
@@ -2181,23 +2186,27 @@ Box.propTypes = {
   hasChildBoxes: propTypes.bool,
   className: propTypes.string,
   children: propTypes.node,
-  rest: propTypes.array
+  rest: propTypes.array,
+  href: propTypes.string,
+  onClick: propTypes.func
 };
 Box.defaultProps = {
-  className: '',
+  className: "",
   cols: undefined,
-  alignX: '',
-  alignY: '',
+  alignX: "",
+  alignY: "",
   children: null,
   left: 0,
   right: 0,
   top: 0,
   bottom: 0,
-  style: '',
+  style: "",
   hasChildBoxes: undefined,
-  tag: 'div',
+  tag: "div",
   attrs: {},
-  rest: [0]
+  rest: [0],
+  href: "",
+  onClick: null
 };
 
 function _templateObject$5() {
@@ -2291,7 +2300,7 @@ var Grid = /*#__PURE__*/React.forwardRef(function (props, ref) {
       attrs = props.attrs,
       isControl = props.isControl;
   var controlIsVisible = useControl(control);
-  var cssModeNormalized = useCssMode(cssMode || 'grid');
+  var cssModeNormalized = useCssMode(cssMode || "grid");
   var breakpointsNormalized = useMemo(function () {
     return breakpoints;
   }, [breakpoints]);
@@ -2381,7 +2390,7 @@ var Grid = /*#__PURE__*/React.forwardRef(function (props, ref) {
   return /*#__PURE__*/React.createElement(StyledContainer, {
     cssMode: cssModeNormalized,
     colspan: colspan,
-    className: classnames(['Grid', "bp-".concat(currentBreakpoint.index), "bp-".concat(currentBreakpoint.value), className]),
+    className: classnames(["Grid", "bp-".concat(currentBreakpoint.index), "bp-".concat(currentBreakpoint.value), className]),
     gutterX: gutterXNormalized,
     gutterY: gutterYNormalized,
     alignX: alignXNormalized,
@@ -2468,23 +2477,23 @@ Grid.propTypes = {
 };
 Grid.defaultProps = {
   breakpoints: [0, 432, 768, 1024, 1200, 1400],
-  left: '0',
-  right: '0',
-  top: '0',
-  bottom: '0',
-  gutterX: '0',
-  gutterY: '0',
-  alignX: '',
-  alignY: '',
+  left: "0",
+  right: "0",
+  top: "0",
+  bottom: "0",
+  gutterX: "0",
+  gutterY: "0",
+  alignX: "",
+  alignY: "",
   colspan: 1,
   control: false,
-  controlColor: 'rgba(0, 0, 0, 0.1)',
-  position: 'relative',
-  style: '',
-  className: '',
+  controlColor: "rgba(0, 0, 0, 0.1)",
+  position: "relative",
+  style: "",
+  className: "",
   children: null,
   cssMode: undefined,
-  tag: 'div',
+  tag: "div",
   attrs: {},
   isControl: false
 };
