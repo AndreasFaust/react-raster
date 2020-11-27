@@ -258,7 +258,7 @@ const Example = () => (
 | **style**         | String or Array of Strings | `''`        | Custom styles with styled-components.                                                                                                                 |
 | **hasChildBoxes** | Boolean                    | `undefined` | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.                                                                       |
 | **tag**           | String                     | `'div'`     | HTML-Tag                                                                                                                                              |
-| **attrs**         | Object                     | `{}`        | Attributes of the HTML-Tag                                                                                                                            |
+| **attrs**         | Object                     | `{}`        | Attributes added to the HTML-Tag                                                                                                                      |
 | **ref**           | React ref-object           | `null`      | Pass a ref.                                                                                                                                           |
 | **href**          | String                     | `''`        | Pass a `href`. Added for the `Link`-component of `nextJS`.                                                                                            |
 | **onClick**       | Function                   | `null`      | Pass a click handler.                                                                                                                                 |
@@ -267,7 +267,7 @@ const Example = () => (
 
 Every contribution is very much appreciated.
 
-**If you like react-raster, don't hesitate to star it on [GitHub](https://github.com/AndreasFaust/react-raster).**
+**If you like `react-raster`, don't hesitate to star it on [GitHub](https://github.com/AndreasFaust/react-raster).**
 
 ## License
 

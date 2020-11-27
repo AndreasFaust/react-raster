@@ -26,6 +26,7 @@ const Box = React.forwardRef((props, ref) => {
     right,
     top,
     bottom,
+    padding,
     style,
     hasChildBoxes,
     tag,
@@ -97,6 +98,10 @@ const Box = React.forwardRef((props, ref) => {
   const bottomNormalized = useMemo(
     () => normalizeProps({ prop: bottom, breakpoints }),
     [bottom, breakpoints]
+  );
+  const paddingNormalized = useMemo(
+    () => normalizeProps({ prop: padding, breakpoints }),
+    [padding, breakpoints]
   );
 
   const colsPercent = useMemo(
@@ -210,11 +215,16 @@ const Box = React.forwardRef((props, ref) => {
       right={rightPercent}
       top={topPercent}
       bottom={bottomPercent}
+      padding={paddingNormalized}
       controlIsVisible={controlIsVisible}
       controlColor={controlColor}
       style={cssMode === "grid" && styleNormalized}
       ref={ref}
-      attrs={{ ...attrs, href, onClick }}
+      attrs={{
+        ...attrs,
+        ...(href && href),
+        ...(onClick && onClick),
+      }}
     >
       <Inner
         cssMode={cssMode}
@@ -236,6 +246,7 @@ const Box = React.forwardRef((props, ref) => {
           alignX={alignXNormalized}
           alignY={alignYNormalized}
           breakpoints={breakpoints}
+          padding={paddingNormalized}
         >
           <Context.Provider
             value={{
@@ -292,6 +303,10 @@ Box.propTypes = {
     PropTypes.arrayOf(PropTypes.number),
     PropTypes.number,
   ]),
+  padding: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string,
+  ]),
   alignX: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   alignY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
@@ -315,6 +330,7 @@ Box.defaultProps = {
   right: 0,
   top: 0,
   bottom: 0,
+  padding: null,
   style: "",
   hasChildBoxes: undefined,
   tag: "div",

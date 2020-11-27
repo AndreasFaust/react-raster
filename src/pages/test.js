@@ -64,7 +64,7 @@ const IndexPage = () => {
           // background: black;
         }
       `}
-      // cssMode='flex'
+      // cssMode="flex"
       ref={gridRef}
     >
       <Box
@@ -101,7 +101,7 @@ const IndexPage = () => {
       <Box
         ref={boxRef}
         className="Box--2"
-        cols={[4]}
+        cols={[5]}
         left={[0]}
         style={`
           background: yellow;

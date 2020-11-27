@@ -45,6 +45,7 @@ const GridContainer = styled(Container)`
       margin-bottom: ${props.bottom[index]};
       align-content: ${props.alignY[index]};
       align-items: ${props.alignY[index]};
+      padding: ${props.padding[index]};
       ${props.style[index]}
     `;
     })}
