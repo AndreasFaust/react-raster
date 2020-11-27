@@ -31,7 +31,8 @@ const Box = React.forwardRef((props, ref) => {
     tag,
     attrs,
     rest,
-    ...furtherProps
+    href,
+    onClick,
   } = props;
 
   const {
@@ -213,7 +214,7 @@ const Box = React.forwardRef((props, ref) => {
       controlColor={controlColor}
       style={cssMode === "grid" && styleNormalized}
       ref={ref}
-      attrs={{ ...furtherProps, ...attrs }}
+      attrs={{ ...attrs, href, onClick }}
     >
       <Inner
         cssMode={cssMode}
@@ -300,6 +301,8 @@ Box.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   rest: PropTypes.array,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Box.defaultProps = {
@@ -317,6 +320,8 @@ Box.defaultProps = {
   tag: "div",
   attrs: {},
   rest: [0],
+  href: "",
+  onClick: null,
 };
 
 export default Box;

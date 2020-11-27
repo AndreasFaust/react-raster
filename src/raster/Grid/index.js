@@ -36,7 +36,6 @@ const Grid = React.forwardRef((props, ref) => {
     tag,
     attrs,
     isControl,
-    ...furtherProps
   } = props;
 
   const controlIsVisible = useControl(control);
@@ -138,7 +137,7 @@ const Grid = React.forwardRef((props, ref) => {
       bottom={bottomNormalized}
       position={positionNormalized}
       tag={tag}
-      attrs={{ ...furtherProps, ...attrs }}
+      attrs={attrs}
       style={styleNormalized}
       ref={ref}
       isControl={isControl}
