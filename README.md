@@ -255,6 +255,7 @@ const Example = () => (
 | **bottom**        | Number or Array of Numbers | `0`         | Bottom margin of the Box. Unit: Grid-columns.                                                                                                         |
 | **alignX**        | String or Array of Strings | `0`         | Horizontal Align of child elements. Possible values: `left`, `center`, `right`                                                                        |
 | **alignY**        | String or Array of Strings | `0`         | Vertical Align of child elements.                                                                                                                     |
+| **padding**       | String or Array of Strings | `null`      | Padding of the Box.                                                                                                                                   |
 | **style**         | String or Array of Strings | `''`        | Custom styles with styled-components.                                                                                                                 |
 | **hasChildBoxes** | Boolean                    | `undefined` | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.                                                                       |
 | **tag**           | String                     | `'div'`     | HTML-Tag                                                                                                                                              |
