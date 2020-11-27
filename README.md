@@ -272,4 +272,5 @@ Every contribution is very much appreciated.
 ## License
 
 Licensed under the MIT License, Copyright © 2019-present Andreas Faust.
+
 See [LICENSE](https://github.com/AndreasFaust/react-raster/license) for more information.
