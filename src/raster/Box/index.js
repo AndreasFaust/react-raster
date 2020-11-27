@@ -1,36 +1,39 @@
-import React, { useEffect, useContext, useMemo, useState } from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import React, { useEffect, useContext, useMemo, useState } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
-import getReset from '../utils/getReset'
-import normalizeProps from '../utils/normalizeProps'
-import getAlign from '../utils/getAlign'
-import getColsPercent from '../utils/getColsPercent'
-import getMarginsPercent from '../utils/getMarginsPercent'
-import Inner from '../utils/inner'
-import Resetter from '../utils/resetter'
-import getAlignmentXRest from '../utils/getAlignmentXRest'
+import getReset from "../utils/getReset";
+import normalizeProps from "../utils/normalizeProps";
+import getAlign from "../utils/getAlign";
+import getColsPercent from "../utils/getColsPercent";
+import getMarginsPercent from "../utils/getMarginsPercent";
+import Inner from "../utils/inner";
+import Resetter from "../utils/resetter";
+import getAlignmentXRest from "../utils/getAlignmentXRest";
 
-import Context from '../context'
-import StyledContainer from './container'
-import { ControlBox } from '../control'
+import Context from "../context";
+import StyledContainer from "./container";
+import { ControlBox } from "../control";
 
-const Box = React.forwardRef(({
-  className,
-  cols,
-  alignX,
-  alignY,
-  children,
-  left,
-  right,
-  top,
-  bottom,
-  style,
-  hasChildBoxes,
-  tag,
-  attrs,
-  rest
-}, ref) => {
+const Box = React.forwardRef((props, ref) => {
+  const {
+    className,
+    cols,
+    alignX,
+    alignY,
+    children,
+    left,
+    right,
+    top,
+    bottom,
+    style,
+    hasChildBoxes,
+    tag,
+    attrs,
+    rest,
+    ...furtherProps
+  } = props;
+
   const {
     cssMode,
     breakpoints,
@@ -42,54 +45,155 @@ const Box = React.forwardRef(({
     controlIsVisible,
     controlColor,
     register,
-  } = useContext(Context)
+  } = useContext(Context);
 
-  const [hasChildBoxesRegistered, setHasChildBoxes] = useState(undefined)
-  const hasChildBoxesNormalized = useMemo(() => getReset(hasChildBoxes, hasChildBoxesRegistered), [hasChildBoxes, hasChildBoxesRegistered])
+  const [hasChildBoxesRegistered, setHasChildBoxes] = useState(undefined);
+  const hasChildBoxesNormalized = useMemo(
+    () => getReset(hasChildBoxes, hasChildBoxesRegistered),
+    [hasChildBoxes, hasChildBoxesRegistered]
+  );
 
-  const alignXNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignX, breakpoints }), cssMode, hasChildBoxesNormalized), [alignX, breakpoints, cssMode, hasChildBoxesNormalized])
-  const alignYNormalized = useMemo(() => getAlign(normalizeProps({ prop: alignY, breakpoints }), cssMode, hasChildBoxesNormalized), [alignY, breakpoints, cssMode, hasChildBoxesNormalized])
+  const alignXNormalized = useMemo(
+    () =>
+      getAlign(
+        normalizeProps({ prop: alignX, breakpoints }),
+        cssMode,
+        hasChildBoxesNormalized
+      ),
+    [alignX, breakpoints, cssMode, hasChildBoxesNormalized]
+  );
+  const alignYNormalized = useMemo(
+    () =>
+      getAlign(
+        normalizeProps({ prop: alignY, breakpoints }),
+        cssMode,
+        hasChildBoxesNormalized
+      ),
+    [alignY, breakpoints, cssMode, hasChildBoxesNormalized]
+  );
 
-  const leftNormalized = useMemo(() => normalizeProps({ prop: left, breakpoints }), [left, breakpoints])
-  const rightNormalized = useMemo(() => normalizeProps({ prop: right, breakpoints }), [right, breakpoints])
-  const restNormalized = useMemo(() => normalizeProps({ prop: rest, breakpoints }), [rest, breakpoints])
-  const colsNormalized = useMemo(() => normalizeProps({ prop: cols, defaultProp: parent, breakpoints }), [cols, parent, breakpoints])
+  const leftNormalized = useMemo(
+    () => normalizeProps({ prop: left, breakpoints }),
+    [left, breakpoints]
+  );
+  const rightNormalized = useMemo(
+    () => normalizeProps({ prop: right, breakpoints }),
+    [right, breakpoints]
+  );
+  const restNormalized = useMemo(
+    () => normalizeProps({ prop: rest, breakpoints }),
+    [rest, breakpoints]
+  );
+  const colsNormalized = useMemo(
+    () => normalizeProps({ prop: cols, defaultProp: parent, breakpoints }),
+    [cols, parent, breakpoints]
+  );
 
-  const topNormalized = useMemo(() => normalizeProps({ prop: top, breakpoints }), [top, breakpoints])
-  const bottomNormalized = useMemo(() => normalizeProps({ prop: bottom, breakpoints }), [bottom, breakpoints])
+  const topNormalized = useMemo(
+    () => normalizeProps({ prop: top, breakpoints }),
+    [top, breakpoints]
+  );
+  const bottomNormalized = useMemo(
+    () => normalizeProps({ prop: bottom, breakpoints }),
+    [bottom, breakpoints]
+  );
 
-  const colsPercent = useMemo(() => getColsPercent({ cols: colsNormalized, left: leftNormalized, right: rightNormalized, parent, cssMode }), [colsNormalized, leftNormalized, rightNormalized, parent, cssMode])
+  const colsPercent = useMemo(
+    () =>
+      getColsPercent({
+        cols: colsNormalized,
+        left: leftNormalized,
+        right: rightNormalized,
+        parent,
+        cssMode,
+      }),
+    [colsNormalized, leftNormalized, rightNormalized, parent, cssMode]
+  );
 
-  const restPercent = useMemo(() => getMarginsPercent({ margin: restNormalized, cols: colsPercent, gutterX, parent, cssMode }), [restNormalized, colsPercent, gutterX, parent, cssMode])
-  const leftPercent = useMemo(() => getMarginsPercent({ margin: leftNormalized, cols: colsPercent, gutterX, parent, cssMode }), [leftNormalized, colsPercent, gutterX, parent, cssMode])
-  const rightPercent = useMemo(() => getMarginsPercent({ margin: rightNormalized, cols: colsPercent, gutterX, parent, cssMode }), [rightNormalized, colsPercent, gutterX, parent, cssMode])
-  const topPercent = useMemo(() => getMarginsPercent({ margin: topNormalized, cols: colsPercent, gutterX, parent, cssMode }), [topNormalized, colsPercent, gutterX, parent, cssMode])
-  const bottomPercent = useMemo(() => getMarginsPercent({ margin: bottomNormalized, cols: colsPercent, gutterX, parent, cssMode }), [bottomNormalized, colsPercent, gutterX, parent, cssMode])
+  const restPercent = useMemo(
+    () =>
+      getMarginsPercent({
+        margin: restNormalized,
+        cols: colsPercent,
+        gutterX,
+        parent,
+        cssMode,
+      }),
+    [restNormalized, colsPercent, gutterX, parent, cssMode]
+  );
+  const leftPercent = useMemo(
+    () =>
+      getMarginsPercent({
+        margin: leftNormalized,
+        cols: colsPercent,
+        gutterX,
+        parent,
+        cssMode,
+      }),
+    [leftNormalized, colsPercent, gutterX, parent, cssMode]
+  );
+  const rightPercent = useMemo(
+    () =>
+      getMarginsPercent({
+        margin: rightNormalized,
+        cols: colsPercent,
+        gutterX,
+        parent,
+        cssMode,
+      }),
+    [rightNormalized, colsPercent, gutterX, parent, cssMode]
+  );
+  const topPercent = useMemo(
+    () =>
+      getMarginsPercent({
+        margin: topNormalized,
+        cols: colsPercent,
+        gutterX,
+        parent,
+        cssMode,
+      }),
+    [topNormalized, colsPercent, gutterX, parent, cssMode]
+  );
+  const bottomPercent = useMemo(
+    () =>
+      getMarginsPercent({
+        margin: bottomNormalized,
+        cols: colsPercent,
+        gutterX,
+        parent,
+        cssMode,
+      }),
+    [bottomNormalized, colsPercent, gutterX, parent, cssMode]
+  );
 
-  const styleNormalized = useMemo(() => normalizeProps({ prop: style, breakpoints }), [style, breakpoints])
+  const styleNormalized = useMemo(
+    () => normalizeProps({ prop: style, breakpoints }),
+    [style, breakpoints]
+  );
 
-  const alignmentXRest = useMemo(() => getAlignmentXRest({
-    children,
-    breakpoints,
-    cssMode,
-    colsTotal: colsNormalized,
-    alignX: alignXNormalized,
-    alignXRaw: alignX,
-  }), [alignX, alignXNormalized, breakpoints, children, colsNormalized, cssMode])
+  const alignmentXRest = useMemo(
+    () =>
+      getAlignmentXRest({
+        children,
+        breakpoints,
+        cssMode,
+        colsTotal: colsNormalized,
+        alignX: alignXNormalized,
+        alignXRaw: alignX,
+      }),
+    [alignX, alignXNormalized, breakpoints, children, colsNormalized, cssMode]
+  );
 
   useEffect(() => {
-    if (register) register()
+    if (register) register();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <StyledContainer
       cssMode={cssMode}
       breakpoints={breakpoints}
-      className={cssMode === 'grid'
-        ? classNames(['Box', className])
-        : 'Box'
-      }
+      className={cssMode === "grid" ? classNames(["Box", className]) : "Box"}
       cols={colsPercent}
       rest={restPercent}
       colsNumber={colsNormalized}
@@ -107,9 +211,9 @@ const Box = React.forwardRef(({
       bottom={bottomPercent}
       controlIsVisible={controlIsVisible}
       controlColor={controlColor}
-      style={cssMode === 'grid' && styleNormalized}
+      style={cssMode === "grid" && styleNormalized}
       ref={ref}
-      attrs={attrs}
+      attrs={{ ...furtherProps, ...attrs }}
     >
       <Inner
         cssMode={cssMode}
@@ -118,12 +222,12 @@ const Box = React.forwardRef(({
         alignY={alignYNormalized}
         style={styleNormalized}
         hasChildBoxes={hasChildBoxes}
-        className={classNames(['Box__Inner', className])}
+        className={classNames(["Box__Inner", className])}
       >
         {controlIsVisible && <ControlBox controlColor={controlColor} />}
         <Resetter
           cssMode={cssMode}
-          className='Box__Resetter'
+          className="Box__Resetter"
           hasChildBoxes={hasChildBoxesNormalized}
           media={media}
           gutterX={gutterX}
@@ -145,35 +249,48 @@ const Box = React.forwardRef(({
               cssMode,
               register: () => {
                 if (!hasChildBoxesRegistered) {
-                  setHasChildBoxes(true)
+                  setHasChildBoxes(true);
                 }
-              }
+              },
             }}
           >
-            {
-              React.Children.toArray(children).map((child, index) => {
-                return child.type && child.type.displayName === 'Box'
-                  ? React.cloneElement(child, {
-                    rest: alignmentXRest && alignmentXRest[index]
+            {React.Children.toArray(children).map((child, index) => {
+              return child.type && child.type.displayName === "Box"
+                ? React.cloneElement(child, {
+                    rest: alignmentXRest && alignmentXRest[index],
                   })
-                  : child
-              })
-            }
+                : child;
+            })}
           </Context.Provider>
         </Resetter>
-      </Inner >
-    </StyledContainer >
-  )
-})
+      </Inner>
+    </StyledContainer>
+  );
+});
 
-Box.displayName = 'Box'
+Box.displayName = "Box";
 
 Box.propTypes = {
-  cols: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  left: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  right: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  top: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-  bottom: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
+  cols: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.number,
+  ]),
+  left: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.number,
+  ]),
+  right: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.number,
+  ]),
+  top: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.number,
+  ]),
+  bottom: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.number,
+  ]),
   alignX: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   alignY: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
@@ -183,24 +300,24 @@ Box.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   rest: PropTypes.array,
-}
+};
 
 Box.defaultProps = {
-  className: '',
+  className: "",
   cols: undefined,
-  alignX: '',
-  alignY: '',
+  alignX: "",
+  alignY: "",
   children: null,
   left: 0,
   right: 0,
   top: 0,
   bottom: 0,
-  style: '',
+  style: "",
   hasChildBoxes: undefined,
-  tag: 'div',
+  tag: "div",
   attrs: {},
-  rest: [0]
-}
+  rest: [0],
+};
 
-export default Box
-export { Box }
+export default Box;
+export { Box };

@@ -1,13 +1,16 @@
-import React, { useEffect, useRef } from 'react'
-import { Link } from 'gatsby'
-import { Grid, Box } from '../raster'
+import React, { useEffect, useRef } from "react";
+import { Link } from "gatsby";
+import { Grid, Box } from "../raster";
 
 const ImageBox = () => (
   <Box
     // top={0.5}
     // left={0.5}
     cols={2}
-    alignY={'center'}
+    alignY={"center"}
+    onClick={() => {
+      console.log("HALLO!");
+    }}
     style={`
       background: pink;
       height: 300px;
@@ -26,33 +29,33 @@ const ImageBox = () => (
     //     width: 100% !important;
     //     height: auto !important;
 
-  //   }
-  // `}
+    //   }
+    // `}
   >
     {/* <img src={image2} alt='Sample Image' /> */}
   </Box>
-)
+);
 
 const IndexPage = () => {
-  const boxRef = useRef()
-  const gridRef = useRef()
+  const boxRef = useRef();
+  const gridRef = useRef();
   useEffect(() => {
-    console.log(boxRef.current)
-    console.log(gridRef.current)
-  }, [])
+    console.log(boxRef.current);
+    console.log(gridRef.current);
+  }, []);
   return (
     <Grid
-      tag='section'
+      tag="section"
       breakpoints={[0, 500, 768, 1024, 1200, 1400]}
-      left={'1.5vw'}
-      right={'3vw'}
-      top={'10vw'}
-      bottom={'20vw'}
-      gutterX={'1.5vw'}
-      gutterY={'3vw'}
+      left={"1.5vw"}
+      right={"3vw"}
+      top={"10vw"}
+      bottom={"20vw"}
+      gutterX={"1.5vw"}
+      gutterY={"3vw"}
       colspan={12}
-      alignX={'center'}
-      alignY={'center'}
+      alignX={"center"}
+      alignY={"center"}
       control
       // styleOuter={`width: 80%;`}
       style={`
@@ -66,11 +69,14 @@ const IndexPage = () => {
     >
       <Box
         ref={boxRef}
-        className='Box--1'
+        className="Box--1"
         cols={[4]}
         left={[2]}
         right={[1]}
-        alignY='center'
+        alignY="center"
+        onClick={() => {
+          console.log("HALLO!");
+        }}
         style={`
         background: yellow;
         height: 400px;
@@ -82,10 +88,10 @@ const IndexPage = () => {
       >
         <ImageBox />
         <Box
-          className='Box--3'
+          className="Box--3"
           cols={[1]}
           left={[1]}
-          alignY='center'
+          alignY="center"
           style={`
             background: green;
             height: 150px;
@@ -94,7 +100,7 @@ const IndexPage = () => {
       </Box>
       <Box
         ref={boxRef}
-        className='Box--2'
+        className="Box--2"
         cols={[4]}
         left={[0]}
         style={`
@@ -164,7 +170,6 @@ const IndexPage = () => {
     </Box>
   </Box> */}
     </Grid>
-
-  )
-}
-export default IndexPage
+  );
+};
+export default IndexPage;
