@@ -7,7 +7,7 @@
 - Custom Breakpoints and Colspan
 - Free nesting of Boxes and Grids
 - Custom styles for every element at every breakpoint
-- Works in all browsers.
+- Works in all browsers
 - Lightweight and performant architecture
 - Visual control via ESC-key
 - Ready for server-side-rendering
@@ -16,7 +16,7 @@
 
 ## Install
 
-Install all dependencies via Yarn or NPM.
+Install all dependencies via `yarn` or `npm`.
 
 ```bash
 yarn add react-raster styled-components react react-dom
@@ -24,9 +24,10 @@ yarn add react-raster styled-components react react-dom
 
 ## Usage
 
-react-raster has only two components: Grid and Box.
-**Grid** is the wrapper, that defines the grid’s basics like gutter, breakpoints and other things.
-**Box** is the element, that gets positioned inside the Grid. Boxes and Grids can be freely nested inside each other.
+- react-raster has only two components: Grid and Box.
+- **Grid** is the wrapper, that defines the grid’s basics like gutter, breakpoints and other things.
+- **Box** is the element, that gets positioned inside the Grid.
+- Boxes and Grids can be freely nested inside each other.
 
 ```jsx
 <Grid
@@ -86,6 +87,32 @@ Either a Box/Grid contains Boxes or regular elements/components.
 
 `cssMode` is the prop, that defines which CSS-layout-engine `react-raster` should use.
 `grid` uses Grid-Layout, `flex` the older Flexbox. `grid` is default, but if the user’s browser does not support it, it automatically falls back to `flex`.
+
+## Combine Box with the `Link`-component of NextJS
+
+The best way to combine links in `NextJS` with `react-raster` is to set the `passHref`-prop on your `Link`-Component. This will automatically infuse a `href`- and `onClick`-prop to its wrapped `Box`, which also needs to have set `tag="a"`, to be an `anchor`-tag. So there is no need for an extra anchor-tag, which might complicate your data-structure!
+
+```jsx
+import React from "react";
+import { Grid, Box } from "react-raster";
+import Link from "next/link";
+
+const BoxLink = (props) => (
+  <Link href={props.href} passHref>
+    <Box tag="a" {...props}>
+      {props.children}
+    </Box>
+  </Link>
+);
+
+const ExampleTeaser = () => (
+  <BoxLink href="/article" cols={[6, 6, 3]}>
+    <img src="/image" alt="Image">
+    <h2>I am a Teaser!</h2>
+    <p>Click me, to read an interesting article.</p>
+  </BoxLink>
+);
+```
 
 ## Advanced Example
 
