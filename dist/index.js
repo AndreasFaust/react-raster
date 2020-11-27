@@ -1518,7 +1518,7 @@ var Inner = function Inner(_ref2) {
 };
 
 function _templateObject2$1() {
-  var data = _taggedTemplateLiteral(["\n      width: calc(100% + (", "));      \n      margin-left: calc(-", " / 2);\n      margin-right: calc(-", " / 2);\n      margin-top: calc(-", " / 2);\n      margin-bottom: calc(-", " / 2);\n\n      align-items: ", ";\n      justify-content: ", ";    \n    "]);
+  var data = _taggedTemplateLiteral(["\n      width: calc(100% + (", "));      \n      margin-left: calc(-", " / 2);\n      margin-right: calc(-", " / 2);\n      margin-top: calc(-", " / 2);\n      margin-bottom: calc(-", " / 2);\n\n      align-items: ", ";\n      justify-content: ", ";    \n      \n      padding: ", ";\n    "]);
 
   _templateObject2$1 = function _templateObject2() {
     return data;
@@ -1528,7 +1528,7 @@ function _templateObject2$1() {
 }
 
 function _templateObject$2() {
-  var data = _taggedTemplateLiteral(["  \n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  ", "\n"]);
 
   _templateObject$2 = function _templateObject() {
     return data;
@@ -1548,12 +1548,12 @@ var ResetterTag = function ResetterTag(_ref) {
 
 var StyledResetter = styled__default['default'](ResetterTag)(_templateObject$2(), function (props) {
   return props.media.map(function (media, index) {
-    return media(_templateObject2$1(), props.gutterX[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.alignY[index], props.alignX[index]);
+    return media(_templateObject2$1(), props.gutterX[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.alignY[index], props.alignX[index], props.padding && props.padding[index]);
   });
 });
 
 var Resetter = function Resetter(props) {
-  if (props.cssMode === 'grid') return props.children;
+  if (props.cssMode === "grid") return props.children;
   return props.hasChildBoxes ? /*#__PURE__*/React__default['default'].createElement(StyledResetter, props) : props.children;
 };
 
@@ -1871,7 +1871,7 @@ function _templateObject5() {
 }
 
 function _templateObject4$2() {
-  var data = _taggedTemplateLiteral(["\n      ", "\n      position: relative;\n      grid-column: auto / span ", ";\n      left: ", ";\n      margin-left: ", ";\n      margin-right: ", ";\n      margin-top: ", ";\n      margin-bottom: ", ";\n      align-content: ", ";\n      align-items: ", ";\n      ", "\n    "]);
+  var data = _taggedTemplateLiteral(["\n      ", "\n      position: relative;\n      grid-column: auto / span ", ";\n      left: ", ";\n      margin-left: ", ";\n      margin-right: ", ";\n      margin-top: ", ";\n      margin-bottom: ", ";\n      align-content: ", ";\n      align-items: ", ";\n      padding: ", ";\n      ", "\n    "]);
 
   _templateObject4$2 = function _templateObject4() {
     return data;
@@ -1926,7 +1926,7 @@ var GridContainer$1 = styled__default['default'](Container)(_templateObject$4(),
   });
 }, function (props) {
   return props.media.map(function (media, index) {
-    return media(_templateObject4$2(), !props.colsNumber[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.style[index]);
+    return media(_templateObject4$2(), !props.colsNumber[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.padding[index], props.style[index]);
   });
 }, function (props) {
   return props.tag === "img" && props.controlIsVisible && "\n    box-shadow: 0 0 999em ".concat(props.controlColor, " inset;\n  ");
@@ -1960,6 +1960,7 @@ var Box = /*#__PURE__*/React__default['default'].forwardRef(function (props, ref
       right = props.right,
       top = props.top,
       bottom = props.bottom,
+      padding = props.padding,
       style = props.style,
       hasChildBoxes = props.hasChildBoxes,
       tag = props.tag,
@@ -2037,6 +2038,12 @@ var Box = /*#__PURE__*/React__default['default'].forwardRef(function (props, ref
       breakpoints: breakpoints
     });
   }, [bottom, breakpoints]);
+  var paddingNormalized = React.useMemo(function () {
+    return normalizeProps({
+      prop: padding,
+      breakpoints: breakpoints
+    });
+  }, [padding, breakpoints]);
   var colsPercent = React.useMemo(function () {
     return getColsPercent({
       cols: colsNormalized,
@@ -2129,14 +2136,12 @@ var Box = /*#__PURE__*/React__default['default'].forwardRef(function (props, ref
     right: rightPercent,
     top: topPercent,
     bottom: bottomPercent,
+    padding: paddingNormalized,
     controlIsVisible: controlIsVisible,
     controlColor: controlColor,
     style: cssMode === "grid" && styleNormalized,
     ref: ref,
-    attrs: _objectSpread2(_objectSpread2({}, attrs), {}, {
-      href: href,
-      onClick: onClick
-    })
+    attrs: _objectSpread2(_objectSpread2(_objectSpread2({}, attrs), href && href), onClick && onClick)
   }, /*#__PURE__*/React__default['default'].createElement(Inner, {
     cssMode: cssMode,
     media: media,
@@ -2156,7 +2161,8 @@ var Box = /*#__PURE__*/React__default['default'].forwardRef(function (props, ref
     gutterY: gutterY,
     alignX: alignXNormalized,
     alignY: alignYNormalized,
-    breakpoints: breakpoints
+    breakpoints: breakpoints,
+    padding: paddingNormalized
   }, /*#__PURE__*/React__default['default'].createElement(Context.Provider, {
     value: {
       breakpoints: breakpoints,
@@ -2187,6 +2193,7 @@ Box.propTypes = {
   right: propTypes.oneOfType([propTypes.arrayOf(propTypes.number), propTypes.number]),
   top: propTypes.oneOfType([propTypes.arrayOf(propTypes.number), propTypes.number]),
   bottom: propTypes.oneOfType([propTypes.arrayOf(propTypes.number), propTypes.number]),
+  padding: propTypes.oneOfType([propTypes.arrayOf(propTypes.string), propTypes.string]),
   alignX: propTypes.oneOfType([propTypes.array, propTypes.string]),
   alignY: propTypes.oneOfType([propTypes.array, propTypes.string]),
   style: propTypes.oneOfType([propTypes.array, propTypes.string]),
@@ -2209,6 +2216,7 @@ Box.defaultProps = {
   right: 0,
   top: 0,
   bottom: 0,
+  padding: null,
   style: "",
   hasChildBoxes: undefined,
   tag: "div",

@@ -1,3 +1,18 @@
+### 5.2.0 (2020-11-27)
+
+##### Documentation Changes
+
+*  add box-padding (154c4f0e)
+
+##### New Features
+
+*  add padding-prop to box (651f861b)
+
+##### Other Changes
+
+*  fix license-link (040a4ce3)
+*  fix license-link (10af1640)
+
 #### 5.1.1 (2020-11-27)
 
 ##### Documentation Changes
