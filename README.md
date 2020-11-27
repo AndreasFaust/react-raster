@@ -107,7 +107,7 @@ const BoxLink = (props) => (
 
 const ExampleTeaser = () => (
   <BoxLink href="/article" cols={[6, 6, 3]}>
-    <img src="/image" alt="Image">
+    <img src="/image" alt="Image" />
     <h2>I am a Teaser!</h2>
     <p>Click me, to read an interesting article.</p>
   </BoxLink>
@@ -271,4 +271,5 @@ Every contribution is very much appreciated.
 
 ## License
 
-MIT © [AndreasFaust](https://github.com/AndreasFaust)
+Licensed under the MIT License, Copyright © 2019-present Andreas Faust.
+See [LICENSE](https://github.com/AndreasFaust/react-raster/license) for more information.
