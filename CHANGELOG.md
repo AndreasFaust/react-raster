@@ -1,3 +1,9 @@
+#### 5.1.1 (2020-11-27)
+
+##### Documentation Changes
+
+*  add next-link example (9137ae6c)
+
 ### 5.1.0 (2020-11-27)
 
 ##### New Features
