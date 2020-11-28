@@ -1,3 +1,9 @@
+#### 6.0.2 (2020-11-28)
+
+##### Documentation Changes
+
+*  fix gutter-default-value (233bb380)
+
 #### 6.0.1 (2020-11-28)
 
 ##### Bug Fixes
