@@ -2,7 +2,7 @@
 
 **react-raster** is an advanced grid-system based on **styled-components**. It is highly customizable while being easy to use. Regardless, if your grid is simple or complex: react-raster simplifies layouting. 😽
 
-[![NPM](https://img.shields.io/npm/v/react-raster.svg)](https://www.npmjs.com/package/react-raster) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-raster.svg)](https://www.npmjs.com/package/react-raster) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 - Custom Breakpoints and Colspan
 - Free nesting of Boxes and Grids
@@ -93,13 +93,13 @@ Either a Box/Grid contains Boxes or regular elements/components.
 
 `NextJS` is great. To use it alongside `styled-components` you need to:
 
-1. Install `babel-plugin-styled-components`
+### Install `babel-plugin-styled-components`
 
 ```bash
 yarn add -D babel-plugin-styled-components
 ```
 
-2. Create `.babelrc` file in your `root`-directory
+### Create `.babelrc` file in your `root`-directory
 
 ```json
 {
@@ -108,7 +108,7 @@ yarn add -D babel-plugin-styled-components
 }
 ```
 
-3. Add `_document.jsx` to your `pages`-directory
+### Add `_document.jsx` to your `pages`-directory
 
 ```jsx
 import Document from "next/document";
