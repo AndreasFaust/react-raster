@@ -1,3 +1,9 @@
+#### 6.0.3 (2020-11-28)
+
+##### Other Changes
+
+*  add tags (07c2fe9e)
+
 #### 6.0.2 (2020-11-28)
 
 ##### Documentation Changes
