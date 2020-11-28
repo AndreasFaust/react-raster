@@ -15,6 +15,8 @@
 
 ✍️ [See the Example!](https://andreasfaust.github.io/react-raster)
 
+---
+
 ## Install
 
 Install all dependencies via `yarn` or `npm`.
@@ -22,6 +24,8 @@ Install all dependencies via `yarn` or `npm`.
 ```bash
 yarn add react-raster styled-components react react-dom
 ```
+
+---
 
 ## Usage
 
@@ -84,10 +88,14 @@ Look up the props-specification for `Grid` and `Box` below.
 Avoid mixing Boxes with other components inside Grids or Boxes.
 Either a Box/Grid contains Boxes or regular elements/components.
 
+---
+
 ## What about cssMode `grid` and `flex`?
 
 `cssMode` is the prop, that defines which CSS-layout-engine `react-raster` should use.
 `grid` uses Grid-Layout, `flex` the older Flexbox. `grid` is default, but if the user’s browser does not support it, it automatically falls back to `flex`.
+
+---
 
 ## Use `Styled-Components` with `NextJS`
 
@@ -143,6 +151,8 @@ export default class MyDocument extends Document {
 }
 ```
 
+---
+
 ## Combine Box with the `Link`-component of NextJS
 
 The best way to combine links in `NextJS` with `react-raster` is to set the `passHref`-prop on your `Link`-Component. This will automatically infuse a `href`- and `onClick`-prop to its wrapped `Box`, which also needs to have set `tag="a"`, to be an `anchor`-tag. So there is no need for an extra anchor-tag, which might complicate your data-structure!
@@ -168,6 +178,8 @@ const ExampleTeaser = () => (
   </BoxLink>
 );
 ```
+
+---
 
 ## Advanced Example
 
@@ -275,6 +287,8 @@ const Example = () => (
 );
 ```
 
+---
+
 ## Grid
 
 | **Name**         | **Type**                   | **Default**                       | **Description**                                                                      |
@@ -299,6 +313,8 @@ const Example = () => (
 | **attrs**        | Object                     | `{}`                              | Attributes of the HTML-Tag                                                           |
 | **ref**          | React ref-object           | `null`                            | Pass a ref.                                                                          |
 
+---
+
 ## Box
 
 | **Name**          | **Type**                   | **Default** | **Description**                                                                                                                                       |
@@ -319,11 +335,15 @@ const Example = () => (
 | **href**          | String                     | `''`        | Pass a `href`. Added for the `Link`-component of `nextJS`.                                                                                            |
 | **onClick**       | Function                   | `null`      | Pass a click handler.                                                                                                                                 |
 
+---
+
 ## Contributing
 
 Every contribution is very much appreciated.
 
 **If you like `react-raster`, don't hesitate to star it on [GitHub](https://github.com/AndreasFaust/react-raster).**
+
+---
 
 ## License
 
