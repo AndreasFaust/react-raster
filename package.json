@@ -62,7 +62,9 @@
     "Layout",
     "Styled Components",
     "Server Side Rendering",
-    "Raster"
+    "Raster",
+    "Next JS",
+    "NextJS"
   ],
   "scripts": {
     "dev": "next dev",
