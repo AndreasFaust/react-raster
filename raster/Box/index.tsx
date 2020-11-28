@@ -11,7 +11,7 @@ import Resetter from "../utils/resetter";
 import getAlignmentXRest from "../utils/getAlignmentXRest";
 
 import Context from "../context";
-import StyledContainer from "./container";
+import StyledBox from "./StyledBox";
 import { ControlBox } from "../Control";
 import Props from "./props";
 
@@ -202,7 +202,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
     }, []);
 
     return (
-      <StyledContainer
+      <StyledBox
         cssMode={cssMode}
         breakpoints={breakpoints}
         className={cssMode === "grid" ? classNames(["Box", className]) : "Box"}
@@ -239,49 +239,51 @@ const Box = React.forwardRef<HTMLElement, Props>(
           hasChildBoxes={hasChildBoxes}
           className={classNames(["Box__Inner", className])}
         >
-          {controlIsVisible && <ControlBox controlColor={controlColor} />}
-          <Resetter
-            cssMode={cssMode}
-            className="Box__Resetter"
-            hasChildBoxes={hasChildBoxesNormalized}
-            media={media}
-            gutterX={gutterX}
-            gutterY={gutterY}
-            alignX={alignXNormalized}
-            alignY={alignYNormalized}
-            padding={paddingNormalized}
-          >
-            <Context.Provider
-              value={{
-                breakpoints,
-                gutterX,
-                gutterY,
-                colspan,
-                media,
-                parent: colsNormalized,
-                controlIsVisible,
-                controlColor,
-                cssMode,
-                register: () => {
-                  if (!hasChildBoxesRegistered) {
-                    setHasChildBoxes(true);
-                  }
-                },
-              }}
+          <>
+            {controlIsVisible && <ControlBox controlColor={controlColor} />}
+            <Resetter
+              cssMode={cssMode}
+              className="Box__Resetter"
+              hasChildBoxes={hasChildBoxesNormalized}
+              media={media}
+              gutterX={gutterX}
+              gutterY={gutterY}
+              alignX={alignXNormalized}
+              alignY={alignYNormalized}
+              padding={paddingNormalized}
             >
-              {React.Children.toArray(children).map(
-                (child: React.ReactNode, index) => {
-                  return React.isValidElement(child)
-                    ? React.cloneElement(child as React.ReactElement<any>, {
-                        rest: alignmentXRest && alignmentXRest[index],
-                      })
-                    : child;
-                }
-              )}
-            </Context.Provider>
-          </Resetter>
+              <Context.Provider
+                value={{
+                  breakpoints,
+                  gutterX,
+                  gutterY,
+                  colspan,
+                  media,
+                  parent: colsNormalized,
+                  controlIsVisible,
+                  controlColor,
+                  cssMode,
+                  register: () => {
+                    if (!hasChildBoxesRegistered) {
+                      setHasChildBoxes(true);
+                    }
+                  },
+                }}
+              >
+                {React.Children.toArray(children).map(
+                  (child: React.ReactNode, index) => {
+                    return React.isValidElement(child)
+                      ? React.cloneElement(child as React.ReactElement<any>, {
+                          rest: alignmentXRest && alignmentXRest[index],
+                        })
+                      : child;
+                  }
+                )}
+              </Context.Provider>
+            </Resetter>
+          </>
         </Inner>
-      </StyledContainer>
+      </StyledBox>
     );
   }
 );

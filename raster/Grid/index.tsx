@@ -8,7 +8,7 @@ import useControl from "../utils/useControl";
 import Inner from "../utils/inner";
 import Resetter from "../utils/resetter";
 import useCssMode from "../utils/useCssMode";
-import StyledContainer from "./container";
+import StyledGrid from "./StyledGrid";
 import { ControlGrid } from "../Control";
 import useCurrentBreakpoint from "../utils/useCurrentBreakpoint";
 import getAlignmentXRest from "../utils/getAlignmentXRest";
@@ -22,8 +22,8 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       right = "0",
       top = "0",
       bottom = "0",
-      gutterX = "0",
-      gutterY = "0",
+      gutterX = "0px",
+      gutterY = "0px",
       alignX = "",
       alignY = "",
       colspan = 1,
@@ -129,7 +129,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     );
 
     return (
-      <StyledContainer
+      <StyledGrid
         cssMode={cssModeNormalized}
         colspan={colspan}
         className={classNames([
@@ -159,13 +159,14 @@ const Grid = React.forwardRef<HTMLElement, Props>(
             cssMode={cssModeNormalized}
             colspan={colspan}
             breakpoints={breakpoints}
-            gutterX={gutterX}
-            gutterY={gutterY}
-            left={left}
-            right={right}
-            top={top}
-            bottom={bottom}
+            gutterX={gutterXNormalized}
+            gutterY={gutterYNormalized}
+            left={leftNormalized}
+            right={rightNormalized}
+            top={topNormalized}
+            bottom={bottomNormalized}
             controlColor={controlColor}
+            media={media}
           />
         )}
         <Inner
@@ -212,7 +213,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
             </Context.Provider>
           </Resetter>
         </Inner>
-      </StyledContainer>
+      </StyledGrid>
     );
   }
 );

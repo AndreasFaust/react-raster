@@ -41,7 +41,6 @@ const GridLayout = styled(Container)<Props>`
   grid-auto-columns: ${(props) => props.colspan}fr;
   grid-auto-rows: min-content;
   box-sizing: border-box;
-
   ${(props: Props) =>
     props.media.map((media, index) => {
       return media`
@@ -52,9 +51,14 @@ const GridLayout = styled(Container)<Props>`
       padding-bottom: ${props.bottom[index]};
       grid-column-gap: ${props.gutterX[index]};
       grid-row-gap: ${props.gutterY[index]};
-      ${props.style[index]}
       align-content: ${(props: Props) => props.alignY[index]};
       align-items: ${(props: Props) => props.alignY[index]};
+      ${props.style[index]}
+      ${
+        props.isControl && props.gutterX[index] === "0px"
+          ? "grid-column-gap: 1px;"
+          : ""
+      }
     `;
     })}
   ${(props) => props.isControl && controlStyles}
@@ -79,7 +83,7 @@ const FlexBox = styled(Container)<Props>`
   ${(props) => props.isControl && controlStyles}
 `;
 
-const GridContainer = React.forwardRef<HTMLElement, Props>((props, ref) => {
+const StyledGrid = React.forwardRef<HTMLElement, Props>((props, ref) => {
   switch (props.cssMode) {
     case "flex":
       return <FlexBox {...props} ref={ref} />;
@@ -88,4 +92,4 @@ const GridContainer = React.forwardRef<HTMLElement, Props>((props, ref) => {
   }
 });
 
-export default GridContainer;
+export default StyledGrid;

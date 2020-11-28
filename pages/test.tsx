@@ -44,8 +44,8 @@ const Testpage: NextPage<Props> = (props) => {
       right={"3vw"}
       top={"10vw"}
       bottom={"20vw"}
-      gutterX={"1.5vw"}
-      gutterY={"3vw"}
+      gutterX={["0px", "0px", "1.5vw"]}
+      // gutterY={"3vw"}
       colspan={12}
       alignX={"center"}
       alignY={"center"}
@@ -85,8 +85,9 @@ const Testpage: NextPage<Props> = (props) => {
         style={`
           background: yellow;
           height: 400px;
+          border: 2px solid red;
           
-          .bp-768 & {
+          .bp-768 && {
             background: black;
           }
         `}

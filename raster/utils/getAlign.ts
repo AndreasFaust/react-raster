@@ -4,7 +4,11 @@ interface Props {
   hasChildBoxes: boolean;
 }
 
-export default ({ align, cssMode, hasChildBoxes }: Props): string[] => {
+export default function getAlign({
+  align,
+  cssMode,
+  hasChildBoxes,
+}: Props): string[] {
   return cssMode === "grid" && hasChildBoxes
     ? align.map((al) => {
         switch (al) {
@@ -34,4 +38,4 @@ export default ({ align, cssMode, hasChildBoxes }: Props): string[] => {
             return al;
         }
       });
-};
+}

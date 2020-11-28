@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Grid from "../Grid";
 import Box from "../Box";
@@ -15,6 +15,7 @@ interface ControlGridProps {
   top: string | string[];
   bottom: string | string[];
   controlColor: string;
+  media: any[];
 }
 
 const ControlGrid: React.FC<ControlGridProps> = (props) => {

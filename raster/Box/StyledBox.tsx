@@ -29,7 +29,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const GridContainer = styled(Container)<Props>`
+const GridLayout = styled(Container)<Props>`
   box-sizing: border-box;
   ${(props) => props.hasChildBoxes && "display: grid;"};
 
@@ -53,27 +53,28 @@ const GridContainer = styled(Container)<Props>`
       )
         return "";
       return media`
-      ${(props.alignX[index] || props.alignY[index]) && `display: flex;`}
-      ${props.alignX[index] && `justify-content: ${props.alignX[index]};`}
-      ${props.alignY[index] && `align-items: ${props.alignY[index]};`}
-    `;
+        ${(props.alignX[index] || props.alignY[index]) && `display: flex;`}
+        ${props.alignX[index] && `justify-content: ${props.alignX[index]};`}
+        ${props.alignY[index] && `align-items: ${props.alignY[index]};`}
+      `;
     })}
+    
   ${(props) =>
     props.media.map((media, index) => {
       return media`
-      ${!props.colspan[index] ? "display: none;" : ""}
-      position: relative;
-      grid-column: auto / span ${props.cols[index]};
-      left: ${props.rest[index]};
-      margin-left: ${props.left[index]};
-      margin-right: ${props.right[index]};
-      margin-top: ${props.top[index]};
-      margin-bottom: ${props.bottom[index]};
-      align-content: ${props.alignY[index]};
-      align-items: ${props.alignY[index]};
-      padding: ${props.padding[index]};
-      ${props.style[index]}
-    `;
+        ${!props.colspan[index] ? "display: none;" : ""}
+        position: relative;
+        grid-column: auto / span ${props.cols[index]};
+        left: ${props.rest[index]};
+        margin-left: ${props.left[index]};
+        margin-right: ${props.right[index]};
+        margin-top: ${props.top[index]};
+        margin-bottom: ${props.bottom[index]};
+        align-content: ${props.alignY[index]};
+        align-items: ${props.alignY[index]};
+        padding: ${props.padding[index]};
+        ${props.style[index]}
+      `;
     })}
 
   ${(props) =>
@@ -84,7 +85,7 @@ const GridContainer = styled(Container)<Props>`
   `}
 `;
 
-const FlexContainer = styled(Container)<Props>`
+const FlexBox = styled(Container)<Props>`
   display: flex;
   box-sizing: border-box;
 
@@ -106,13 +107,13 @@ const FlexContainer = styled(Container)<Props>`
     })}
 `;
 
-const BoxContainer = React.forwardRef<HTMLElement, Props>((props, ref) => {
+const StyledBox = React.forwardRef<HTMLElement, Props>((props, ref) => {
   switch (props.cssMode) {
     case "flex":
-      return <FlexContainer {...props} ref={ref} />;
+      return <FlexBox {...props} ref={ref} />;
     case "grid":
-      return <GridContainer {...props} ref={ref} />;
+      return <GridLayout {...props} ref={ref} />;
   }
 });
 
-export default BoxContainer;
+export default StyledBox;

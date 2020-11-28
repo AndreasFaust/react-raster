@@ -90,7 +90,7 @@ function getArray(prop, defaultProp) {
         return [prop];
     return prop;
 }
-var normalizeProps = (function (_a) {
+function normalizeProps(_a) {
     var prop = _a.prop, defaultProp = _a.defaultProp, breakpoints = _a.breakpoints;
     var breakpointsLength = breakpoints.length;
     var array = getArray(prop, defaultProp);
@@ -99,7 +99,7 @@ var normalizeProps = (function (_a) {
     if (array.length > breakpointsLength)
         array = array.splice(breakpointsLength);
     return array;
-});
+}
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -156,7 +156,7 @@ function getMediaQueries(breakpoints) {
 }
 var templateObject_1;
 
-var getAlign = (function (_a) {
+function getAlign(_a) {
     var align = _a.align, cssMode = _a.cssMode, hasChildBoxes = _a.hasChildBoxes;
     return cssMode === "grid" && hasChildBoxes
         ? align.map(function (al) {
@@ -187,7 +187,7 @@ var getAlign = (function (_a) {
                     return al;
             }
         });
-});
+}
 
 var useControl = function (control) {
     var _a = React.useState(false), isVisible = _a[0], setIsVisible = _a[1];
@@ -378,7 +378,7 @@ function getRest(_a) {
         }
     });
 }
-var getAlignmentXRest = (function (_a) {
+function getAlignmentXRest(_a) {
     var children = _a.children, breakpoints = _a.breakpoints, colsTotal = _a.colsTotal, alignX = _a.alignX, alignXRaw = _a.alignXRaw, cssMode = _a.cssMode;
     if (!children || cssMode === "flex" || !alignXRaw)
         return null;
@@ -427,7 +427,7 @@ var getAlignmentXRest = (function (_a) {
         return newBreakpoint;
     });
     return regroupRestByElement(restArrayGroupedByBreakpoint);
-});
+}
 
 var GridContainer$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  box-sizing: border-box;\n  ", ";\n\n  ", "\n  ", "\n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n  ", ";\n\n  ",
     "\n  ",
@@ -574,30 +574,31 @@ var Box = React.forwardRef(function (_a, ref) {
     }, []);
     return (React.createElement(BoxContainer, { cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign({}, attrs), (href && { href: href })), (onClick && { onClick: onClick })) },
         React.createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, hasChildBoxes: hasChildBoxes, className: classnames(["Box__Inner", className]) },
-            controlIsVisible && React.createElement(ControlBox, { controlColor: controlColor }),
-            React.createElement(Resetter, { cssMode: cssMode, className: "Box__Resetter", hasChildBoxes: hasChildBoxesNormalized, media: media, gutterX: gutterX, gutterY: gutterY, alignX: alignXNormalized, alignY: alignYNormalized, padding: paddingNormalized },
-                React.createElement(Context.Provider, { value: {
-                        breakpoints: breakpoints,
-                        gutterX: gutterX,
-                        gutterY: gutterY,
-                        colspan: colspan,
-                        media: media,
-                        parent: colsNormalized,
-                        controlIsVisible: controlIsVisible,
-                        controlColor: controlColor,
-                        cssMode: cssMode,
-                        register: function () {
-                            if (!hasChildBoxesRegistered) {
-                                setHasChildBoxes(true);
-                            }
-                        },
-                    } }, React.Children.toArray(children).map(function (child, index) {
-                    return React.isValidElement(child)
-                        ? React.cloneElement(child, {
-                            rest: alignmentXRest && alignmentXRest[index],
-                        })
-                        : child;
-                }))))));
+            React.createElement(React.Fragment, null,
+                controlIsVisible && React.createElement(ControlBox, { controlColor: controlColor }),
+                React.createElement(Resetter, { cssMode: cssMode, className: "Box__Resetter", hasChildBoxes: hasChildBoxesNormalized, media: media, gutterX: gutterX, gutterY: gutterY, alignX: alignXNormalized, alignY: alignYNormalized, padding: paddingNormalized },
+                    React.createElement(Context.Provider, { value: {
+                            breakpoints: breakpoints,
+                            gutterX: gutterX,
+                            gutterY: gutterY,
+                            colspan: colspan,
+                            media: media,
+                            parent: colsNormalized,
+                            controlIsVisible: controlIsVisible,
+                            controlColor: controlColor,
+                            cssMode: cssMode,
+                            register: function () {
+                                if (!hasChildBoxesRegistered) {
+                                    setHasChildBoxes(true);
+                                }
+                            },
+                        } }, React.Children.toArray(children).map(function (child, index) {
+                        return React.isValidElement(child)
+                            ? React.cloneElement(child, {
+                                rest: alignmentXRest && alignmentXRest[index],
+                            })
+                            : child;
+                    })))))));
 });
 Box.displayName = "Box";
 

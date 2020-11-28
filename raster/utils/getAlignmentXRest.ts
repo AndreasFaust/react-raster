@@ -72,14 +72,14 @@ interface Props {
   cssMode: "flex" | "grid";
 }
 
-export default ({
+export default function getAlignmentXRest({
   children,
   breakpoints,
   colsTotal,
   alignX,
   alignXRaw,
   cssMode,
-}: Props) => {
+}: Props) {
   if (!children || cssMode === "flex" || !alignXRaw) return null;
 
   const elements = getElements(children, breakpoints, colsTotal);
@@ -135,4 +135,4 @@ export default ({
   );
 
   return regroupRestByElement(restArrayGroupedByBreakpoint);
-};
+}

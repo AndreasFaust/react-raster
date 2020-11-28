@@ -1,4 +1,5 @@
 import isArray from "./isArray";
+import { FlattenInterpolation } from "styled-components";
 
 function addValues({ array, breakpointsLength }) {
   const lastKnownValue = array[array.length - 1];
@@ -23,7 +24,11 @@ interface Props {
   breakpoints: number[];
 }
 
-export default ({ prop, defaultProp, breakpoints }: Props): any[] => {
+export default function normalizeProps({
+  prop,
+  defaultProp,
+  breakpoints,
+}: Props): any[] {
   const breakpointsLength = breakpoints.length;
   let array = getArray(prop, defaultProp);
 
@@ -31,4 +36,4 @@ export default ({ prop, defaultProp, breakpoints }: Props): any[] => {
     array = addValues({ array, breakpointsLength });
   if (array.length > breakpointsLength) array = array.splice(breakpointsLength);
   return array;
-};
+}
