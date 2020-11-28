@@ -72,7 +72,7 @@ const Testpage: NextPage<Props> = (props) => {
       >
         <h1>Hallo!</h1>
       </Box>
-      {/* <Box
+      <Box
         ref={boxRef}
         className="Box--1"
         cols={[4]}
@@ -102,7 +102,7 @@ const Testpage: NextPage<Props> = (props) => {
             height: 150px;
           `}
         />
-      </Box> */}
+      </Box>
     </Grid>
   );
 };

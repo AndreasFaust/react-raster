@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from "react";
 import styled from "styled-components";
 
@@ -45,7 +44,7 @@ interface Props {
   alignX: string[];
   alignY: string[];
   media: any[];
-  children: React.ReactNode;
+  children: React.ReactElement;
   hasChildBoxes: boolean;
 }
 
