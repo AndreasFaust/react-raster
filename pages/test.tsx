@@ -1,5 +1,6 @@
 import React from "react";
 import { NextPage } from "next";
+import Link from "next/link";
 import { Grid, Box } from "../raster";
 
 const ImageBox = () => (
@@ -60,18 +61,21 @@ const Testpage: NextPage<Props> = (props) => {
       // cssMode="flex"
       ref={gridRef}
     >
-      <Box
-        ref={boxRef}
-        className="Box--2"
-        cols={[5]}
-        left={[0]}
-        style={`
+      <Link href="/" passHref>
+        <Box
+          ref={boxRef}
+          className="Box--2"
+          tag="a"
+          cols={[5]}
+          left={[0]}
+          style={`
           background: pink;
           height: 200px;
         `}
-      >
-        <h1>Hallo!</h1>
-      </Box>
+        >
+          <h1>Hallo!</h1>
+        </Box>
+      </Link>
       <Box
         ref={boxRef}
         className="Box--1"
