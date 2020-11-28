@@ -285,8 +285,8 @@ const Example = () => (
 | **right**        | String or Array of Strings | `'0'`                             | Right padding of the Grid.                                                           |
 | **top**          | String or Array of Strings | `'0'`                             | Top padding of the Grid.                                                             |
 | **bottom**       | String or Array of Strings | `'0'`                             | Bottom padding of the Grid.                                                          |
-| **gutterX**      | String or Array of Strings | `'0'`                             | Horizontal gutter.                                                                   |
-| **gutterY**      | String or Array of Strings | `'0'`                             | Verical gutter.                                                                      |
+| **gutterX**      | String or Array of Strings | `'0px'`                           | Horizontal gutter.                                                                   |
+| **gutterY**      | String or Array of Strings | `'0px'`                           | Verical gutter.                                                                      |
 | **alignX**       | String or Array of Strings | `''`                              | Horizontal align of child elements. Possible values: `left`, `center`, `right`       |
 | **alignY**       | String or Array of Strings | `''`                              | Vertical align of child elements.                                                    |
 | **control**      | Boolean                    | `false`                           | Enable visual control via ESC-Key.                                                   |
