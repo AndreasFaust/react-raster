@@ -10,6 +10,7 @@
 - Works in all browsers
 - Lightweight and performant architecture
 - Visual control via ESC-key
+- Completely re-written in TypeScript
 - Ready for server-side-rendering
 
 ✍️ [See the Example!](https://andreasfaust.github.io/react-raster)
