@@ -44,7 +44,9 @@ const Startpage: NextPage<Props> = (props) => {
         cssMode={mode}
         key={mode + "header"}
         style={`
-          background-image: url(/header-bg.jpg);
+          background-image: url(${
+            process.env.productionPath + "/header-bg.jpg"
+          });
           background-size: cover;
           background-position: center bottom;
           background-repeat: no-repeat;
@@ -56,7 +58,7 @@ const Startpage: NextPage<Props> = (props) => {
           cols={[8, 6, 4, 4, 3, 2]}
           tag="img"
           attrs={{
-            src: "/react-raster-logo.svg",
+            src: process.env.productionPath + "/react-raster-logo.svg",
             alt: "Logo",
           }}
         />
@@ -94,7 +96,11 @@ const Startpage: NextPage<Props> = (props) => {
             left={[0, 0, 0, 1]}
             alignX={["center", "center", "right"]}
           >
-            <img className="hintIcon" src="/scale.svg" alt="Scale icon" />
+            <img
+              className="hintIcon"
+              src={process.env.productionPath + "/scale.svg"}
+              alt="Scale icon"
+            />
             <small>Scale your Viewport to see the layout changing!</small>
           </Box>
           <Box
@@ -102,13 +108,29 @@ const Startpage: NextPage<Props> = (props) => {
             cols={[12, 12, 5, 4]}
             alignX={["center", "center", "left"]}
           >
-            <img className="hintIcon" src="/esc.svg" alt="Escape icon" />
+            <img
+              className="hintIcon"
+              src={process.env.productionPath + "/esc.svg"}
+              alt="Escape icon"
+            />
             <small>
               Press <pre>ESC</pre> to see the column-grid
             </small>
           </Box>
         </Box>
       </Grid>
+      <style jsx global>{`
+        @font-face {
+          font-family: "Italic";
+          src: url("${process.env.productionPath}/alegreya-italic.woff2")
+            format("woff2");
+        }
+        @font-face {
+          font-family: "Plex";
+          src: url("${process.env.productionPath}/plex-mono.woff")
+            format("woff");
+        }
+      `}</style>
     </>
   );
 };

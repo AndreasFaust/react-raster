@@ -1,3 +1,9 @@
+const isProduction = process.env.NODE_ENV === "production";
+const productionPath = "/react-raster";
+
 module.exports = {
-  basePath: process.env.NODE_ENV === "production" ? "/react-raster" : "",
+  basePath: isProduction ? productionPath : "",
+  env: {
+    productionPath: isProduction ? productionPath + "/" : "",
+  },
 };
