@@ -88,6 +88,25 @@ Either a Box/Grid contains Boxes or regular elements/components.
 `cssMode` is the prop, that defines which CSS-layout-engine `react-raster` should use.
 `grid` uses Grid-Layout, `flex` the older Flexbox. `grid` is default, but if the user’s browser does not support it, it automatically falls back to `flex`.
 
+## Use `Styled-Components` with `NextJS`
+
+`NextJS` is great. To use it alongside `styled-components` you need to:
+
+1. Install `babel-plugin-styled-components`
+
+```bash
+yarn add -D babel-plugin-styled-components
+```
+
+2. Create `.babelrc` file in your `root`-directory
+
+```json
+{
+  "presets": ["next/babel"],
+  "plugins": [["styled-components", { "ssr": true }]]
+}
+```
+
 ## Combine Box with the `Link`-component of NextJS
 
 The best way to combine links in `NextJS` with `react-raster` is to set the `passHref`-prop on your `Link`-Component. This will automatically infuse a `href`- and `onClick`-prop to its wrapped `Box`, which also needs to have set `tag="a"`, to be an `anchor`-tag. So there is no need for an extra anchor-tag, which might complicate your data-structure!
@@ -144,27 +163,27 @@ const Example = () => (
     controlColor="rgba(0, 100, 255, 0.1)"
     // use the "bp-"-classes to limit styles to certain breakpoints…
     style={`
-            &.bp-0, 
-            &.bp-432, 
-            &.bp-768 {
+            &&.bp-0, 
+            &&.bp-432, 
+            &&.bp-768 {
                 background: red;
             }
-            &.bp-1024, 
-            &.bp-1200, 
-            &.bp-1400 {
+            &&.bp-1024, 
+            &&.bp-1200, 
+            &&.bp-1400 {
                 background: blue;
             }
         `}
     // the "bp-"-classes have also an index-based indication
     style={`
-            &.bp-1, 
-            &.bp-2, 
-            &.bp-3 {
+            &&.bp-1, 
+            &&.bp-2, 
+            &&.bp-3 {
                 background: red;
             }
-            &.bp-4, 
-            &.bp-5, 
-            &.bp-6 {
+            &&.bp-4, 
+            &&.bp-5, 
+            &&.bp-6 {
                 background: blue;
             }
         `}
@@ -185,7 +204,7 @@ const Example = () => (
       style={`
               background: pink;
 
-              .bp-1024 &, .bp-1200 &, .bp-1400 & {
+              .bp-1024 &&, .bp-1200 &&, .bp-1400 && {
                 background: red;
               }
 
