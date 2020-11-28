@@ -1,6 +1,6 @@
 import React from "react";
 
-export default interface Props {
+export interface Props {
   cols?: number | number[];
   left?: number | number[];
   right?: number | number[];
@@ -15,7 +15,27 @@ export default interface Props {
   hasChildBoxes?: boolean;
   className?: string;
   children?: React.ReactNode;
-  rest?: string[];
+  rest?: number[];
   href?: string;
   onClick?: () => void;
 }
+
+export const defaultProps = {
+  className: "",
+  cols: undefined,
+  alignX: "",
+  alignY: "",
+  children: null,
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
+  padding: null,
+  style: "",
+  hasChildBoxes: undefined,
+  tag: "div",
+  attrs: {},
+  rest: [0],
+  href: "",
+  onClick: null,
+};

@@ -319,44 +319,16 @@ function getMarginsPercent(_a) {
     });
 }
 
-function groupElementsByBreakpoint(breakpoints, elements) {
-    var elementsRestructured = [];
-    breakpoints.forEach(function (_, bpIndex) {
-        var elementAtBreakpoint = [];
-        elements.forEach(function (element) {
-            elementAtBreakpoint.push({
-                cols: element.cols[bpIndex],
-                left: element.left[bpIndex],
-                right: element.right[bpIndex],
-                total: element.total[bpIndex],
-            });
-        });
-        elementsRestructured.push(elementAtBreakpoint);
-    });
-    return elementsRestructured;
+function sumup(a, b, c) {
+    return a.map(function (el, i) { return el + b[i] + c[i]; });
 }
-function regroupRestByElement(restArrayGroupedByBreakpoint) {
-    var rests = [];
-    restArrayGroupedByBreakpoint.forEach(function (breakpoint) {
-        breakpoint.forEach(function (rest, bpIndex) {
-            if (!rests[bpIndex]) {
-                rests[bpIndex] = [rest];
-            }
-            else {
-                rests[bpIndex] = __spreadArrays(rests[bpIndex], [rest]);
-            }
-        });
-    });
-    return rests;
-}
-function getElements(children, breakpoints, colsTotal) {
-    function sumup(a, b, c) {
-        return a.map(function (el, i) { return el + b[i] + c[i]; });
-    }
-    return React.Children.map(children, function (_a) {
-        var displayName = _a.type.displayName, props = _a.props;
-        if (displayName !== "Box")
+function getElements(_a) {
+    var children = _a.children, breakpoints = _a.breakpoints, colsTotal = _a.colsTotal;
+    return React.Children.map(children, function (child) {
+        if (!React.isValidElement(child)) {
             return null;
+        }
+        var props = child.props;
         var left = normalizeProps({ prop: props.left, breakpoints: breakpoints });
         var right = normalizeProps({ prop: props.right, breakpoints: breakpoints });
         var cols = normalizeProps({
@@ -366,8 +338,9 @@ function getElements(children, breakpoints, colsTotal) {
         });
         var total = sumup(cols, left, right);
         return { left: left, right: right, cols: cols, total: total };
-    }).filter(function (el) { return el !== null; });
+    }).filter(function (el) { return el; });
 }
+
 function getRest(_a) {
     var stack = _a.stack, rest = _a.rest, alignX = _a.alignX;
     return stack.map(function () {
@@ -381,13 +354,9 @@ function getRest(_a) {
         }
     });
 }
-function getAlignmentXRest(_a) {
-    var children = _a.children, breakpoints = _a.breakpoints, colsTotal = _a.colsTotal, alignX = _a.alignX, alignXRaw = _a.alignXRaw, cssMode = _a.cssMode;
-    if (!children || cssMode === "flex" || !alignXRaw)
-        return null;
-    var elements = getElements(children, breakpoints, colsTotal);
-    var elementsGroupedByBreakpoint = groupElementsByBreakpoint(breakpoints, elements);
-    var restArrayGroupedByBreakpoint = elementsGroupedByBreakpoint.map(function (breakpoint, index) {
+function restArrayGroupedByBreakpoint(_a) {
+    var breakpoints = _a.breakpoints, colsTotal = _a.colsTotal, alignX = _a.alignX;
+    return breakpoints.map(function (breakpoint, index) {
         if (!breakpoint.length)
             return breakpoint;
         var totalWidth = 0;
@@ -429,7 +398,56 @@ function getAlignmentXRest(_a) {
         }
         return newBreakpoint;
     });
-    return regroupRestByElement(restArrayGroupedByBreakpoint);
+}
+
+function groupElementsByBreakpoint(_a) {
+    var breakpoints = _a.breakpoints, elements = _a.elements;
+    var elementsRestructured = [];
+    breakpoints.forEach(function (_, index) {
+        var elementAtBreakpoint = [];
+        elements.forEach(function (element) {
+            elementAtBreakpoint.push({
+                cols: element.cols[index],
+                left: element.left[index],
+                right: element.right[index],
+                total: element.total[index],
+            });
+        });
+        elementsRestructured.push(elementAtBreakpoint);
+    });
+    return elementsRestructured;
+}
+
+function regroupRestByElement(rest) {
+    var rests = [];
+    rest.forEach(function (breakpoint) {
+        breakpoint.forEach(function (rest, bpIndex) {
+            if (!rests[bpIndex]) {
+                rests[bpIndex] = [rest];
+            }
+            else {
+                rests[bpIndex] = __spreadArrays(rests[bpIndex], [rest]);
+            }
+        });
+    });
+    return rests;
+}
+
+function getAlignmentXRest(_a) {
+    var children = _a.children, breakpoints = _a.breakpoints, colsTotal = _a.colsTotal, alignX = _a.alignX, alignXRaw = _a.alignXRaw, cssMode = _a.cssMode;
+    if (!children || cssMode === "flex" || !alignXRaw)
+        return null;
+    var elements = getElements({ children: children, breakpoints: breakpoints, colsTotal: colsTotal });
+    var elementsGroupedByBreakpoint = groupElementsByBreakpoint({
+        breakpoints: breakpoints,
+        elements: elements,
+    });
+    var rest = restArrayGroupedByBreakpoint({
+        alignX: alignX,
+        breakpoints: elementsGroupedByBreakpoint,
+        colsTotal: colsTotal,
+    });
+    return regroupRestByElement(rest);
 }
 
 var GridLayout$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  box-sizing: border-box;\n  ", ";\n\n  ", "\n  ", "\n    \n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n  ", ";\n\n  ",
@@ -474,10 +492,30 @@ var StyledBox = React.forwardRef(function (props, ref) {
 });
 var templateObject_1$4, templateObject_2$3, templateObject_3$2, templateObject_4$1, templateObject_5, templateObject_6;
 
+var defaultProps = {
+    className: "",
+    cols: undefined,
+    alignX: "",
+    alignY: "",
+    children: null,
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    padding: null,
+    style: "",
+    hasChildBoxes: undefined,
+    tag: "div",
+    attrs: {},
+    rest: [0],
+    href: "",
+    onClick: null,
+};
+
 var Box = React.forwardRef(function (_a, ref) {
-    var _b = _a.className, className = _b === void 0 ? "" : _b, _c = _a.cols, cols = _c === void 0 ? undefined : _c, _d = _a.alignX, alignX = _d === void 0 ? "" : _d, _e = _a.alignY, alignY = _e === void 0 ? "" : _e, _f = _a.children, children = _f === void 0 ? null : _f, _g = _a.left, left = _g === void 0 ? 0 : _g, _h = _a.right, right = _h === void 0 ? 0 : _h, _j = _a.top, top = _j === void 0 ? 0 : _j, _k = _a.bottom, bottom = _k === void 0 ? 0 : _k, _l = _a.padding, padding = _l === void 0 ? null : _l, _m = _a.style, style = _m === void 0 ? "" : _m, _o = _a.hasChildBoxes, hasChildBoxes = _o === void 0 ? undefined : _o, _p = _a.tag, tag = _p === void 0 ? "div" : _p, _q = _a.attrs, attrs = _q === void 0 ? {} : _q, _r = _a.rest, rest = _r === void 0 ? [0] : _r, _s = _a.href, href = _s === void 0 ? "" : _s, _t = _a.onClick, onClick = _t === void 0 ? null : _t;
-    var _u = useContext(Context), cssMode = _u.cssMode, breakpoints = _u.breakpoints, gutterX = _u.gutterX, gutterY = _u.gutterY, colspan = _u.colspan, parent = _u.parent, media = _u.media, controlIsVisible = _u.controlIsVisible, controlColor = _u.controlColor, register = _u.register;
-    var _v = useState(undefined), hasChildBoxesRegistered = _v[0], setHasChildBoxes = _v[1];
+    var className = _a.className, cols = _a.cols, alignX = _a.alignX, alignY = _a.alignY, children = _a.children, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, padding = _a.padding, style = _a.style, hasChildBoxes = _a.hasChildBoxes, tag = _a.tag, attrs = _a.attrs, rest = _a.rest, href = _a.href, onClick = _a.onClick;
+    var _b = useContext(Context), cssMode = _b.cssMode, breakpoints = _b.breakpoints, gutterX = _b.gutterX, gutterY = _b.gutterY, colspan = _b.colspan, parent = _b.parent, media = _b.media, controlIsVisible = _b.controlIsVisible, controlColor = _b.controlColor, register = _b.register;
+    var _c = useState(undefined), hasChildBoxesRegistered = _c[0], setHasChildBoxes = _c[1];
     var hasChildBoxesNormalized = useMemo(function () {
         return getReset({
             hasChildBoxesFromProps: hasChildBoxes,
@@ -604,6 +642,7 @@ var Box = React.forwardRef(function (_a, ref) {
                     })))))));
 });
 Box.displayName = "Box";
+Box.defaultProps = defaultProps;
 
 var ControlGrid = function (props) {
     return (React.createElement(Grid, __assign({}, props, { position: "absolute", className: "Grid--Control", alignY: "stretch", isControl: true }), __spreadArrays(Array(props.colspan)).map(function (col, index) { return (React.createElement(Box, { key: index, cols: 1, style: "\n            background-color: " + props.controlColor + ";\n          " })); })));
@@ -637,8 +676,31 @@ function useCurrentBreakpoint(breakpoints) {
     return currentBp;
 }
 
+var defaultProps$1 = {
+    breakpoints: [0, 432, 768, 1024, 1200, 1400],
+    left: "0",
+    right: "0",
+    top: "0",
+    bottom: "0",
+    gutterX: "0px",
+    gutterY: "0px",
+    alignX: null,
+    alignY: null,
+    colspan: 1,
+    control: false,
+    controlColor: "rgba(0, 0, 0, 0.1)",
+    position: "relative",
+    style: "",
+    className: "",
+    children: null,
+    cssMode: undefined,
+    tag: "div",
+    attrs: {},
+    isControl: false,
+};
+
 var Grid = React.forwardRef(function (_a, ref) {
-    var _b = _a.breakpoints, breakpoints = _b === void 0 ? [0, 432, 768, 1024, 1200, 1400] : _b, _c = _a.left, left = _c === void 0 ? "0" : _c, _d = _a.right, right = _d === void 0 ? "0" : _d, _e = _a.top, top = _e === void 0 ? "0" : _e, _f = _a.bottom, bottom = _f === void 0 ? "0" : _f, _g = _a.gutterX, gutterX = _g === void 0 ? "0px" : _g, _h = _a.gutterY, gutterY = _h === void 0 ? "0px" : _h, _j = _a.alignX, alignX = _j === void 0 ? "" : _j, _k = _a.alignY, alignY = _k === void 0 ? "" : _k, _l = _a.colspan, colspan = _l === void 0 ? 1 : _l, _m = _a.control, control = _m === void 0 ? false : _m, _o = _a.controlColor, controlColor = _o === void 0 ? "rgba(0, 0, 0, 0.1)" : _o, _p = _a.position, position = _p === void 0 ? "relative" : _p, _q = _a.style, style = _q === void 0 ? "" : _q, _r = _a.className, className = _r === void 0 ? "" : _r, _s = _a.children, children = _s === void 0 ? null : _s, _t = _a.cssMode, cssMode = _t === void 0 ? undefined : _t, _u = _a.tag, tag = _u === void 0 ? "div" : _u, _v = _a.attrs, attrs = _v === void 0 ? {} : _v, _w = _a.isControl, isControl = _w === void 0 ? false : _w;
+    var breakpoints = _a.breakpoints, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, gutterX = _a.gutterX, gutterY = _a.gutterY, alignX = _a.alignX, alignY = _a.alignY, colspan = _a.colspan, control = _a.control, controlColor = _a.controlColor, position = _a.position, style = _a.style, className = _a.className, children = _a.children, cssMode = _a.cssMode, tag = _a.tag, attrs = _a.attrs, isControl = _a.isControl;
     var controlIsVisible = useControl(control);
     var cssModeNormalized = useCssMode(cssMode || "grid");
     var breakpointsNormalized = useMemo(function () { return breakpoints; }, [breakpoints]);
@@ -722,6 +784,7 @@ var Grid = React.forwardRef(function (_a, ref) {
                     })
                     : children)))));
 });
+Grid.defaultProps = defaultProps$1;
 
 export { Box, Grid };
 //# sourceMappingURL=index.es.js.map

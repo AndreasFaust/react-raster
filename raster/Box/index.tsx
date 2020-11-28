@@ -13,28 +13,28 @@ import getAlignmentXRest from "../utils/getAlignmentXRest";
 import Context from "../context";
 import StyledBox from "./StyledBox";
 import { ControlBox } from "../Control";
-import Props from "./props";
+import { Props, defaultProps } from "./props";
 
 const Box = React.forwardRef<HTMLElement, Props>(
   (
     {
-      className = "",
-      cols = undefined,
-      alignX = "",
-      alignY = "",
-      children = null,
-      left = 0,
-      right = 0,
-      top = 0,
-      bottom = 0,
-      padding = null,
-      style = "",
-      hasChildBoxes = undefined,
-      tag = "div",
-      attrs = {},
-      rest = [0],
-      href = "",
-      onClick = null,
+      className,
+      cols,
+      alignX,
+      alignY,
+      children,
+      left,
+      right,
+      top,
+      bottom,
+      padding,
+      style,
+      hasChildBoxes,
+      tag,
+      attrs,
+      rest,
+      href,
+      onClick,
     },
     ref
   ) => {
@@ -289,6 +289,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
 );
 
 Box.displayName = "Box";
+Box.defaultProps = defaultProps;
 
 export default Box;
 export { Box };

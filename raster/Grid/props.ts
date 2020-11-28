@@ -1,6 +1,6 @@
 import React from "react";
 
-export default interface Props {
+export interface Props {
   breakpoints?: number[];
   colspan?: number;
   left?: string | string[];
@@ -22,3 +22,26 @@ export default interface Props {
   isControl?: boolean;
   cssMode?: "grid" | "flex";
 }
+
+export const defaultProps = {
+  breakpoints: [0, 432, 768, 1024, 1200, 1400],
+  left: "0",
+  right: "0",
+  top: "0",
+  bottom: "0",
+  gutterX: "0px",
+  gutterY: "0px",
+  alignX: null,
+  alignY: null,
+  colspan: 1,
+  control: false,
+  controlColor: "rgba(0, 0, 0, 0.1)",
+  position: "relative",
+  style: "",
+  className: "",
+  children: null,
+  cssMode: undefined,
+  tag: "div",
+  attrs: {},
+  isControl: false,
+};
