@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Grid } from "../dist";
+import { Grid } from "../raster";
 
 interface Props {}
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { NextPage } from "next";
-import { Grid, Box } from "../dist";
+import { Grid, Box } from "../raster";
 
 const ImageBox = () => (
   <Box
