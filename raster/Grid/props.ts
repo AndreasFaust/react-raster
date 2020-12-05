@@ -1,5 +1,8 @@
 import React from "react";
 
+type AlignX = "left" | "right" | "center";
+type AlignY = "top" | "bottom" | "center";
+
 export interface Props {
   breakpoints?: number[];
   colspan?: number;
@@ -9,8 +12,8 @@ export interface Props {
   bottom?: string | string[];
   gutterX?: string | string[];
   gutterY?: string | string[];
-  alignX?: string | string[];
-  alignY?: string | string[];
+  alignX?: AlignX | AlignX[];
+  alignY?: AlignY | AlignY[];
   control?: boolean;
   controlColor?: string;
   position?: string | string[];

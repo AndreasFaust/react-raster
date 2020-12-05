@@ -48,7 +48,7 @@ const Testpage: NextPage<Props> = (props) => {
       gutterX={["0px", "0px", "1.5vw"]}
       // gutterY={"3vw"}
       colspan={12}
-      alignX={"center"}
+      alignX={["center", "right", "left"]}
       // alignY={"center"}
       control
       // styleOuter={`width: 80%;`}
@@ -58,10 +58,23 @@ const Testpage: NextPage<Props> = (props) => {
           // background: black;
         }
       `}
-      cssMode="flex"
+      // cssMode="flex"
       ref={gridRef}
     >
-      <Link href="/" passHref>
+      <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
+        Hallo
+      </Box>
+      <Box cols={[2, 3]} bottom={1} style={`background: red;`}>
+        Hallo
+      </Box>
+      <Box cols={[3, 4]} bottom={1} style={`background: red;`}>
+        Hallo
+      </Box>
+      <Box cols={[4, 5]} bottom={1} style={`background: red;`}>
+        Hallo
+      </Box>
+
+      {/* <Link href="/" passHref>
         <Box
           ref={boxRef}
           className="Box--2"
@@ -113,7 +126,7 @@ const Testpage: NextPage<Props> = (props) => {
             height: 150px;
           `}
         />
-      </Box>
+      </Box> */}
     </Grid>
   );
 };

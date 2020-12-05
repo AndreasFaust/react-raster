@@ -1,5 +1,8 @@
 import React from "react";
 
+type AlignX = "left" | "right" | "center";
+type AlignY = "top" | "bottom" | "center";
+
 export interface Props {
   cols?: number | number[];
   left?: number | number[];
@@ -7,8 +10,8 @@ export interface Props {
   top?: number | number[];
   bottom?: number | number[];
   padding?: string | string[];
-  alignX?: string | string[];
-  alignY?: string | string[];
+  alignX?: AlignX | AlignX[];
+  alignY?: AlignY | AlignY[];
   style?: string | string[];
   tag?: string;
   attrs?: object;

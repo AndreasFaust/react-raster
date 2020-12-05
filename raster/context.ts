@@ -10,11 +10,12 @@ interface ContextProps {
   media: any[];
   controlIsVisible: boolean;
   controlColor: string;
-  rest: number[];
+  rest: { id: string; width: number[] }[];
   registerChildBox?: (childBox: {
     left: number[];
     right: number[];
     cols: number[];
+    id: string;
   }) => void;
 }
 

@@ -67,6 +67,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     const positionNormalized = normalizeProps({ prop: position, breakpoints });
     const styleNormalized = normalizeProps({ prop: style, breakpoints });
     const alignmentXRest = getAlignmentXRest({
+      breakpoints,
       childBoxes,
       cssMode,
       alignX: alignXNormalized,
@@ -149,6 +150,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
                   left: number[];
                   right: number[];
                   cols: number[];
+                  id: string;
                 }) => {
                   setChildBoxes((childBoxes) => [...childBoxes, childBox]);
                 },

@@ -1,11 +1,13 @@
 import React, { useEffect, useContext, useState } from "react";
 import classNames from "classnames";
+import { nanoid } from "nanoid";
 
 import getColsPercent from "../utils/getColsPercent";
 import Inner from "../utils/inner";
 import Resetter from "../utils/resetter";
 import getAlign from "../utils/getAlign";
 import getAlignmentXRest from "../utils/getAlignmentXRest";
+import normalizeRest from "../utils/normalizeRest";
 import normalizeProps from "../utils/normalizeProps";
 import getReset from "../utils/getReset";
 
@@ -52,6 +54,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       registerChildBox,
     } = useContext(Context);
 
+    const id = React.useRef(nanoid());
     const [childBoxes, setChildBoxes] = useState([]);
     const hasChildBoxesNormalized = getReset({
       hasChildBoxesFromProps: hasChildBoxes,
@@ -68,11 +71,12 @@ const Box = React.forwardRef<HTMLElement, Props>(
       hasChildBoxes: hasChildBoxesNormalized,
     });
 
+    const restNormalized = normalizeRest({ rest, breakpoints, id: id.current });
+
     const leftNormalized = normalizeProps({ prop: left, breakpoints });
     const rightNormalized = normalizeProps({ prop: right, breakpoints });
     const topNormalized = normalizeProps({ prop: top, breakpoints });
     const bottomNormalized = normalizeProps({ prop: bottom, breakpoints });
-    const restNormalized = normalizeProps({ prop: rest, breakpoints });
     const paddingNormalized = normalizeProps({ prop: padding, breakpoints });
     const styleNormalized = normalizeProps({ prop: style, breakpoints });
     const colsNormalized = normalizeProps({
@@ -111,6 +115,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
     });
 
     const alignmentXRest = getAlignmentXRest({
+      breakpoints,
       childBoxes,
       cssMode,
       alignX: alignXNormalized,
@@ -123,6 +128,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
           left: leftNormalized,
           right: rightNormalized,
           cols: colsNormalized,
+          id: id.current,
         });
     }, []);
 
@@ -194,6 +200,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
                     left: number[];
                     right: number[];
                     cols: number[];
+                    id: string;
                   }) => {
                     setChildBoxes((childBoxes) => [...childBoxes, childBox]);
                   },

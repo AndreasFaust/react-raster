@@ -21,7 +21,11 @@
 
 Layouting user-interfaces is tough. Every viewport-size needs its own layout.
 `react-raster` provides a simplified interface for `CSS Grid Layout`, to setup the layout for every breakpoint directly in your `React`-component.
-It emulates `flexbox` behaviour missing in `CSS Grid Layout`, like automatically centering sibling boxes or add margin to boxes.
+It emulates `flexbox`-like behaviour, that is missing in `CSS Grid Layout` like:
+
+- Automatic aligning of sibling boxes
+- Add margin to boxes
+
 Additionally it polyfills `Grid Layout` with `Flexbox`, if you need to support very old browsers for some reason.
 With `react-raster` defining a grid and placing and stacking some boxes is as easy as never before.
 

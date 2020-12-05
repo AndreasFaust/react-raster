@@ -17,7 +17,7 @@ export default function getMarginsPercent({
     return margin.map((mar, index) => {
       return mar
         ? `calc(((100% + ${gutterX[index]}) / ${cols[index]}) * ${mar})`
-        : undefined;
+        : null;
     });
   }
   return margin.map((mar, index) => {
