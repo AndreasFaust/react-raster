@@ -26,10 +26,12 @@ It emulates `flexbox`-like behaviour, that is missing in `CSS Grid Layout` like:
 - Automatic aligning of sibling boxes
 - Add margin to boxes
 
-Additionally it polyfills `Grid Layout` with `Flexbox`, if you need to support very old browsers for some reason.
+Additionally it polyfills `Grid Layout` using `Flexbox`, if you need to support very old browsers for some reason.
 With `react-raster` defining a grid and placing and stacking some boxes is as easy as never before.
 
 > Try it out and **star it** if you like it!
+
+---
 
 ## Install
 
