@@ -58,7 +58,7 @@ const Testpage: NextPage<Props> = (props) => {
           // background: black;
         }
       `}
-      // cssMode="flex"
+      cssMode="flex"
       ref={gridRef}
     >
       <Link href="/" passHref>
@@ -66,7 +66,7 @@ const Testpage: NextPage<Props> = (props) => {
           ref={boxRef}
           className="Box--2"
           tag="a"
-          cols={[4]}
+          cols={[5]}
           left={[0]}
           alignX="center"
           style={`

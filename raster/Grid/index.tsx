@@ -119,6 +119,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
           className="Grid__Inner"
           alignX={alignXNormalized}
           alignY={alignYNormalized}
+          style={styleNormalized}
           media={media}
           hasChildBoxes
         >

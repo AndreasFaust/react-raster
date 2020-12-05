@@ -10,6 +10,7 @@ interface StyledProps {
   media: any[];
   alignX: string[];
   alignY: string[];
+  style: string[];
   hasChildBoxes: boolean;
 }
 
@@ -21,20 +22,17 @@ const StyledInner = styled(InnerTag)<StyledProps>`
     props.media.map((media: any, index: number) => {
       return props.hasChildBoxes
         ? media`
-        display: flex;
-        align-items: stretch;
-        justify-content: stretch;
-      `
-        : media`
-        ${
-          (props.alignX[index] || props.alignY[index]) &&
-          `
           display: flex;
+          align-items: stretch;
+          justify-content: stretch;
+          ${props.style && props.style[index]}
         `
-        }
-        ${props.alignX[index] && `justify-content: ${props.alignX[index]};`}
-        ${props.alignY[index] && `align-items: ${props.alignY[index]};`}
-      `;
+        : media`
+          ${(props.alignX[index] || props.alignY[index]) && `display: flex;`}
+          ${props.alignX[index] && `justify-content: ${props.alignX[index]};`}
+          ${props.alignY[index] && `align-items: ${props.alignY[index]};`}
+          ${props.style[index]}
+        `;
     })}
 `;
 
@@ -43,6 +41,7 @@ interface Props {
   className: string;
   alignX: string[];
   alignY: string[];
+  style: string[];
   media: any[];
   children: React.ReactElement;
   hasChildBoxes: boolean;
@@ -53,6 +52,7 @@ const Inner: React.FC<Props> = ({
   className,
   alignX,
   alignY,
+  style,
   children,
   cssMode,
   hasChildBoxes,
@@ -64,6 +64,7 @@ const Inner: React.FC<Props> = ({
       media={media}
       alignX={alignX}
       alignY={alignY}
+      style={style}
       hasChildBoxes={hasChildBoxes}
     >
       {children}

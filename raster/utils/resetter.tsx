@@ -41,8 +41,8 @@ const StyledResetter = styled(ResetterTag)<Props>`
 `;
 
 const Resetter: React.FC<Props> = (props) => {
-  if (props.cssMode === "grid") return props.children;
-  return props.hasChildBoxes ? <StyledResetter {...props} /> : props.children;
+  if (props.cssMode === "grid" || !props.hasChildBoxes) return props.children;
+  return <StyledResetter {...props} />;
 };
 
 export default Resetter;

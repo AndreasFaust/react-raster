@@ -1,5 +1,4 @@
 import isArray from "./isArray";
-import { FlattenInterpolation } from "styled-components";
 
 function addValues({ array, breakpointsLength }) {
   const lastKnownValue = array[array.length - 1];

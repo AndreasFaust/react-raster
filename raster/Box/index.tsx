@@ -161,6 +161,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
           media={media}
           alignX={alignXNormalized}
           alignY={alignYNormalized}
+          style={styleNormalized}
           hasChildBoxes={hasChildBoxes}
           className={classNames(["Box__Inner", className])}
         >
