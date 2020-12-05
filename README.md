@@ -113,7 +113,7 @@ Either a Box/Grid contains Boxes or regular elements/components.
 
 ## Use `Styled-Components` with `NextJS`
 
-`NextJS` is great. To use it alongside `styled-components` you need to:
+`NextJS` is great. To use it alongside `styled-components` you might need to:
 
 ### Install `babel-plugin-styled-components`
 
@@ -305,6 +305,8 @@ const Example = () => (
 
 ## Grid
 
+All props are optional.
+
 | **Name**         | **Type**                   | **Default**                       | **Description**                                                                      |
 | :--------------- | :------------------------- | :-------------------------------- | :----------------------------------------------------------------------------------- |
 | **breakpoints**  | Array                      | `[0, 432, 768, 1024, 1200, 1400]` | Breakpoints in Pixels, in ascending order starting with zero.                        |
@@ -315,14 +317,14 @@ const Example = () => (
 | **bottom**       | String or Array of Strings | `'0'`                             | Bottom padding of the Grid.                                                          |
 | **gutterX**      | String or Array of Strings | `'0px'`                           | Horizontal gutter.                                                                   |
 | **gutterY**      | String or Array of Strings | `'0px'`                           | Verical gutter.                                                                      |
-| **alignX**       | String or Array of Strings | `''`                              | Horizontal align of child elements. Possible values: `left`, `center`, `right`       |
-| **alignY**       | String or Array of Strings | `''`                              | Vertical align of child elements.                                                    |
+| **alignX**       | String or Array of Strings | `null`                            | Horizontal align of child elements. Possible values: `left`, `center`, `right`       |
+| **alignY**       | String or Array of Strings | `null`                            | Vertical align of child elements. Possible values: `top`, `center`, `bottom`         |
 | **control**      | Boolean                    | `false`                           | Enable visual control via ESC-Key.                                                   |
 | **controlColor** | Boolean                    | `'rgba(0, 0, 0, 0.1)'`            | Custom color for the grid-control.                                                   |
 | **position**     | String or Array of Strings | `'relative'`                      | CSS-position                                                                         |
-| **className**    | String                     | `''`                              | CSS-Class(es)                                                                        |
-| **style**        | String or Array of Strings | `''`                              | Custom styles with styled-components.                                                |
-| **cssMode**      | String                     | `undefined`                       | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support. |
+| **className**    | String                     | `null`                            | CSS-Class(es)                                                                        |
+| **style**        | String or Array of Strings | `null`                            | Custom styles with styled-components.                                                |
+| **cssMode**      | String                     | `null`                            | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support. |
 | **tag**          | String                     | `'div'`                           | HTML-Tag                                                                             |
 | **attrs**        | Object                     | `{}`                              | Attributes of the HTML-Tag                                                           |
 | **ref**          | React ref-object           | `null`                            | Pass a ref.                                                                          |
@@ -331,22 +333,24 @@ const Example = () => (
 
 ## Box
 
+All props are optional.
+
 | **Name**          | **Type**                   | **Default** | **Description**                                                                                                                                       |
 | :---------------- | :------------------------- | :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **cols**          | Number or Array of Numbers | `undefined` | Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid-columns defined with the prop "colspan". The value `0` sets `display: none;`. |
+| **cols**          | Number or Array of Numbers | `null`      | Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid-columns defined with the prop "colspan". The value `0` sets `display: none;`. |
 | **left**          | Number or Array of Numbers | `0`         | Left margin of the Box. Unit: Grid-columns.                                                                                                           |
 | **right**         | Number or Array of Numbers | `0`         | Right margin of the Box. Unit: Grid-columns.                                                                                                          |
 | **top**           | Number or Array of Numbers | `0`         | Top margin of the Box. Unit: Grid-columns.                                                                                                            |
 | **bottom**        | Number or Array of Numbers | `0`         | Bottom margin of the Box. Unit: Grid-columns.                                                                                                         |
-| **alignX**        | String or Array of Strings | `0`         | Horizontal Align of child elements. Possible values: `left`, `center`, `right`                                                                        |
-| **alignY**        | String or Array of Strings | `0`         | Vertical Align of child elements.                                                                                                                     |
+| **alignX**        | String or Array of Strings | `null`      | Horizontal Align of child elements. Possible values: `left`, `center`, `right`                                                                        |
+| **alignY**        | String or Array of Strings | `null`      | Vertical Align of child elements. Possible values: `top`, `center`, `bottom`                                                                          |
 | **padding**       | String or Array of Strings | `null`      | Padding of the Box.                                                                                                                                   |
-| **style**         | String or Array of Strings | `''`        | Custom styles with styled-components.                                                                                                                 |
-| **hasChildBoxes** | Boolean                    | `undefined` | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.                                                                       |
+| **style**         | String or Array of Strings | `null`      | Custom styles with styled-components.                                                                                                                 |
+| **hasChildBoxes** | Boolean                    | `null`      | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.                                                                       |
 | **tag**           | String                     | `'div'`     | HTML-Tag                                                                                                                                              |
 | **attrs**         | Object                     | `{}`        | Attributes added to the HTML-Tag                                                                                                                      |
 | **ref**           | React ref-object           | `null`      | Pass a ref.                                                                                                                                           |
-| **href**          | String                     | `''`        | Pass a `href`. Added for the `Link`-component of `nextJS`.                                                                                            |
+| **href**          | String                     | `null`      | Pass a `href`. Added for the `Link`-component of `nextJS`.                                                                                            |
 | **onClick**       | Function                   | `null`      | Pass a click handler.                                                                                                                                 |
 
 ---
