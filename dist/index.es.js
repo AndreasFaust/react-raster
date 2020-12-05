@@ -288,6 +288,64 @@ var StyledGrid = React.forwardRef(function (props, ref) {
 });
 var templateObject_1$3, templateObject_2$2, templateObject_3$1, templateObject_4;
 
+// This file replaces `index.js` in bundlers like webpack or Rollup,
+
+if (process.env.NODE_ENV !== 'production') {
+  // All bundlers will remove this block in the production bundle.
+  if (
+    typeof navigator !== 'undefined' &&
+    navigator.product === 'ReactNative' &&
+    typeof crypto === 'undefined'
+  ) {
+    throw new Error(
+      'React Native does not have a built-in secure random generator. ' +
+        'If you don’t need unpredictable IDs use `nanoid/non-secure`. ' +
+        'For secure IDs, import `react-native-get-random-values` ' +
+        'before Nano ID. If you use Expo, install `expo-random` ' +
+        'and use `nanoid/async`.'
+    )
+  }
+  if (typeof msCrypto !== 'undefined' && typeof crypto === 'undefined') {
+    throw new Error(
+      'Import file with `if (!window.crypto) window.crypto = window.msCrypto`' +
+        ' before importing Nano ID to fix IE 11 support'
+    )
+  }
+  if (typeof crypto === 'undefined') {
+    throw new Error(
+      'Your browser does not have secure random generator. ' +
+        'If you don’t need unpredictable IDs, you can use nanoid/non-secure.'
+    )
+  }
+}
+
+let nanoid = (size = 21) => {
+  let id = '';
+  let bytes = crypto.getRandomValues(new Uint8Array(size));
+
+  // A compact alternative for `for (var i = 0; i < step; i++)`.
+  while (size--) {
+    // It is incorrect to use bytes exceeding the alphabet size.
+    // The following mask reduces the random byte in the 0-255 value
+    // range to the 0-63 value range. Therefore, adding hacks, such
+    // as empty string fallback or magic numbers, is unneccessary because
+    // the bitmask trims bytes down to the alphabet size.
+    let byte = bytes[size] & 63;
+    if (byte < 36) {
+      // `0-9a-z`
+      id += byte.toString(36);
+    } else if (byte < 62) {
+      // `A-Z`
+      id += (byte - 26).toString(36).toUpperCase();
+    } else if (byte < 63) {
+      id += '_';
+    } else {
+      id += '-';
+    }
+  }
+  return id
+};
+
 function getColsPercent(_a) {
     var cols = _a.cols, left = _a.left, right = _a.right, parentCols = _a.parentCols, cssMode = _a.cssMode;
     if (cssMode === "grid") {
@@ -296,28 +354,85 @@ function getColsPercent(_a) {
     return cols.map(function (col, index) { return (col * 100) / parentCols[index]; });
 }
 
+function getWidth(alignX, cols, rowWidth) {
+    switch (alignX) {
+        case "center":
+            return (cols - rowWidth) / 2;
+        case "end":
+            return cols - rowWidth;
+        default:
+            return null;
+    }
+}
+function getBreakpointRows(_a) {
+    var index = _a.index, cols = _a.cols, children = _a.children, alignX = _a.alignX;
+    var rows = [{ ids: [], width: 0 }];
+    children.map(function (child) {
+        var currentRow = rows[rows.length - 1];
+        if (currentRow.width + child.width[index] <= cols) {
+            rows[rows.length - 1] = {
+                ids: __spreadArrays(currentRow.ids, [child.id]),
+                width: currentRow.width + child.width[index],
+            };
+        }
+        else {
+            rows.push({
+                ids: [child.id],
+                width: child.width[index],
+            });
+        }
+    });
+    return rows.map(function (row) { return (__assign(__assign({}, row), { width: getWidth(alignX, cols, row.width) })); });
+}
+
 function sumup(a, b, c) {
     return a.map(function (el, i) { return el + b[i] + c[i]; });
 }
 function getAlignmentXRest(_a) {
-    var childBoxes = _a.childBoxes, alignX = _a.alignX, cssMode = _a.cssMode, cols = _a.cols;
+    var childBoxes = _a.childBoxes, alignX = _a.alignX, cssMode = _a.cssMode, cols = _a.cols, breakpoints = _a.breakpoints;
     if (!childBoxes.length || cssMode === "flex")
         return null;
     if (childBoxes.length === 1) {
-        return sumup(childBoxes[0].cols, childBoxes[0].left, childBoxes[0].right).map(function (width, index) {
-            return alignX[index] === "center" ? (cols[index] - width) / 2 : null;
-        });
+        return [
+            {
+                id: childBoxes[0].id,
+                width: sumup(childBoxes[0].cols, childBoxes[0].left, childBoxes[0].right).map(function (width, index) {
+                    return alignX[index] === "center" ? (cols[index] - width) / 2 : null;
+                }),
+            },
+        ];
     }
-    var rest = childBoxes
-        .map(function (childBox) { return sumup(childBox.cols, childBox.left, childBox.right); })
-        .reduce(function (acc, currentValue, _, array) {
-        return acc.map(function (accWidth, index) {
-            return alignX[index] === "center"
-                ? (cols[index] - (accWidth + currentValue[index])) / 2
-                : null;
+    var children = childBoxes.map(function (childBox) { return ({
+        width: sumup(childBox.cols, childBox.left, childBox.right),
+        id: childBox.id,
+    }); });
+    var breakpointRows = breakpoints.map(function (_, index) {
+        return getBreakpointRows({
+            index: index,
+            children: children,
+            cols: cols[index],
+            alignX: alignX[index],
         });
     });
+    var rest = children.map(function (child) {
+        return {
+            id: child.id,
+            width: breakpointRows.map(function (breakpointRow) {
+                return breakpointRow.find(function (row) {
+                    return row.ids.find(function (id) { return id === child.id; });
+                }).width;
+            }),
+        };
+    });
     return rest;
+}
+
+function normalizeRest(_a) {
+    var rest = _a.rest, id = _a.id, breakpoints = _a.breakpoints;
+    if (!rest) {
+        return normalizeProps({ prop: null, breakpoints: breakpoints });
+    }
+    return rest.find(function (r) { return r.id === id; }).width;
 }
 
 function getReset(_a) {
@@ -370,21 +485,21 @@ var StyledBox = React.forwardRef(function (props, ref) {
 var templateObject_1$4, templateObject_2$3, templateObject_3$2, templateObject_4$1, templateObject_5, templateObject_6;
 
 var defaultProps = {
-    className: "",
-    cols: undefined,
-    alignX: "",
-    alignY: "",
+    className: null,
+    cols: null,
+    alignX: null,
+    alignY: null,
     children: null,
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
     padding: null,
-    style: "",
-    hasChildBoxes: undefined,
+    style: null,
+    hasChildBoxes: null,
     tag: "div",
     attrs: {},
-    href: "",
+    href: null,
     onClick: null,
 };
 
@@ -394,7 +509,7 @@ function getMarginsPercent(_a) {
         return margin.map(function (mar, index) {
             return mar
                 ? "calc(((100% + " + gutterX[index] + ") / " + cols[index] + ") * " + mar + ")"
-                : undefined;
+                : null;
         });
     }
     return margin.map(function (mar, index) {
@@ -418,6 +533,7 @@ function useMarginPercent(_a) {
 var Box = React.forwardRef(function (_a, ref) {
     var className = _a.className, cols = _a.cols, alignX = _a.alignX, alignY = _a.alignY, children = _a.children, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, padding = _a.padding, style = _a.style, hasChildBoxes = _a.hasChildBoxes, tag = _a.tag, attrs = _a.attrs, href = _a.href, onClick = _a.onClick;
     var _b = useContext(Context), cssMode = _b.cssMode, breakpoints = _b.breakpoints, gutterX = _b.gutterX, gutterY = _b.gutterY, colspan = _b.colspan, parentCols = _b.parentCols, media = _b.media, controlIsVisible = _b.controlIsVisible, controlColor = _b.controlColor, rest = _b.rest, registerChildBox = _b.registerChildBox;
+    var id = React.useRef(nanoid());
     var _c = useState([]), childBoxes = _c[0], setChildBoxes = _c[1];
     var hasChildBoxesNormalized = getReset({
         hasChildBoxesFromProps: hasChildBoxes,
@@ -433,11 +549,11 @@ var Box = React.forwardRef(function (_a, ref) {
         cssMode: cssMode,
         hasChildBoxes: hasChildBoxesNormalized,
     });
+    var restNormalized = normalizeRest({ rest: rest, breakpoints: breakpoints, id: id.current });
     var leftNormalized = normalizeProps({ prop: left, breakpoints: breakpoints });
     var rightNormalized = normalizeProps({ prop: right, breakpoints: breakpoints });
     var topNormalized = normalizeProps({ prop: top, breakpoints: breakpoints });
     var bottomNormalized = normalizeProps({ prop: bottom, breakpoints: breakpoints });
-    var restNormalized = normalizeProps({ prop: rest, breakpoints: breakpoints });
     var paddingNormalized = normalizeProps({ prop: padding, breakpoints: breakpoints });
     var styleNormalized = normalizeProps({ prop: style, breakpoints: breakpoints });
     var colsNormalized = normalizeProps({
@@ -473,6 +589,7 @@ var Box = React.forwardRef(function (_a, ref) {
         cols: colsPercent,
     });
     var alignmentXRest = getAlignmentXRest({
+        breakpoints: breakpoints,
         childBoxes: childBoxes,
         cssMode: cssMode,
         alignX: alignXNormalized,
@@ -484,6 +601,7 @@ var Box = React.forwardRef(function (_a, ref) {
                 left: leftNormalized,
                 right: rightNormalized,
                 cols: colsNormalized,
+                id: id.current,
             });
     }, []);
     return (React.createElement(StyledBox, { cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign({}, attrs), (href && { href: href })), (onClick && { onClick: onClick })) },
@@ -556,10 +674,10 @@ var defaultProps$1 = {
     control: false,
     controlColor: "rgba(0, 0, 0, 0.1)",
     position: "relative",
-    style: "",
-    className: "",
+    style: null,
+    className: null,
     children: null,
-    cssMode: undefined,
+    cssMode: null,
     tag: "div",
     attrs: {},
     isControl: false,
@@ -592,6 +710,7 @@ var Grid = React.forwardRef(function (_a, ref) {
     var positionNormalized = normalizeProps({ prop: position, breakpoints: breakpoints });
     var styleNormalized = normalizeProps({ prop: style, breakpoints: breakpoints });
     var alignmentXRest = getAlignmentXRest({
+        breakpoints: breakpoints,
         childBoxes: childBoxes,
         cssMode: cssMode,
         alignX: alignXNormalized,

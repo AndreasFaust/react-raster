@@ -307,27 +307,27 @@ const Example = () => (
 
 All props are optional.
 
-| **Name**         | **Type**                   | **Default**                       | **Description**                                                                      |
-| :--------------- | :------------------------- | :-------------------------------- | :----------------------------------------------------------------------------------- |
-| **breakpoints**  | Array                      | `[0, 432, 768, 1024, 1200, 1400]` | Breakpoints in Pixels, in ascending order starting with zero.                        |
-| **colspan**      | Number                     | `1`                               | Number of columns.                                                                   |
-| **left**         | String or Array of Strings | `'0'`                             | Left padding of the Grid.                                                            |
-| **right**        | String or Array of Strings | `'0'`                             | Right padding of the Grid.                                                           |
-| **top**          | String or Array of Strings | `'0'`                             | Top padding of the Grid.                                                             |
-| **bottom**       | String or Array of Strings | `'0'`                             | Bottom padding of the Grid.                                                          |
-| **gutterX**      | String or Array of Strings | `'0px'`                           | Horizontal gutter.                                                                   |
-| **gutterY**      | String or Array of Strings | `'0px'`                           | Verical gutter.                                                                      |
-| **alignX**       | String or Array of Strings | `null`                            | Horizontal align of child elements. Possible values: `left`, `center`, `right`       |
-| **alignY**       | String or Array of Strings | `null`                            | Vertical align of child elements. Possible values: `top`, `center`, `bottom`         |
-| **control**      | Boolean                    | `false`                           | Enable visual control via ESC-Key.                                                   |
-| **controlColor** | Boolean                    | `'rgba(0, 0, 0, 0.1)'`            | Custom color for the grid-control.                                                   |
-| **position**     | String or Array of Strings | `'relative'`                      | CSS-position                                                                         |
-| **className**    | String                     | `null`                            | CSS-Class(es)                                                                        |
-| **style**        | String or Array of Strings | `null`                            | Custom styles with styled-components.                                                |
-| **cssMode**      | String                     | `null`                            | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support. |
-| **tag**          | String                     | `'div'`                           | HTML-Tag                                                                             |
-| **attrs**        | Object                     | `{}`                              | Attributes of the HTML-Tag                                                           |
-| **ref**          | React ref-object           | `null`                            | Pass a ref.                                                                          |
+| **Name**         | **Type**                   | **Default**                       | **Description**                                                                                                 |
+| :--------------- | :------------------------- | :-------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| **breakpoints**  | Array                      | `[0, 432, 768, 1024, 1200, 1400]` | Breakpoints in Pixels, in ascending order starting with zero.                                                   |
+| **colspan**      | Number                     | `1`                               | Number of columns.                                                                                              |
+| **left**         | String or Array of Strings | `'0'`                             | Left padding of the Grid.                                                                                       |
+| **right**        | String or Array of Strings | `'0'`                             | Right padding of the Grid.                                                                                      |
+| **top**          | String or Array of Strings | `'0'`                             | Top padding of the Grid.                                                                                        |
+| **bottom**       | String or Array of Strings | `'0'`                             | Bottom padding of the Grid.                                                                                     |
+| **gutterX**      | String or Array of Strings | `'0px'`                           | Horizontal gutter.                                                                                              |
+| **gutterY**      | String or Array of Strings | `'0px'`                           | Verical gutter.                                                                                                 |
+| **alignX**       | String or Array of Strings | `null`                            | Horizontal align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around` |
+| **alignY**       | String or Array of Strings | `null`                            | Vertical align of child elements. Possible values: `top`, `center`, `bottom`, `stretch`                         |
+| **control**      | Boolean                    | `false`                           | Enable visual control via ESC-Key.                                                                              |
+| **controlColor** | Boolean                    | `'rgba(0, 0, 0, 0.1)'`            | Custom color for the grid-control.                                                                              |
+| **position**     | String or Array of Strings | `'relative'`                      | CSS-position                                                                                                    |
+| **className**    | String                     | `null`                            | CSS-Class(es)                                                                                                   |
+| **style**        | String or Array of Strings | `null`                            | Custom styles with styled-components.                                                                           |
+| **cssMode**      | String                     | `null`                            | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support.                            |
+| **tag**          | String                     | `'div'`                           | HTML-Tag                                                                                                        |
+| **attrs**        | Object                     | `{}`                              | Attributes of the HTML-Tag                                                                                      |
+| **ref**          | React ref-object           | `null`                            | Pass a ref.                                                                                                     |
 
 ---
 
@@ -342,8 +342,8 @@ All props are optional.
 | **right**         | Number or Array of Numbers | `0`         | Right margin of the Box. Unit: Grid-columns.                                                                                                          |
 | **top**           | Number or Array of Numbers | `0`         | Top margin of the Box. Unit: Grid-columns.                                                                                                            |
 | **bottom**        | Number or Array of Numbers | `0`         | Bottom margin of the Box. Unit: Grid-columns.                                                                                                         |
-| **alignX**        | String or Array of Strings | `null`      | Horizontal Align of child elements. Possible values: `left`, `center`, `right`                                                                        |
-| **alignY**        | String or Array of Strings | `null`      | Vertical Align of child elements. Possible values: `top`, `center`, `bottom`                                                                          |
+| **alignX**        | String or Array of Strings | `null`      | Horizontal Align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around`                                       |
+| **alignY**        | String or Array of Strings | `null`      | Vertical Align of child elements. Possible values: `top`, `center`, `bottom`, `stretch`                                                               |
 | **padding**       | String or Array of Strings | `null`      | Padding of the Box.                                                                                                                                   |
 | **style**         | String or Array of Strings | `null`      | Custom styles with styled-components.                                                                                                                 |
 | **hasChildBoxes** | Boolean                    | `null`      | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.                                                                       |
