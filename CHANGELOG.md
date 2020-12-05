@@ -1,3 +1,15 @@
+#### 6.0.5 (2020-12-05)
+
+##### Documentation Changes
+
+*  fix props-table (95d2e6a0)
+*  add concept (a98b636c)
+
+##### Bug Fixes
+
+*  fix align-types (83b89d29)
+*  make centering possible again when multiple rows (ee297927)
+
 #### 6.0.4 (2020-12-05)
 
 ##### Documentation Changes
