@@ -1,20 +1,18 @@
 interface Props {
   margin: number[];
   cols: number[];
-  parent: number[];
+  parentCols: number[];
   cssMode: "grid" | "flex";
   gutterX: string[];
 }
 
-type Treturn = (string | undefined)[];
-
 export default function getMarginsPercent({
   margin,
   cols,
-  parent,
+  parentCols,
   cssMode,
   gutterX,
-}: Props): Treturn {
+}: Props): (string | undefined)[] {
   if (cssMode === "grid") {
     return margin.map((mar, index) => {
       return mar
@@ -23,6 +21,6 @@ export default function getMarginsPercent({
     });
   }
   return margin.map((mar, index) => {
-    return mar ? `${(mar * 100) / parent[index]}%` : undefined;
+    return mar ? `${(mar * 100) / parentCols[index]}%` : undefined;
   });
 }

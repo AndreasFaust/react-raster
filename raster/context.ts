@@ -6,11 +6,16 @@ interface ContextProps {
   gutterX: string[];
   gutterY: string[];
   colspan: number;
-  parent: number[];
+  parentCols: number[];
   media: any[];
   controlIsVisible: boolean;
   controlColor: string;
-  registerChildBox?: () => void;
+  rest: number[];
+  registerChildBox?: (childBox: {
+    left: number[];
+    right: number[];
+    cols: number[];
+  }) => void;
 }
 
 const Context = React.createContext<ContextProps | null>(null);

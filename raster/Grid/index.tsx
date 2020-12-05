@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import classNames from "classnames";
 import Context from "../context";
 import normalizeProps from "../utils/normalizeProps";
@@ -42,91 +42,36 @@ const Grid = React.forwardRef<HTMLElement, Props>(
   ) => {
     const controlIsVisible = useControl(control);
     const cssModeNormalized = useCssMode(cssMode || "grid");
+    const [childBoxes, setChildBoxes] = React.useState([]);
 
-    const breakpointsNormalized = useMemo(() => breakpoints, [breakpoints]);
-    const currentBreakpoint = useCurrentBreakpoint(breakpointsNormalized);
-    const gutterXNormalized = useMemo(
-      () =>
-        normalizeProps({ prop: gutterX, breakpoints: breakpointsNormalized }),
-      [gutterX, breakpointsNormalized]
-    );
-    const gutterYNormalized = useMemo(
-      () =>
-        normalizeProps({ prop: gutterY, breakpoints: breakpointsNormalized }),
-      [gutterY, breakpointsNormalized]
-    );
-    const alignXNormalized = useMemo(
-      () =>
-        getAlign({
-          align: normalizeProps({
-            prop: alignX,
-            breakpoints: breakpointsNormalized,
-          }),
-          cssMode: cssModeNormalized,
-          hasChildBoxes: true,
-        }),
-      [alignX, breakpointsNormalized, cssModeNormalized]
-    );
-    const alignYNormalized = useMemo(
-      () =>
-        getAlign({
-          align: normalizeProps({
-            prop: alignY,
-            breakpoints: breakpointsNormalized,
-          }),
-          cssMode: cssModeNormalized,
-          hasChildBoxes: true,
-        }),
-      [alignY, breakpointsNormalized, cssModeNormalized]
-    );
+    const currentBreakpoint = useCurrentBreakpoint(breakpoints);
+    const gutterXNormalized = normalizeProps({ prop: gutterX, breakpoints });
+    const gutterYNormalized = normalizeProps({ prop: gutterY, breakpoints });
+    const alignXNormalized = getAlign({
+      align: normalizeProps({ prop: alignX, breakpoints }),
+      cssMode: cssModeNormalized,
+      hasChildBoxes: true,
+    });
+    const alignYNormalized = getAlign({
+      align: normalizeProps({ prop: alignY, breakpoints }),
+      cssMode: cssModeNormalized,
+      hasChildBoxes: true,
+    });
 
-    const media = useMemo(() => getMediaQueries(breakpointsNormalized), [
-      breakpointsNormalized,
-    ]);
-    const parent = useMemo(
-      () =>
-        normalizeProps({ prop: colspan, breakpoints: breakpointsNormalized }),
-      [colspan, breakpointsNormalized]
-    );
-    const leftNormalized = useMemo(
-      () => normalizeProps({ prop: left, breakpoints: breakpointsNormalized }),
-      [left, breakpointsNormalized]
-    );
-    const rightNormalized = useMemo(
-      () => normalizeProps({ prop: right, breakpoints: breakpointsNormalized }),
-      [right, breakpointsNormalized]
-    );
-    const topNormalized = useMemo(
-      () => normalizeProps({ prop: top, breakpoints: breakpointsNormalized }),
-      [top, breakpointsNormalized]
-    );
-    const bottomNormalized = useMemo(
-      () =>
-        normalizeProps({ prop: bottom, breakpoints: breakpointsNormalized }),
-      [bottom, breakpointsNormalized]
-    );
-    const positionNormalized = useMemo(
-      () =>
-        normalizeProps({ prop: position, breakpoints: breakpointsNormalized }),
-      [position, breakpointsNormalized]
-    );
-    const styleNormalized = useMemo(
-      () => normalizeProps({ prop: style, breakpoints }),
-      [style, breakpoints]
-    );
-
-    // const alignmentXRest = useMemo(
-    //   () =>
-    //     getAlignmentXRest({
-    //       children,
-    //       breakpoints,
-    //       colsTotal: normalizeProps({ prop: colspan, breakpoints }),
-    //       alignX: alignXNormalized,
-    //       cssMode,
-    //       alignXRaw: alignX,
-    //     }),
-    //   [alignX, alignXNormalized, breakpoints, children, colspan, cssMode]
-    // );
+    const media = getMediaQueries(breakpoints);
+    const colsNormalized = normalizeProps({ prop: colspan, breakpoints });
+    const leftNormalized = normalizeProps({ prop: left, breakpoints });
+    const rightNormalized = normalizeProps({ prop: right, breakpoints });
+    const topNormalized = normalizeProps({ prop: top, breakpoints });
+    const bottomNormalized = normalizeProps({ prop: bottom, breakpoints });
+    const positionNormalized = normalizeProps({ prop: position, breakpoints });
+    const styleNormalized = normalizeProps({ prop: style, breakpoints });
+    const alignmentXRest = getAlignmentXRest({
+      childBoxes,
+      cssMode,
+      alignX: alignXNormalized,
+      cols: colsNormalized,
+    });
 
     return (
       <StyledGrid
@@ -190,27 +135,25 @@ const Grid = React.forwardRef<HTMLElement, Props>(
             <Context.Provider
               value={{
                 cssMode: cssModeNormalized,
-                breakpoints: breakpointsNormalized,
+                breakpoints,
                 gutterX: gutterXNormalized,
                 gutterY: gutterYNormalized,
                 media,
                 colspan,
-                parent,
+                parentCols: colsNormalized,
                 controlIsVisible,
                 controlColor,
+                rest: alignmentXRest,
+                registerChildBox: (childBox: {
+                  left: number[];
+                  right: number[];
+                  cols: number[];
+                }) => {
+                  setChildBoxes((childBoxes) => [...childBoxes, childBox]);
+                },
               }}
             >
               {children}
-              {/* {alignmentXRest
-                ? React.Children.map(children, (child, index) => {
-                    return React.cloneElement(
-                      child as React.ReactElement<any>,
-                      {
-                        rest: alignmentXRest && alignmentXRest[index],
-                      }
-                    );
-                  })
-                : children} */}
             </Context.Provider>
           </Resetter>
         </Inner>

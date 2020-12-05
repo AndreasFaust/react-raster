@@ -66,14 +66,18 @@ const Testpage: NextPage<Props> = (props) => {
           ref={boxRef}
           className="Box--2"
           tag="a"
-          cols={[5]}
+          cols={[4]}
           left={[0]}
+          alignX="center"
           style={`
             background: pink;
             height: 200px;
           `}
         >
-          <Box cols={3} tag="h1">
+          <Box cols={2} tag="h2" className="Box--3">
+            Hallo!
+          </Box>
+          <Box cols={2} tag="h2" className="Box--4">
             Hallo!
           </Box>
         </Box>

@@ -15,7 +15,6 @@ export interface Props {
   hasChildBoxes?: boolean;
   className?: string;
   children?: React.ReactNode;
-  rest?: number[];
   href?: string;
   onClick?: () => void;
 }
@@ -35,7 +34,6 @@ export const defaultProps = {
   hasChildBoxes: undefined,
   tag: "div",
   attrs: {},
-  rest: [0],
   href: "",
   onClick: null,
 };
