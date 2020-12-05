@@ -45,10 +45,10 @@ yarn add react-raster styled-components react react-dom
 
 ## Usage
 
-- react-raster has only two components: Grid and Box.
-- **Grid** is the wrapper, that defines the grid’s basics like gutter, breakpoints and other things.
-- **Box** is the element, that gets positioned inside the Grid.
-- Boxes and Grids can be freely nested inside each other.
+- `react-raster` has only two components: **Grid** and **Box**.
+- `Grid` is the wrapper, that defines the grid’s basics like gutter, breakpoints and other things.
+- `Box` is the element, that gets positioned inside the Grid.
+- Boxes and Grids can be **freely nested inside each other**.
 
 ```jsx
 <Grid
