@@ -1,3 +1,23 @@
+#### 6.0.4 (2020-12-05)
+
+##### Documentation Changes
+
+*  add lines to readme for better legibility (70dc04ec)
+*  fix example for gh-pages (379cc221)
+*  fix badge (4297a4ab)
+
+##### Bug Fixes
+
+*  add custom-style to flexbox again (db842db1)
+
+##### Other Changes
+
+*  check next-link-functionality (e8bb0d52)
+
+##### Refactors
+
+*  outsource hooks from box to make it stronger typed and better readable (ce044125)
+
 #### 6.0.3 (2020-11-28)
 
 ##### Other Changes
