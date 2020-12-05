@@ -1,9 +1,6 @@
 import React, { useEffect, useContext, useMemo, useState } from "react";
 import classNames from "classnames";
 
-import getReset from "../utils/getReset";
-import normalizeProps from "../utils/normalizeProps";
-import getAlign from "../utils/getAlign";
 import getColsPercent from "../utils/getColsPercent";
 import getMarginsPercent from "../utils/getMarginsPercent";
 import Inner from "../utils/inner";
@@ -14,6 +11,11 @@ import Context from "../context";
 import StyledBox from "./StyledBox";
 import { ControlBox } from "../Control";
 import { Props, defaultProps } from "./props";
+
+import useHasChildBoxes from "./hooks/useHasChildBoxes";
+import useMarginPercent from "./hooks/useMarginPercent";
+import useAlign from "./hooks/useAlign";
+import { useNormalizeString, useNormalizeNumber } from "./hooks/useNormalize";
 
 const Box = React.forwardRef<HTMLElement, Props>(
   (
@@ -51,64 +53,28 @@ const Box = React.forwardRef<HTMLElement, Props>(
       register,
     } = useContext(Context);
 
-    const [hasChildBoxesRegistered, setHasChildBoxes] = useState(undefined);
-    const hasChildBoxesNormalized = useMemo(
-      () =>
-        getReset({
-          hasChildBoxesFromProps: hasChildBoxes,
-          hasChildBoxesFromRegister: hasChildBoxesRegistered,
-        }),
-      [hasChildBoxes, hasChildBoxesRegistered]
-    );
+    const [hasChildBoxesRegistered, setHasChildBoxes] = useState(null);
+    const hasChildBoxesNormalized = useHasChildBoxes({
+      hasChildBoxes,
+      hasChildBoxesRegistered,
+    });
+    const alignXNormalized = useAlign({
+      align: alignX,
+      hasChildBoxes: hasChildBoxesNormalized,
+    });
+    const alignYNormalized = useAlign({
+      align: alignY,
+      hasChildBoxes: hasChildBoxesNormalized,
+    });
 
-    const alignXNormalized = useMemo(
-      () =>
-        getAlign({
-          align: normalizeProps({ prop: alignX, breakpoints }),
-          cssMode,
-          hasChildBoxes: hasChildBoxesNormalized,
-        }),
-      [alignX, breakpoints, cssMode, hasChildBoxesNormalized]
-    );
-    const alignYNormalized = useMemo(
-      () =>
-        getAlign({
-          align: normalizeProps({ prop: alignY, breakpoints }),
-          cssMode,
-          hasChildBoxes: hasChildBoxesNormalized,
-        }),
-      [alignY, breakpoints, cssMode, hasChildBoxesNormalized]
-    );
-
-    const leftNormalized = useMemo(
-      () => normalizeProps({ prop: left, breakpoints }),
-      [left, breakpoints]
-    );
-    const rightNormalized = useMemo(
-      () => normalizeProps({ prop: right, breakpoints }),
-      [right, breakpoints]
-    );
-    const restNormalized = useMemo(
-      () => normalizeProps({ prop: rest, breakpoints }),
-      [rest, breakpoints]
-    );
-    const colsNormalized = useMemo(
-      () => normalizeProps({ prop: cols, defaultProp: parent, breakpoints }),
-      [cols, parent, breakpoints]
-    );
-
-    const topNormalized = useMemo(
-      () => normalizeProps({ prop: top, breakpoints }),
-      [top, breakpoints]
-    );
-    const bottomNormalized = useMemo(
-      () => normalizeProps({ prop: bottom, breakpoints }),
-      [bottom, breakpoints]
-    );
-    const paddingNormalized = useMemo(
-      () => normalizeProps({ prop: padding, breakpoints }),
-      [padding, breakpoints]
-    );
+    const leftNormalized = useNormalizeNumber(left);
+    const rightNormalized = useNormalizeNumber(right);
+    const topNormalized = useNormalizeNumber(top);
+    const bottomNormalized = useNormalizeNumber(bottom);
+    const restNormalized = useNormalizeNumber(rest);
+    const paddingNormalized = useNormalizeString(padding);
+    const styleNormalized = useNormalizeString(style);
+    const colsNormalized = useNormalizeNumber(cols, parent);
 
     const colsPercent = useMemo(
       () =>
@@ -122,66 +88,26 @@ const Box = React.forwardRef<HTMLElement, Props>(
       [colsNormalized, leftNormalized, rightNormalized, parent, cssMode]
     );
 
-    const restPercent = useMemo(
-      () =>
-        getMarginsPercent({
-          margin: restNormalized,
-          cols: colsPercent,
-          gutterX,
-          parent,
-          cssMode,
-        }),
-      [restNormalized, colsPercent, gutterX, parent, cssMode]
-    );
-    const leftPercent = useMemo(
-      () =>
-        getMarginsPercent({
-          margin: leftNormalized,
-          cols: colsPercent,
-          gutterX,
-          parent,
-          cssMode,
-        }),
-      [leftNormalized, colsPercent, gutterX, parent, cssMode]
-    );
-    const rightPercent = useMemo(
-      () =>
-        getMarginsPercent({
-          margin: rightNormalized,
-          cols: colsPercent,
-          gutterX,
-          parent,
-          cssMode,
-        }),
-      [rightNormalized, colsPercent, gutterX, parent, cssMode]
-    );
-    const topPercent = useMemo(
-      () =>
-        getMarginsPercent({
-          margin: topNormalized,
-          cols: colsPercent,
-          gutterX,
-          parent,
-          cssMode,
-        }),
-      [topNormalized, colsPercent, gutterX, parent, cssMode]
-    );
-    const bottomPercent = useMemo(
-      () =>
-        getMarginsPercent({
-          margin: bottomNormalized,
-          cols: colsPercent,
-          gutterX,
-          parent,
-          cssMode,
-        }),
-      [bottomNormalized, colsPercent, gutterX, parent, cssMode]
-    );
-
-    const styleNormalized = useMemo(
-      () => normalizeProps({ prop: style, breakpoints }),
-      [style, breakpoints]
-    );
+    const restPercent = useMarginPercent({
+      prop: restNormalized,
+      cols: colsPercent,
+    });
+    const leftPercent = useMarginPercent({
+      prop: leftNormalized,
+      cols: colsPercent,
+    });
+    const rightPercent = useMarginPercent({
+      prop: rightNormalized,
+      cols: colsPercent,
+    });
+    const topPercent = useMarginPercent({
+      prop: topNormalized,
+      cols: colsPercent,
+    });
+    const bottomPercent = useMarginPercent({
+      prop: topNormalized,
+      cols: colsPercent,
+    });
 
     const alignmentXRest = useMemo(
       () =>
@@ -198,7 +124,6 @@ const Box = React.forwardRef<HTMLElement, Props>(
 
     useEffect(() => {
       if (register) register();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

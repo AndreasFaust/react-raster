@@ -15,7 +15,7 @@ interface Props {
   alignX: string[];
   alignY: string[];
   media: any[];
-  padding?: string[];
+  padding?: string[] | number[];
   children: React.ReactNode;
 }
 
