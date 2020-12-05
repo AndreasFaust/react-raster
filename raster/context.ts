@@ -10,7 +10,7 @@ interface ContextProps {
   media: any[];
   controlIsVisible: boolean;
   controlColor: string;
-  register?: () => void;
+  registerChildBox?: () => void;
 }
 
 const Context = React.createContext<ContextProps | null>(null);

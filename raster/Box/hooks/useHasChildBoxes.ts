@@ -3,20 +3,20 @@ import getReset from "../../utils/getReset";
 
 interface Props {
   hasChildBoxes?: boolean;
-  hasChildBoxesRegistered?: boolean;
+  childBoxes: { left: number[]; right: number[]; cols: number[] }[];
 }
 
 export default function useHasChildBoxes({
   hasChildBoxes,
-  hasChildBoxesRegistered,
+  childBoxes,
 }: Props): boolean {
   const hasChildBoxesNormalized = useMemo(
     () =>
       getReset({
         hasChildBoxesFromProps: hasChildBoxes,
-        hasChildBoxesFromRegister: hasChildBoxesRegistered,
+        hasChildBoxesFromRegister: !!childBoxes.length,
       }),
-    [hasChildBoxes, hasChildBoxesRegistered]
+    [hasChildBoxes, childBoxes]
   );
   return hasChildBoxesNormalized;
 }

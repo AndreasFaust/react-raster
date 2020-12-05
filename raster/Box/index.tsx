@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useMemo, useState } from "react";
 import classNames from "classnames";
 
 import getColsPercent from "../utils/getColsPercent";
-import getMarginsPercent from "../utils/getMarginsPercent";
 import Inner from "../utils/inner";
 import Resetter from "../utils/resetter";
 import getAlignmentXRest from "../utils/getAlignmentXRest";
@@ -50,13 +49,13 @@ const Box = React.forwardRef<HTMLElement, Props>(
       media,
       controlIsVisible,
       controlColor,
-      register,
+      registerChildBox,
     } = useContext(Context);
 
-    const [hasChildBoxesRegistered, setHasChildBoxes] = useState(null);
+    const [childBoxes, setChildBoxes] = useState([]);
     const hasChildBoxesNormalized = useHasChildBoxes({
       hasChildBoxes,
-      hasChildBoxesRegistered,
+      childBoxes,
     });
     const alignXNormalized = useAlign({
       align: alignX,
@@ -105,25 +104,32 @@ const Box = React.forwardRef<HTMLElement, Props>(
       cols: colsPercent,
     });
     const bottomPercent = useMarginPercent({
-      prop: topNormalized,
+      prop: bottomNormalized,
       cols: colsPercent,
     });
 
     const alignmentXRest = useMemo(
       () =>
         getAlignmentXRest({
-          children,
+          childBoxes,
           breakpoints,
           cssMode,
           colsTotal: colsNormalized,
           alignX: alignXNormalized,
           alignXRaw: alignX,
         }),
-      [alignX, alignXNormalized, breakpoints, children, colsNormalized, cssMode]
+      [
+        alignX,
+        alignXNormalized,
+        breakpoints,
+        childBoxes,
+        colsNormalized,
+        cssMode,
+      ]
     );
 
     useEffect(() => {
-      if (register) register();
+      if (registerChildBox) registerChildBox();
     }, []);
 
     return (
@@ -188,14 +194,21 @@ const Box = React.forwardRef<HTMLElement, Props>(
                   controlIsVisible,
                   controlColor,
                   cssMode,
-                  register: () => {
-                    if (!hasChildBoxesRegistered) {
-                      setHasChildBoxes(true);
-                    }
+                  rest: alignmentXRest,
+                  registerChildBox: () => {
+                    setChildBoxes((childBoxes) => [
+                      ...childBoxes,
+                      {
+                        left: leftNormalized,
+                        right: rightNormalized,
+                        cols: colsNormalized,
+                      },
+                    ]);
                   },
                 }}
               >
-                {React.Children.toArray(children).map(
+                {children}
+                {/* {React.Children.toArray(children).map(
                   (child: React.ReactNode, index) => {
                     return React.isValidElement(child)
                       ? React.cloneElement(child as React.ReactElement<any>, {
@@ -203,7 +216,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
                         })
                       : child;
                   }
-                )}
+                )} */}
               </Context.Provider>
             </Resetter>
           </>

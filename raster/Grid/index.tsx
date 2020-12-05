@@ -115,18 +115,18 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       [style, breakpoints]
     );
 
-    const alignmentXRest = useMemo(
-      () =>
-        getAlignmentXRest({
-          children,
-          breakpoints,
-          colsTotal: normalizeProps({ prop: colspan, breakpoints }),
-          alignX: alignXNormalized,
-          cssMode,
-          alignXRaw: alignX,
-        }),
-      [alignX, alignXNormalized, breakpoints, children, colspan, cssMode]
-    );
+    // const alignmentXRest = useMemo(
+    //   () =>
+    //     getAlignmentXRest({
+    //       children,
+    //       breakpoints,
+    //       colsTotal: normalizeProps({ prop: colspan, breakpoints }),
+    //       alignX: alignXNormalized,
+    //       cssMode,
+    //       alignXRaw: alignX,
+    //     }),
+    //   [alignX, alignXNormalized, breakpoints, children, colspan, cssMode]
+    // );
 
     return (
       <StyledGrid
@@ -200,7 +200,8 @@ const Grid = React.forwardRef<HTMLElement, Props>(
                 controlColor,
               }}
             >
-              {alignmentXRest
+              {children}
+              {/* {alignmentXRest
                 ? React.Children.map(children, (child, index) => {
                     return React.cloneElement(
                       child as React.ReactElement<any>,
@@ -209,7 +210,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
                       }
                     );
                   })
-                : children}
+                : children} */}
             </Context.Provider>
           </Resetter>
         </Inner>

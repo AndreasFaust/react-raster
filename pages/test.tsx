@@ -49,7 +49,7 @@ const Testpage: NextPage<Props> = (props) => {
       // gutterY={"3vw"}
       colspan={12}
       alignX={"center"}
-      alignY={"center"}
+      // alignY={"center"}
       control
       // styleOuter={`width: 80%;`}
       style={`
@@ -69,11 +69,13 @@ const Testpage: NextPage<Props> = (props) => {
           cols={[5]}
           left={[0]}
           style={`
-          background: pink;
-          height: 200px;
-        `}
+            background: pink;
+            height: 200px;
+          `}
         >
-          <h1>Hallo!</h1>
+          <Box cols={3} tag="h1">
+            Hallo!
+          </Box>
         </Box>
       </Link>
       <Box
