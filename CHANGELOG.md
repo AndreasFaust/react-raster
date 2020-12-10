@@ -1,3 +1,14 @@
+#### 6.0.6 (2020-12-10)
+
+##### Documentation Changes
+
+*  improve highlighting (5e4525b2)
+*  add line (78a9786c)
+
+##### Bug Fixes
+
+*  make cssMode-detection actually work (7bb721c3)
+
 #### 6.0.5 (2020-12-05)
 
 ##### Documentation Changes

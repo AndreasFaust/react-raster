@@ -241,19 +241,24 @@ var Resetter = function (props) {
 };
 var templateObject_1$2, templateObject_2$1;
 
-function useCssMode(initialValue) {
-    var _a = React.useState(initialValue), cssMode = _a[0], setCssMode = _a[1];
+function useCssMode(cssModeFromProps) {
+    var _a = React.useState("grid"), cssMode = _a[0], setCssMode = _a[1];
     React.useEffect(function () {
-        if (cssMode)
+        if (cssModeFromProps) {
+            setCssMode(cssModeFromProps);
             return;
+        }
         var supportsCSS = (window.CSS && window.CSS.supports) || false;
         var supportsGrid = supportsCSS
             ? supportsCSS("grid-template-rows", "none")
             : false;
-        if (!supportsGrid) {
+        if (supportsGrid) {
+            setCssMode("grid");
+        }
+        else {
             setCssMode("flex");
         }
-    }, []);
+    }, [cssMode, cssModeFromProps]);
     return cssMode;
 }
 
@@ -432,7 +437,10 @@ function normalizeRest(_a) {
     if (!rest) {
         return normalizeProps({ prop: null, breakpoints: breakpoints });
     }
-    return rest.find(function (r) { return r.id === id; }).width;
+    var thisRest = rest.find(function (r) { return r.id === id; });
+    return thisRest
+        ? thisRest.width
+        : normalizeProps({ prop: null, breakpoints: breakpoints });
 }
 
 function getReset(_a) {
@@ -686,7 +694,7 @@ var defaultProps$1 = {
 var Grid = React.forwardRef(function (_a, ref) {
     var breakpoints = _a.breakpoints, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, gutterX = _a.gutterX, gutterY = _a.gutterY, alignX = _a.alignX, alignY = _a.alignY, colspan = _a.colspan, control = _a.control, controlColor = _a.controlColor, position = _a.position, style = _a.style, className = _a.className, children = _a.children, cssMode = _a.cssMode, tag = _a.tag, attrs = _a.attrs, isControl = _a.isControl;
     var controlIsVisible = useControl(control);
-    var cssModeNormalized = useCssMode(cssMode || "grid");
+    var cssModeNormalized = useCssMode(cssMode);
     var _b = React.useState([]), childBoxes = _b[0], setChildBoxes = _b[1];
     var currentBreakpoint = useCurrentBreakpoint(breakpoints);
     var gutterXNormalized = normalizeProps({ prop: gutterX, breakpoints: breakpoints });
