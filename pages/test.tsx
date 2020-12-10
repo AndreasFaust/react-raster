@@ -38,43 +38,48 @@ const Testpage: NextPage<Props> = (props) => {
   }, []);
 
   return (
-    <Grid
-      tag="section"
-      breakpoints={[0, 500, 768, 1024, 1200, 1400]}
-      left={"1.5vw"}
-      right={"3vw"}
-      top={"10vw"}
-      bottom={"20vw"}
-      gutterX={["0px", "0px", "1.5vw"]}
-      // gutterY={"3vw"}
-      colspan={12}
-      alignX={["center", "right", "left"]}
-      // alignY={"center"}
-      control
-      // styleOuter={`width: 80%;`}
-      style={`
+    <>
+      <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
+        Hallo
+      </Box>
+
+      <Grid
+        tag="section"
+        breakpoints={[0, 500, 768, 1024, 1200, 1400]}
+        left={"1.5vw"}
+        right={"3vw"}
+        top={"10vw"}
+        bottom={"20vw"}
+        gutterX={["0px", "0px", "1.5vw"]}
+        // gutterY={"3vw"}
+        colspan={12}
+        alignX={["center", "right", "left"]}
+        // alignY={"center"}
+        control
+        // styleOuter={`width: 80%;`}
+        style={`
         background: blue;
         &.bp-768 {
           // background: black;
         }
       `}
-      // cssMode="flex"
-      ref={gridRef}
-    >
-      <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
-        Hallo
-      </Box>
-      <Box cols={[2, 3]} bottom={1} style={`background: red;`}>
-        Hallo
-      </Box>
-      <Box cols={[3, 4]} bottom={1} style={`background: red;`}>
-        Hallo
-      </Box>
-      <Box cols={[4, 5]} bottom={1} style={`background: red;`}>
-        Hallo
-      </Box>
+        // cssMode="flex"
+        ref={gridRef}
+      >
+        <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
+          Hallo
+        </Box>
+        <Box cols={[2, 3]} bottom={1} style={`background: red;`}>
+          Hallo
+        </Box>
+        <Box cols={[3, 4]} bottom={1} style={`background: red;`}>
+          Hallo
+        </Box>
+        <Box cols={[4, 5]} bottom={1} style={`background: red;`}>
+          Hallo
+        </Box>
 
-      {/* <Link href="/" passHref>
+        {/* <Link href="/" passHref>
         <Box
           ref={boxRef}
           className="Box--2"
@@ -127,7 +132,8 @@ const Testpage: NextPage<Props> = (props) => {
           `}
         />
       </Box> */}
-    </Grid>
+      </Grid>
+    </>
   );
 };
 

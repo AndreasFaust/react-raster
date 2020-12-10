@@ -10,6 +10,7 @@ import getAlignmentXRest from "../utils/getAlignmentXRest";
 import normalizeRest from "../utils/normalizeRest";
 import normalizeProps from "../utils/normalizeProps";
 import getReset from "../utils/getReset";
+import ErrorMessage from "../utils/ErrorMessage";
 
 import Context from "../context";
 import StyledBox from "./StyledBox";
@@ -40,6 +41,11 @@ const Box = React.forwardRef<HTMLElement, Props>(
     },
     ref
   ) => {
+    const context = useContext(Context);
+    if (!context) {
+      return <ErrorMessage />;
+    }
+
     const {
       cssMode,
       breakpoints,
@@ -52,7 +58,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       controlColor,
       rest,
       registerChildBox,
-    } = useContext(Context);
+    } = context;
 
     const [id] = React.useState(nanoid);
     const [childBoxes, setChildBoxes] = useState([]);
