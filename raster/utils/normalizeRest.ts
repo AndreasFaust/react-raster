@@ -14,5 +14,8 @@ export default function normalizeRest({
   if (!rest) {
     return normalizeProps({ prop: null, breakpoints });
   }
-  return rest.find((r) => r.id === id).width;
+  const thisRest = rest.find((r) => r.id === id);
+  return thisRest
+    ? thisRest.width
+    : normalizeProps({ prop: null, breakpoints });
 }

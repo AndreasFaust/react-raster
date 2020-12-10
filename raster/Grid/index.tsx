@@ -41,7 +41,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     ref
   ) => {
     const controlIsVisible = useControl(control);
-    const cssModeNormalized = useCssMode(cssMode || "grid");
+    const cssModeNormalized = useCssMode(cssMode);
     const [childBoxes, setChildBoxes] = React.useState([]);
 
     const currentBreakpoint = useCurrentBreakpoint(breakpoints);
