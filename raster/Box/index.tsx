@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import classNames from "classnames";
-import { nanoid } from "nanoid";
+import { nanoid } from "nanoid/non-secure";
 
 import getColsPercent from "../utils/getColsPercent";
 import Inner from "../utils/inner";
@@ -54,7 +54,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       registerChildBox,
     } = useContext(Context);
 
-    const id = React.useRef(nanoid());
+    const [id] = React.useState(nanoid);
     const [childBoxes, setChildBoxes] = useState([]);
     const hasChildBoxesNormalized = getReset({
       hasChildBoxesFromProps: hasChildBoxes,
@@ -71,7 +71,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       hasChildBoxes: hasChildBoxesNormalized,
     });
 
-    const restNormalized = normalizeRest({ rest, breakpoints, id: id.current });
+    const restNormalized = normalizeRest({ rest, breakpoints, id });
 
     const leftNormalized = normalizeProps({ prop: left, breakpoints });
     const rightNormalized = normalizeProps({ prop: right, breakpoints });
@@ -128,7 +128,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
           left: leftNormalized,
           right: rightNormalized,
           cols: colsNormalized,
-          id: id.current,
+          id,
         });
     }, []);
 
