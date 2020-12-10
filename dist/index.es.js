@@ -293,60 +293,18 @@ var StyledGrid = React.forwardRef(function (props, ref) {
 });
 var templateObject_1$3, templateObject_2$2, templateObject_3$1, templateObject_4;
 
-// This file replaces `index.js` in bundlers like webpack or Rollup,
-
-if (process.env.NODE_ENV !== 'production') {
-  // All bundlers will remove this block in the production bundle.
-  if (
-    typeof navigator !== 'undefined' &&
-    navigator.product === 'ReactNative' &&
-    typeof crypto === 'undefined'
-  ) {
-    throw new Error(
-      'React Native does not have a built-in secure random generator. ' +
-        'If you don’t need unpredictable IDs use `nanoid/non-secure`. ' +
-        'For secure IDs, import `react-native-get-random-values` ' +
-        'before Nano ID. If you use Expo, install `expo-random` ' +
-        'and use `nanoid/async`.'
-    )
-  }
-  if (typeof msCrypto !== 'undefined' && typeof crypto === 'undefined') {
-    throw new Error(
-      'Import file with `if (!window.crypto) window.crypto = window.msCrypto`' +
-        ' before importing Nano ID to fix IE 11 support'
-    )
-  }
-  if (typeof crypto === 'undefined') {
-    throw new Error(
-      'Your browser does not have secure random generator. ' +
-        'If you don’t need unpredictable IDs, you can use nanoid/non-secure.'
-    )
-  }
-}
+// This alphabet uses `A-Za-z0-9_-` symbols. The genetic algorithm helped
+// optimize the gzip compression for this alphabet.
+let urlAlphabet =
+  'ModuleSymbhasOwnPr-0123456789ABCDEFGHNRVfgctiUvz_KqYTJkLxpZXIjQW';
 
 let nanoid = (size = 21) => {
   let id = '';
-  let bytes = crypto.getRandomValues(new Uint8Array(size));
-
   // A compact alternative for `for (var i = 0; i < step; i++)`.
-  while (size--) {
-    // It is incorrect to use bytes exceeding the alphabet size.
-    // The following mask reduces the random byte in the 0-255 value
-    // range to the 0-63 value range. Therefore, adding hacks, such
-    // as empty string fallback or magic numbers, is unneccessary because
-    // the bitmask trims bytes down to the alphabet size.
-    let byte = bytes[size] & 63;
-    if (byte < 36) {
-      // `0-9a-z`
-      id += byte.toString(36);
-    } else if (byte < 62) {
-      // `A-Z`
-      id += (byte - 26).toString(36).toUpperCase();
-    } else if (byte < 63) {
-      id += '_';
-    } else {
-      id += '-';
-    }
+  let i = size;
+  while (i--) {
+    // `| 0` is more compact and faster than `Math.floor()`.
+    id += urlAlphabet[(Math.random() * 64) | 0];
   }
   return id
 };
@@ -541,7 +499,7 @@ function useMarginPercent(_a) {
 var Box = React.forwardRef(function (_a, ref) {
     var className = _a.className, cols = _a.cols, alignX = _a.alignX, alignY = _a.alignY, children = _a.children, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, padding = _a.padding, style = _a.style, hasChildBoxes = _a.hasChildBoxes, tag = _a.tag, attrs = _a.attrs, href = _a.href, onClick = _a.onClick;
     var _b = useContext(Context), cssMode = _b.cssMode, breakpoints = _b.breakpoints, gutterX = _b.gutterX, gutterY = _b.gutterY, colspan = _b.colspan, parentCols = _b.parentCols, media = _b.media, controlIsVisible = _b.controlIsVisible, controlColor = _b.controlColor, rest = _b.rest, registerChildBox = _b.registerChildBox;
-    var id = React.useRef(nanoid());
+    var id = React.useState(nanoid)[0];
     var _c = useState([]), childBoxes = _c[0], setChildBoxes = _c[1];
     var hasChildBoxesNormalized = getReset({
         hasChildBoxesFromProps: hasChildBoxes,
@@ -557,7 +515,7 @@ var Box = React.forwardRef(function (_a, ref) {
         cssMode: cssMode,
         hasChildBoxes: hasChildBoxesNormalized,
     });
-    var restNormalized = normalizeRest({ rest: rest, breakpoints: breakpoints, id: id.current });
+    var restNormalized = normalizeRest({ rest: rest, breakpoints: breakpoints, id: id });
     var leftNormalized = normalizeProps({ prop: left, breakpoints: breakpoints });
     var rightNormalized = normalizeProps({ prop: right, breakpoints: breakpoints });
     var topNormalized = normalizeProps({ prop: top, breakpoints: breakpoints });
@@ -609,7 +567,7 @@ var Box = React.forwardRef(function (_a, ref) {
                 left: leftNormalized,
                 right: rightNormalized,
                 cols: colsNormalized,
-                id: id.current,
+                id: id,
             });
     }, []);
     return (React.createElement(StyledBox, { cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign({}, attrs), (href && { href: href })), (onClick && { onClick: onClick })) },

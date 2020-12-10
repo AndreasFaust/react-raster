@@ -1,3 +1,9 @@
+#### 6.0.7 (2020-12-10)
+
+##### Bug Fixes
+
+*  nanoId threw error so switched to nanoid/non-secure (67da56c1)
+
 #### 6.0.6 (2020-12-10)
 
 ##### Documentation Changes
