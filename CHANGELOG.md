@@ -1,3 +1,9 @@
+#### 6.0.8 (2020-12-10)
+
+##### Bug Fixes
+
+*  show error-message, if Box is not child of a Grid (f9fea99e)
+
 #### 6.0.7 (2020-12-10)
 
 ##### Bug Fixes

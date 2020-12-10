@@ -417,6 +417,17 @@ function getReset(_a) {
         : hasChildBoxesFromRegister;
 }
 
+var ErrorMessage = function () {
+    console.error("Error in react-raster! Boxes always need a wrapping Grid!");
+    return (React__default['default'].createElement("div", { style: {
+            background: "red",
+            padding: "0.5em",
+            fontFamily: "sans-serif",
+        } },
+        React__default['default'].createElement("strong", null, "Error!"),
+        " This is a fallback, because this Box is not child of a Grid!"));
+};
+
 var GridLayout$1 = styled__default['default'](Container)(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  box-sizing: border-box;\n  ", ";\n\n  ", "\n  ", "\n    \n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n  ", ";\n\n  ",
     "\n  ",
     "\n    \n  ",
@@ -507,9 +518,13 @@ function useMarginPercent(_a) {
 
 var Box = React__default['default'].forwardRef(function (_a, ref) {
     var className = _a.className, cols = _a.cols, alignX = _a.alignX, alignY = _a.alignY, children = _a.children, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, padding = _a.padding, style = _a.style, hasChildBoxes = _a.hasChildBoxes, tag = _a.tag, attrs = _a.attrs, href = _a.href, onClick = _a.onClick;
-    var _b = React.useContext(Context), cssMode = _b.cssMode, breakpoints = _b.breakpoints, gutterX = _b.gutterX, gutterY = _b.gutterY, colspan = _b.colspan, parentCols = _b.parentCols, media = _b.media, controlIsVisible = _b.controlIsVisible, controlColor = _b.controlColor, rest = _b.rest, registerChildBox = _b.registerChildBox;
+    var context = React.useContext(Context);
+    if (!context) {
+        return React__default['default'].createElement(ErrorMessage, null);
+    }
+    var cssMode = context.cssMode, breakpoints = context.breakpoints, gutterX = context.gutterX, gutterY = context.gutterY, colspan = context.colspan, parentCols = context.parentCols, media = context.media, controlIsVisible = context.controlIsVisible, controlColor = context.controlColor, rest = context.rest, registerChildBox = context.registerChildBox;
     var id = React__default['default'].useState(nanoid)[0];
-    var _c = React.useState([]), childBoxes = _c[0], setChildBoxes = _c[1];
+    var _b = React.useState([]), childBoxes = _b[0], setChildBoxes = _b[1];
     var hasChildBoxesNormalized = getReset({
         hasChildBoxesFromProps: hasChildBoxes,
         hasChildBoxesFromRegister: !!childBoxes.length,
