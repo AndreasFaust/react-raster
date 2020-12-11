@@ -37,6 +37,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       tag,
       attrs,
       href,
+      component,
       onClick,
     },
     ref
@@ -140,6 +141,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
 
     return (
       <StyledBox
+        component={component}
         cssMode={cssMode}
         breakpoints={breakpoints}
         className={cssMode === "grid" ? classNames(["Box", className]) : "Box"}

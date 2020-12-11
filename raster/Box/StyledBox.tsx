@@ -27,6 +27,7 @@ interface Props {
   style?: string[];
   attrs: object;
   children: React.ReactNode;
+  component: React.ReactElement;
 }
 
 const GridLayout = styled(Container)<Props>`

@@ -12,6 +12,7 @@ export interface Props {
   alignY?: AlignY | AlignY[];
   style?: string | string[];
   tag?: string;
+  component?: React.ReactElement;
   attrs?: object;
   hasChildBoxes?: boolean;
   className?: string;
@@ -37,4 +38,5 @@ export const defaultProps = {
   attrs: {},
   href: null,
   onClick: null,
+  component: null,
 };

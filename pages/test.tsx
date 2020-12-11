@@ -2,6 +2,7 @@ import React from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 import { Grid, Box } from "../raster";
+import { motion } from "framer-motion";
 
 const ImageBox = () => (
   <Box
@@ -39,9 +40,9 @@ const Testpage: NextPage<Props> = (props) => {
 
   return (
     <>
-      <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
+      {/* <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
         Hallo
-      </Box>
+      </Box> */}
 
       <Grid
         tag="section"
@@ -72,9 +73,17 @@ const Testpage: NextPage<Props> = (props) => {
         <Box cols={[2, 3]} bottom={1} style={`background: red;`}>
           Hallo
         </Box>
-        <Box cols={[3, 4]} bottom={1} style={`background: red;`}>
-          Hallo
-        </Box>
+        <Link href="/" passHref>
+          <Box
+            cols={[3, 4]}
+            left={1}
+            bottom={1}
+            style={`background: green;`}
+            component={<motion.a id="arsch" animate={{ y: -100 }} />}
+          >
+            DEPP!
+          </Box>
+        </Link>
         <Box cols={[4, 5]} bottom={1} style={`background: red;`}>
           Hallo
         </Box>
