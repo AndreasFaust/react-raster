@@ -34,6 +34,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       className,
       children,
       cssMode,
+      component,
       tag,
       attrs,
       isControl,
@@ -76,8 +77,13 @@ const Grid = React.forwardRef<HTMLElement, Props>(
 
     return (
       <StyledGrid
+        alignX={alignXNormalized}
+        alignY={alignYNormalized}
+        attrs={attrs}
+        bottom={bottomNormalized}
         cssMode={cssModeNormalized}
         colspan={colspan}
+        component={component}
         className={classNames([
           "Grid",
           `bp-${currentBreakpoint.index}`,
@@ -86,19 +92,15 @@ const Grid = React.forwardRef<HTMLElement, Props>(
         ])}
         gutterX={gutterXNormalized}
         gutterY={gutterYNormalized}
-        alignX={alignXNormalized}
-        alignY={alignYNormalized}
-        media={media}
-        left={leftNormalized}
-        right={rightNormalized}
-        top={topNormalized}
-        bottom={bottomNormalized}
-        position={positionNormalized}
-        tag={tag}
-        attrs={attrs}
-        style={styleNormalized}
-        ref={ref}
         isControl={isControl}
+        left={leftNormalized}
+        media={media}
+        position={positionNormalized}
+        ref={ref}
+        right={rightNormalized}
+        style={styleNormalized}
+        tag={tag}
+        top={topNormalized}
       >
         {control && controlIsVisible && (
           <ControlGrid

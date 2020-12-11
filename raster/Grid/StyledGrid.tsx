@@ -22,6 +22,7 @@ interface Props {
   children: React.ReactNode;
   cssMode: "grid" | "flex";
   style: string[];
+  component?: React.ReactElement;
 }
 
 const controlStyles = `

@@ -197,6 +197,56 @@ const ExampleTeaser = () => (
 
 ---
 
+## Combine Box with `Framer Motion`’s `Motion`-Component
+
+`react-raster`’s components can be combined with `Framer Motion`.
+Here’s an example you can also find at [Code Sandbox](https://codesandbox.io/s/react-raster-example-with-framer-motion-ddi0k).
+
+```jsx
+import React from "react";
+import { Grid, Box } from "react-raster";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const teaserVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
+
+const ExampleTeaser = () => (
+  <Box component={<motion.a variants={teaserVariants} />}>
+    <h2>I am the child of the Motion-Link!</h2>
+  </Box>
+);
+
+const ExampleGrid = () => {
+  <Grid
+    component={
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      />
+    }
+  >
+    <ExampleTeaser />
+    <ExampleTeaser />
+    <ExampleTeaser />
+  </Grid>;
+};
+```
+
+---
+
 ## Advanced Example
 
 The following code gives you a more detailed example of what you can do with react-raster:
@@ -330,6 +380,7 @@ All props are optional.
 | **tag**          | String                     | `'div'`                           | HTML-Tag                                                                                                        |
 | **attrs**        | Object                     | `{}`                              | Attributes of the HTML-Tag                                                                                      |
 | **ref**          | React ref-object           | `null`                            | Pass a ref.                                                                                                     |
+| **component**    | ReactElement               | `null`                            | Render a React Component instead of a normal Grid. Useful for Framer Motion. .                                  |
 
 ---
 
@@ -354,6 +405,7 @@ All props are optional.
 | **ref**           | React ref-object           | `null`      | Pass a ref.                                                                                                                                           |
 | **href**          | String                     | `null`      | Pass a `href`. Added for the `Link`-component of `nextJS`.                                                                                            |
 | **onClick**       | Function                   | `null`      | Pass a click handler.                                                                                                                                 |
+| **component**     | ReactElement               | `null`      | Render a React Component instead of a normal Box. Useful for Framer Motion.                                                                           |
 
 ---
 

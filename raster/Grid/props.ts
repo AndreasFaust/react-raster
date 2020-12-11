@@ -2,47 +2,49 @@ import React from "react";
 import { AlignX, AlignY } from "../alignTypes";
 
 export interface Props {
-  breakpoints?: number[];
-  colspan?: number;
-  left?: string | string[];
-  right?: string | string[];
-  top?: string | string[];
-  bottom?: string | string[];
-  gutterX?: string | string[];
-  gutterY?: string | string[];
   alignX?: AlignX | AlignX[];
   alignY?: AlignY | AlignY[];
+  attrs?: object;
+  bottom?: string | string[];
+  breakpoints?: number[];
+  children?: React.ReactNode;
+  className?: string;
+  colspan?: number;
+  component?: React.ReactElement;
   control?: boolean;
   controlColor?: string;
-  position?: string | string[];
-  className?: string;
-  style?: string | string[];
-  children?: React.ReactNode;
-  tag?: string;
-  attrs?: object;
-  isControl?: boolean;
   cssMode?: "grid" | "flex";
+  gutterX?: string | string[];
+  gutterY?: string | string[];
+  isControl?: boolean;
+  left?: string | string[];
+  position?: string | string[];
+  right?: string | string[];
+  style?: string | string[];
+  tag?: string;
+  top?: string | string[];
 }
 
 export const defaultProps = {
-  breakpoints: [0, 432, 768, 1024, 1200, 1400],
-  left: "0",
-  right: "0",
-  top: "0",
-  bottom: "0",
-  gutterX: "0px",
-  gutterY: "0px",
   alignX: null,
   alignY: null,
+  attrs: {},
+  bottom: "0",
+  breakpoints: [0, 432, 768, 1024, 1200, 1400],
+  children: null,
+  className: null,
   colspan: 1,
+  component: null,
   control: false,
   controlColor: "rgba(0, 0, 0, 0.1)",
-  position: "relative",
-  style: null,
-  className: null,
-  children: null,
   cssMode: null,
-  tag: "div",
-  attrs: {},
+  gutterX: "0px",
+  gutterY: "0px",
   isControl: false,
+  left: "0",
+  position: "relative",
+  right: "0",
+  tag: "div",
+  top: "0",
+  style: null,
 };

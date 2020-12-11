@@ -2,41 +2,41 @@ import React from "react";
 import { AlignX, AlignY } from "../alignTypes";
 
 export interface Props {
-  cols?: number | number[];
-  left?: number | number[];
-  right?: number | number[];
-  top?: number | number[];
-  bottom?: number | number[];
-  padding?: string | string[];
   alignX?: AlignX | AlignX[];
   alignY?: AlignY | AlignY[];
+  attrs?: object;
+  bottom?: number | number[];
+  children?: React.ReactNode;
+  className?: string;
+  cols?: number | number[];
+  component?: React.ReactElement;
+  hasChildBoxes?: boolean;
+  href?: string;
+  left?: number | number[];
+  onClick?: () => void;
+  padding?: string | string[];
+  right?: number | number[];
   style?: string | string[];
   tag?: string;
-  component?: React.ReactElement;
-  attrs?: object;
-  hasChildBoxes?: boolean;
-  className?: string;
-  children?: React.ReactNode;
-  href?: string;
-  onClick?: () => void;
+  top?: number | number[];
 }
 
 export const defaultProps = {
-  className: null,
-  cols: null,
+  attrs: {},
   alignX: null,
   alignY: null,
-  children: null,
-  left: 0,
-  right: 0,
-  top: 0,
   bottom: 0,
-  padding: null,
-  style: null,
-  hasChildBoxes: null,
-  tag: "div",
-  attrs: {},
-  href: null,
-  onClick: null,
+  children: null,
+  className: null,
+  cols: null,
   component: null,
+  hasChildBoxes: null,
+  href: null,
+  left: 0,
+  onClick: null,
+  padding: null,
+  right: 0,
+  style: null,
+  tag: "div",
+  top: 0,
 };
