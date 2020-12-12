@@ -5,7 +5,7 @@ interface Props {
   attrs?: any;
   tag?: string;
   children: React.ReactNode;
-  component: React.ReactElement;
+  component?: React.ReactElement;
 }
 
 const Container = React.forwardRef<HTMLElement, Props>(

@@ -4,30 +4,30 @@ import styled from "styled-components";
 import Container from "../utils/container";
 
 interface Props {
-  cssMode: "grid" | "flex";
-  breakpoints: number[];
-  className: string;
-  cols: number[];
-  rest: string[];
-  media: any[];
-  gutterX: string[];
-  gutterY: string[];
-  colspan: number[];
-  hasChildBoxes: boolean;
   alignX: string[];
   alignY: string[];
-  tag: string;
-  left: string[];
-  right: string[];
-  top: string[];
-  bottom: string[];
-  padding: string[];
-  controlIsVisible: boolean;
-  controlColor: string;
-  style?: string[];
   attrs: object;
+  bottom: string[];
+  breakpoints: number[];
   children: React.ReactNode;
-  component: React.ReactElement;
+  className: string;
+  cols: number[];
+  colspan: number[];
+  component?: React.ReactElement;
+  controlColor: string;
+  controlIsVisible: boolean;
+  cssMode: "grid" | "flex";
+  gutterX: string[];
+  gutterY: string[];
+  hasChildBoxes: boolean;
+  left: string[];
+  media: any[];
+  padding: string[];
+  rest: string[];
+  right: string[];
+  style?: string[];
+  tag: string;
+  top: string[];
 }
 
 const GridLayout = styled(Container)<Props>`

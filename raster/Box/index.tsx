@@ -22,23 +22,23 @@ import useMarginPercent from "./hooks/useMarginPercent";
 const Box = React.forwardRef<HTMLElement, Props>(
   (
     {
-      className,
-      cols,
       alignX,
       alignY,
-      children,
-      left,
-      right,
-      top,
-      bottom,
-      padding,
-      style,
-      hasChildBoxes,
-      tag,
       attrs,
-      href,
+      bottom,
+      className,
+      cols,
       component,
+      children,
+      hasChildBoxes,
+      href,
+      padding,
+      left,
       onClick,
+      right,
+      style,
+      top,
+      tag,
     },
     ref
   ) => {
@@ -48,15 +48,15 @@ const Box = React.forwardRef<HTMLElement, Props>(
     }
 
     const {
-      cssMode,
       breakpoints,
+      colspan,
+      controlColor,
+      controlIsVisible,
+      cssMode,
       gutterX,
       gutterY,
-      colspan,
-      parentCols,
       media,
-      controlIsVisible,
-      controlColor,
+      parentCols,
       rest,
       registerChildBox,
     } = context;

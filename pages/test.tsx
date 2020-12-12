@@ -48,7 +48,7 @@ const Testpage: NextPage<Props> = (props) => {
           y: 50,
           opacity: 0,
         }}
-        variants={variants}
+        // variants={variants}
       >
         <Grid
           tag="section"
