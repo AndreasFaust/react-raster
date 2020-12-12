@@ -1,3 +1,9 @@
+#### 6.0.10 (2020-12-12)
+
+##### Bug Fixes
+
+*  update dependencies (35f7d336)
+
 #### 6.0.9 (2020-12-12)
 
 ##### Bug Fixes
