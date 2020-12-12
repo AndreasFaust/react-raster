@@ -13,9 +13,12 @@ const items = [
 ];
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
   show: {
-    opacity: 1,
     transition: {
       staggerChildren: 0.3,
     },
@@ -60,6 +63,7 @@ const ExampleGrid = ({ children }) => (
         variants={containerVariants}
         initial="hidden"
         animate="show"
+        exit="hidden"
       />
     }
   >

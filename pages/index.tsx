@@ -118,6 +118,36 @@ const Startpage: NextPage<Props> = (props) => {
             </small>
           </Box>
         </Box>
+        <Box cols={[12]} top={0.5} alignX="center">
+          <Box cols={[12, 12, 6]} top={0.5}>
+            <Box tag="h2">
+              Example with <pre>Framer Motion</pre>
+            </Box>
+            <Box>
+              <iframe
+                src="https://codesandbox.io/embed/react-raster-example-with-framer-motion-ddi0k"
+                style={{ width: "100%", height: 500 }}
+                // style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+              ></iframe>
+            </Box>
+          </Box>
+          <Box cols={[12, 12, 6]} top={0.5}>
+            <Box tag="h2">
+              Example with <pre>Next JS</pre> and <pre>Framer Motion</pre>
+            </Box>
+            <Box>
+              <iframe
+                src="https://codesandbox.io/embed/react-raster-example-with-framer-motion-and-nextlink-j4wg6"
+                style={{ width: "100%", height: 500 }}
+                // style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+              ></iframe>
+            </Box>
+          </Box>
+        </Box>
       </Grid>
       <style jsx global>{`
         @font-face {

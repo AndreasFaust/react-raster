@@ -1,22 +1,16 @@
 import React from "react";
-
+import App from "next/app";
+import { AnimatePresence } from "framer-motion";
 import "./css/reset.css";
 import "./css/index.css";
 
-interface Props {
-  Component?: any;
-  pageProps?: any;
-  router?: any;
+function MyApp({ Component, pageProps, router }) {
+  return (
+    <AnimatePresence exitBeforeEnter>
+      <div className="content"></div>
+      <Component {...pageProps} key={router.route} />
+    </AnimatePresence>
+  );
 }
 
-const App: React.FC<Props> = ({ Component, pageProps, router }) => {
-  return (
-    <>
-      <div className="content">
-        <Component {...pageProps} key={router.asPath} />
-      </div>
-    </>
-  );
-};
-
-export default App;
+export default MyApp;
