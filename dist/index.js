@@ -272,7 +272,10 @@ function useCssMode(cssModeFromProps) {
 }
 
 var Container = React__default['default'].forwardRef(function (_a, ref) {
-    var className = _a.className, children = _a.children, _b = _a.attrs, attrs = _b === void 0 ? {} : _b, _c = _a.tag, tag = _c === void 0 ? "div" : _c;
+    var className = _a.className, children = _a.children, component = _a.component, _b = _a.attrs, attrs = _b === void 0 ? {} : _b, _c = _a.tag, tag = _c === void 0 ? "div" : _c;
+    if (component) {
+        return React__default['default'].cloneElement(component, __assign({ children: children, className: className }, attrs));
+    }
     return React__default['default'].createElement(tag, __assign(__assign({}, attrs), { className: className, ref: ref }), tag !== "img" ? children : undefined);
 });
 
@@ -471,22 +474,23 @@ var StyledBox = React__default['default'].forwardRef(function (props, ref) {
 var templateObject_1$4, templateObject_2$3, templateObject_3$2, templateObject_4$1, templateObject_5, templateObject_6;
 
 var defaultProps = {
-    className: null,
-    cols: null,
+    attrs: {},
     alignX: null,
     alignY: null,
-    children: null,
-    left: 0,
-    right: 0,
-    top: 0,
     bottom: 0,
-    padding: null,
-    style: null,
+    children: null,
+    className: null,
+    cols: null,
+    component: null,
     hasChildBoxes: null,
-    tag: "div",
-    attrs: {},
     href: null,
+    left: 0,
     onClick: null,
+    padding: null,
+    right: 0,
+    style: null,
+    tag: "div",
+    top: 0,
 };
 
 function getMarginsPercent(_a) {
@@ -517,12 +521,12 @@ function useMarginPercent(_a) {
 }
 
 var Box = React__default['default'].forwardRef(function (_a, ref) {
-    var className = _a.className, cols = _a.cols, alignX = _a.alignX, alignY = _a.alignY, children = _a.children, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, padding = _a.padding, style = _a.style, hasChildBoxes = _a.hasChildBoxes, tag = _a.tag, attrs = _a.attrs, href = _a.href, onClick = _a.onClick;
+    var alignX = _a.alignX, alignY = _a.alignY, attrs = _a.attrs, bottom = _a.bottom, className = _a.className, cols = _a.cols, component = _a.component, children = _a.children, hasChildBoxes = _a.hasChildBoxes, href = _a.href, padding = _a.padding, left = _a.left, onClick = _a.onClick, right = _a.right, style = _a.style, top = _a.top, tag = _a.tag;
     var context = React.useContext(Context);
     if (!context) {
         return React__default['default'].createElement(ErrorMessage, null);
     }
-    var cssMode = context.cssMode, breakpoints = context.breakpoints, gutterX = context.gutterX, gutterY = context.gutterY, colspan = context.colspan, parentCols = context.parentCols, media = context.media, controlIsVisible = context.controlIsVisible, controlColor = context.controlColor, rest = context.rest, registerChildBox = context.registerChildBox;
+    var breakpoints = context.breakpoints, colspan = context.colspan, controlColor = context.controlColor, controlIsVisible = context.controlIsVisible, cssMode = context.cssMode, gutterX = context.gutterX, gutterY = context.gutterY, media = context.media, parentCols = context.parentCols, rest = context.rest, registerChildBox = context.registerChildBox;
     var id = React__default['default'].useState(nanoid)[0];
     var _b = React.useState([]), childBoxes = _b[0], setChildBoxes = _b[1];
     var hasChildBoxesNormalized = getReset({
@@ -594,7 +598,7 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
                 id: id,
             });
     }, []);
-    return (React__default['default'].createElement(StyledBox, { cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign({}, attrs), (href && { href: href })), (onClick && { onClick: onClick })) },
+    return (React__default['default'].createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign({}, attrs), (href && { href: href })), (onClick && { onClick: onClick })) },
         React__default['default'].createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, hasChildBoxes: hasChildBoxes, className: classnames(["Box__Inner", className]) },
             React__default['default'].createElement(React__default['default'].Fragment, null,
                 controlIsVisible && React__default['default'].createElement(ControlBox, { controlColor: controlColor }),
@@ -651,30 +655,31 @@ function useCurrentBreakpoint(breakpoints) {
 }
 
 var defaultProps$1 = {
-    breakpoints: [0, 432, 768, 1024, 1200, 1400],
-    left: "0",
-    right: "0",
-    top: "0",
-    bottom: "0",
-    gutterX: "0px",
-    gutterY: "0px",
     alignX: null,
     alignY: null,
+    attrs: {},
+    bottom: "0",
+    breakpoints: [0, 432, 768, 1024, 1200, 1400],
+    children: null,
+    className: null,
     colspan: 1,
+    component: null,
     control: false,
     controlColor: "rgba(0, 0, 0, 0.1)",
-    position: "relative",
-    style: null,
-    className: null,
-    children: null,
     cssMode: null,
-    tag: "div",
-    attrs: {},
+    gutterX: "0px",
+    gutterY: "0px",
     isControl: false,
+    left: "0",
+    position: "relative",
+    right: "0",
+    tag: "div",
+    top: "0",
+    style: null,
 };
 
 var Grid = React__default['default'].forwardRef(function (_a, ref) {
-    var breakpoints = _a.breakpoints, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, gutterX = _a.gutterX, gutterY = _a.gutterY, alignX = _a.alignX, alignY = _a.alignY, colspan = _a.colspan, control = _a.control, controlColor = _a.controlColor, position = _a.position, style = _a.style, className = _a.className, children = _a.children, cssMode = _a.cssMode, tag = _a.tag, attrs = _a.attrs, isControl = _a.isControl;
+    var breakpoints = _a.breakpoints, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, gutterX = _a.gutterX, gutterY = _a.gutterY, alignX = _a.alignX, alignY = _a.alignY, colspan = _a.colspan, control = _a.control, controlColor = _a.controlColor, position = _a.position, style = _a.style, className = _a.className, children = _a.children, cssMode = _a.cssMode, component = _a.component, tag = _a.tag, attrs = _a.attrs, isControl = _a.isControl;
     var controlIsVisible = useControl(control);
     var cssModeNormalized = useCssMode(cssMode);
     var _b = React__default['default'].useState([]), childBoxes = _b[0], setChildBoxes = _b[1];
@@ -706,12 +711,12 @@ var Grid = React__default['default'].forwardRef(function (_a, ref) {
         alignX: alignXNormalized,
         cols: colsNormalized,
     });
-    return (React__default['default'].createElement(StyledGrid, { cssMode: cssModeNormalized, colspan: colspan, className: classnames([
+    return (React__default['default'].createElement(StyledGrid, { alignX: alignXNormalized, alignY: alignYNormalized, attrs: attrs, bottom: bottomNormalized, cssMode: cssModeNormalized, colspan: colspan, component: component, className: classnames([
             "Grid",
             "bp-" + currentBreakpoint.index,
             "bp-" + currentBreakpoint.value,
             className,
-        ]), gutterX: gutterXNormalized, gutterY: gutterYNormalized, alignX: alignXNormalized, alignY: alignYNormalized, media: media, left: leftNormalized, right: rightNormalized, top: topNormalized, bottom: bottomNormalized, position: positionNormalized, tag: tag, attrs: attrs, style: styleNormalized, ref: ref, isControl: isControl },
+        ]), gutterX: gutterXNormalized, gutterY: gutterYNormalized, isControl: isControl, left: leftNormalized, media: media, position: positionNormalized, ref: ref, right: rightNormalized, style: styleNormalized, tag: tag, top: topNormalized },
         control && controlIsVisible && (React__default['default'].createElement(ControlGrid, { cssMode: cssModeNormalized, colspan: colspan, breakpoints: breakpoints, gutterX: gutterXNormalized, gutterY: gutterYNormalized, left: leftNormalized, right: rightNormalized, top: topNormalized, bottom: bottomNormalized, controlColor: controlColor, media: media })),
         React__default['default'].createElement(Inner, { cssMode: cssModeNormalized, className: "Grid__Inner", alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, media: media, hasChildBoxes: true },
             React__default['default'].createElement(Resetter, { cssMode: cssModeNormalized, className: "Grid__Resetter", hasChildBoxes: true, gutterX: gutterXNormalized, gutterY: gutterYNormalized, alignX: alignXNormalized, alignY: alignYNormalized, media: media },

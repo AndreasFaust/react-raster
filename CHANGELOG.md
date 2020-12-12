@@ -1,3 +1,13 @@
+#### 6.0.9 (2020-12-12)
+
+##### Bug Fixes
+
+*  make component-prop optional everywhere (38050fb5)
+
+##### Other Changes
+
+*  add component-prop (7e68dbf9)
+
 #### 6.0.8 (2020-12-10)
 
 ##### Bug Fixes
