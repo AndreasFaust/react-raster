@@ -430,4 +430,4 @@ Every contribution is very much appreciated.
 
 Licensed under the MIT License, Copyright © 2019-present Andreas Faust.
 
-See [LICENSE](LICENSE) for more information.
+See [LICENSE](LICENSE.md) for more information.
