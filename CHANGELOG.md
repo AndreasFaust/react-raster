@@ -1,3 +1,13 @@
+#### 6.0.11 (2020-12-29)
+
+##### Documentation Changes
+
+*  add exmaples to example-page (22bd6471)
+
+##### Bug Fixes
+
+*  fix peerDependencies (4182cf12)
+
 #### 6.0.10 (2020-12-12)
 
 ##### Bug Fixes
