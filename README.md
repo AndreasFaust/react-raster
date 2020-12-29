@@ -1,4 +1,4 @@
-![react-raster Logo](https://raw.github.com/andreasfaust/react-raster/master/assets/react-raster-logo.svg?sanitize=true)
+![react-raster Logo](https://raw.github.com/andreasfaust/react-raster/master/assets/react-raster-logo.png?sanitize=true)
 
 **react-raster** is an advanced grid-system based on **styled-components**. It is highly customizable while being easy to use. Regardless, if your grid is simple or complex: react-raster simplifies layouting. 😽
 
@@ -30,6 +30,15 @@ Additionally it polyfills `Grid Layout` using `Flexbox`, if you need to support 
 With `react-raster` defining a grid and placing and stacking some boxes is as easy as never before.
 
 > Try it out and **star it** if you like it!
+
+---
+
+## PeerDependencies
+
+- react: >= 16.8.0,
+- react-dom: >= 16.8.0,
+- styled-components: >= 5.2.0
+
 
 ---
 
