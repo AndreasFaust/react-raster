@@ -1,3 +1,9 @@
+#### 6.0.12 (2020-12-29)
+
+##### Bug Fixes
+
+*  add license (4aa22d1d)
+
 #### 6.0.11 (2020-12-29)
 
 ##### Documentation Changes
