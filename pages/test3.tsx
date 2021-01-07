@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Grid, Box } from "../raster";
+import { Grid, Box } from "../src";
 import { motion } from "framer-motion";
 
 const items = [

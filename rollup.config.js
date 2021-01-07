@@ -7,7 +7,7 @@ import external from "rollup-plugin-peer-deps-external";
 import pkg from "./package.json";
 
 export default {
-  input: "raster/index.ts",
+  input: "src/index.ts",
   output: [
     {
       file: pkg.main,
