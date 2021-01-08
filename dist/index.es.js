@@ -95,7 +95,7 @@ var classnames = createCommonjsModule(function (module) {
 });
 
 var Context = React.createContext({
-    breakpoint: { index: null, value: null },
+    breakpoint: { index: 0, value: 0 },
     breakpoints: null,
     cssMode: null,
     gutterX: null,

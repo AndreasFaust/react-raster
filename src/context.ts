@@ -3,8 +3,8 @@ import React from "react";
 interface ContextProps {
   cssMode: "grid" | "flex" | null;
   breakpoint: {
-    index: number | null;
-    value: number | null;
+    index: number;
+    value: number;
   };
   breakpoints: number[] | null;
   gutterX: string[] | null;
@@ -24,7 +24,7 @@ interface ContextProps {
 }
 
 const Context = React.createContext<ContextProps>({
-  breakpoint: { index: null, value: null },
+  breakpoint: { index: 0, value: 0 },
   breakpoints: null,
   cssMode: null,
   gutterX: null,
