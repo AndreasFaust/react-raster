@@ -2,7 +2,10 @@ import React from "react";
 
 interface ContextPropsBasic {
   cssMode: "grid" | "flex";
-  breakpoint: number;
+  breakpoint: {
+    index: number;
+    value: number;
+  };
   breakpoints: number[];
   gutterX: string[];
   gutterY: string[];

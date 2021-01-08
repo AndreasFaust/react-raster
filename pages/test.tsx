@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 const ChildBox = () => {
   const { breakpoint } = useRaster();
+  console.log(breakpoint);
   return (
     <Box
       // top={0.5}
