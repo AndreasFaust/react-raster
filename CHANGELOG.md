@@ -1,3 +1,13 @@
+#### 6.1.1 (2021-01-08)
+
+##### Documentation Changes
+
+*  fix useRaster-example (49e8a2c1)
+
+##### Bug Fixes
+
+*  change context (98251ec5)
+
 ### 6.1.0 (2021-01-08)
 
 ##### Documentation Changes
