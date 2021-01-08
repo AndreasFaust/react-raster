@@ -261,7 +261,7 @@ In child-components of `Grid` and `Box` you have access to all grid-settings via
 
 ```jsx
 import React from "react";
-import { Grid, Box } from "react-raster";
+import { useRaster } from "react-raster";
 
 const ChildComponent = () => {
   const { breakpoint } = useRaster();
