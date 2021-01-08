@@ -103,21 +103,22 @@ var classnames = createCommonjsModule(function (module) {
 }());
 });
 
-var Context = React__default['default'].createContext(null);
+var Context = React__default['default'].createContext({
+    breakpoint: { index: null, value: null },
+    breakpoints: null,
+    cssMode: null,
+    gutterX: null,
+    gutterY: null,
+    colspan: null,
+    parentCols: null,
+    media: null,
+    controlIsVisible: null,
+    controlColor: null,
+    rest: null,
+    registerChildBox: null,
+});
 function useRaster() {
-    var _a = React__default['default'].useContext(Context), cssMode = _a.cssMode, breakpoint = _a.breakpoint, breakpoints = _a.breakpoints, gutterX = _a.gutterX, gutterY = _a.gutterY, colspan = _a.colspan, parentCols = _a.parentCols, media = _a.media, controlIsVisible = _a.controlIsVisible, controlColor = _a.controlColor;
-    return {
-        cssMode: cssMode,
-        breakpoint: breakpoint,
-        breakpoints: breakpoints,
-        gutterX: gutterX,
-        gutterY: gutterY,
-        colspan: colspan,
-        parentCols: parentCols,
-        media: media,
-        controlIsVisible: controlIsVisible,
-        controlColor: controlColor,
-    };
+    return React__default['default'].useContext(Context);
 }
 
 function isArray(prop) {
@@ -533,7 +534,7 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
     if (!context) {
         return React__default['default'].createElement(ErrorMessage, null);
     }
-    var breakpoints = context.breakpoints, colspan = context.colspan, controlColor = context.controlColor, controlIsVisible = context.controlIsVisible, cssMode = context.cssMode, gutterX = context.gutterX, gutterY = context.gutterY, media = context.media, parentCols = context.parentCols, rest = context.rest, registerChildBox = context.registerChildBox;
+    var breakpoint = context.breakpoint, breakpoints = context.breakpoints, colspan = context.colspan, controlColor = context.controlColor, controlIsVisible = context.controlIsVisible, cssMode = context.cssMode, gutterX = context.gutterX, gutterY = context.gutterY, media = context.media, parentCols = context.parentCols, rest = context.rest, registerChildBox = context.registerChildBox;
     var id = React__default['default'].useState(nanoid)[0];
     var _b = React.useState([]), childBoxes = _b[0], setChildBoxes = _b[1];
     var hasChildBoxesNormalized = getReset({
@@ -612,6 +613,7 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
                 React__default['default'].createElement(Resetter, { cssMode: cssMode, className: "Box__Resetter", hasChildBoxes: hasChildBoxesNormalized, media: media, gutterX: gutterX, gutterY: gutterY, alignX: alignXNormalized, alignY: alignYNormalized, padding: paddingNormalized },
                     React__default['default'].createElement(Context.Provider, { value: {
                             breakpoints: breakpoints,
+                            breakpoint: breakpoint,
                             gutterX: gutterX,
                             gutterY: gutterY,
                             colspan: colspan,

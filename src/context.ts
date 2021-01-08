@@ -1,58 +1,45 @@
 import React from "react";
 
-interface ContextPropsBasic {
-  cssMode: "grid" | "flex";
-  breakpoint?: {
-    index: number;
-    value: number;
+interface ContextProps {
+  cssMode: "grid" | "flex" | null;
+  breakpoint: {
+    index: number | null;
+    value: number | null;
   };
-  breakpoints: number[];
-  gutterX: string[];
-  gutterY: string[];
-  colspan: number;
-  parentCols: number[];
-  media: any[];
-  controlIsVisible: boolean;
-  controlColor: string;
-}
-
-interface ContextProps extends ContextPropsBasic {
-  rest: { id: string; width: number[] }[];
+  breakpoints: number[] | null;
+  gutterX: string[] | null;
+  gutterY: string[] | null;
+  colspan: number | null;
+  parentCols: number[] | null;
+  media: any[] | null;
+  controlIsVisible: boolean | null;
+  controlColor: string | null;
+  rest: { id: string; width: number[] }[] | null;
   registerChildBox?: (childBox: {
     left: number[];
     right: number[];
     cols: number[];
     id: string;
-  }) => void;
+  }) => void | null;
 }
 
-const Context = React.createContext<ContextProps | null>(null);
+const Context = React.createContext<ContextProps>({
+  breakpoint: { index: null, value: null },
+  breakpoints: null,
+  cssMode: null,
+  gutterX: null,
+  gutterY: null,
+  colspan: null,
+  parentCols: null,
+  media: null,
+  controlIsVisible: null,
+  controlColor: null,
+  rest: null,
+  registerChildBox: null,
+});
 
-function useRaster(): ContextPropsBasic {
-  const {
-    cssMode,
-    breakpoint,
-    breakpoints,
-    gutterX,
-    gutterY,
-    colspan,
-    parentCols,
-    media,
-    controlIsVisible,
-    controlColor,
-  } = React.useContext(Context);
-  return {
-    cssMode,
-    breakpoint,
-    breakpoints,
-    gutterX,
-    gutterY,
-    colspan,
-    parentCols,
-    media,
-    controlIsVisible,
-    controlColor,
-  };
+function useRaster(): ContextProps {
+  return React.useContext(Context);
 }
 
 export { useRaster };

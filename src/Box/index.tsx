@@ -48,6 +48,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
     }
 
     const {
+      breakpoint,
       breakpoints,
       colspan,
       controlColor,
@@ -195,6 +196,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
               <Context.Provider
                 value={{
                   breakpoints,
+                  breakpoint,
                   gutterX,
                   gutterY,
                   colspan,
