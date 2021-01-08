@@ -39,7 +39,6 @@ With `react-raster` defining a grid and placing and stacking some boxes is as ea
 - react-dom: >= 16.8.0,
 - styled-components: >= 5.2.0
 
-
 ---
 
 ## Install
@@ -252,6 +251,24 @@ const ExampleGrid = () => {
     <ExampleTeaser />
   </Grid>;
 };
+```
+
+---
+
+## useRaster
+
+In child-components of `Grid` and `Box` you have access to all grid-settings via the hook `useRaster`:
+
+```jsx
+import React from "react";
+import { Grid, Box } from "react-raster";
+
+const ChildComponent = () => {
+  const { breakpoint } = useRaster();
+  return <h1>The current breakpoint is {breakpoint.value}</h1>;
+};
+
+export default ChildComponent;
 ```
 
 ---
