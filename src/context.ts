@@ -2,7 +2,7 @@ import React from "react";
 
 interface ContextPropsBasic {
   cssMode: "grid" | "flex";
-  breakpoint: {
+  breakpoint?: {
     index: number;
     value: number;
   };

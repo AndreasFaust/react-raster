@@ -104,6 +104,21 @@ var classnames = createCommonjsModule(function (module) {
 });
 
 var Context = React__default['default'].createContext(null);
+function useRaster() {
+    var _a = React__default['default'].useContext(Context), cssMode = _a.cssMode, breakpoint = _a.breakpoint, breakpoints = _a.breakpoints, gutterX = _a.gutterX, gutterY = _a.gutterY, colspan = _a.colspan, parentCols = _a.parentCols, media = _a.media, controlIsVisible = _a.controlIsVisible, controlColor = _a.controlColor;
+    return {
+        cssMode: cssMode,
+        breakpoint: breakpoint,
+        breakpoints: breakpoints,
+        gutterX: gutterX,
+        gutterY: gutterY,
+        colspan: colspan,
+        parentCols: parentCols,
+        media: media,
+        controlIsVisible: controlIsVisible,
+        controlColor: controlColor,
+    };
+}
 
 function isArray(prop) {
     if (!prop)
@@ -714,6 +729,7 @@ var Grid = React__default['default'].forwardRef(function (_a, ref) {
             React__default['default'].createElement(Resetter, { cssMode: cssModeNormalized, className: "Grid__Resetter", hasChildBoxes: true, gutterX: gutterXNormalized, gutterY: gutterYNormalized, alignX: alignXNormalized, alignY: alignYNormalized, media: media },
                 React__default['default'].createElement(Context.Provider, { value: {
                         cssMode: cssModeNormalized,
+                        breakpoint: currentBreakpoint,
                         breakpoints: breakpoints,
                         gutterX: gutterXNormalized,
                         gutterY: gutterYNormalized,
@@ -732,4 +748,5 @@ Grid.defaultProps = defaultProps$1;
 
 exports.Box = Box;
 exports.Grid = Grid;
+exports.useRaster = useRaster;
 //# sourceMappingURL=index.js.map
