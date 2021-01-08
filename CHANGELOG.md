@@ -1,3 +1,19 @@
+### 6.1.0 (2021-01-08)
+
+##### Documentation Changes
+
+*  add useRaster (c23819fb)
+
+##### New Features
+
+*  add useRaster (5461b185)
+
+##### Bug Fixes
+
+*  fix breakpoint-type (d2a370c2)
+*  fix breakpoint-type (ac3de8f2)
+*  change raster to src (6de8b070)
+
 #### 6.0.12 (2020-12-29)
 
 ##### Bug Fixes
