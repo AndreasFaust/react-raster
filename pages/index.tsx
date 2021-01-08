@@ -55,7 +55,7 @@ const Startpage: NextPage<Props> = (props) => {
       >
         <Box
           className="logo"
-          cols={[8, 6, 4, 4, 3, 2]}
+          cols={[8, 6, 4, 4,3,2]}
           tag="img"
           attrs={{
             src: process.env.productionPath + "/react-raster-logo.svg",

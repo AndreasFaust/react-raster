@@ -139,6 +139,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
             <Context.Provider
               value={{
                 cssMode: cssModeNormalized,
+                breakpoint: currentBreakpoint,
                 breakpoints,
                 gutterX: gutterXNormalized,
                 gutterY: gutterYNormalized,
