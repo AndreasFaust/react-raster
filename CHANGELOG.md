@@ -1,3 +1,9 @@
+#### 6.1.2 (2021-01-08)
+
+##### Bug Fixes
+
+*  fix breakpoint-type (7f5bc182)
+
 #### 6.1.1 (2021-01-08)
 
 ##### Documentation Changes
