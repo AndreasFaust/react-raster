@@ -1,3 +1,9 @@
+### 6.2.0 (2021-01-14)
+
+##### New Features
+
+*  add order-prop (81e7c23d)
+
 #### 6.1.2 (2021-01-08)
 
 ##### Bug Fixes
