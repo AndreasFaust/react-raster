@@ -28,6 +28,7 @@ interface Props {
   style?: string[];
   tag: string;
   top: string[];
+  order: number[];
 }
 
 const GridLayout = styled(Container)<Props>`
@@ -74,6 +75,7 @@ const GridLayout = styled(Container)<Props>`
         align-content: ${props.alignY[index]};
         align-items: ${props.alignY[index]};
         padding: ${props.padding[index]};
+        order: ${props.order[index]};
         ${props.style[index]}
       `;
     })}
@@ -104,6 +106,8 @@ const FlexBox = styled(Container)<Props>`
         margin-right: ${props.right[index]};
         margin-top: ${props.top[index]};
         margin-bottom: ${props.bottom[index]};
+
+        order: ${props.order[index]};
       `;
     })}
 `;

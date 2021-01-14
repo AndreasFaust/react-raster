@@ -449,7 +449,7 @@ var GridLayout$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 =
         });
 }, function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        ", "\n      "], ["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        ", "\n      "])), !props.colspan[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.padding[index], props.style[index]);
+        return media(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        ", "\n      "], ["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        ", "\n      "])), !props.colspan[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.padding[index], props.order[index], props.style[index]);
     });
 }, function (props) {
     return props.tag === "img" &&
@@ -459,7 +459,7 @@ var GridLayout$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 =
 var FlexBox$1 = styled(Container)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  display: flex;\n  box-sizing: border-box;\n\n  ", "\n"], ["\n  display: flex;\n  box-sizing: border-box;\n\n  ",
     "\n"])), function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n        width: ", "%;\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n      "], ["\n        width: ", "%;\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n      "])), props.cols[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.left[index], props.right[index], props.top[index], props.bottom[index]);
+        return media(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n        width: ", "%;\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n\n        order: ", ";\n      "], ["\n        width: ", "%;\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n\n        order: ", ";\n      "])), props.cols[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.order[index]);
     });
 });
 var StyledBox = React.forwardRef(function (props, ref) {
@@ -490,6 +490,7 @@ var defaultProps = {
     style: null,
     tag: "div",
     top: 0,
+    order: null,
 };
 
 function getMarginsPercent(_a) {
@@ -520,7 +521,7 @@ function useMarginPercent(_a) {
 }
 
 var Box = React.forwardRef(function (_a, ref) {
-    var alignX = _a.alignX, alignY = _a.alignY, attrs = _a.attrs, bottom = _a.bottom, className = _a.className, cols = _a.cols, component = _a.component, children = _a.children, hasChildBoxes = _a.hasChildBoxes, href = _a.href, padding = _a.padding, left = _a.left, onClick = _a.onClick, right = _a.right, style = _a.style, top = _a.top, tag = _a.tag;
+    var alignX = _a.alignX, alignY = _a.alignY, attrs = _a.attrs, bottom = _a.bottom, className = _a.className, cols = _a.cols, component = _a.component, children = _a.children, hasChildBoxes = _a.hasChildBoxes, href = _a.href, padding = _a.padding, left = _a.left, onClick = _a.onClick, right = _a.right, style = _a.style, top = _a.top, tag = _a.tag, order = _a.order;
     var context = useContext(Context);
     if (!context) {
         return React.createElement(ErrorMessage, null);
@@ -549,6 +550,7 @@ var Box = React.forwardRef(function (_a, ref) {
     var bottomNormalized = normalizeProps({ prop: bottom, breakpoints: breakpoints });
     var paddingNormalized = normalizeProps({ prop: padding, breakpoints: breakpoints });
     var styleNormalized = normalizeProps({ prop: style, breakpoints: breakpoints });
+    var orderNormalized = normalizeProps({ prop: order, breakpoints: breakpoints });
     var colsNormalized = normalizeProps({
         prop: cols,
         defaultProp: parentCols,
@@ -597,7 +599,7 @@ var Box = React.forwardRef(function (_a, ref) {
                 id: id,
             });
     }, []);
-    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign({}, attrs), (href && { href: href })), (onClick && { onClick: onClick })) },
+    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign({}, attrs), (href && { href: href })), (onClick && { onClick: onClick })) },
         React.createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, hasChildBoxes: hasChildBoxes, className: classnames(["Box__Inner", className]) },
             React.createElement(React.Fragment, null,
                 controlIsVisible && React.createElement(ControlBox, { controlColor: controlColor }),

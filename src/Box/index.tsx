@@ -39,6 +39,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       style,
       top,
       tag,
+      order,
     },
     ref
   ) => {
@@ -46,7 +47,6 @@ const Box = React.forwardRef<HTMLElement, Props>(
     if (!context) {
       return <ErrorMessage />;
     }
-
     const {
       breakpoint,
       breakpoints,
@@ -87,6 +87,8 @@ const Box = React.forwardRef<HTMLElement, Props>(
     const bottomNormalized = normalizeProps({ prop: bottom, breakpoints });
     const paddingNormalized = normalizeProps({ prop: padding, breakpoints });
     const styleNormalized = normalizeProps({ prop: style, breakpoints });
+    const orderNormalized = normalizeProps({ prop: order, breakpoints });
+
     const colsNormalized = normalizeProps({
       prop: cols,
       defaultProp: parentCols,
@@ -163,6 +165,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
         padding={paddingNormalized}
         controlIsVisible={controlIsVisible}
         controlColor={controlColor}
+        order={orderNormalized}
         style={cssMode === "grid" && styleNormalized}
         ref={ref}
         attrs={{

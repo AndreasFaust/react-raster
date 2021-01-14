@@ -19,6 +19,7 @@ export interface Props {
   style?: string | string[];
   tag?: string;
   top?: number | number[];
+  order?: number | number[];
 }
 
 export const defaultProps = {
@@ -39,4 +40,5 @@ export const defaultProps = {
   style: null,
   tag: "div",
   top: 0,
+  order: null,
 };

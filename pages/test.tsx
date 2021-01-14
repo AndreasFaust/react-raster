@@ -70,16 +70,31 @@ const Testpage: NextPage<Props> = (props) => {
       </Box>
       <ChildBox />
       <Link href="/" passHref>
-        <Box
-          style={`background: green;`}
-          component={
-            <motion.a
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-            />
-          }
-        >
-          <h1>DEPP!</h1>
+        <Box>
+          <Box
+            style={`background: green;`}
+            order={[1, 1, 2]}
+            component={
+              <motion.a
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+              />
+            }
+          >
+            <h2>DU!</h2>
+          </Box>
+          <Box
+            style={`background: green;`}
+            order={[2, 2, 1]}
+            component={
+              <motion.a
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+              />
+            }
+          >
+            <h2>DEPP!</h2>
+          </Box>
         </Box>
       </Link>
       <Box cols={[4, 5]} bottom={1} style={`background: red;`}>

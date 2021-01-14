@@ -400,6 +400,7 @@ All props are optional.
 | **control**      | Boolean                    | `false`                           | Enable visual control via ESC-Key.                                                                              |
 | **controlColor** | Boolean                    | `'rgba(0, 0, 0, 0.1)'`            | Custom color for the grid-control.                                                                              |
 | **position**     | String or Array of Strings | `'relative'`                      | CSS-position                                                                                                    |
+| **order**        | Number or Array of Numbers | `null`                            | CSS Grid-Layou/Flexbox order-property                                                                           |
 | **className**    | String                     | `null`                            | CSS-Class(es)                                                                                                   |
 | **style**        | String or Array of Strings | `null`                            | Custom styles with styled-components.                                                                           |
 | **cssMode**      | String                     | `null`                            | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support.                            |
