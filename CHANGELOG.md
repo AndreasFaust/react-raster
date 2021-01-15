@@ -1,3 +1,9 @@
+### 6.3.0 (2021-01-15)
+
+##### New Features
+
+*  add innerHTML (e5d51db7)
+
 ### 6.2.0 (2021-01-14)
 
 ##### New Features

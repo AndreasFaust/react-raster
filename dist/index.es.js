@@ -214,21 +214,21 @@ var useControl = function (control) {
 };
 
 var InnerTag = function (_a) {
-    var className = _a.className, children = _a.children;
-    return (React.createElement("div", { className: className }, children));
+    var className = _a.className, innerHTML = _a.innerHTML, children = _a.children;
+    return innerHTML ? (React.createElement("div", { className: className, dangerouslySetInnerHTML: { __html: innerHTML } })) : (React.createElement("div", { className: className }, children));
 };
 var StyledInner = styled(InnerTag)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  position: relative;\n  width: 100%;\n\n  ", "\n"], ["\n  position: relative;\n  width: 100%;\n\n  ",
     "\n"])), function (props) {
     return props.media.map(function (media, index) {
         return props.hasChildBoxes
-            ? media(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "], ["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "])), props.style && props.style[index]) : media(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          ", "\n          ", "\n          ", "\n          ", "\n        "], ["\n          ", "\n          ", "\n          ", "\n          ", "\n        "])), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: " + props.alignX[index] + ";", props.alignY[index] && "align-items: " + props.alignY[index] + ";", props.style[index]);
+            ? media(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "], ["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "])), props.style && props.style[index]) : media(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          ", "\n          ", "\n          ", "\n          ", "\n        "], ["\n          ", "\n          ", "\n          ", "\n          ", "\n        "])), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: " + props.alignX[index] + ";", props.alignY[index] && "align-items: " + props.alignY[index] + ";", props.style && props.style[index]);
     });
 });
 var Inner = function (_a) {
-    var media = _a.media, className = _a.className, alignX = _a.alignX, alignY = _a.alignY, style = _a.style, children = _a.children, cssMode = _a.cssMode, hasChildBoxes = _a.hasChildBoxes;
+    var media = _a.media, className = _a.className, alignX = _a.alignX, alignY = _a.alignY, style = _a.style, children = _a.children, cssMode = _a.cssMode, hasChildBoxes = _a.hasChildBoxes, innerHTML = _a.innerHTML;
     if (cssMode === "grid")
         return children;
-    return (React.createElement(StyledInner, { className: className, media: media, alignX: alignX, alignY: alignY, style: style, hasChildBoxes: hasChildBoxes }, children));
+    return (React.createElement(StyledInner, { className: className, media: media, cssMode: cssMode, alignX: alignX, alignY: alignY, style: style, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML }, children));
 };
 var templateObject_1$1, templateObject_2, templateObject_3;
 
@@ -271,11 +271,14 @@ function useCssMode(cssModeFromProps) {
 }
 
 var Container = React.forwardRef(function (_a, ref) {
-    var className = _a.className, children = _a.children, component = _a.component, _b = _a.attrs, attrs = _b === void 0 ? {} : _b, _c = _a.tag, tag = _c === void 0 ? "div" : _c;
+    var className = _a.className, children = _a.children, component = _a.component, _b = _a.attrs, attrs = _b === void 0 ? {} : _b, _c = _a.tag, tag = _c === void 0 ? "div" : _c, cssMode = _a.cssMode;
     if (component) {
         return React.cloneElement(component, __assign({ children: children, className: className }, attrs));
     }
-    return React.createElement(tag, __assign(__assign({}, attrs), { className: className, ref: ref }), tag !== "img" ? children : undefined);
+    return React.createElement(tag, __assign(__assign({}, attrs), { className: className,
+        ref: ref }), (tag !== "img" && !attrs.dangerouslySetInnerHTML) || cssMode === "flex"
+        ? children
+        : null);
 });
 
 var controlStyles = "\n  width: 100%;\n  z-index: 10000;\n  left: 0; \n  top: 0; \n  bottom: 0;\n  margin: 0;\n  grid-auto-rows: auto;\n  pointer-events: none;\n";
@@ -491,6 +494,7 @@ var defaultProps = {
     tag: "div",
     top: 0,
     order: null,
+    innerHTML: null,
 };
 
 function getMarginsPercent(_a) {
@@ -521,7 +525,7 @@ function useMarginPercent(_a) {
 }
 
 var Box = React.forwardRef(function (_a, ref) {
-    var alignX = _a.alignX, alignY = _a.alignY, attrs = _a.attrs, bottom = _a.bottom, className = _a.className, cols = _a.cols, component = _a.component, children = _a.children, hasChildBoxes = _a.hasChildBoxes, href = _a.href, padding = _a.padding, left = _a.left, onClick = _a.onClick, right = _a.right, style = _a.style, top = _a.top, tag = _a.tag, order = _a.order;
+    var alignX = _a.alignX, alignY = _a.alignY, attrs = _a.attrs, bottom = _a.bottom, className = _a.className, cols = _a.cols, component = _a.component, children = _a.children, hasChildBoxes = _a.hasChildBoxes, href = _a.href, innerHTML = _a.innerHTML, padding = _a.padding, left = _a.left, onClick = _a.onClick, right = _a.right, style = _a.style, top = _a.top, tag = _a.tag, order = _a.order;
     var context = useContext(Context);
     if (!context) {
         return React.createElement(ErrorMessage, null);
@@ -599,8 +603,11 @@ var Box = React.forwardRef(function (_a, ref) {
                 id: id,
             });
     }, []);
-    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign({}, attrs), (href && { href: href })), (onClick && { onClick: onClick })) },
-        React.createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, hasChildBoxes: hasChildBoxes, className: classnames(["Box__Inner", className]) },
+    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
+            cssMode === "grid" && {
+            dangerouslySetInnerHTML: { __html: innerHTML },
+        })), (href && { href: href })), (onClick && { onClick: onClick })) },
+        React.createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML, className: classnames(["Box__Inner", className]) },
             React.createElement(React.Fragment, null,
                 controlIsVisible && React.createElement(ControlBox, { controlColor: controlColor }),
                 React.createElement(Resetter, { cssMode: cssMode, className: "Box__Resetter", hasChildBoxes: hasChildBoxesNormalized, media: media, gutterX: gutterX, gutterY: gutterY, alignX: alignXNormalized, alignY: alignYNormalized, padding: paddingNormalized },
