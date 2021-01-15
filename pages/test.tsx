@@ -62,10 +62,13 @@ const Testpage: NextPage<Props> = (props) => {
       // cssMode="flex"
       ref={gridRef}
     >
-      <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
-        Hallo
-      </Box>
-      <Box cols={[2, 3]} bottom={1} style={`background: red;`}>
+      <Box
+        cols={[2, 3]}
+        bottom={1}
+        style={`background: red;`}
+        innerHTML="<h1>HALLIHALLO</h1>"
+      />
+      {/* <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
         Hallo
       </Box>
       <ChildBox />
@@ -99,7 +102,7 @@ const Testpage: NextPage<Props> = (props) => {
       </Link>
       <Box cols={[4, 5]} bottom={1} style={`background: red;`}>
         Hallo
-      </Box>
+      </Box> */}
     </Grid>
   );
 };

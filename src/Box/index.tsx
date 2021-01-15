@@ -32,6 +32,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       children,
       hasChildBoxes,
       href,
+      innerHTML,
       padding,
       left,
       onClick,
@@ -170,6 +171,10 @@ const Box = React.forwardRef<HTMLElement, Props>(
         ref={ref}
         attrs={{
           ...attrs,
+          ...(innerHTML &&
+            cssMode === "grid" && {
+              dangerouslySetInnerHTML: { __html: innerHTML },
+            }),
           ...(href && { href }),
           ...(onClick && { onClick }),
         }}
@@ -181,6 +186,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
           alignY={alignYNormalized}
           style={styleNormalized}
           hasChildBoxes={hasChildBoxes}
+          innerHTML={innerHTML}
           className={classNames(["Box__Inner", className])}
         >
           <>

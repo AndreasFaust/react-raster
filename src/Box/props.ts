@@ -20,6 +20,7 @@ export interface Props {
   tag?: string;
   top?: number | number[];
   order?: number | number[];
+  innerHTML?: string;
 }
 
 export const defaultProps = {
@@ -41,4 +42,5 @@ export const defaultProps = {
   tag: "div",
   top: 0,
   order: null,
+  innerHTML: null,
 };
