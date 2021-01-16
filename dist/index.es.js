@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
+var types = /*#__PURE__*/Object.freeze({
+    __proto__: null
+});
+
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -748,5 +752,5 @@ var Grid = React.forwardRef(function (_a, ref) {
 });
 Grid.defaultProps = defaultProps$1;
 
-export { Box, Grid, useRaster };
+export { Box, Grid, types as Types, useRaster };
 //# sourceMappingURL=index.es.js.map

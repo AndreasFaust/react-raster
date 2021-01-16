@@ -10,6 +10,10 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
 
+var types = /*#__PURE__*/Object.freeze({
+    __proto__: null
+});
+
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -759,5 +763,6 @@ Grid.defaultProps = defaultProps$1;
 
 exports.Box = Box;
 exports.Grid = Grid;
+exports.Types = types;
 exports.useRaster = useRaster;
 //# sourceMappingURL=index.js.map

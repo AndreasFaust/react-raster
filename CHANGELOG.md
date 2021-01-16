@@ -1,3 +1,9 @@
+### 6.4.0 (2021-01-16)
+
+##### New Features
+
+*  export types (c30e39c1)
+
 ### 6.3.0 (2021-01-15)
 
 ##### New Features
