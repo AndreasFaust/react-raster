@@ -39,9 +39,11 @@ const Testpage: NextPage<Props> = (props) => {
   const gridRef = React.useRef();
 
   return (
-    <SpecialGrid>
-      {/* <Box /> */}
-      {/* <SpecialBox>Hallo!</SpecialBox>
+    <>
+      <Box />
+      <SpecialGrid>
+        {/* <Box /> */}
+        {/* <SpecialBox>Hallo!</SpecialBox>
       <Box
         cols={[2, 3]}
         bottom={1}
@@ -49,11 +51,12 @@ const Testpage: NextPage<Props> = (props) => {
         innerHTML="<h1>HALLIHALLO</h1>"
         className="test123"
       /> */}
-      <Box cols={3} style={`background: yellow;`}>
-        <Box style={`background: red;`}>Hallo</Box>
-      </Box>
-      {/* <ChildBox /> */}
-    </SpecialGrid>
+        <Box cols={3} style={`background: yellow;`}>
+          <Box style={`background: red;`}>Hallo</Box>
+        </Box>
+        {/* <ChildBox /> */}
+      </SpecialGrid>
+    </>
   );
 };
 

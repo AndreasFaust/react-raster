@@ -44,7 +44,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
     ref
   ) => {
     const context = useContext(Context);
-    if (!context) {
+    if (!context.breakpoints) {
       return <ErrorMessage />;
     }
     const {
