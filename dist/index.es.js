@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 var types = /*#__PURE__*/Object.freeze({
@@ -42,61 +42,6 @@ function __makeTemplateObject(cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 }
-
-function createCommonjsModule(fn) {
-  var module = { exports: {} };
-	return fn(module, module.exports), module.exports;
-}
-
-/*!
-  Copyright (c) 2017 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-
-var classnames = createCommonjsModule(function (module) {
-/* global define */
-
-(function () {
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg) && arg.length) {
-				var inner = classNames.apply(null, arg);
-				if (inner) {
-					classes.push(inner);
-				}
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if ( module.exports) {
-		classNames.default = classNames;
-		module.exports = classNames;
-	} else {
-		window.classNames = classNames;
-	}
-}());
-});
 
 var Context = React.createContext({
     breakpoint: { index: 0, value: 0 },
@@ -232,7 +177,7 @@ var Inner = function (_a) {
     var media = _a.media, className = _a.className, alignX = _a.alignX, alignY = _a.alignY, style = _a.style, children = _a.children, cssMode = _a.cssMode, hasChildBoxes = _a.hasChildBoxes, innerHTML = _a.innerHTML;
     if (cssMode === "grid")
         return children;
-    return (React.createElement(StyledInner, { className: className, media: media, cssMode: cssMode, alignX: alignX, alignY: alignY, style: style, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML }, children));
+    return (React.createElement(StyledInner, { className: ["Box__Inner", className].join(" "), media: media, cssMode: cssMode, alignX: alignX, alignY: alignY, style: style, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML }, children));
 };
 var templateObject_1$1, templateObject_2, templateObject_3;
 
@@ -607,11 +552,11 @@ var Box = React.forwardRef(function (_a, ref) {
                 id: id,
             });
     }, []);
-    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? classnames(["Box", className]) : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
+    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? ["Box", className].join(" ") : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
             cssMode === "grid" && {
             dangerouslySetInnerHTML: { __html: innerHTML },
         })), (href && { href: href })), (onClick && { onClick: onClick })) },
-        React.createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML, className: classnames(["Box__Inner", className]) },
+        React.createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML, className: className },
             React.createElement(React.Fragment, null,
                 controlIsVisible && React.createElement(ControlBox, { controlColor: controlColor }),
                 React.createElement(Resetter, { cssMode: cssMode, className: "Box__Resetter", hasChildBoxes: hasChildBoxesNormalized, media: media, gutterX: gutterX, gutterY: gutterY, alignX: alignXNormalized, alignY: alignYNormalized, padding: paddingNormalized },
@@ -691,6 +636,18 @@ var defaultProps$1 = {
     style: null,
 };
 
+function useClassName(className, breakpoint) {
+    var classNameComplete = useMemo(function () {
+        return [
+            "Grid",
+            "bp-" + breakpoint.index,
+            "bp-" + breakpoint.value,
+            className,
+        ].join(" ");
+    }, [className, breakpoint.index]);
+    return classNameComplete;
+}
+
 var Grid = React.forwardRef(function (_a, ref) {
     var breakpoints = _a.breakpoints, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, gutterX = _a.gutterX, gutterY = _a.gutterY, alignX = _a.alignX, alignY = _a.alignY, colspan = _a.colspan, control = _a.control, controlColor = _a.controlColor, position = _a.position, style = _a.style, className = _a.className, children = _a.children, cssMode = _a.cssMode, component = _a.component, tag = _a.tag, attrs = _a.attrs, isControl = _a.isControl;
     var controlIsVisible = useControl(control);
@@ -724,12 +681,8 @@ var Grid = React.forwardRef(function (_a, ref) {
         alignX: alignXNormalized,
         cols: colsNormalized,
     });
-    return (React.createElement(StyledGrid, { alignX: alignXNormalized, alignY: alignYNormalized, attrs: attrs, bottom: bottomNormalized, cssMode: cssModeNormalized, colspan: colspan, component: component, className: classnames([
-            "Grid",
-            "bp-" + currentBreakpoint.index,
-            "bp-" + currentBreakpoint.value,
-            className,
-        ]), gutterX: gutterXNormalized, gutterY: gutterYNormalized, isControl: isControl, left: leftNormalized, media: media, position: positionNormalized, ref: ref, right: rightNormalized, style: styleNormalized, tag: tag, top: topNormalized },
+    var classNameComplete = useClassName(className, currentBreakpoint);
+    return (React.createElement(StyledGrid, { alignX: alignXNormalized, alignY: alignYNormalized, attrs: attrs, bottom: bottomNormalized, cssMode: cssModeNormalized, colspan: colspan, component: component, className: classNameComplete, gutterX: gutterXNormalized, gutterY: gutterYNormalized, isControl: isControl, left: leftNormalized, media: media, position: positionNormalized, ref: ref, right: rightNormalized, style: styleNormalized, tag: tag, top: topNormalized },
         control && controlIsVisible && (React.createElement(ControlGrid, { cssMode: cssModeNormalized, colspan: colspan, breakpoints: breakpoints, gutterX: gutterXNormalized, gutterY: gutterYNormalized, left: leftNormalized, right: rightNormalized, top: topNormalized, bottom: bottomNormalized, controlColor: controlColor, media: media })),
         React.createElement(Inner, { cssMode: cssModeNormalized, className: "Grid__Inner", alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, media: media, hasChildBoxes: true },
             React.createElement(Resetter, { cssMode: cssModeNormalized, className: "Grid__Resetter", hasChildBoxes: true, gutterX: gutterXNormalized, gutterY: gutterYNormalized, alignX: alignXNormalized, alignY: alignYNormalized, media: media },

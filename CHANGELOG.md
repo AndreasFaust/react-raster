@@ -1,3 +1,9 @@
+#### 6.4.1 (2021-01-17)
+
+##### Bug Fixes
+
+*  remove classnames package (9933179a)
+
 ### 6.4.0 (2021-01-16)
 
 ##### New Features
