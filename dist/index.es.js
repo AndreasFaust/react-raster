@@ -177,7 +177,7 @@ var Inner = function (_a) {
     var media = _a.media, className = _a.className, alignX = _a.alignX, alignY = _a.alignY, style = _a.style, children = _a.children, cssMode = _a.cssMode, hasChildBoxes = _a.hasChildBoxes, innerHTML = _a.innerHTML;
     if (cssMode === "grid")
         return children;
-    return (React.createElement(StyledInner, { className: ["Box__Inner", className].join(" "), media: media, cssMode: cssMode, alignX: alignX, alignY: alignY, style: style, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML }, children));
+    return (React.createElement(StyledInner, { className: className, media: media, cssMode: cssMode, alignX: alignX, alignY: alignY, style: style, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML }, children));
 };
 var templateObject_1$1, templateObject_2, templateObject_3;
 
@@ -552,11 +552,11 @@ var Box = React.forwardRef(function (_a, ref) {
                 id: id,
             });
     }, []);
-    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" ? ["Box", className].join(" ") : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
+    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" && className ? ["Box", className].join(" ") : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
             cssMode === "grid" && {
             dangerouslySetInnerHTML: { __html: innerHTML },
         })), (href && { href: href })), (onClick && { onClick: onClick })) },
-        React.createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML, className: className },
+        React.createElement(Inner, { cssMode: cssMode, media: media, alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML, className: className ? ["Box__Inner", className].join(" ") : "Box__Inner" },
             React.createElement(React.Fragment, null,
                 controlIsVisible && React.createElement(ControlBox, { controlColor: controlColor }),
                 React.createElement(Resetter, { cssMode: cssMode, className: "Box__Resetter", hasChildBoxes: hasChildBoxesNormalized, media: media, gutterX: gutterX, gutterY: gutterY, alignX: alignXNormalized, alignY: alignYNormalized, padding: paddingNormalized },
@@ -638,12 +638,14 @@ var defaultProps$1 = {
 
 function useClassName(className, breakpoint) {
     var classNameComplete = useMemo(function () {
-        return [
+        var classArray = [
             "Grid",
             "bp-" + breakpoint.index,
             "bp-" + breakpoint.value,
-            className,
-        ].join(" ");
+        ];
+        if (className)
+            classArray.push(className);
+        return classArray.join(" ");
     }, [className, breakpoint.index]);
     return classNameComplete;
 }
