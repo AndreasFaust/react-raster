@@ -1,3 +1,9 @@
+#### 6.4.4 (2021-01-17)
+
+##### Bug Fixes
+
+*  fix context-props. fix flex-bug in grid-component. (a88e95b0)
+
 #### 6.4.3 (2021-01-17)
 
 ##### Bug Fixes

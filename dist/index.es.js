@@ -44,18 +44,9 @@ function __makeTemplateObject(cooked, raw) {
 }
 
 var Context = React.createContext({
-    breakpoint: { index: 0, value: 0 },
-    breakpoints: null,
-    cssMode: null,
-    gutterX: null,
-    gutterY: null,
-    colspan: null,
-    parentCols: null,
-    media: null,
-    controlIsVisible: null,
-    controlColor: null,
-    rest: null,
-    registerChildBox: null,
+// breakpoint: { index: 0, value: 0 },
+// breakpoints: [0],
+// cssMode: "grid",
 });
 function useRaster() {
     return React.useContext(Context);
@@ -166,14 +157,14 @@ var StyledInner = styled(InnerTag)(templateObject_3 || (templateObject_3 = __mak
     "\n"])), function (props) {
     return props.media.map(function (media, index) {
         return props.hasChildBoxes
-            ? media(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "], ["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "])), props.style && props.style[index]) : media(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          ", "\n          ", "\n          ", "\n          ", "\n        "], ["\n          ", "\n          ", "\n          ", "\n          ", "\n        "])), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: " + props.alignX[index] + ";", props.alignY[index] && "align-items: " + props.alignY[index] + ";", props.style && props.style[index]);
+            ? media(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "], ["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "])), props.style && !props.isGrid && props.style[index]) : media(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          ", "\n          ", "\n          ", "\n          ", "\n        "], ["\n          ", "\n          ", "\n          ", "\n          ", "\n        "])), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: " + props.alignX[index] + ";", props.alignY[index] && "align-items: " + props.alignY[index] + ";", props.style && !props.isGrid && props.style[index]);
     });
 });
 var Inner = function (_a) {
-    var media = _a.media, className = _a.className, alignX = _a.alignX, alignY = _a.alignY, style = _a.style, children = _a.children, cssMode = _a.cssMode, hasChildBoxes = _a.hasChildBoxes, innerHTML = _a.innerHTML;
+    var media = _a.media, className = _a.className, alignX = _a.alignX, alignY = _a.alignY, style = _a.style, children = _a.children, cssMode = _a.cssMode, hasChildBoxes = _a.hasChildBoxes, innerHTML = _a.innerHTML, isGrid = _a.isGrid;
     if (cssMode === "grid")
         return children;
-    return (React.createElement(StyledInner, { className: className, media: media, cssMode: cssMode, alignX: alignX, alignY: alignY, style: style, hasChildBoxes: hasChildBoxes, innerHTML: innerHTML }, children));
+    return (React.createElement(StyledInner, { className: className, media: media, cssMode: cssMode, alignX: alignX, alignY: alignY, style: style, hasChildBoxes: hasChildBoxes, isGrid: isGrid, innerHTML: innerHTML }, children));
 };
 var templateObject_1$1, templateObject_2, templateObject_3;
 
@@ -221,7 +212,8 @@ var Container = React.forwardRef(function (_a, ref) {
         return React.cloneElement(component, __assign({ children: children, className: className }, attrs));
     }
     return React.createElement(tag, __assign(__assign({}, attrs), { className: className,
-        ref: ref }), (tag !== "img" && !attrs.dangerouslySetInnerHTML) || cssMode === "flex"
+        ref: ref }), (tag !== "img" && !attrs.dangerouslySetInnerHTML) ||
+        (tag !== "img" && cssMode === "flex")
         ? children
         : null);
 });
@@ -420,28 +412,6 @@ var StyledBox = React.forwardRef(function (props, ref) {
 });
 var templateObject_1$4, templateObject_2$3, templateObject_3$2, templateObject_4$1, templateObject_5, templateObject_6;
 
-var defaultProps = {
-    attrs: {},
-    alignX: null,
-    alignY: null,
-    bottom: 0,
-    children: null,
-    className: null,
-    cols: null,
-    component: null,
-    hasChildBoxes: null,
-    href: null,
-    left: 0,
-    onClick: null,
-    padding: null,
-    right: 0,
-    style: null,
-    tag: "div",
-    top: 0,
-    order: null,
-    innerHTML: null,
-};
-
 function getMarginsPercent(_a) {
     var margin = _a.margin, cols = _a.cols, parentCols = _a.parentCols, cssMode = _a.cssMode, gutterX = _a.gutterX;
     if (cssMode === "grid") {
@@ -470,14 +440,14 @@ function useMarginPercent(_a) {
 }
 
 var Box = React.forwardRef(function (_a, ref) {
-    var alignX = _a.alignX, alignY = _a.alignY, attrs = _a.attrs, bottom = _a.bottom, className = _a.className, cols = _a.cols, component = _a.component, children = _a.children, hasChildBoxes = _a.hasChildBoxes, href = _a.href, innerHTML = _a.innerHTML, padding = _a.padding, left = _a.left, onClick = _a.onClick, right = _a.right, style = _a.style, top = _a.top, tag = _a.tag, order = _a.order;
+    var _b = _a.attrs, attrs = _b === void 0 ? {} : _b, alignX = _a.alignX, alignY = _a.alignY, _c = _a.bottom, bottom = _c === void 0 ? 0 : _c, children = _a.children, className = _a.className, cols = _a.cols, component = _a.component, hasChildBoxes = _a.hasChildBoxes, href = _a.href, _d = _a.left, left = _d === void 0 ? 0 : _d, onClick = _a.onClick, padding = _a.padding, _e = _a.right, right = _e === void 0 ? 0 : _e, style = _a.style, _f = _a.tag, tag = _f === void 0 ? "div" : _f, _g = _a.top, top = _g === void 0 ? 0 : _g, order = _a.order, innerHTML = _a.innerHTML;
     var context = useContext(Context);
     if (!context) {
         return React.createElement(ErrorMessage, null);
     }
     var breakpoint = context.breakpoint, breakpoints = context.breakpoints, colspan = context.colspan, controlColor = context.controlColor, controlIsVisible = context.controlIsVisible, cssMode = context.cssMode, gutterX = context.gutterX, gutterY = context.gutterY, media = context.media, parentCols = context.parentCols, rest = context.rest, registerChildBox = context.registerChildBox;
     var id = React.useState(nanoid)[0];
-    var _b = useState([]), childBoxes = _b[0], setChildBoxes = _b[1];
+    var _h = useState([]), childBoxes = _h[0], setChildBoxes = _h[1];
     var hasChildBoxesNormalized = getReset({
         hasChildBoxesFromProps: hasChildBoxes,
         hasChildBoxesFromRegister: !!childBoxes.length,
@@ -574,7 +544,6 @@ var Box = React.forwardRef(function (_a, ref) {
                         } }, children))))));
 });
 Box.displayName = "Box";
-Box.defaultProps = defaultProps;
 
 var ControlGrid = function (props) {
     return (React.createElement(Grid, __assign({}, props, { position: "absolute", className: "Grid--Control", alignY: "stretch", isControl: true }), __spreadArrays(Array(props.colspan)).map(function (col, index) { return (React.createElement(Box, { key: index, cols: 1, style: "\n            background-color: " + props.controlColor + ";\n          " })); })));
@@ -608,49 +577,26 @@ function useCurrentBreakpoint(breakpoints) {
     return currentBp;
 }
 
-var defaultProps$1 = {
-    alignX: null,
-    alignY: null,
-    attrs: {},
-    bottom: "0",
-    breakpoints: [0, 432, 768, 1024, 1200, 1400],
-    children: null,
-    className: null,
-    colspan: 1,
-    component: null,
-    control: false,
-    controlColor: "rgba(0, 0, 0, 0.1)",
-    cssMode: null,
-    gutterX: "0px",
-    gutterY: "0px",
-    isControl: false,
-    left: "0",
-    position: "relative",
-    right: "0",
-    tag: "div",
-    top: "0",
-    style: null,
-};
-
-function useClassName(className, breakpoint) {
+function useClassName(_a) {
+    var className = _a.className, currentBreakpoint = _a.currentBreakpoint;
     var classNameComplete = useMemo(function () {
         var classArray = [
             "Grid",
-            "bp-" + breakpoint.index,
-            "bp-" + breakpoint.value,
+            "bp-" + currentBreakpoint.index,
+            "bp-" + currentBreakpoint.value,
         ];
         if (className)
             classArray.push(className);
         return classArray.join(" ");
-    }, [className, breakpoint.index]);
+    }, [className, currentBreakpoint.index]);
     return classNameComplete;
 }
 
 var Grid = React.forwardRef(function (_a, ref) {
-    var breakpoints = _a.breakpoints, left = _a.left, right = _a.right, top = _a.top, bottom = _a.bottom, gutterX = _a.gutterX, gutterY = _a.gutterY, alignX = _a.alignX, alignY = _a.alignY, colspan = _a.colspan, control = _a.control, controlColor = _a.controlColor, position = _a.position, style = _a.style, className = _a.className, children = _a.children, cssMode = _a.cssMode, component = _a.component, tag = _a.tag, attrs = _a.attrs, isControl = _a.isControl;
+    var alignX = _a.alignX, alignY = _a.alignY, _b = _a.attrs, attrs = _b === void 0 ? {} : _b, _c = _a.bottom, bottom = _c === void 0 ? "0" : _c, _d = _a.breakpoints, breakpoints = _d === void 0 ? [0, 432, 768, 1024, 1200, 1400] : _d, children = _a.children, className = _a.className, _e = _a.colspan, colspan = _e === void 0 ? 1 : _e, component = _a.component, _f = _a.control, control = _f === void 0 ? false : _f, _g = _a.controlColor, controlColor = _g === void 0 ? "rgba(0, 0, 0, 0.1)" : _g, cssMode = _a.cssMode, _h = _a.gutterX, gutterX = _h === void 0 ? "0px" : _h, _j = _a.gutterY, gutterY = _j === void 0 ? "0px" : _j, _k = _a.isControl, isControl = _k === void 0 ? false : _k, _l = _a.left, left = _l === void 0 ? "0" : _l, _m = _a.position, position = _m === void 0 ? "relative" : _m, _o = _a.right, right = _o === void 0 ? "0" : _o, _p = _a.tag, tag = _p === void 0 ? "div" : _p, _q = _a.top, top = _q === void 0 ? "0" : _q, style = _a.style;
     var controlIsVisible = useControl(control);
     var cssModeNormalized = useCssMode(cssMode);
-    var _b = React.useState([]), childBoxes = _b[0], setChildBoxes = _b[1];
+    var _r = React.useState([]), childBoxes = _r[0], setChildBoxes = _r[1];
     var currentBreakpoint = useCurrentBreakpoint(breakpoints);
     var gutterXNormalized = normalizeProps({ prop: gutterX, breakpoints: breakpoints });
     var gutterYNormalized = normalizeProps({ prop: gutterY, breakpoints: breakpoints });
@@ -678,14 +624,17 @@ var Grid = React.forwardRef(function (_a, ref) {
     var alignmentXRest = getAlignmentXRest({
         breakpoints: breakpoints,
         childBoxes: childBoxes,
-        cssMode: cssMode,
+        cssMode: cssModeNormalized,
         alignX: alignXNormalized,
         cols: colsNormalized,
     });
-    var classNameComplete = useClassName(className, currentBreakpoint);
+    var classNameComplete = useClassName({
+        className: className,
+        currentBreakpoint: currentBreakpoint,
+    });
     return (React.createElement(StyledGrid, { alignX: alignXNormalized, alignY: alignYNormalized, attrs: attrs, bottom: bottomNormalized, cssMode: cssModeNormalized, colspan: colspan, component: component, className: classNameComplete, gutterX: gutterXNormalized, gutterY: gutterYNormalized, isControl: isControl, left: leftNormalized, media: media, position: positionNormalized, ref: ref, right: rightNormalized, style: styleNormalized, tag: tag, top: topNormalized },
         control && controlIsVisible && (React.createElement(ControlGrid, { cssMode: cssModeNormalized, colspan: colspan, breakpoints: breakpoints, gutterX: gutterXNormalized, gutterY: gutterYNormalized, left: leftNormalized, right: rightNormalized, top: topNormalized, bottom: bottomNormalized, controlColor: controlColor, media: media })),
-        React.createElement(Inner, { cssMode: cssModeNormalized, className: "Grid__Inner", alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, media: media, hasChildBoxes: true },
+        React.createElement(Inner, { cssMode: cssModeNormalized, className: "Grid__Inner", alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, media: media, isGrid: true, hasChildBoxes: true },
             React.createElement(Resetter, { cssMode: cssModeNormalized, className: "Grid__Resetter", hasChildBoxes: true, gutterX: gutterXNormalized, gutterY: gutterYNormalized, alignX: alignXNormalized, alignY: alignYNormalized, media: media },
                 React.createElement(Context.Provider, { value: {
                         cssMode: cssModeNormalized,
@@ -704,7 +653,6 @@ var Grid = React.forwardRef(function (_a, ref) {
                         },
                     } }, children)))));
 });
-Grid.defaultProps = defaultProps$1;
 
 export { Box, Grid, types as Types, useRaster };
 //# sourceMappingURL=index.es.js.map
