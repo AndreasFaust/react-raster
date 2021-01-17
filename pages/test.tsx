@@ -40,7 +40,7 @@ const Testpage: NextPage<Props> = (props) => {
 
   return (
     <SpecialGrid>
-      <Box />
+      {/* <Box /> */}
       <SpecialBox>Hallo!</SpecialBox>
       <Box
         cols={[2, 3]}
@@ -49,7 +49,12 @@ const Testpage: NextPage<Props> = (props) => {
         innerHTML="<h1>HALLIHALLO</h1>"
         className="test123"
       />
-      <ChildBox />
+      <Box cols={3} style={`background: yellow;`}>
+        <Box cols={2} style={`background: red;`}>
+          Hallo
+        </Box>
+      </Box>
+      {/* <ChildBox /> */}
       {/* <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
         Hallo
       </Box>

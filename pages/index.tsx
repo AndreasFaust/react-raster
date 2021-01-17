@@ -55,7 +55,7 @@ const Startpage: NextPage<Props> = (props) => {
       >
         <Box
           className="logo"
-          cols={[8, 6, 4, 4,3,2]}
+          cols={[8, 6, 4, 4, 3, 2]}
           tag="img"
           attrs={{
             src: process.env.productionPath + "/react-raster-logo.svg",
@@ -96,11 +96,11 @@ const Startpage: NextPage<Props> = (props) => {
             left={[0, 0, 0, 1]}
             alignX={["center", "center", "right"]}
           >
-            <img
+            {/* <img
               className="hintIcon"
               src={process.env.productionPath + "/scale.svg"}
               alt="Scale icon"
-            />
+            /> */}
             <small>Scale your Viewport to see the layout changing!</small>
           </Box>
           <Box
@@ -108,11 +108,11 @@ const Startpage: NextPage<Props> = (props) => {
             cols={[12, 12, 5, 4]}
             alignX={["center", "center", "left"]}
           >
-            <img
+            {/* <img
               className="hintIcon"
               src={process.env.productionPath + "/esc.svg"}
               alt="Escape icon"
-            />
+            /> */}
             <small>
               Press <pre>ESC</pre> to see the column-grid
             </small>

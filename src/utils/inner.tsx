@@ -20,6 +20,7 @@ interface StyledProps {
   innerHTML?: string;
   hasChildBoxes: boolean;
   cssMode: "grid" | "flex";
+  isGrid?: boolean;
 }
 
 const StyledInner = styled(InnerTag)<StyledProps>`
@@ -33,13 +34,13 @@ const StyledInner = styled(InnerTag)<StyledProps>`
           display: flex;
           align-items: stretch;
           justify-content: stretch;
-          ${props.style && props.style[index]}
+          ${props.style && !props.isGrid && props.style[index]}
         `
         : media`
           ${(props.alignX[index] || props.alignY[index]) && `display: flex;`}
           ${props.alignX[index] && `justify-content: ${props.alignX[index]};`}
           ${props.alignY[index] && `align-items: ${props.alignY[index]};`}
-          ${props.style && props.style[index]}
+          ${props.style && !props.isGrid && props.style[index]}
         `;
     })}
 `;
@@ -54,6 +55,7 @@ interface Props {
   children: React.ReactElement;
   hasChildBoxes: boolean;
   innerHTML?: string;
+  isGrid?: boolean;
 }
 
 const Inner: React.FC<Props> = ({
@@ -66,6 +68,7 @@ const Inner: React.FC<Props> = ({
   cssMode,
   hasChildBoxes,
   innerHTML,
+  isGrid,
 }) => {
   if (cssMode === "grid") return children;
   return (
@@ -77,6 +80,7 @@ const Inner: React.FC<Props> = ({
       alignY={alignY}
       style={style}
       hasChildBoxes={hasChildBoxes}
+      isGrid={isGrid}
       innerHTML={innerHTML}
     >
       {children}

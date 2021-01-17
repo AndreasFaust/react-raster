@@ -17,18 +17,18 @@ import useGridClassName from "../utils/useClassName";
 const Grid = React.forwardRef<HTMLElement, Props>(
   (
     {
-      alignX = null,
-      alignY = null,
+      alignX,
+      alignY,
       attrs = {},
       bottom = "0",
       breakpoints = [0, 432, 768, 1024, 1200, 1400],
-      children = null,
-      className = null,
+      children,
+      className,
       colspan = 1,
-      component = null,
+      component,
       control = false,
       controlColor = "rgba(0, 0, 0, 0.1)",
-      cssMode = null,
+      cssMode,
       gutterX = "0px",
       gutterY = "0px",
       isControl = false,
@@ -37,7 +37,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       right = "0",
       tag = "div",
       top = "0",
-      style = null,
+      style,
     },
     ref
   ) => {
@@ -73,12 +73,15 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     const alignmentXRest = getAlignmentXRest({
       breakpoints,
       childBoxes,
-      cssMode,
+      cssMode: cssModeNormalized,
       alignX: alignXNormalized,
       cols: colsNormalized,
     });
 
-    const classNameComplete = useGridClassName(className, currentBreakpoint);
+    const classNameComplete = useGridClassName({
+      className,
+      currentBreakpoint,
+    });
 
     return (
       <StyledGrid
@@ -124,6 +127,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
           alignY={alignYNormalized}
           style={styleNormalized}
           media={media}
+          isGrid={true}
           hasChildBoxes
         >
           <Resetter

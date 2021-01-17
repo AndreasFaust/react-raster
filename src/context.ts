@@ -1,41 +1,32 @@
 import React from "react";
 
 interface ContextProps {
-  cssMode: "grid" | "flex" | null;
-  breakpoint: {
+  cssMode?: "grid" | "flex";
+  breakpoint?: {
     index: number;
     value: number;
   };
-  breakpoints: number[] | null;
-  gutterX: string[] | null;
-  gutterY: string[] | null;
-  colspan: number | null;
-  parentCols: number[] | null;
-  media: any[] | null;
-  controlIsVisible: boolean | null;
-  controlColor: string | null;
-  rest: { id: string; width: number[] }[] | null;
+  breakpoints?: number[];
+  gutterX?: string[];
+  gutterY?: string[];
+  colspan?: number;
+  parentCols?: number[];
+  media?: any[];
+  controlIsVisible?: boolean;
+  controlColor?: string;
+  rest?: { id: string; width: number[] }[];
   registerChildBox?: (childBox: {
     left: number[];
     right: number[];
     cols: number[];
     id: string;
-  }) => void | null;
+  }) => void;
 }
 
 const Context = React.createContext<ContextProps>({
-  breakpoint: { index: 0, value: 0 },
-  breakpoints: null,
-  cssMode: null,
-  gutterX: null,
-  gutterY: null,
-  colspan: null,
-  parentCols: null,
-  media: null,
-  controlIsVisible: null,
-  controlColor: null,
-  rest: null,
-  registerChildBox: null,
+  // breakpoint: { index: 0, value: 0 },
+  // breakpoints: [0],
+  // cssMode: "grid",
 });
 
 function useRaster(): ContextProps {

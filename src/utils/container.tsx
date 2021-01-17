@@ -24,7 +24,8 @@ const Container = React.forwardRef<HTMLElement, Props>(
         className,
         ref,
       },
-      (tag !== "img" && !attrs.dangerouslySetInnerHTML) || cssMode === "flex"
+      (tag !== "img" && !attrs.dangerouslySetInnerHTML) ||
+        (tag !== "img" && cssMode === "flex")
         ? children
         : null
     );

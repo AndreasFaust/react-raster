@@ -1,6 +1,6 @@
 import React from "react";
 
-type TCssMode = "grid" | "flex" | null;
+type TCssMode = "grid" | "flex";
 
 export default function useCssMode(cssModeFromProps?: TCssMode): TCssMode {
   const [cssMode, setCssMode] = React.useState<TCssMode>("grid");
