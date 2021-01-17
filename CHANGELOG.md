@@ -1,3 +1,9 @@
+#### 6.4.6 (2021-01-17)
+
+##### Bug Fixes
+
+*  fix context-check and error-handling in Box (4fac82a9)
+
 #### 6.4.5 (2021-01-17)
 
 ##### Other Changes

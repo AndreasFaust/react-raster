@@ -442,7 +442,7 @@ function useMarginPercent(_a) {
 var Box = React.forwardRef(function (_a, ref) {
     var _b = _a.attrs, attrs = _b === void 0 ? {} : _b, alignX = _a.alignX, alignY = _a.alignY, _c = _a.bottom, bottom = _c === void 0 ? 0 : _c, children = _a.children, className = _a.className, cols = _a.cols, component = _a.component, hasChildBoxes = _a.hasChildBoxes, href = _a.href, _d = _a.left, left = _d === void 0 ? 0 : _d, onClick = _a.onClick, padding = _a.padding, _e = _a.right, right = _e === void 0 ? 0 : _e, style = _a.style, _f = _a.tag, tag = _f === void 0 ? "div" : _f, _g = _a.top, top = _g === void 0 ? 0 : _g, order = _a.order, innerHTML = _a.innerHTML;
     var context = useContext(Context);
-    if (!context) {
+    if (!context.breakpoints) {
         return React.createElement(ErrorMessage, null);
     }
     var breakpoint = context.breakpoint, breakpoints = context.breakpoints, colspan = context.colspan, controlColor = context.controlColor, controlIsVisible = context.controlIsVisible, cssMode = context.cssMode, gutterX = context.gutterX, gutterY = context.gutterY, media = context.media, parentCols = context.parentCols, rest = context.rest, registerChildBox = context.registerChildBox;
