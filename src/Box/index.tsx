@@ -147,7 +147,9 @@ const Box = React.forwardRef<HTMLElement, Props>(
         component={component}
         cssMode={cssMode}
         breakpoints={breakpoints}
-        className={cssMode === "grid" ? ["Box", className].join(" ") : "Box"}
+        className={
+          cssMode === "grid" && className ? ["Box", className].join(" ") : "Box"
+        }
         cols={colsPercent}
         rest={restPercent}
         media={media}
@@ -186,7 +188,9 @@ const Box = React.forwardRef<HTMLElement, Props>(
           style={styleNormalized}
           hasChildBoxes={hasChildBoxes}
           innerHTML={innerHTML}
-          className={className}
+          className={
+            className ? ["Box__Inner", className].join(" ") : "Box__Inner"
+          }
         >
           <>
             {controlIsVisible && <ControlBox controlColor={controlColor} />}

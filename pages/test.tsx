@@ -8,7 +8,7 @@ import SpecialBox from "../components/SpecialBox";
 
 const ChildBox = () => {
   const { breakpoint } = useRaster();
-  console.log(breakpoint);
+  // console.log(breakpoint);
   return (
     <Box
       // top={0.5}
@@ -36,10 +36,11 @@ const ChildBox = () => {
 interface Props {}
 
 const Testpage: NextPage<Props> = (props) => {
-  // const gridRef = React.useRef();
+  const gridRef = React.useRef();
 
   return (
     <SpecialGrid>
+      <Box />
       <SpecialBox>Hallo!</SpecialBox>
       <Box
         cols={[2, 3]}
@@ -48,6 +49,7 @@ const Testpage: NextPage<Props> = (props) => {
         innerHTML="<h1>HALLIHALLO</h1>"
         className="test123"
       />
+      <ChildBox />
       {/* <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
         Hallo
       </Box>

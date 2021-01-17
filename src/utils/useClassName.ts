@@ -5,12 +5,13 @@ export default function useClassName(
   breakpoint: { index: number; value: number }
 ): string {
   const classNameComplete = useMemo(() => {
-    return [
+    const classArray = [
       "Grid",
       `bp-${breakpoint.index}`,
       `bp-${breakpoint.value}`,
-      className,
-    ].join(" ");
+    ];
+    if (className) classArray.push(className);
+    return classArray.join(" ");
   }, [className, breakpoint.index]);
   return classNameComplete;
 }
