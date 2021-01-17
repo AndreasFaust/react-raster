@@ -41,55 +41,18 @@ const Testpage: NextPage<Props> = (props) => {
   return (
     <SpecialGrid>
       {/* <Box /> */}
-      <SpecialBox>Hallo!</SpecialBox>
+      {/* <SpecialBox>Hallo!</SpecialBox>
       <Box
         cols={[2, 3]}
         bottom={1}
         style={`background: red;`}
         innerHTML="<h1>HALLIHALLO</h1>"
         className="test123"
-      />
+      /> */}
       <Box cols={3} style={`background: yellow;`}>
-        <Box cols={2} style={`background: red;`}>
-          Hallo
-        </Box>
+        <Box style={`background: red;`}>Hallo</Box>
       </Box>
       {/* <ChildBox /> */}
-      {/* <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
-        Hallo
-      </Box>
-      <ChildBox />
-      <Link href="/" passHref>
-        <Box>
-          <Box
-            style={`background: green;`}
-            order={[1, 1, 2]}
-            component={
-              <motion.a
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-              />
-            }
-          >
-            <h2>DU!</h2>
-          </Box>
-          <Box
-            style={`background: green;`}
-            order={[2, 2, 1]}
-            component={
-              <motion.a
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-              />
-            }
-          >
-            <h2>DEPP!</h2>
-          </Box>
-        </Box>
-      </Link>
-      <Box cols={[4, 5]} bottom={1} style={`background: red;`}>
-        Hallo
-      </Box> */}
     </SpecialGrid>
   );
 };

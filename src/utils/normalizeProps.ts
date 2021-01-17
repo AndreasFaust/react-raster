@@ -15,7 +15,7 @@ function getArray(
   prop?: number | number[] | string | string[],
   defaultProp?: number | number[] | string | string[]
 ): any[] {
-  if (typeof prop === null || typeof prop === undefined) {
+  if (prop === null || prop === undefined) {
     return makeArray(defaultProp);
   }
   return makeArray(prop);
