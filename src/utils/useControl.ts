@@ -1,6 +1,6 @@
 import React from "react";
 
-const useControl = (control: boolean): boolean => {
+const useControl = (control?: boolean): boolean => {
   const [isVisible, setIsVisible] = React.useState(false);
   React.useEffect(() => {
     function onKeyup(event) {

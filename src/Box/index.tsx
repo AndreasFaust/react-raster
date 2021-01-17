@@ -14,32 +14,32 @@ import ErrorMessage from "../utils/ErrorMessage";
 import Context from "../context";
 import StyledBox from "./StyledBox";
 import { ControlBox } from "../Control";
-import { Props, defaultProps } from "./props";
+import { Props } from "./props";
 
 import useMarginPercent from "./hooks/useMarginPercent";
 
 const Box = React.forwardRef<HTMLElement, Props>(
   (
     {
-      alignX,
-      alignY,
-      attrs,
-      bottom,
-      className,
-      cols,
-      component,
-      children,
-      hasChildBoxes,
-      href,
-      innerHTML,
-      padding,
-      left,
-      onClick,
-      right,
-      style,
-      top,
-      tag,
-      order,
+      attrs = {},
+      alignX = null,
+      alignY = null,
+      bottom = 0,
+      children = null,
+      className = null,
+      cols = null,
+      component = null,
+      hasChildBoxes = null,
+      href = null,
+      left = 0,
+      onClick = null,
+      padding = null,
+      right = 0,
+      style = null,
+      tag = "div",
+      top = 0,
+      order = null,
+      innerHTML = null,
     },
     ref
   ) => {
@@ -239,7 +239,6 @@ const Box = React.forwardRef<HTMLElement, Props>(
 );
 
 Box.displayName = "Box";
-Box.defaultProps = defaultProps;
 
 export default Box;
 export { Box };

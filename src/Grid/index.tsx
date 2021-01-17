@@ -11,33 +11,33 @@ import StyledGrid from "./StyledGrid";
 import { ControlGrid } from "../Control";
 import useCurrentBreakpoint from "../utils/useCurrentBreakpoint";
 import getAlignmentXRest from "../utils/getAlignmentXRest";
-import { Props, defaultProps } from "./props";
+import { Props } from "./props";
 import useGridClassName from "../utils/useClassName";
 
 const Grid = React.forwardRef<HTMLElement, Props>(
   (
     {
-      breakpoints,
-      left,
-      right,
-      top,
-      bottom,
-      gutterX,
-      gutterY,
-      alignX,
-      alignY,
-      colspan,
-      control,
-      controlColor,
-      position,
-      style,
-      className,
-      children,
-      cssMode,
-      component,
-      tag,
-      attrs,
-      isControl,
+      alignX = null,
+      alignY = null,
+      attrs = {},
+      bottom = "0",
+      breakpoints = [0, 432, 768, 1024, 1200, 1400],
+      children = null,
+      className = null,
+      colspan = 1,
+      component = null,
+      control = false,
+      controlColor = "rgba(0, 0, 0, 0.1)",
+      cssMode = null,
+      gutterX = "0px",
+      gutterY = "0px",
+      isControl = false,
+      left = "0",
+      position = "relative",
+      right = "0",
+      tag = "div",
+      top = "0",
+      style = null,
     },
     ref
   ) => {
@@ -167,8 +167,6 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     );
   }
 );
-
-Grid.defaultProps = defaultProps;
 
 export default Grid;
 export { Grid };

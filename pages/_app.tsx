@@ -1,5 +1,4 @@
 import React from "react";
-import App from "next/app";
 import { AnimatePresence } from "framer-motion";
 import "./css/reset.css";
 import "./css/index.css";

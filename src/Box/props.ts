@@ -22,25 +22,3 @@ export interface Props {
   order?: number | number[];
   innerHTML?: string;
 }
-
-export const defaultProps = {
-  attrs: {},
-  alignX: null,
-  alignY: null,
-  bottom: 0,
-  children: null,
-  className: null,
-  cols: null,
-  component: null,
-  hasChildBoxes: null,
-  href: null,
-  left: 0,
-  onClick: null,
-  padding: null,
-  right: 0,
-  style: null,
-  tag: "div",
-  top: 0,
-  order: null,
-  innerHTML: null,
-};
