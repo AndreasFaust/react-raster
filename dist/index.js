@@ -70,39 +70,35 @@ function useRaster() {
     return React__default['default'].useContext(Context);
 }
 
-function isArray(prop) {
-    if (!prop)
-        return false;
-    return prop.constructor === Array;
-}
-
 function addValues(_a) {
-    var array = _a.array, breakpointsLength = _a.breakpointsLength;
-    var lastKnownValue = array[array.length - 1];
-    while (array.length < breakpointsLength) {
-        array.push(lastKnownValue);
+    var propArray = _a.propArray, breakpointsLength = _a.breakpointsLength;
+    var lastKnownValue = propArray[propArray.length - 1];
+    while (propArray.length < breakpointsLength) {
+        propArray.push(lastKnownValue);
     }
-    return array;
+    return propArray;
+}
+function makeArray(prop) {
+    if (Array.isArray(prop))
+        return prop;
+    else
+        return [prop];
 }
 function getArray(prop, defaultProp) {
-    if (!prop) {
-        if (isArray(defaultProp))
-            return defaultProp;
-        return defaultProp ? [defaultProp] : [prop];
+    if (typeof prop === null || typeof prop === undefined) {
+        return makeArray(defaultProp);
     }
-    if (!isArray(prop))
-        return [prop];
-    return prop;
+    return makeArray(prop);
 }
 function normalizeProps(_a) {
     var prop = _a.prop, defaultProp = _a.defaultProp, breakpoints = _a.breakpoints;
     var breakpointsLength = breakpoints.length;
-    var array = getArray(prop, defaultProp);
-    if (array.length < breakpointsLength)
-        array = addValues({ array: array, breakpointsLength: breakpointsLength });
-    if (array.length > breakpointsLength)
-        array = array.splice(breakpointsLength);
-    return array;
+    var propArray = getArray(prop, defaultProp);
+    if (propArray.length < breakpointsLength)
+        propArray = addValues({ propArray: propArray, breakpointsLength: breakpointsLength });
+    if (propArray.length > breakpointsLength)
+        propArray = propArray.splice(breakpointsLength);
+    return propArray;
 }
 
 function getMediaQueries(breakpoints) {
@@ -678,7 +674,10 @@ var Grid = React__default['default'].forwardRef(function (_a, ref) {
         hasChildBoxes: true,
     });
     var media = getMediaQueries(breakpoints);
-    var colsNormalized = normalizeProps({ prop: colspan, breakpoints: breakpoints });
+    var colsNormalized = normalizeProps({
+        prop: colspan,
+        breakpoints: breakpoints,
+    });
     var leftNormalized = normalizeProps({ prop: left, breakpoints: breakpoints });
     var rightNormalized = normalizeProps({ prop: right, breakpoints: breakpoints });
     var topNormalized = normalizeProps({ prop: top, breakpoints: breakpoints });

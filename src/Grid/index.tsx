@@ -60,7 +60,10 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     });
 
     const media = getMediaQueries(breakpoints);
-    const colsNormalized = normalizeProps({ prop: colspan, breakpoints });
+    const colsNormalized = normalizeProps({
+      prop: colspan,
+      breakpoints,
+    });
     const leftNormalized = normalizeProps({ prop: left, breakpoints });
     const rightNormalized = normalizeProps({ prop: right, breakpoints });
     const topNormalized = normalizeProps({ prop: top, breakpoints });

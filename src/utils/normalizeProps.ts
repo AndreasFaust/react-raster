@@ -1,25 +1,29 @@
-import isArray from "./isArray";
-
-function addValues({ array, breakpointsLength }) {
-  const lastKnownValue = array[array.length - 1];
-  while (array.length < breakpointsLength) {
-    array.push(lastKnownValue);
+function addValues({ propArray, breakpointsLength }) {
+  const lastKnownValue = propArray[propArray.length - 1];
+  while (propArray.length < breakpointsLength) {
+    propArray.push(lastKnownValue);
   }
-  return array;
+  return propArray;
 }
 
-function getArray(prop, defaultProp) {
-  if (!prop) {
-    if (isArray(defaultProp)) return defaultProp;
-    return defaultProp ? [defaultProp] : [prop];
+function makeArray(prop?: number | number[] | string | string[]): any[] {
+  if (Array.isArray(prop)) return prop;
+  else return [prop];
+}
+
+function getArray(
+  prop?: number | number[] | string | string[],
+  defaultProp?: number | number[] | string | string[]
+): any[] {
+  if (typeof prop === null || typeof prop === undefined) {
+    return makeArray(defaultProp);
   }
-  if (!isArray(prop)) return [prop];
-  return prop;
+  return makeArray(prop);
 }
 
 interface Props {
-  prop: number | number[] | string | string[];
-  defaultProp?: any;
+  prop?: number | number[] | string | string[];
+  defaultProp?: number | number[] | string | string[];
   breakpoints: number[];
 }
 
@@ -29,10 +33,10 @@ export default function normalizeProps({
   breakpoints,
 }: Props): any[] {
   const breakpointsLength = breakpoints.length;
-  let array = getArray(prop, defaultProp);
-
-  if (array.length < breakpointsLength)
-    array = addValues({ array, breakpointsLength });
-  if (array.length > breakpointsLength) array = array.splice(breakpointsLength);
-  return array;
+  let propArray = getArray(prop, defaultProp);
+  if (propArray.length < breakpointsLength)
+    propArray = addValues({ propArray, breakpointsLength });
+  if (propArray.length > breakpointsLength)
+    propArray = propArray.splice(breakpointsLength);
+  return propArray;
 }
