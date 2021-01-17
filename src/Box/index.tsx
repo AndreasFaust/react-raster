@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-import classNames from "classnames";
 import { nanoid } from "nanoid/non-secure";
 
 import getColsPercent from "../utils/getColsPercent";
@@ -148,7 +147,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
         component={component}
         cssMode={cssMode}
         breakpoints={breakpoints}
-        className={cssMode === "grid" ? classNames(["Box", className]) : "Box"}
+        className={cssMode === "grid" ? ["Box", className].join(" ") : "Box"}
         cols={colsPercent}
         rest={restPercent}
         media={media}
@@ -187,7 +186,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
           style={styleNormalized}
           hasChildBoxes={hasChildBoxes}
           innerHTML={innerHTML}
-          className={classNames(["Box__Inner", className])}
+          className={className}
         >
           <>
             {controlIsVisible && <ControlBox controlColor={controlColor} />}

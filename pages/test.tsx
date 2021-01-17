@@ -3,6 +3,8 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { Grid, Box, useRaster } from "../src";
 import { motion } from "framer-motion";
+import SpecialGrid from "../components/SpecialGrid";
+import SpecialBox from "../components/SpecialBox";
 
 const ChildBox = () => {
   const { breakpoint } = useRaster();
@@ -34,39 +36,17 @@ const ChildBox = () => {
 interface Props {}
 
 const Testpage: NextPage<Props> = (props) => {
-  const gridRef = React.useRef();
+  // const gridRef = React.useRef();
 
   return (
-    <Grid
-      tag="section"
-      breakpoints={[0, 500, 768, 1024, 1200, 1400]}
-      left={"1.5vw"}
-      right={"3vw"}
-      top={"10vw"}
-      bottom={"20vw"}
-      gutterX={["0px", "0px", "1.5vw"]}
-      // gutterY={"3vw"}
-      colspan={12}
-      alignX={["center", "right", "left"]}
-      // alignY={"center"}
-      control
-      // component={
-      // }
-      // styleOuter={`width: 80%;`}
-      style={`
-            background: blue;
-            &.bp-768 {
-              // background: black;
-            }
-          `}
-      // cssMode="flex"
-      ref={gridRef}
-    >
+    <SpecialGrid>
+      <SpecialBox>Hallo!</SpecialBox>
       <Box
         cols={[2, 3]}
         bottom={1}
         style={`background: red;`}
         innerHTML="<h1>HALLIHALLO</h1>"
+        className="test123"
       />
       {/* <Box cols={[1, 2]} bottom={1} style={`background: red;`}>
         Hallo
@@ -103,7 +83,7 @@ const Testpage: NextPage<Props> = (props) => {
       <Box cols={[4, 5]} bottom={1} style={`background: red;`}>
         Hallo
       </Box> */}
-    </Grid>
+    </SpecialGrid>
   );
 };
 

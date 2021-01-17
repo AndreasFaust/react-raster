@@ -1,0 +1,33 @@
+import React from "react";
+import { Grid, Types } from "../src";
+
+const SpecialGrid: React.FC<Types.Grid> = (props) => (
+  <Grid {...props}>{props.children}</Grid>
+);
+
+SpecialGrid.defaultProps = {
+  tag: "section",
+  breakpoints: [0, 500, 768, 1024, 1200, 1400],
+  left: "1.5vw",
+  right: "3vw",
+  top: "10vw",
+  bottom: "20vw",
+  gutterX: ["0px", "0px", "1.5vw"],
+  // gutterY:"3vw",
+  colspan: 12,
+  alignX: ["center", "right", "left"],
+  // alignY:"center",
+  control: true,
+  className: "test123",
+  // component:,
+  //
+  // styleOuter:`width: 80%;`,
+  style: `
+    background: blue;
+    &.bp-768 {
+      // background: black;
+    }
+  `,
+};
+
+export default SpecialGrid;

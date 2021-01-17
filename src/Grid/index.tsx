@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import Context from "../context";
 import normalizeProps from "../utils/normalizeProps";
 import getMediaQueries from "../utils/getMediaQueries";
@@ -13,6 +12,7 @@ import { ControlGrid } from "../Control";
 import useCurrentBreakpoint from "../utils/useCurrentBreakpoint";
 import getAlignmentXRest from "../utils/getAlignmentXRest";
 import { Props, defaultProps } from "./props";
+import useGridClassName from "../utils/useClassName";
 
 const Grid = React.forwardRef<HTMLElement, Props>(
   (
@@ -75,6 +75,8 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       cols: colsNormalized,
     });
 
+    const classNameComplete = useGridClassName(className, currentBreakpoint);
+
     return (
       <StyledGrid
         alignX={alignXNormalized}
@@ -84,12 +86,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
         cssMode={cssModeNormalized}
         colspan={colspan}
         component={component}
-        className={classNames([
-          "Grid",
-          `bp-${currentBreakpoint.index}`,
-          `bp-${currentBreakpoint.value}`,
-          className,
-        ])}
+        className={classNameComplete}
         gutterX={gutterXNormalized}
         gutterY={gutterYNormalized}
         isControl={isControl}

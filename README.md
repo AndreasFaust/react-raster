@@ -114,6 +114,27 @@ Either a Box/Grid contains Boxes or regular elements/components.
 
 ---
 
+## Exported TypeScript Prop-Types
+
+`react-raster` exports its components’s prop-types, if you want to customize a `Box` with special defaults.
+
+```tsx
+import React from "react";
+import { Box, Types } from "react-raster";
+
+const SpecialBox: React.FC<Types.Box> = (props) => (
+  <Box {...props}>{props.children}</Box>
+);
+
+SpecialBox.defaultProps = {
+  cols: [6, 6, 3],
+};
+
+export default SpecialBox;
+```
+
+---
+
 ## What about cssMode `grid` and `flex`?
 
 `cssMode` is the prop, that defines which CSS-layout-engine `react-raster` should use.

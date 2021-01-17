@@ -70,7 +70,7 @@ const Inner: React.FC<Props> = ({
   if (cssMode === "grid") return children;
   return (
     <StyledInner
-      className={className}
+      className={["Box__Inner", className].join(" ")}
       media={media}
       cssMode={cssMode}
       alignX={alignX}
