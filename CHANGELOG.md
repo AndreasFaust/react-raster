@@ -1,3 +1,9 @@
+#### 6.4.5 (2021-01-17)
+
+##### Other Changes
+
+*  fix parentcols-behaviour (434252d2)
+
 #### 6.4.4 (2021-01-17)
 
 ##### Bug Fixes

@@ -67,7 +67,7 @@ function makeArray(prop) {
         return [prop];
 }
 function getArray(prop, defaultProp) {
-    if (typeof prop === null || typeof prop === undefined) {
+    if (prop === null || prop === undefined) {
         return makeArray(defaultProp);
     }
     return makeArray(prop);
