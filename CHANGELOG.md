@@ -1,3 +1,9 @@
+#### 6.4.3 (2021-01-17)
+
+##### Bug Fixes
+
+*  fix normalizeProps (0bddcb72)
+
 #### 6.4.2 (2021-01-17)
 
 ##### Bug Fixes
