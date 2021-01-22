@@ -313,7 +313,7 @@ const Example = () => (
     className="Testgrid"
     tag="section"
     breakpoints={[0, 432, 768, 1024, 1200, 1400]}
-    colspan={12}
+    colspan={[6, 6, 8, 12]}
     left={["3vw", "3vw", "3vw", "2vw"]}
     right={["3vw", "3vw", "3vw", "2vw"]}
     top={"10vw"}
@@ -359,7 +359,7 @@ const Example = () => (
     <Box
       className="Testgrid__Box"
       tag="article"
-      cols={[12, 12, 6]}
+      cols={[6, 6, 4, 6]}
       top={1}
       left={[0, 0, 3]}
       style={`
@@ -388,7 +388,7 @@ const Example = () => (
       <Box
         className="Testgrid__Image"
         tag="img"
-        cols={12}
+        cols={6}
         top={1}
         attr={{
           src: "https://my-image-source.io",
@@ -409,7 +409,7 @@ All props are optional.
 | **Name**         | **Type**                   | **Default**                       | **Description**                                                                                                 |
 | :--------------- | :------------------------- | :-------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
 | **breakpoints**  | Array                      | `[0, 432, 768, 1024, 1200, 1400]` | Breakpoints in Pixels, in ascending order starting with zero.                                                   |
-| **colspan**      | Number                     | `1`                               | Number of columns.                                                                                              |
+| **colspan**      | Number or Array of Numbers | `1`                               | Number of columns.                                                                                              |
 | **left**         | String or Array of Strings | `'0'`                             | Left padding of the Grid.                                                                                       |
 | **right**        | String or Array of Strings | `'0'`                             | Right padding of the Grid.                                                                                      |
 | **top**          | String or Array of Strings | `'0'`                             | Top padding of the Grid.                                                                                        |
