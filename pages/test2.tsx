@@ -30,23 +30,32 @@ const teaserVariants = {
   show: { opacity: 1 },
 };
 
-export const ExampleTeaser = ({ item }) => (
-  <Link href="/test3" passHref>
-    <Box
-      cols={4}
-      style={`
+export const ExampleTeaser = ({ item }) => {
+  return (
+    <Link href="/test3" passHref>
+      <Box
+        cols={4}
+        style={`
         background: blue;
         height: 400px;
         color: white;
       `}
-      alignY="center"
-      alignX="center"
-      component={<motion.a variants={teaserVariants} />}
-    >
-      <h2>{item}</h2>
-    </Box>
-  </Link>
-);
+        alignY="center"
+        alignX="center"
+        component={<motion.a variants={teaserVariants} />}
+      >
+        <Box
+          tag="h2"
+          onResize={(element) => {
+            console.log(element.offsetWidth);
+          }}
+        >
+          {item}
+        </Box>
+      </Box>
+    </Link>
+  );
+};
 
 const ExampleGrid = ({ children }) => (
   <Grid

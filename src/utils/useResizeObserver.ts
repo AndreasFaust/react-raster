@@ -9,12 +9,10 @@ export default function useResizeObserver(
     if (!ref.current || !onResize) return;
 
     const dOnResize = debounce(() => {
-      if (onResize) onResize(ref.current);
+      if (onResize && ref.current) onResize(ref.current);
     }, 150);
 
-    const observer = new ResizeObserver(() => {
-      dOnResize();
-    });
+    const observer = new ResizeObserver(dOnResize);
 
     observer.observe(ref.current);
 

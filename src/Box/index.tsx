@@ -144,7 +144,6 @@ const Box = React.forwardRef<HTMLElement, Props>(
           id,
         });
     }, []);
-
     const boxRef = useCombinedRefs(ref);
     useResizeObserver(boxRef, onResize);
 
