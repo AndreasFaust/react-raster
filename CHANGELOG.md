@@ -1,3 +1,9 @@
+### 6.5.0 (2021-01-22)
+
+##### New Features
+
+*  add onResize-callback (70a4810a)
+
 #### 6.4.6 (2021-01-17)
 
 ##### Bug Fixes
