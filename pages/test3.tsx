@@ -56,7 +56,7 @@ const ExampleGrid = ({ children }) => (
     bottom={"20vw"}
     gutterX={"1.5vw"}
     gutterY={"1.25vw"}
-    colspan={12}
+    colspan={[6, 6, 6, 8, 12]}
     control
     component={
       <motion.div

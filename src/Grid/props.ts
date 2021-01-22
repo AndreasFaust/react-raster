@@ -9,7 +9,7 @@ export interface Props {
   breakpoints?: number[];
   children?: React.ReactNode;
   className?: string;
-  colspan?: number;
+  colspan?: number | number[];
   component?: React.ReactElement;
   control?: boolean;
   controlColor?: string;

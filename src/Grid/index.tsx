@@ -45,7 +45,10 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     const cssModeNormalized = useCssMode(cssMode);
     const [childBoxes, setChildBoxes] = React.useState([]);
 
+    const colspanNormalized = normalizeProps({ prop: colspan, breakpoints });
     const currentBreakpoint = useCurrentBreakpoint(breakpoints);
+    const currentColspan = colspanNormalized[currentBreakpoint.index - 1];
+
     const gutterXNormalized = normalizeProps({ prop: gutterX, breakpoints });
     const gutterYNormalized = normalizeProps({ prop: gutterY, breakpoints });
     const alignXNormalized = getAlign({
@@ -61,7 +64,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
 
     const media = getMediaQueries(breakpoints);
     const colsNormalized = normalizeProps({
-      prop: colspan,
+      prop: currentColspan,
       breakpoints,
     });
     const leftNormalized = normalizeProps({ prop: left, breakpoints });
@@ -90,7 +93,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
         attrs={attrs}
         bottom={bottomNormalized}
         cssMode={cssModeNormalized}
-        colspan={colspan}
+        colspan={currentColspan}
         component={component}
         className={classNameComplete}
         gutterX={gutterXNormalized}
@@ -108,7 +111,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
         {control && controlIsVisible && (
           <ControlGrid
             cssMode={cssModeNormalized}
-            colspan={colspan}
+            colspan={currentColspan}
             breakpoints={breakpoints}
             gutterX={gutterXNormalized}
             gutterY={gutterYNormalized}
@@ -148,7 +151,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
                 gutterX: gutterXNormalized,
                 gutterY: gutterYNormalized,
                 media,
-                colspan,
+                colspan: currentColspan,
                 parentCols: colsNormalized,
                 controlIsVisible,
                 controlColor,

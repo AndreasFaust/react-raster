@@ -14,7 +14,7 @@ SpecialGrid.defaultProps = {
   bottom: "20vw",
   gutterX: ["0px", "0px", "1.5vw"],
   // gutterY:"3vw",
-  colspan: 12,
+  colspan: [6, 6, 6, 12],
   alignX: ["center", "right", "left"],
   // alignY:"center",
   control: true,
