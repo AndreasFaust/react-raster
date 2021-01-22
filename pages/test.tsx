@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 import { Grid, Box, useRaster } from "../src";
@@ -36,11 +36,13 @@ const ChildBox = () => {
 interface Props {}
 
 const Testpage: NextPage<Props> = (props) => {
-  const gridRef = React.useRef();
-
+  const boxRef = React.useRef<HTMLElement>(null);
+  useEffect(() => {
+    console.log(boxRef.current);
+  }, []);
   return (
     <>
-      <Box />
+      {/* <Box /> */}
       <SpecialGrid>
         {/* <Box /> */}
         {/* <SpecialBox>Hallo!</SpecialBox>
@@ -51,8 +53,16 @@ const Testpage: NextPage<Props> = (props) => {
         innerHTML="<h1>HALLIHALLO</h1>"
         className="test123"
       /> */}
-        <Box cols={3} style={`background: yellow;`}>
-          <Box style={`background: red;`}>Hallo</Box>
+        <Box
+          // ref={boxRef}
+          cols={3}
+          style={`background: yellow;`}
+          onResize={(element) => {
+            console.log(element.offsetWidth);
+          }}
+        >
+          <h1>Hello!</h1>
+          {/* <Box style={`basckground: red;`}>Hallo</Box> */}
         </Box>
         {/* <ChildBox /> */}
       </SpecialGrid>

@@ -14,6 +14,7 @@ export interface Props {
   href?: string;
   left?: number | number[];
   onClick?: () => void;
+  onResize?: (element: HTMLElement) => void;
   padding?: string | string[];
   right?: number | number[];
   style?: string | string[];

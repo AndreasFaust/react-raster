@@ -379,6 +379,48 @@ var ErrorMessage = function () {
         " This is a fallback, because this Box is not child of a Grid!"));
 };
 
+function useCombinedRefs(ref) {
+    var targetRef = React__default['default'].useRef();
+    React__default['default'].useEffect(function () {
+        if (!ref)
+            return;
+        if (typeof ref === "function") {
+            ref(targetRef.current);
+        }
+        else {
+            ref.current = targetRef.current;
+        }
+    }, [ref]);
+    return targetRef;
+}
+
+function debounce(callback, delay) {
+    var timeout;
+    return function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(callback, delay);
+    };
+}
+
+function useResizeObserver(ref, onResize) {
+    React__default['default'].useEffect(function () {
+        if (!ref.current || !onResize)
+            return;
+        var dOnResize = debounce(function () {
+            if (onResize)
+                onResize(ref.current);
+        }, 150);
+        var observer = new ResizeObserver(function () {
+            dOnResize();
+        });
+        observer.observe(ref.current);
+        return function () {
+            if (ref.current)
+                observer.unobserve(ref.current);
+        };
+    }, [ref.current]);
+}
+
 var GridLayout$1 = styled__default['default'](Container)(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  box-sizing: border-box;\n  ", ";\n\n  ", "\n  ", "\n    \n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n  ", ";\n\n  ",
     "\n  ",
     "\n    \n  ",
@@ -449,7 +491,7 @@ function useMarginPercent(_a) {
 }
 
 var Box = React__default['default'].forwardRef(function (_a, ref) {
-    var _b = _a.attrs, attrs = _b === void 0 ? {} : _b, alignX = _a.alignX, alignY = _a.alignY, _c = _a.bottom, bottom = _c === void 0 ? 0 : _c, children = _a.children, className = _a.className, cols = _a.cols, component = _a.component, hasChildBoxes = _a.hasChildBoxes, href = _a.href, _d = _a.left, left = _d === void 0 ? 0 : _d, onClick = _a.onClick, padding = _a.padding, _e = _a.right, right = _e === void 0 ? 0 : _e, style = _a.style, _f = _a.tag, tag = _f === void 0 ? "div" : _f, _g = _a.top, top = _g === void 0 ? 0 : _g, order = _a.order, innerHTML = _a.innerHTML;
+    var _b = _a.attrs, attrs = _b === void 0 ? {} : _b, alignX = _a.alignX, alignY = _a.alignY, _c = _a.bottom, bottom = _c === void 0 ? 0 : _c, children = _a.children, className = _a.className, cols = _a.cols, component = _a.component, hasChildBoxes = _a.hasChildBoxes, href = _a.href, _d = _a.left, left = _d === void 0 ? 0 : _d, onClick = _a.onClick, padding = _a.padding, _e = _a.right, right = _e === void 0 ? 0 : _e, style = _a.style, _f = _a.tag, tag = _f === void 0 ? "div" : _f, _g = _a.top, top = _g === void 0 ? 0 : _g, order = _a.order, innerHTML = _a.innerHTML, onResize = _a.onResize;
     var context = React.useContext(Context);
     if (!context.breakpoints) {
         return React__default['default'].createElement(ErrorMessage, null);
@@ -527,7 +569,9 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
                 id: id,
             });
     }, []);
-    return (React__default['default'].createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" && className ? ["Box", className].join(" ") : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: ref, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
+    var boxRef = useCombinedRefs(ref);
+    useResizeObserver(boxRef, onResize);
+    return (React__default['default'].createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" && className ? ["Box", className].join(" ") : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: boxRef, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
             cssMode === "grid" && {
             dangerouslySetInnerHTML: { __html: innerHTML },
         })), (href && { href: href })), (onClick && { onClick: onClick })) },

@@ -437,24 +437,26 @@ All props are optional.
 
 All props are optional.
 
-| **Name**          | **Type**                   | **Default** | **Description**                                                                                                                                       |
-| :---------------- | :------------------------- | :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **cols**          | Number or Array of Numbers | `null`      | Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid-columns defined with the prop "colspan". The value `0` sets `display: none;`. |
-| **left**          | Number or Array of Numbers | `0`         | Left margin of the Box. Unit: Grid-columns.                                                                                                           |
-| **right**         | Number or Array of Numbers | `0`         | Right margin of the Box. Unit: Grid-columns.                                                                                                          |
-| **top**           | Number or Array of Numbers | `0`         | Top margin of the Box. Unit: Grid-columns.                                                                                                            |
-| **bottom**        | Number or Array of Numbers | `0`         | Bottom margin of the Box. Unit: Grid-columns.                                                                                                         |
-| **alignX**        | String or Array of Strings | `null`      | Horizontal Align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around`                                       |
-| **alignY**        | String or Array of Strings | `null`      | Vertical Align of child elements. Possible values: `top`, `center`, `bottom`, `stretch`                                                               |
-| **padding**       | String or Array of Strings | `null`      | Padding of the Box.                                                                                                                                   |
-| **style**         | String or Array of Strings | `null`      | Custom styles with styled-components.                                                                                                                 |
-| **hasChildBoxes** | Boolean                    | `null`      | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.                                                                       |
-| **tag**           | String                     | `'div'`     | HTML-Tag                                                                                                                                              |
-| **attrs**         | Object                     | `{}`        | Attributes added to the HTML-Tag                                                                                                                      |
-| **ref**           | React ref-object           | `null`      | Pass a ref.                                                                                                                                           |
-| **href**          | String                     | `null`      | Pass a `href`. Added for the `Link`-component of `nextJS`.                                                                                            |
-| **onClick**       | Function                   | `null`      | Pass a click handler.                                                                                                                                 |
-| **component**     | ReactElement               | `null`      | Render a React Component instead of a normal Box. Useful for Framer Motion.                                                                           |
+| **Name**          | **Type**                   | **Default** | **Description**                                                                                                                                                                    |
+| :---------------- | :------------------------- | :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **cols**          | Number or Array of Numbers | `null`      | Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid-columns defined with the prop "colspan". The value `0` sets `display: none;`.                              |
+| **left**          | Number or Array of Numbers | `0`         | Left margin of the Box. Unit: Grid-columns.                                                                                                                                        |
+| **right**         | Number or Array of Numbers | `0`         | Right margin of the Box. Unit: Grid-columns.                                                                                                                                       |
+| **top**           | Number or Array of Numbers | `0`         | Top margin of the Box. Unit: Grid-columns.                                                                                                                                         |
+| **bottom**        | Number or Array of Numbers | `0`         | Bottom margin of the Box. Unit: Grid-columns.                                                                                                                                      |
+| **alignX**        | String or Array of Strings | `null`      | Horizontal Align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around`                                                                    |
+| **alignY**        | String or Array of Strings | `null`      | Vertical Align of child elements. Possible values: `top`, `center`, `bottom`, `stretch`                                                                                            |
+| **padding**       | String or Array of Strings | `null`      | Padding of the Box.                                                                                                                                                                |
+| **style**         | String or Array of Strings | `null`      | Custom styles with styled-components.                                                                                                                                              |
+| **hasChildBoxes** | Boolean                    | `null`      | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.                                                                                                    |
+| **tag**           | String                     | `'div'`     | HTML-Tag                                                                                                                                                                           |
+| **attrs**         | Object                     | `{}`        | Attributes added to the HTML-Tag                                                                                                                                                   |
+| **ref**           | React ref-object           | `null`      | Pass a ref.                                                                                                                                                                        |
+| **href**          | String                     | `null`      | Pass a `href`. Added for the `Link`-component of `nextJS`.                                                                                                                         |
+| **onClick**       | Function                   | `null`      | Pass a click handler.                                                                                                                                                              |
+| **onResize**      | Function                   | `null`      | Pass a resize handler. Is also triggered on first render. ⚠️ Caution: Uses ResizeObserver internally, so it just works with newer browsers! See https://caniuse.com/resizeobserver |
+
+| **component** | ReactElement | `null` | Render a React Component instead of a normal Box. Useful for Framer Motion. |
 
 ---
 

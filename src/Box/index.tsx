@@ -10,6 +10,8 @@ import normalizeRest from "../utils/normalizeRest";
 import normalizeProps from "../utils/normalizeProps";
 import getReset from "../utils/getReset";
 import ErrorMessage from "../utils/ErrorMessage";
+import useCombinedRefs from "../utils/useCombinedRefs";
+import useResizeObserver from "../utils/useResizeObserver";
 
 import Context from "../context";
 import StyledBox from "./StyledBox";
@@ -40,6 +42,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       top = 0,
       order,
       innerHTML,
+      onResize,
     },
     ref
   ) => {
@@ -142,6 +145,9 @@ const Box = React.forwardRef<HTMLElement, Props>(
         });
     }, []);
 
+    const boxRef = useCombinedRefs(ref);
+    useResizeObserver(boxRef, onResize);
+
     return (
       <StyledBox
         component={component}
@@ -169,7 +175,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
         controlColor={controlColor}
         order={orderNormalized}
         style={cssMode === "grid" && styleNormalized}
-        ref={ref}
+        ref={boxRef}
         attrs={{
           ...attrs,
           ...(innerHTML &&
