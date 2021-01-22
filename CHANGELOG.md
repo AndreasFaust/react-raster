@@ -1,3 +1,9 @@
+### 6.6.0 (2021-01-22)
+
+##### New Features
+
+*  make colspan variable (26094ed6)
+
 #### 6.5.1 (2021-01-22)
 
 ##### Bug Fixes

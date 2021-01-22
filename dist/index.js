@@ -648,7 +648,9 @@ var Grid = React__default['default'].forwardRef(function (_a, ref) {
     var controlIsVisible = useControl(control);
     var cssModeNormalized = useCssMode(cssMode);
     var _r = React__default['default'].useState([]), childBoxes = _r[0], setChildBoxes = _r[1];
+    var colspanNormalized = normalizeProps({ prop: colspan, breakpoints: breakpoints });
     var currentBreakpoint = useCurrentBreakpoint(breakpoints);
+    var currentColspan = colspanNormalized[currentBreakpoint.index - 1];
     var gutterXNormalized = normalizeProps({ prop: gutterX, breakpoints: breakpoints });
     var gutterYNormalized = normalizeProps({ prop: gutterY, breakpoints: breakpoints });
     var alignXNormalized = getAlign({
@@ -663,7 +665,7 @@ var Grid = React__default['default'].forwardRef(function (_a, ref) {
     });
     var media = getMediaQueries(breakpoints);
     var colsNormalized = normalizeProps({
-        prop: colspan,
+        prop: currentColspan,
         breakpoints: breakpoints,
     });
     var leftNormalized = normalizeProps({ prop: left, breakpoints: breakpoints });
@@ -683,8 +685,8 @@ var Grid = React__default['default'].forwardRef(function (_a, ref) {
         className: className,
         currentBreakpoint: currentBreakpoint,
     });
-    return (React__default['default'].createElement(StyledGrid, { alignX: alignXNormalized, alignY: alignYNormalized, attrs: attrs, bottom: bottomNormalized, cssMode: cssModeNormalized, colspan: colspan, component: component, className: classNameComplete, gutterX: gutterXNormalized, gutterY: gutterYNormalized, isControl: isControl, left: leftNormalized, media: media, position: positionNormalized, ref: ref, right: rightNormalized, style: styleNormalized, tag: tag, top: topNormalized },
-        control && controlIsVisible && (React__default['default'].createElement(ControlGrid, { cssMode: cssModeNormalized, colspan: colspan, breakpoints: breakpoints, gutterX: gutterXNormalized, gutterY: gutterYNormalized, left: leftNormalized, right: rightNormalized, top: topNormalized, bottom: bottomNormalized, controlColor: controlColor, media: media })),
+    return (React__default['default'].createElement(StyledGrid, { alignX: alignXNormalized, alignY: alignYNormalized, attrs: attrs, bottom: bottomNormalized, cssMode: cssModeNormalized, colspan: currentColspan, component: component, className: classNameComplete, gutterX: gutterXNormalized, gutterY: gutterYNormalized, isControl: isControl, left: leftNormalized, media: media, position: positionNormalized, ref: ref, right: rightNormalized, style: styleNormalized, tag: tag, top: topNormalized },
+        control && controlIsVisible && (React__default['default'].createElement(ControlGrid, { cssMode: cssModeNormalized, colspan: currentColspan, breakpoints: breakpoints, gutterX: gutterXNormalized, gutterY: gutterYNormalized, left: leftNormalized, right: rightNormalized, top: topNormalized, bottom: bottomNormalized, controlColor: controlColor, media: media })),
         React__default['default'].createElement(Inner, { cssMode: cssModeNormalized, className: "Grid__Inner", alignX: alignXNormalized, alignY: alignYNormalized, style: styleNormalized, media: media, isGrid: true, hasChildBoxes: true },
             React__default['default'].createElement(Resetter, { cssMode: cssModeNormalized, className: "Grid__Resetter", hasChildBoxes: true, gutterX: gutterXNormalized, gutterY: gutterYNormalized, alignX: alignXNormalized, alignY: alignYNormalized, media: media },
                 React__default['default'].createElement(Context.Provider, { value: {
@@ -694,7 +696,7 @@ var Grid = React__default['default'].forwardRef(function (_a, ref) {
                         gutterX: gutterXNormalized,
                         gutterY: gutterYNormalized,
                         media: media,
-                        colspan: colspan,
+                        colspan: currentColspan,
                         parentCols: colsNormalized,
                         controlIsVisible: controlIsVisible,
                         controlColor: controlColor,
