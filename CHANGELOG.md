@@ -1,3 +1,9 @@
+#### 6.5.1 (2021-01-22)
+
+##### Bug Fixes
+
+*  execute onResize only if argument is not null (c415befa)
+
 ### 6.5.0 (2021-01-22)
 
 ##### New Features

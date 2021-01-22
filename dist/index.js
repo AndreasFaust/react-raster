@@ -407,12 +407,10 @@ function useResizeObserver(ref, onResize) {
         if (!ref.current || !onResize)
             return;
         var dOnResize = debounce(function () {
-            if (onResize)
+            if (onResize && ref.current)
                 onResize(ref.current);
         }, 150);
-        var observer = new ResizeObserver(function () {
-            dOnResize();
-        });
+        var observer = new ResizeObserver(dOnResize);
         observer.observe(ref.current);
         return function () {
             if (ref.current)
