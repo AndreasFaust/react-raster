@@ -20,6 +20,7 @@ interface Props {
   gutterX: string[];
   gutterY: string[];
   hasChildBoxes: boolean;
+  height: string[];
   left: string[];
   media: any[];
   padding: string[];
@@ -76,6 +77,7 @@ const GridLayout = styled(Container)<Props>`
         align-items: ${props.alignY[index]};
         padding: ${props.padding[index]};
         order: ${props.order[index]};
+        height: ${props.height[index]};
         ${props.style[index]}
       `;
     })}
@@ -96,6 +98,7 @@ const FlexBox = styled(Container)<Props>`
     props.media.map((media, index) => {
       return media`
         width: ${props.cols[index]}%;
+        height: ${props.height[index]};
         
         padding-left: calc(${props.gutterX[index]} / 2);
         padding-right: calc(${props.gutterX[index]} / 2);

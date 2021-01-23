@@ -57,6 +57,7 @@ const Testpage: NextPage<Props> = (props) => {
           // ref={boxRef}
           cols={3}
           style={`background: yellow;`}
+          height={["50vh", "50vh", "50vh", "100vh"]}
           onResize={(element) => {
             console.log(element.offsetWidth);
           }}

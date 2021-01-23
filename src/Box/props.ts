@@ -11,15 +11,16 @@ export interface Props {
   cols?: number | number[];
   component?: React.ReactElement;
   hasChildBoxes?: boolean;
+  height?: string | string[];
   href?: string;
+  innerHTML?: string;
   left?: number | number[];
   onClick?: () => void;
   onResize?: (element: HTMLElement) => void;
+  order?: number | number[];
   padding?: string | string[];
   right?: number | number[];
   style?: string | string[];
   tag?: string;
   top?: number | number[];
-  order?: number | number[];
-  innerHTML?: string;
 }

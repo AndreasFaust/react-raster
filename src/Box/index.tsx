@@ -32,17 +32,18 @@ const Box = React.forwardRef<HTMLElement, Props>(
       cols,
       component,
       hasChildBoxes,
+      height,
       href,
+      innerHTML,
       left = 0,
       onClick,
+      onResize,
+      order,
       padding,
       right = 0,
       style,
       tag = "div",
       top = 0,
-      order,
-      innerHTML,
-      onResize,
     },
     ref
   ) => {
@@ -91,6 +92,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
     const paddingNormalized = normalizeProps({ prop: padding, breakpoints });
     const styleNormalized = normalizeProps({ prop: style, breakpoints });
     const orderNormalized = normalizeProps({ prop: order, breakpoints });
+    const heightNormalized = normalizeProps({ prop: height, breakpoints });
 
     const colsNormalized = normalizeProps({
       prop: cols,
@@ -155,6 +157,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
         className={
           cssMode === "grid" && className ? ["Box", className].join(" ") : "Box"
         }
+        height={heightNormalized}
         cols={colsPercent}
         rest={restPercent}
         media={media}
