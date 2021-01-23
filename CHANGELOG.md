@@ -1,3 +1,13 @@
+### 6.7.0 (2021-01-23)
+
+##### Documentation Changes
+
+*  add colspan-array (b764339b)
+
+##### New Features
+
+*  add height (f53fd315)
+
 ### 6.6.0 (2021-01-22)
 
 ##### New Features

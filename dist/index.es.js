@@ -429,7 +429,7 @@ var GridLayout$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 =
         });
 }, function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        ", "\n      "], ["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        ", "\n      "])), !props.colspan[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.padding[index], props.order[index], props.style[index]);
+        return media(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        height: ", ";\n        ", "\n      "], ["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        height: ", ";\n        ", "\n      "])), !props.colspan[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.padding[index], props.order[index], props.height[index], props.style[index]);
     });
 }, function (props) {
     return props.tag === "img" &&
@@ -439,7 +439,7 @@ var GridLayout$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 =
 var FlexBox$1 = styled(Container)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  display: flex;\n  box-sizing: border-box;\n\n  ", "\n"], ["\n  display: flex;\n  box-sizing: border-box;\n\n  ",
     "\n"])), function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n        width: ", "%;\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n\n        order: ", ";\n      "], ["\n        width: ", "%;\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n\n        order: ", ";\n      "])), props.cols[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.order[index]);
+        return media(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n        width: ", "%;\n        height: ", ";\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n\n        order: ", ";\n      "], ["\n        width: ", "%;\n        height: ", ";\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n\n        order: ", ";\n      "])), props.cols[index], props.height[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.order[index]);
     });
 });
 var StyledBox = React.forwardRef(function (props, ref) {
@@ -480,7 +480,7 @@ function useMarginPercent(_a) {
 }
 
 var Box = React.forwardRef(function (_a, ref) {
-    var _b = _a.attrs, attrs = _b === void 0 ? {} : _b, alignX = _a.alignX, alignY = _a.alignY, _c = _a.bottom, bottom = _c === void 0 ? 0 : _c, children = _a.children, className = _a.className, cols = _a.cols, component = _a.component, hasChildBoxes = _a.hasChildBoxes, href = _a.href, _d = _a.left, left = _d === void 0 ? 0 : _d, onClick = _a.onClick, padding = _a.padding, _e = _a.right, right = _e === void 0 ? 0 : _e, style = _a.style, _f = _a.tag, tag = _f === void 0 ? "div" : _f, _g = _a.top, top = _g === void 0 ? 0 : _g, order = _a.order, innerHTML = _a.innerHTML, onResize = _a.onResize;
+    var _b = _a.attrs, attrs = _b === void 0 ? {} : _b, alignX = _a.alignX, alignY = _a.alignY, _c = _a.bottom, bottom = _c === void 0 ? 0 : _c, children = _a.children, className = _a.className, cols = _a.cols, component = _a.component, hasChildBoxes = _a.hasChildBoxes, height = _a.height, href = _a.href, innerHTML = _a.innerHTML, _d = _a.left, left = _d === void 0 ? 0 : _d, onClick = _a.onClick, onResize = _a.onResize, order = _a.order, padding = _a.padding, _e = _a.right, right = _e === void 0 ? 0 : _e, style = _a.style, _f = _a.tag, tag = _f === void 0 ? "div" : _f, _g = _a.top, top = _g === void 0 ? 0 : _g;
     var context = useContext(Context);
     if (!context.breakpoints) {
         return React.createElement(ErrorMessage, null);
@@ -510,6 +510,7 @@ var Box = React.forwardRef(function (_a, ref) {
     var paddingNormalized = normalizeProps({ prop: padding, breakpoints: breakpoints });
     var styleNormalized = normalizeProps({ prop: style, breakpoints: breakpoints });
     var orderNormalized = normalizeProps({ prop: order, breakpoints: breakpoints });
+    var heightNormalized = normalizeProps({ prop: height, breakpoints: breakpoints });
     var colsNormalized = normalizeProps({
         prop: cols,
         defaultProp: parentCols,
@@ -560,7 +561,7 @@ var Box = React.forwardRef(function (_a, ref) {
     }, []);
     var boxRef = useCombinedRefs(ref);
     useResizeObserver(boxRef, onResize);
-    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" && className ? ["Box", className].join(" ") : "Box", cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: boxRef, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
+    return (React.createElement(StyledBox, { component: component, cssMode: cssMode, breakpoints: breakpoints, className: cssMode === "grid" && className ? ["Box", className].join(" ") : "Box", height: heightNormalized, cols: colsPercent, rest: restPercent, media: media, gutterX: gutterX, gutterY: gutterY, colspan: colsNormalized, hasChildBoxes: hasChildBoxesNormalized, alignX: alignXNormalized, alignY: alignYNormalized, tag: tag, left: leftPercent, right: rightPercent, top: topPercent, bottom: bottomPercent, padding: paddingNormalized, controlIsVisible: controlIsVisible, controlColor: controlColor, order: orderNormalized, style: cssMode === "grid" && styleNormalized, ref: boxRef, attrs: __assign(__assign(__assign(__assign({}, attrs), (innerHTML &&
             cssMode === "grid" && {
             dangerouslySetInnerHTML: { __html: innerHTML },
         })), (href && { href: href })), (onClick && { onClick: onClick })) },
