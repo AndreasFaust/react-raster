@@ -1,3 +1,9 @@
+## 7.0.0 (2021-01-24)
+
+##### Breaking Changes
+
+*  pass generic props automatically (7d53ee95)
+
 ### 6.7.0 (2021-01-23)
 
 ##### Documentation Changes
