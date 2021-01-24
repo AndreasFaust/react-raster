@@ -35,11 +35,11 @@ export const ExampleTeaser = ({ item }) => {
     <Link href="/test3" passHref>
       <Box
         cols={4}
-        style={`
-        background: blue;
-        height: 400px;
-        color: white;
-      `}
+        css={`
+          background: blue;
+          height: 400px;
+          color: white;
+        `}
         alignY="center"
         alignX="center"
         component={<motion.a variants={teaserVariants} />}

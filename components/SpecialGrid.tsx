@@ -2,7 +2,9 @@ import React from "react";
 import { Grid, Types } from "../src";
 
 const SpecialGrid: React.FC<Types.Grid> = (props) => (
-  <Grid {...props}>{props.children}</Grid>
+  <Grid tag="section" {...props}>
+    {props.children}
+  </Grid>
 );
 
 SpecialGrid.defaultProps = {
@@ -22,7 +24,7 @@ SpecialGrid.defaultProps = {
   // component:,
   //
   // styleOuter:`width: 80%;`,
-  style: `
+  css: `
     background: blue;
     &.bp-768 {
       // background: black;

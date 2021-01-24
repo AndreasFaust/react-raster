@@ -31,7 +31,7 @@ const ControlGrid: React.FC<ControlGridProps> = (props) => {
         <Box
           key={index}
           cols={1}
-          style={`
+          css={`
             background-color: ${props.controlColor};
           `}
         />

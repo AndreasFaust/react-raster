@@ -1,10 +1,10 @@
-import React from "react";
+import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 import { AlignX, AlignY } from "../alignTypes";
 
-export interface Props {
+export interface Props
+  extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   alignX?: AlignX | AlignX[];
   alignY?: AlignY | AlignY[];
-  attrs?: object;
   bottom?: number | number[];
   children?: React.ReactNode;
   className?: string;
@@ -12,15 +12,15 @@ export interface Props {
   component?: React.ReactElement;
   hasChildBoxes?: boolean;
   height?: string | string[];
-  href?: string;
   innerHTML?: string;
   left?: number | number[];
-  onClick?: () => void;
   onResize?: (element: HTMLElement) => void;
   order?: number | number[];
   padding?: string | string[];
   right?: number | number[];
-  style?: string | string[];
+  css?: string | string[];
   tag?: string;
   top?: number | number[];
+  // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
+  ref?: React.MutableRefObject<HTMLElement>;
 }

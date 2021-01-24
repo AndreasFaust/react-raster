@@ -45,19 +45,25 @@ const Testpage: NextPage<Props> = (props) => {
       {/* <Box /> */}
       <SpecialGrid>
         {/* <Box /> */}
-        {/* <SpecialBox>Hallo!</SpecialBox>
-      <Box
-        cols={[2, 3]}
-        bottom={1}
-        style={`background: red;`}
-        innerHTML="<h1>HALLIHALLO</h1>"
-        className="test123"
-      /> */}
+        <SpecialBox>Hallo!</SpecialBox>
         <Box
-          // ref={boxRef}
+          cols={[2, 3]}
+          bottom={1}
+          css={`
+            background: red;
+          `}
+          innerHTML="<h1>HALLIHALLO</h1>"
+          className="test123"
+        />
+        <Box
+          ref={boxRef}
           cols={3}
-          style={`background: yellow;`}
-          height={["50vh", "50vh", "50vh", "100vh"]}
+          css={`
+            background: yellow;
+          `}
+          id="hallo"
+          // onClick={(e) => console.log(e)}
+          // height={["50vh", "50vh", "50vh", "100vh"]}
           onResize={(element) => {
             console.log(element.offsetWidth);
           }}

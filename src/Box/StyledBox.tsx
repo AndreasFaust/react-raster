@@ -17,6 +17,7 @@ interface Props {
   controlColor: string;
   controlIsVisible: boolean;
   cssMode: "grid" | "flex";
+  customStyles?: string[];
   gutterX: string[];
   gutterY: string[];
   hasChildBoxes: boolean;
@@ -26,7 +27,6 @@ interface Props {
   padding: string[];
   rest: string[];
   right: string[];
-  style?: string[];
   tag: string;
   top: string[];
   order: number[];
@@ -78,7 +78,7 @@ const GridLayout = styled(Container)<Props>`
         padding: ${props.padding[index]};
         order: ${props.order[index]};
         height: ${props.height[index]};
-        ${props.style[index]}
+        ${props.customStyles[index]}
       `;
     })}
 

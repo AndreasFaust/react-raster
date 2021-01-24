@@ -34,7 +34,7 @@ export const ExampleTeaser = ({ item }) => (
   <Link href="/test2" passHref>
     <Box
       cols={4}
-      style={`
+      css={`
         background: blue;
         height: 400px;
         color: white;

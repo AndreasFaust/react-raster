@@ -7,13 +7,21 @@
 - Custom Breakpoints and Colspan
 - Free nesting of Boxes and Grids
 - Custom styles for every element at every breakpoint
-- Works in all browsers
+- Extending functionality of CSS-Grid-Layout
 - Lightweight and performant architecture
 - Visual control via ESC-key
-- Completely re-written in TypeScript
+- Written in TypeScript
 - Ready for server-side-rendering
+- Fallback for old browsers which do no support CSS-Grid-Layout
 
 ✍️ [See the Example!](https://andreasfaust.github.io/react-raster)
+
+---
+
+## ⚠️ Breaking-Changes in `Major-Version 7`
+
+1. Automatic passing of all `Generic Props` like e.g. `id`, `className`, `tabIndex` and `React-Events`. This makes `attrs` obsolete, which is no longer supported.
+2. Custom styling via `Styled Components` (as `String` or `Array of Strings`) can be achieved via the new prop `css`. The old prop `style` is now reserved for classical `JSX-inline-Styling`.
 
 ---
 
@@ -106,11 +114,6 @@ This simple example defines a grid with a left padding:
 
 **Almost all props support this feature.**
 Look up the props-specification for `Grid` and `Box` below.
-
-### Avoid mixing Boxes with other components
-
-Avoid mixing Boxes with other components inside Grids or Boxes.
-Either a Box/Grid contains Boxes or regular elements/components.
 
 ---
 
@@ -323,33 +326,33 @@ const Example = () => (
     control={process.env.NODE_ENV !== "production"}
     controlColor="rgba(0, 100, 255, 0.1)"
     // use the "bp-"-classes to limit styles to certain breakpoints…
-    style={`
-            &&.bp-0, 
-            &&.bp-432, 
-            &&.bp-768 {
-                background: red;
-            }
-            &&.bp-1024, 
-            &&.bp-1200, 
-            &&.bp-1400 {
-                background: blue;
-            }
-        `}
+    css={`
+      &&.bp-0,
+      &&.bp-432,
+      &&.bp-768 {
+        background: red;
+      }
+      &&.bp-1024,
+      &&.bp-1200,
+      &&.bp-1400 {
+        background: blue;
+      }
+    `}
     // the "bp-"-classes have also an index-based indication
-    style={`
-            &&.bp-1, 
-            &&.bp-2, 
-            &&.bp-3 {
-                background: red;
-            }
-            &&.bp-4, 
-            &&.bp-5, 
-            &&.bp-6 {
-                background: blue;
-            }
-        `}
+    css={`
+      &&.bp-1,
+      &&.bp-2,
+      &&.bp-3 {
+        background: red;
+      }
+      &&.bp-4,
+      &&.bp-5,
+      &&.bp-6 {
+        background: blue;
+      }
+    `}
     // … or use an array of strings, to address certain breakpoints
-    style={[
+    css={[
       `background: red;`,
       `background: red;`,
       `background: red;`,
@@ -362,20 +365,22 @@ const Example = () => (
       cols={[6, 6, 4, 6]}
       top={1}
       left={[0, 0, 3]}
-      style={`
-              background: pink;
+      css={`
+        background: pink;
 
-              .bp-1024 &&, .bp-1200 &&, .bp-1400 && {
-                background: red;
-              }
+        .bp-1024 &&,
+        .bp-1200 &&,
+        .bp-1400 && {
+          background: red;
+        }
 
-              ::after {
-                content: 'Hallo!';
-                position: absolute;
-                left: 50%;
-                top: 50%;
-              }
-            `}
+        ::after {
+          content: "Hallo!";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+        }
+      `}
     >
       <MyCustomChildBox>
         <h2>Hello</h2>
@@ -390,10 +395,8 @@ const Example = () => (
         tag="img"
         cols={6}
         top={1}
-        attr={{
-          src: "https://my-image-source.io",
-          alt: "A box can be an image, too!",
-        }}
+        src="https://my-image-source.io"
+        alt="A box can be an image, too!"
       />
     </Box>
   </Grid>
@@ -404,7 +407,7 @@ const Example = () => (
 
 ## Grid
 
-All props are optional.
+All props are optional. `Generic Props` like Events and HTML-Attributes are passed automatically.
 
 | **Name**         | **Type**                   | **Default**                       | **Description**                                                                                                 |
 | :--------------- | :------------------------- | :-------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
@@ -416,26 +419,24 @@ All props are optional.
 | **bottom**       | String or Array of Strings | `'0'`                             | Bottom padding of the Grid.                                                                                     |
 | **gutterX**      | String or Array of Strings | `'0px'`                           | Horizontal gutter.                                                                                              |
 | **gutterY**      | String or Array of Strings | `'0px'`                           | Verical gutter.                                                                                                 |
-| **alignX**       | String or Array of Strings | `null`                            | Horizontal align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around` |
-| **alignY**       | String or Array of Strings | `null`                            | Vertical align of child elements. Possible values: `top`, `center`, `bottom`, `stretch`                         |
+| **alignX**       | String or Array of Strings | `undefined`                       | Horizontal align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around` |
+| **alignY**       | String or Array of Strings | `undefined`                       | Vertical align of child elements. Possible values: `top`, `center`, `bottom`, `stretch`                         |
 | **control**      | Boolean                    | `false`                           | Enable visual control via ESC-Key.                                                                              |
 | **controlColor** | Boolean                    | `'rgba(0, 0, 0, 0.1)'`            | Custom color for the grid-control.                                                                              |
 | **position**     | String or Array of Strings | `'relative'`                      | CSS-position                                                                                                    |
-| **order**        | Number or Array of Numbers | `null`                            | CSS Grid-Layout/Flexbox order-property                                                                          |
-| **innerHTML**    | String                     | `null`                            | React’s `dangerouslySetInnerHTML` simplified                                                                    |
-| **className**    | String                     | `null`                            | CSS-Class(es)                                                                                                   |
-| **style**        | String or Array of Strings | `null`                            | Custom styles with styled-components.                                                                           |
-| **cssMode**      | String                     | `null`                            | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support.                            |
+| **order**        | Number or Array of Numbers | `undefined`                       | CSS Grid-Layout/Flexbox order-property                                                                          |
+| **innerHTML**    | String                     | `undefined`                       | React’s `dangerouslySetInnerHTML` simplified                                                                    |
+| **css**          | String or Array of Strings | `undefined`                       | Custom styles with styled-components.                                                                           |
+| **cssMode**      | String                     | `undefined`                       | Use CSS Grid Layout or Flexbox. Override automatic detection of Grid-Layout-support.                            |
 | **tag**          | String                     | `'div'`                           | HTML-Tag                                                                                                        |
-| **attrs**        | Object                     | `{}`                              | Attributes of the HTML-Tag                                                                                      |
-| **ref**          | React ref-object           | `null`                            | Pass a ref.                                                                                                     |
-| **component**    | ReactElement               | `null`                            | Render a React Component instead of a normal Grid. Useful for Framer Motion. .                                  |
+| **ref**          | React ref-object           | `undefined`                       | Pass a ref.                                                                                                     |
+| **component**    | ReactElement               | `undefined`                       | Render a React Component instead of a normal Grid. Useful for Framer Motion. .                                  |
 
 ---
 
 ## Box
 
-All props are optional.
+All props are optional. `Generic Props` like Events and HTML-Attributes are passed automatically.
 
 | **Name**   | **Type**                   | **Default** | **Description**                                                                                                                                       |
 | :--------- | :------------------------- | :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -444,18 +445,15 @@ All props are optional.
 | **right**  | Number or Array of Numbers | `0`         | Right margin of the Box. Unit: Grid-columns.                                                                                                          |
 | **top**    | Number or Array of Numbers | `0`         | Top margin of the Box. Unit: Grid-columns.                                                                                                            |
 | **bottom** | Number or Array of Numbers | `0`         | Bottom margin of the Box. Unit: Grid-columns.                                                                                                         |
-| **height** | String or Array of Strings | `undefined` | Bottom margin of the Box. Unit: Every unit a CSS-height can have.                                                                                     |
+| **height** | String or Array of Strings | `undefined` | Heights of the Box. Unit: Every unit a CSS-height can have.                                                                                           |
 
 | **alignX** | String or Array of Strings | `null` | Horizontal Align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around` |
 | **alignY** | String or Array of Strings | `null` | Vertical Align of child elements. Possible values: `top`, `center`, `bottom`, `stretch` |
 | **padding** | String or Array of Strings | `null` | Padding of the Box. |
-| **style** | String or Array of Strings | `null` | Custom styles with styled-components. |
+| **css** | String or Array of Strings | `null` | Custom styles with styled-components. |
 | **hasChildBoxes** | Boolean | `null` | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. |
 | **tag** | String | `'div'` | HTML-Tag |
-| **attrs** | Object | `{}` | Attributes added to the HTML-Tag |
 | **ref** | React ref-object | `null` | Pass a ref. |
-| **href** | String | `null` | Pass a `href`. Added for the `Link`-component of `nextJS`. |
-| **onClick** | Function | `null` | Pass a click handler. |
 | **onResize** | Function | `null` | Pass a resize handler. Is also triggered on first render. ⚠️ Caution: Uses ResizeObserver internally, so it just works with newer browsers! See https://caniuse.com/resizeobserver |
 
 | **component** | ReactElement | `null` | Render a React Component instead of a normal Box. Useful for Framer Motion. |

@@ -23,7 +23,6 @@ import useMarginPercent from "./hooks/useMarginPercent";
 const Box = React.forwardRef<HTMLElement, Props>(
   (
     {
-      attrs = {},
       alignX,
       alignY,
       bottom = 0,
@@ -33,17 +32,16 @@ const Box = React.forwardRef<HTMLElement, Props>(
       component,
       hasChildBoxes,
       height,
-      href,
       innerHTML,
       left = 0,
-      onClick,
       onResize,
       order,
       padding,
       right = 0,
-      style,
+      css,
       tag = "div",
       top = 0,
+      ...undefinedProps
     },
     ref
   ) => {
@@ -90,7 +88,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
     const topNormalized = normalizeProps({ prop: top, breakpoints });
     const bottomNormalized = normalizeProps({ prop: bottom, breakpoints });
     const paddingNormalized = normalizeProps({ prop: padding, breakpoints });
-    const styleNormalized = normalizeProps({ prop: style, breakpoints });
+    const cssNormalized = normalizeProps({ prop: css, breakpoints });
     const orderNormalized = normalizeProps({ prop: order, breakpoints });
     const heightNormalized = normalizeProps({ prop: height, breakpoints });
 
@@ -176,16 +174,14 @@ const Box = React.forwardRef<HTMLElement, Props>(
         controlIsVisible={controlIsVisible}
         controlColor={controlColor}
         order={orderNormalized}
-        style={cssMode === "grid" && styleNormalized}
+        customStyles={cssNormalized}
         ref={boxRef}
         attrs={{
-          ...attrs,
+          ...undefinedProps,
           ...(innerHTML &&
             cssMode === "grid" && {
               dangerouslySetInnerHTML: { __html: innerHTML },
             }),
-          ...(href && { href }),
-          ...(onClick && { onClick }),
         }}
       >
         <Inner
@@ -193,7 +189,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
           media={media}
           alignX={alignXNormalized}
           alignY={alignYNormalized}
-          style={styleNormalized}
+          customStyles={cssNormalized}
           hasChildBoxes={hasChildBoxes}
           innerHTML={innerHTML}
           className={

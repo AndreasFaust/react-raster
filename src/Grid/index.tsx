@@ -19,7 +19,6 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     {
       alignX,
       alignY,
-      attrs = {},
       bottom = "0",
       breakpoints = [0, 432, 768, 1024, 1200, 1400],
       children,
@@ -37,7 +36,8 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       right = "0",
       tag = "div",
       top = "0",
-      style,
+      css,
+      ...undefinedProps
     },
     ref
   ) => {
@@ -61,7 +61,6 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       cssMode: cssModeNormalized,
       hasChildBoxes: true,
     });
-
     const media = getMediaQueries(breakpoints);
     const colsNormalized = normalizeProps({
       prop: currentColspan,
@@ -72,7 +71,11 @@ const Grid = React.forwardRef<HTMLElement, Props>(
     const topNormalized = normalizeProps({ prop: top, breakpoints });
     const bottomNormalized = normalizeProps({ prop: bottom, breakpoints });
     const positionNormalized = normalizeProps({ prop: position, breakpoints });
-    const styleNormalized = normalizeProps({ prop: style, breakpoints });
+    const cssNormalized = normalizeProps({
+      prop: css,
+      breakpoints,
+      defaultProp: "",
+    });
     const alignmentXRest = getAlignmentXRest({
       breakpoints,
       childBoxes,
@@ -85,12 +88,11 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       className,
       currentBreakpoint,
     });
-
     return (
       <StyledGrid
         alignX={alignXNormalized}
         alignY={alignYNormalized}
-        attrs={attrs}
+        attrs={undefinedProps}
         bottom={bottomNormalized}
         cssMode={cssModeNormalized}
         colspan={currentColspan}
@@ -104,7 +106,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
         position={positionNormalized}
         ref={ref}
         right={rightNormalized}
-        style={styleNormalized}
+        customStyles={cssNormalized}
         tag={tag}
         top={topNormalized}
       >
@@ -128,7 +130,7 @@ const Grid = React.forwardRef<HTMLElement, Props>(
           className="Grid__Inner"
           alignX={alignXNormalized}
           alignY={alignYNormalized}
-          style={styleNormalized}
+          customStyles={cssNormalized}
           media={media}
           isGrid={true}
           hasChildBoxes
