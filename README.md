@@ -454,8 +454,7 @@ All props are optional. `Generic Props` like Events and HTML-Attributes are pass
 | **tag**           | String                     | `'div'`     | HTML-Tag                                                                                                                                                                           |
 | **ref**           | React ref-object           | `null`      | Pass a ref.                                                                                                                                                                        |
 | **onResize**      | Function                   | `null`      | Pass a resize handler. Is also triggered on first render. ⚠️ Caution: Uses ResizeObserver internally, so it just works with newer browsers! See https://caniuse.com/resizeobserver |
-
-| **component** | ReactElement | `null` | Render a React Component instead of a normal Box. Useful for Framer Motion. |
+| **component**     | ReactElement               | `null`      | Render a React Component instead of a normal Box. Useful for Framer Motion.                                                                                                        |
 
 ---
 
