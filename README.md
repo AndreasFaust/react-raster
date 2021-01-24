@@ -21,7 +21,7 @@
 ## ⚠️ Breaking-Changes in `Major-Version 7`
 
 1. Automatic passing of all `Generic Props` like e.g. `id`, `className`, `tabIndex` and `React-Events`. This makes `attrs` obsolete, which is no longer supported.
-2. Custom styling via `Styled Components` (as `String` or `Array of Strings`) can be achieved via the new prop `css`. The old prop `style` is now reserved for classical `JSX-inline-Styling`.
+2. Custom styling via `Styled Components` (as `String` or `Array of Strings`) can be achieved via the new prop `css`. The old prop `style` is now reserved for classic `JSX-inline-Styling`.
 
 ---
 
@@ -37,7 +37,7 @@ It emulates `flexbox`-like behaviour, that is missing in `CSS Grid Layout` like:
 Additionally it polyfills `Grid Layout` using `Flexbox`, if you need to support very old browsers for some reason.
 With `react-raster` defining a grid and placing and stacking some boxes is as easy as never before.
 
-> Try it out and **star it** if you like it!
+> ⭐ Try it out and **star it** if you like it!
 
 ---
 
@@ -438,23 +438,22 @@ All props are optional. `Generic Props` like Events and HTML-Attributes are pass
 
 All props are optional. `Generic Props` like Events and HTML-Attributes are passed automatically.
 
-| **Name**   | **Type**                   | **Default** | **Description**                                                                                                                                       |
-| :--------- | :------------------------- | :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **cols**   | Number or Array of Numbers | `null`      | Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid-columns defined with the prop "colspan". The value `0` sets `display: none;`. |
-| **left**   | Number or Array of Numbers | `0`         | Left margin of the Box. Unit: Grid-columns.                                                                                                           |
-| **right**  | Number or Array of Numbers | `0`         | Right margin of the Box. Unit: Grid-columns.                                                                                                          |
-| **top**    | Number or Array of Numbers | `0`         | Top margin of the Box. Unit: Grid-columns.                                                                                                            |
-| **bottom** | Number or Array of Numbers | `0`         | Bottom margin of the Box. Unit: Grid-columns.                                                                                                         |
-| **height** | String or Array of Strings | `undefined` | Heights of the Box. Unit: Every unit a CSS-height can have.                                                                                           |
-
-| **alignX** | String or Array of Strings | `null` | Horizontal Align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around` |
-| **alignY** | String or Array of Strings | `null` | Vertical Align of child elements. Possible values: `top`, `center`, `bottom`, `stretch` |
-| **padding** | String or Array of Strings | `null` | Padding of the Box. |
-| **css** | String or Array of Strings | `null` | Custom styles with styled-components. |
-| **hasChildBoxes** | Boolean | `null` | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component. |
-| **tag** | String | `'div'` | HTML-Tag |
-| **ref** | React ref-object | `null` | Pass a ref. |
-| **onResize** | Function | `null` | Pass a resize handler. Is also triggered on first render. ⚠️ Caution: Uses ResizeObserver internally, so it just works with newer browsers! See https://caniuse.com/resizeobserver |
+| **Name**          | **Type**                   | **Default** | **Description**                                                                                                                                                                    |
+| :---------------- | :------------------------- | :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **cols**          | Number or Array of Numbers | `null`      | Width of the Box. Falls back to width of parent Box or Grid. Unit: Grid-columns defined with the prop "colspan". The value `0` sets `display: none;`.                              |
+| **left**          | Number or Array of Numbers | `0`         | Left margin of the Box. Unit: Grid-columns.                                                                                                                                        |
+| **right**         | Number or Array of Numbers | `0`         | Right margin of the Box. Unit: Grid-columns.                                                                                                                                       |
+| **top**           | Number or Array of Numbers | `0`         | Top margin of the Box. Unit: Grid-columns.                                                                                                                                         |
+| **bottom**        | Number or Array of Numbers | `0`         | Bottom margin of the Box. Unit: Grid-columns.                                                                                                                                      |
+| **height**        | String or Array of Strings | `undefined` | Heights of the Box. Unit: Every unit a CSS-height can have.                                                                                                                        |
+| **alignX**        | String or Array of Strings | `null`      | Horizontal Align of child elements. Possible values: `left`, `center`, `right`, `space-between`, `space-around`                                                                    |
+| **alignY**        | String or Array of Strings | `null`      | Vertical Align of child elements. Possible values: `top`, `center`, `bottom`, `stretch`                                                                                            |
+| **padding**       | String or Array of Strings | `null`      | Padding of the Box.                                                                                                                                                                |
+| **css**           | String or Array of Strings | `null`      | Custom styles with styled-components.                                                                                                                                              |
+| **hasChildBoxes** | Boolean                    | `null`      | Tell react-raster that you have child-Boxes inside this Grid- or Box-Component.                                                                                                    |
+| **tag**           | String                     | `'div'`     | HTML-Tag                                                                                                                                                                           |
+| **ref**           | React ref-object           | `null`      | Pass a ref.                                                                                                                                                                        |
+| **onResize**      | Function                   | `null`      | Pass a resize handler. Is also triggered on first render. ⚠️ Caution: Uses ResizeObserver internally, so it just works with newer browsers! See https://caniuse.com/resizeobserver |
 
 | **component** | ReactElement | `null` | Render a React Component instead of a normal Box. Useful for Framer Motion. |
 
