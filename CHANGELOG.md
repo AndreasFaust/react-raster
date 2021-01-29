@@ -1,3 +1,9 @@
+#### 7.0.6 (2021-01-29)
+
+##### Bug Fixes
+
+*  fix types again (bd1d2ec2)
+
 #### 7.0.5 (2021-01-29)
 
 ##### Bug Fixes
