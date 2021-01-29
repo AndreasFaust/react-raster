@@ -1,3 +1,9 @@
+#### 7.0.2 (2021-01-29)
+
+##### Bug Fixes
+
+*  fix colspan adaptation (7f97ed70)
+
 #### 7.0.1 (2021-01-29)
 
 ##### Documentation Changes
