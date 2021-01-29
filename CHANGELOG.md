@@ -1,3 +1,14 @@
+#### 7.0.1 (2021-01-29)
+
+##### Documentation Changes
+
+*  fix props-table (c2437585)
+*  some typo-fixes (c9eeee1a)
+
+##### Bug Fixes
+
+*  prevent and warn, if Box needs more cols than parent (2d7ed8a8)
+
 ## 7.0.0 (2021-01-24)
 
 ##### Breaking Changes
