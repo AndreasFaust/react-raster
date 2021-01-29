@@ -1,8 +1,7 @@
-import React, { DetailedHTMLProps, HTMLAttributes } from "react";
+import React, { HTMLProps } from "react";
 import { AlignX, AlignY } from "../alignTypes";
 
-export interface Props
-  extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
+export interface Props extends Omit<HTMLProps<HTMLElement>, "cols" | "height"> {
   alignX?: AlignX | AlignX[];
   alignY?: AlignY | AlignY[];
   bottom?: number | number[];
@@ -21,6 +20,4 @@ export interface Props
   css?: string | string[];
   tag?: string;
   top?: number | number[];
-  // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
-  ref?: React.MutableRefObject<HTMLElement>;
 }

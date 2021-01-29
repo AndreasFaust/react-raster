@@ -43,10 +43,9 @@ const Startpage: NextPage<Props> = (props) => {
         alignX={"center"}
         cssMode={mode}
         key={mode + "header"}
-        style={`
-          background-image: url(${
-            process.env.productionPath + "/header-bg.jpg"
-          });
+        css={`
+          background-image: url(${process.env.productionPath +
+          "/header-bg.jpg"});
           background-size: cover;
           background-position: center bottom;
           background-repeat: no-repeat;
@@ -57,10 +56,8 @@ const Startpage: NextPage<Props> = (props) => {
           className="logo"
           cols={[8, 6, 4, 4, 3, 2]}
           tag="img"
-          attrs={{
-            src: process.env.productionPath + "/react-raster-logo.svg",
-            alt: "Logo",
-          }}
+          src={process.env.productionPath + "/react-raster-logo.svg"}
+          alt="Logo"
         />
       </Grid>
       <Grid
@@ -71,14 +68,14 @@ const Startpage: NextPage<Props> = (props) => {
         cssMode={mode}
         key={mode + "section-1"}
         bottom="5vh"
-        style={`
+        css={`
           min-height: 33.333vh;
         `}
       >
         <Box
           tag="h1"
           cols={[12, 8, 7, 6]}
-          style={`
+          css={`
             justify-content: center;
           `}
         >
