@@ -6,7 +6,7 @@ import Box from "../Box";
 
 interface ControlGridProps {
   cssMode: "grid" | "flex";
-  colspan: number[];
+  colspan: number;
   breakpoints: number[];
   gutterX: string | string[];
   gutterY: string | string[];

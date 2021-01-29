@@ -18,15 +18,15 @@ const ChildBox = () => {
       onClick={() => {
         console.log("HALLO!");
       }}
-      style={`
-      background: pink;
-      height: 300px;
+      css={`
+        background: pink;
+        height: 300px;
 
-      img {
-        display: block;
-        width: 100%;
-      }
-    `}
+        img {
+          display: block;
+          width: 100%;
+        }
+      `}
     >
       {/* <img src={image2} alt='Sample Image' /> */}
     </Box>
