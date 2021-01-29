@@ -1,12 +1,13 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import Grid from "../Grid";
 import Box from "../Box";
 
 interface ControlGridProps {
   cssMode: "grid" | "flex";
-  colspan: number;
+  colspan: number[];
+  currentColspan: number;
   breakpoints: number[];
   gutterX: string | string[];
   gutterY: string | string[];
@@ -15,19 +16,19 @@ interface ControlGridProps {
   top: string | string[];
   bottom: string | string[];
   controlColor: string;
-  media: any[];
 }
 
 const ControlGrid: React.FC<ControlGridProps> = (props) => {
+  const { currentColspan, ...rest } = props;
   return (
     <Grid
-      {...props}
+      {...rest}
       position="absolute"
-      className="Grid--Control"
+      className="GridControl"
       alignY="stretch"
       isControl
     >
-      {[...Array(props.colspan)].map((col, index) => (
+      {[...Array(currentColspan)].map((col, index) => (
         <Box
           key={index}
           cols={1}

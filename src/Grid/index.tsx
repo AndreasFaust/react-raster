@@ -110,7 +110,8 @@ const Grid = React.forwardRef<HTMLElement, Props>(
         {control && controlIsVisible && (
           <ControlGrid
             cssMode={cssModeNormalized}
-            colspan={currentColspan}
+            colspan={colspanNormalized}
+            currentColspan={currentColspan}
             breakpoints={breakpoints}
             gutterX={gutterXNormalized}
             gutterY={gutterYNormalized}
@@ -119,7 +120,6 @@ const Grid = React.forwardRef<HTMLElement, Props>(
             top={topNormalized}
             bottom={bottomNormalized}
             controlColor={controlColor}
-            media={media}
           />
         )}
         <Inner
