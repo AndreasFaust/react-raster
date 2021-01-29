@@ -20,4 +20,6 @@ export interface Props extends Omit<HTMLProps<HTMLElement>, "cols" | "height"> {
   css?: string | string[];
   tag?: string;
   top?: number | number[];
+  // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
+  ref?: React.MutableRefObject<HTMLElement>;
 }

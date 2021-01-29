@@ -23,4 +23,6 @@ export interface Props extends HTMLProps<HTMLElement> {
   css?: string | string[];
   tag?: string;
   top?: string | string[];
+  // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
+  ref?: React.MutableRefObject<HTMLElement>;
 }
