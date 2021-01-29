@@ -155,7 +155,7 @@ export default SpecialBox;
 yarn add -D babel-plugin-styled-components
 ```
 
-### Create `.babelrc` file in your `root`-directory
+### Create `babel-config.json` file in your `root`-directory
 
 ```json
 {

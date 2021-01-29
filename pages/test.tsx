@@ -45,6 +45,17 @@ const Testpage: NextPage<Props> = (props) => {
       {/* <Box /> */}
       <SpecialGrid>
         {/* <Box /> */}
+        <Box
+          left={1}
+          cols={12}
+          bottom={1}
+          css={`
+            background: red;
+          `}
+          ref={boxRef}
+        >
+          Too wide
+        </Box>
         <SpecialBox>Hallo!</SpecialBox>
         <Box
           cols={[2, 3]}

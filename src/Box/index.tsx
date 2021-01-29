@@ -6,6 +6,7 @@ import Inner from "../utils/inner";
 import Resetter from "../utils/resetter";
 import getAlign from "../utils/getAlign";
 import getAlignmentXRest from "../utils/getAlignmentXRest";
+import normalizeCols from "../utils/normalizeCols";
 import normalizeRest from "../utils/normalizeRest";
 import normalizeProps from "../utils/normalizeProps";
 import getReset from "../utils/getReset";
@@ -64,7 +65,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       registerChildBox,
     } = context;
 
-    const [id] = React.useState(nanoid);
+    const id = React.useRef(nanoid());
     const [childBoxes, setChildBoxes] = useState([]);
     const hasChildBoxesNormalized = getReset({
       hasChildBoxesFromProps: hasChildBoxes,
@@ -81,7 +82,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       hasChildBoxes: hasChildBoxesNormalized,
     });
 
-    const restNormalized = normalizeRest({ rest, breakpoints, id });
+    const restNormalized = normalizeRest({ rest, breakpoints, id: id.current });
 
     const leftNormalized = normalizeProps({ prop: left, breakpoints });
     const rightNormalized = normalizeProps({ prop: right, breakpoints });
@@ -92,10 +93,12 @@ const Box = React.forwardRef<HTMLElement, Props>(
     const orderNormalized = normalizeProps({ prop: order, breakpoints });
     const heightNormalized = normalizeProps({ prop: height, breakpoints });
 
-    const colsNormalized = normalizeProps({
-      prop: cols,
-      defaultProp: parentCols,
+    const colsNormalized = normalizeCols({
+      cols,
+      parentCols,
       breakpoints,
+      left: leftNormalized,
+      right: rightNormalized,
     });
 
     const colsPercent = getColsPercent({
@@ -141,7 +144,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
           left: leftNormalized,
           right: rightNormalized,
           cols: colsNormalized,
-          id,
+          id: id.current,
         });
     }, []);
     const boxRef = useCombinedRefs(ref);

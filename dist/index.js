@@ -362,6 +362,35 @@ function getAlignmentXRest(_a) {
     return rest;
 }
 
+function checkError(_a) {
+    var cols = _a.cols, parentCols = _a.parentCols, left = _a.left, right = _a.right;
+    var error = false;
+    var colsChecked = cols.map(function (cols, index) {
+        if (cols + left[index] + right[index] > parentCols[index]) {
+            error = true;
+            return parentCols[index] - left[index] - right[index];
+        }
+        return cols;
+    });
+    if (error) {
+        console.error("Error in react-raster: Box has more cols than parent allows.");
+    }
+    return colsChecked;
+}
+function normalizeCols(_a) {
+    var cols = _a.cols, parentCols = _a.parentCols, breakpoints = _a.breakpoints, left = _a.left, right = _a.right;
+    if (!cols) {
+        return parentCols.map(function (parentCol, index) {
+            return parentCol - left[index] - right[index];
+        });
+    }
+    var colsNormalized = normalizeProps({
+        prop: cols,
+        breakpoints: breakpoints,
+    });
+    return checkError({ cols: colsNormalized, parentCols: parentCols, left: left, right: right });
+}
+
 function normalizeRest(_a) {
     var rest = _a.rest, id = _a.id, breakpoints = _a.breakpoints;
     if (!rest) {
@@ -507,7 +536,7 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
         return React__default['default'].createElement(ErrorMessage, null);
     }
     var breakpoint = context.breakpoint, breakpoints = context.breakpoints, colspan = context.colspan, controlColor = context.controlColor, controlIsVisible = context.controlIsVisible, cssMode = context.cssMode, gutterX = context.gutterX, gutterY = context.gutterY, media = context.media, parentCols = context.parentCols, rest = context.rest, registerChildBox = context.registerChildBox;
-    var id = React__default['default'].useState(nanoid)[0];
+    var id = React__default['default'].useRef(nanoid());
     var _g = React.useState([]), childBoxes = _g[0], setChildBoxes = _g[1];
     var hasChildBoxesNormalized = getReset({
         hasChildBoxesFromProps: hasChildBoxes,
@@ -523,7 +552,7 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
         cssMode: cssMode,
         hasChildBoxes: hasChildBoxesNormalized,
     });
-    var restNormalized = normalizeRest({ rest: rest, breakpoints: breakpoints, id: id });
+    var restNormalized = normalizeRest({ rest: rest, breakpoints: breakpoints, id: id.current });
     var leftNormalized = normalizeProps({ prop: left, breakpoints: breakpoints });
     var rightNormalized = normalizeProps({ prop: right, breakpoints: breakpoints });
     var topNormalized = normalizeProps({ prop: top, breakpoints: breakpoints });
@@ -532,10 +561,12 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
     var cssNormalized = normalizeProps({ prop: css, breakpoints: breakpoints });
     var orderNormalized = normalizeProps({ prop: order, breakpoints: breakpoints });
     var heightNormalized = normalizeProps({ prop: height, breakpoints: breakpoints });
-    var colsNormalized = normalizeProps({
-        prop: cols,
-        defaultProp: parentCols,
+    var colsNormalized = normalizeCols({
+        cols: cols,
+        parentCols: parentCols,
         breakpoints: breakpoints,
+        left: leftNormalized,
+        right: rightNormalized,
     });
     var colsPercent = getColsPercent({
         cols: colsNormalized,
@@ -577,7 +608,7 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
                 left: leftNormalized,
                 right: rightNormalized,
                 cols: colsNormalized,
-                id: id,
+                id: id.current,
             });
     }, []);
     var boxRef = useCombinedRefs(ref);
