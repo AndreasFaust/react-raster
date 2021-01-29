@@ -1,3 +1,9 @@
+#### 7.0.5 (2021-01-29)
+
+##### Bug Fixes
+
+*  fix typescript types of Grid and Box (a3ffe4d6)
+
 #### 7.0.4 (2021-01-29)
 
 ##### Bug Fixes
