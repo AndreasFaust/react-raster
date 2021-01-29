@@ -37,6 +37,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       left = 0,
       onResize,
       order,
+      id,
       padding,
       right = 0,
       css,
@@ -46,6 +47,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
     },
     ref
   ) => {
+    // console.log("RENDER!");
     const context = useContext(Context);
     if (!context.breakpoints) {
       return <ErrorMessage />;
@@ -64,8 +66,10 @@ const Box = React.forwardRef<HTMLElement, Props>(
       rest,
       registerChildBox,
     } = context;
+    console.log(rest);
 
-    const id = React.useRef(nanoid());
+    // const id = React.useRef(nanoid());
+    // console.log(id);
     const [childBoxes, setChildBoxes] = useState([]);
     const hasChildBoxesNormalized = getReset({
       hasChildBoxesFromProps: hasChildBoxes,
@@ -82,7 +86,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
       hasChildBoxes: hasChildBoxesNormalized,
     });
 
-    const restNormalized = normalizeRest({ rest, breakpoints, id: id.current });
+    const restNormalized = normalizeRest({ rest, breakpoints, id });
 
     const leftNormalized = normalizeProps({ prop: left, breakpoints });
     const rightNormalized = normalizeProps({ prop: right, breakpoints });
@@ -144,7 +148,7 @@ const Box = React.forwardRef<HTMLElement, Props>(
           left: leftNormalized,
           right: rightNormalized,
           cols: colsNormalized,
-          id: id.current,
+          id,
         });
     }, []);
     const boxRef = useCombinedRefs(ref);

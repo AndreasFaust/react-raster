@@ -36,55 +36,74 @@ const ChildBox = () => {
 interface Props {}
 
 const Testpage: NextPage<Props> = (props) => {
-  const boxRef = React.useRef<HTMLElement>(null);
-  useEffect(() => {
-    console.log(boxRef.current);
-  }, []);
+  // const boxRef = React.useRef<HTMLElement>(null);
+  // useEffect(() => {
+  //   console.log(boxRef.current);
+  // }, []);
   return (
-    <>
-      {/* <Box /> */}
-      <SpecialGrid>
-        {/* <Box /> */}
-        <Box
-          left={1}
-          cols={12}
-          bottom={1}
-          css={`
-            background: red;
-          `}
-          ref={boxRef}
-        >
-          Too wide
-        </Box>
-        <SpecialBox>Hallo!</SpecialBox>
-        <Box
-          cols={[2, 3]}
-          bottom={1}
-          css={`
-            background: red;
-          `}
-          innerHTML="<h1>HALLIHALLO</h1>"
-          className="test123"
-        />
-        <Box
-          ref={boxRef}
-          cols={3}
-          css={`
-            background: yellow;
-          `}
-          id="hallo"
-          // onClick={(e) => console.log(e)}
-          // height={["50vh", "50vh", "50vh", "100vh"]}
-          onResize={(element) => {
-            console.log(element.offsetWidth);
-          }}
-        >
-          <h1>Hello!</h1>
-          {/* <Box style={`basckground: red;`}>Hallo</Box> */}
-        </Box>
-        {/* <ChildBox /> */}
-      </SpecialGrid>
-    </>
+    <Grid
+      colspan={6}
+      alignX="center"
+      css={"background: red;"}
+      top="5rem"
+      bottom="5rem"
+      left="5rem"
+      right="5rem"
+      control
+    >
+      <Box
+        cols={2}
+        css={`
+          background: blue;
+        `}
+      >
+        Hallo
+      </Box>
+    </Grid>
+    // <>
+    //   {/* <Box /> */}
+    //   <SpecialGrid>
+    //     {/* <Box /> */}
+    //     <Box
+    //       left={1}
+    //       cols={12}
+    //       bottom={1}
+    //       css={`
+    //         background: red;
+    //       `}
+    //       ref={boxRef}
+    //     >
+    //       Too wide
+    //     </Box>
+    //     <SpecialBox>Hallo!</SpecialBox>
+    //     <Box
+    //       cols={[2, 3]}
+    //       bottom={1}
+    //       css={`
+    //         background: red;
+    //       `}
+    //       innerHTML="<h1>HALLIHALLO</h1>"
+    //       className="test123"
+    //     />
+    //     <Box
+    //       ref={boxRef}
+    //       cols={3}
+    //       css={`
+    //         background: yellow;
+    //       `}
+    //       id="hallo"
+    //       // onClick={(e) => console.log(e)}
+    //       // height={["50vh", "50vh", "50vh", "100vh"]}
+    //       onResize={(element) => {
+    //         console.log(element.offsetWidth);
+    //       }}
+    //     >
+    //       <h1>Hello!</h1>
+    //       {/* <Box style={`basckground: red;`}>Hallo</Box> */}
+    //     </Box>
+    //     {/* <ChildBox /> */}
+    //   </SpecialGrid>
+    // </>
   );
 };
 

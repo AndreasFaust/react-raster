@@ -13,6 +13,7 @@ import useCurrentBreakpoint from "../utils/useCurrentBreakpoint";
 import getAlignmentXRest from "../utils/getAlignmentXRest";
 import { Props } from "./props";
 import useGridClassName from "../utils/useClassName";
+import { nanoid } from "nanoid/non-secure";
 
 const Grid = React.forwardRef<HTMLElement, Props>(
   (
@@ -73,8 +74,17 @@ const Grid = React.forwardRef<HTMLElement, Props>(
       breakpoints,
       defaultProp: "",
     });
+
+    const childrenNormalized = React.Children.map(children, (child) => {
+      if (React.isValidElement(child)) {
+        return React.cloneElement(child, { id: nanoid() });
+      }
+      return child;
+    });
+
     const alignmentXRest = getAlignmentXRest({
       breakpoints,
+      children: childrenNormalized,
       childBoxes,
       cssMode: cssModeNormalized,
       alignX: alignXNormalized,
