@@ -5,7 +5,7 @@ import Container from "../utils/container";
 
 interface Props {
   attrs?: object;
-  colspan: number;
+  colspan: number[];
   className: string;
   gutterX: string[];
   gutterY: string[];
@@ -38,13 +38,13 @@ const controlStyles = `
 
 const GridLayout = styled(Container)<Props>`
   display: grid;
-  grid-template-columns: repeat(${(props) => props.colspan}, 1fr);
-  grid-auto-columns: ${(props) => props.colspan}fr;
   grid-auto-rows: min-content;
   box-sizing: border-box;
   ${(props) =>
     props.media.map((media, index) => {
       return media`
+        grid-template-columns: repeat(${(props) => props.colspan[index]}, 1fr);
+        grid-auto-columns: ${(props) => props.colspan[index]}fr;    
         position: ${props.position[index]};
         padding-left: ${props.left[index]};
         padding-right: ${props.right[index]};
