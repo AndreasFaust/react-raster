@@ -1,3 +1,9 @@
+#### 7.0.4 (2021-01-29)
+
+##### Bug Fixes
+
+*  fix grid control-props (6850f23f)
+
 #### 7.0.3 (2021-01-29)
 
 ##### Bug Fixes

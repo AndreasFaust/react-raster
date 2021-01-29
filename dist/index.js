@@ -641,7 +641,8 @@ var Box = React__default['default'].forwardRef(function (_a, ref) {
 Box.displayName = "Box";
 
 var ControlGrid = function (props) {
-    return (React__default['default'].createElement(Grid, __assign({}, props, { position: "absolute", className: "Grid--Control", alignY: "stretch", isControl: true }), __spreadArrays(Array(props.colspan)).map(function (col, index) { return (React__default['default'].createElement(Box, { key: index, cols: 1, css: "\n            background-color: " + props.controlColor + ";\n          " })); })));
+    var currentColspan = props.currentColspan, rest = __rest(props, ["currentColspan"]);
+    return (React__default['default'].createElement(Grid, __assign({}, rest, { position: "absolute", className: "GridControl", alignY: "stretch", isControl: true }), __spreadArrays(Array(currentColspan)).map(function (col, index) { return (React__default['default'].createElement(Box, { key: index, cols: 1, css: "\n            background-color: " + props.controlColor + ";\n          " })); })));
 };
 var StyledControlBox = styled__default['default']("div")(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"], ["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"])), function (props) { return props.controlColor; });
 var ControlBox = function (props) {
@@ -730,7 +731,7 @@ var Grid = React__default['default'].forwardRef(function (_a, ref) {
         currentBreakpoint: currentBreakpoint,
     });
     return (React__default['default'].createElement(StyledGrid, { alignX: alignXNormalized, alignY: alignYNormalized, attrs: undefinedProps, bottom: bottomNormalized, cssMode: cssModeNormalized, colspan: colspanNormalized, component: component, className: classNameComplete, gutterX: gutterXNormalized, gutterY: gutterYNormalized, isControl: isControl, left: leftNormalized, media: media, position: positionNormalized, ref: ref, right: rightNormalized, customStyles: cssNormalized, tag: tag, top: topNormalized },
-        control && controlIsVisible && (React__default['default'].createElement(ControlGrid, { cssMode: cssModeNormalized, colspan: currentColspan, breakpoints: breakpoints, gutterX: gutterXNormalized, gutterY: gutterYNormalized, left: leftNormalized, right: rightNormalized, top: topNormalized, bottom: bottomNormalized, controlColor: controlColor, media: media })),
+        control && controlIsVisible && (React__default['default'].createElement(ControlGrid, { cssMode: cssModeNormalized, colspan: colspanNormalized, currentColspan: currentColspan, breakpoints: breakpoints, gutterX: gutterXNormalized, gutterY: gutterYNormalized, left: leftNormalized, right: rightNormalized, top: topNormalized, bottom: bottomNormalized, controlColor: controlColor })),
         React__default['default'].createElement(Inner, { cssMode: cssModeNormalized, className: "Grid__Inner", alignX: alignXNormalized, alignY: alignYNormalized, customStyles: cssNormalized, media: media, isGrid: true, hasChildBoxes: true },
             React__default['default'].createElement(Resetter, { cssMode: cssModeNormalized, className: "Grid__Resetter", hasChildBoxes: true, gutterX: gutterXNormalized, gutterY: gutterYNormalized, alignX: alignXNormalized, alignY: alignYNormalized, media: media },
                 React__default['default'].createElement(Context.Provider, { value: {
