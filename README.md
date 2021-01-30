@@ -459,7 +459,7 @@ All props are optional. `Generic Props` like Events and HTML-Attributes are pass
 
 ## ❌ Known Issues
 
-The prop `alineX` allows you to automatically center `Boxes` or align them to the right. This is not provided by `CSS Grid Layout` by default, so the `Box` needs to iterate its children, check their widths and margins and then calculate the position for every `Box` in every row. So in the first frame all `Boxes` are aligned left and in the second they are positioned correctly, which leads to a small, undesired visible "jump". It can be hidden, by visibly hiding the `Boxes` on load and reveal them with a fading animation for example.
+The prop `alignX` allows you to automatically center `Boxes` or align them to the right. This is not provided by `CSS Grid Layout` by default, so the `Box` needs to iterate its children, check their widths and margins and then calculate the position for every `Box` in every row. So in the first frame all `Boxes` are aligned left and in the second they are positioned correctly, which leads to a small, undesired visible "jump". It can be hidden, by visibly hiding the `Boxes` on load and reveal them with a fading animation for example.
 
 If you have any idea, how to fix this, please contribute it to the issue https://github.com/AndreasFaust/react-raster/issues/12.
 
