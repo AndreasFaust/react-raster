@@ -27,17 +27,16 @@
 
 ## Concept
 
-Layouting user-interfaces is tough. Every viewport-size needs its own layout.
-`react-raster` provides a simplified interface for `CSS Grid Layout`, to setup the layout for every breakpoint directly in your `React`-component.
+Layouting user-interfaces is tough. Every viewport-size needs its own composition. `react-raster` provides a simplified interface for `CSS Grid Layout`, to setup the layout for every breakpoint directly in your `React`-component.
 It emulates `flexbox`-like behaviour, that is missing in `CSS Grid Layout` like:
 
-- Automatic aligning of sibling boxes
 - Add margin to boxes
+- Automatic aligning of sibling boxes
 
-Additionally it polyfills `Grid Layout` using `Flexbox`, if you need to support very old browsers for some reason.
-With `react-raster` defining a grid and placing and stacking some boxes is as easy as never before.
+Additionally it polyfills `Grid Layout` using `Flexbox`, if you need to support older browsers.
+With `react-raster` defining a grid and placing and stacking boxes is as easy as never before.
 
-> ⭐ Try it out and **star it** if you like it!
+**⭐ Try it out and _star it_ if you like it!**
 
 ---
 
@@ -135,13 +134,6 @@ SpecialBox.defaultProps = {
 
 export default SpecialBox;
 ```
-
----
-
-## What about cssMode `grid` and `flex`?
-
-`cssMode` is the prop, that defines which CSS-layout-engine `react-raster` should use.
-`grid` uses Grid-Layout, `flex` the older Flexbox. `grid` is default, but if the user’s browser does not support it, it automatically falls back to `flex`.
 
 ---
 
@@ -455,6 +447,21 @@ All props are optional. `Generic Props` like Events and HTML-Attributes are pass
 | **ref**           | React ref-object           | `null`      | Pass a ref.                                                                                                                                                                        |
 | **onResize**      | Function                   | `null`      | Pass a resize handler. Is also triggered on first render. ⚠️ Caution: Uses ResizeObserver internally, so it just works with newer browsers! See https://caniuse.com/resizeobserver |
 | **component**     | ReactElement               | `null`      | Render a React Component instead of a normal Box. Useful for Framer Motion.                                                                                                        |
+
+---
+
+## 💡 What about cssMode `grid` and `flex`?
+
+`cssMode` is the prop, that defines which CSS-layout-engine `react-raster` should use.
+`grid` uses Grid-Layout, `flex` the older Flexbox. `grid` is default, but if the user’s browser does not support it, it automatically falls back to `flex`.
+
+---
+
+## ❌ Known Issues
+
+The prop `alineX` allows you to automatically center `Boxes` or align them to the right. This is not provided by `CSS Grid Layout` by default, so the `Box` needs to iterate its children, check their widths and margins and then calculate the position for every `Box` in every row. So in the first frame all `Boxes` are aligned left and in the second they are positioned correctly, which leads to a small, undesired visible "jump". It can be hidden, by visibly hiding the `Boxes` on load and reveal them with a fading animation for example.
+
+If you have any idea, how to fix this, please contribute it to the issue https://github.com/AndreasFaust/react-raster/issues/12.
 
 ---
 
