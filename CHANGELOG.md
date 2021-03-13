@@ -1,3 +1,10 @@
+#### 7.0.7 (2021-03-13)
+
+##### Documentation Changes
+
+*  fix typo (5a99e5e1)
+*  add known issues (5bd12173)
+
 #### 7.0.6 (2021-01-29)
 
 ##### Bug Fixes
