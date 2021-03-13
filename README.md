@@ -14,7 +14,7 @@
 - Ready for server-side-rendering
 - Fallback for legacy browsers, which do not support CSS-Grid-Layout
 
-✍️ [See the Documentation!](https://andreasfaust.github.io/react-raster-docs)
+## ✍️ [See the Documentation!](https://andreasfaust.github.io/react-raster-docs)
 
 **⭐ Try it out and _star it_ if you like it!**
 
@@ -38,7 +38,7 @@ yarn add react-raster styled-components react react-dom
 
 ---
 
-## Usage
+## Basic Usage
 
 - `react-raster` has only two components: **Grid** and **Box**.
 - `Grid` is the wrapper, that defines the grid’s basics like gutter, breakpoints and other things.
