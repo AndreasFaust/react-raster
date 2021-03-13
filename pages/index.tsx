@@ -93,11 +93,11 @@ const Startpage: NextPage<Props> = (props) => {
             left={[0, 0, 0, 1]}
             alignX={["center", "center", "right"]}
           >
-            {/* <img
+            <img
               className="hintIcon"
               src={process.env.productionPath + "/scale.svg"}
               alt="Scale icon"
-            /> */}
+            />
             <small>Scale your Viewport to see the layout changing!</small>
           </Box>
           <Box
@@ -105,14 +105,34 @@ const Startpage: NextPage<Props> = (props) => {
             cols={[12, 12, 5, 4]}
             alignX={["center", "center", "left"]}
           >
-            {/* <img
+            <img
               className="hintIcon"
               src={process.env.productionPath + "/esc.svg"}
               alt="Escape icon"
-            /> */}
+            />
             <small>
               Press <pre>ESC</pre> to see the column-grid
             </small>
+          </Box>
+        </Box>
+        <Box cols={[12]} top={0.5} alignX="center">
+          <Box tag="a" href="https://andreasfaust.github.io/react-raster-docs/">
+            <Box
+              tag="h2"
+              css={`
+                color: #000;
+                font-size: 5vw;
+                :before {
+                  content: "→ ";
+                  font-size: 6.75vw;
+                }
+                :hover {
+                  text-shadow: 0.05em 0.05em 0 rgba(255, 0, 0, 0.5);
+                }
+              `}
+            >
+              Check out the Documentation
+            </Box>
           </Box>
         </Box>
         <Box cols={[12]} top={0.5} alignX="center">

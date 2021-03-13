@@ -36,7 +36,7 @@ const ChildBox = () => {
 interface Props {}
 
 const Testpage: NextPage<Props> = (props) => {
-  const boxRef = React.useRef<HTMLElement>(null);
+  const boxRef = React.useRef(null);
   useEffect(() => {
     console.log(boxRef.current);
   }, []);
@@ -46,8 +46,7 @@ const Testpage: NextPage<Props> = (props) => {
       <SpecialGrid>
         {/* <Box /> */}
         <Box
-          left={1}
-          cols={12}
+          cols={6}
           bottom={1}
           css={`
             background: red;
@@ -68,7 +67,7 @@ const Testpage: NextPage<Props> = (props) => {
         />
         <Box
           ref={boxRef}
-          cols={3}
+          cols={12}
           css={`
             background: yellow;
           `}
@@ -79,10 +78,31 @@ const Testpage: NextPage<Props> = (props) => {
             console.log(element.offsetWidth);
           }}
         >
-          <h1>Hello!</h1>
+          <h1>
+            Hello, Nach einem Jahr Pandemie sind die Infektionszahlen in
+            Deutschland hoch. Neue Mutationen machen das Virus noch
+            unberechenbarer. Trotz tiefgreifender Maßnahmen sind viele
+            Regierungen unfähig oder nicht willens, einen konsequenten
+            Gesundheitsschutz auch in der Arbeitswelt durchzusetzen oder die
+            nicht lebenswichtige Produktion einzuschränken. Allein die private
+            Solidarität der Bürger*innen soll uns aus der Krise führen.!
+          </h1>
           {/* <Box style={`basckground: red;`}>Hallo</Box> */}
         </Box>
         {/* <ChildBox /> */}
+        <Box
+          css={`
+            height: 100%;
+            background: yellow;
+          `}
+        ></Box>
+        <Box
+          cols={1}
+          css={`
+            height: 100%;
+            background: red;
+          `}
+        ></Box>
       </SpecialGrid>
     </>
   );

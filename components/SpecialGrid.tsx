@@ -15,7 +15,7 @@ SpecialGrid.defaultProps = {
   top: "10vw",
   bottom: "20vw",
   gutterX: ["0px", "0px", "1.5vw"],
-  // gutterY:"3vw",
+  gutterY: "1.5vw",
   colspan: [6, 6, 6, 12],
   alignX: ["center", "right", "left"],
   // alignY:"center",
@@ -26,6 +26,7 @@ SpecialGrid.defaultProps = {
   // styleOuter:`width: 80%;`,
   css: `
     background: blue;
+    grid-auto-rows: minmax(min-content, 1fr);
     &.bp-768 {
       // background: black;
     }
