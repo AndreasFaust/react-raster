@@ -43,13 +43,12 @@ function __rest(s, e) {
     return t;
 }
 
-function __spreadArrays() {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+function __spreadArray(to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 }
+
 function __makeTemplateObject(cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
@@ -106,11 +105,11 @@ function getMediaQueries(breakpoints) {
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
-            return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n        @media (min-width: ", "px) ", " {\n          ", ";\n        }\n      "], ["\n        @media (min-width: ", "px) ", " {\n          ", ";\n        }\n      "])), bp, max, css.apply(void 0, args));
+            return css(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n        @media (min-width: ", "px) ", " {\n          ", ";\n        }\n      "], ["\n        @media (min-width: ", "px) ", " {\n          ", ";\n        }\n      "])), bp, max, css.apply(void 0, args));
         };
     });
 }
-var templateObject_1;
+var templateObject_1$5;
 
 function getAlign(_a) {
     var align = _a.align, cssMode = _a.cssMode, hasChildBoxes = _a.hasChildBoxes;
@@ -165,11 +164,11 @@ var InnerTag = function (_a) {
     var className = _a.className, innerHTML = _a.innerHTML, children = _a.children;
     return innerHTML ? (React.createElement("div", { className: className, dangerouslySetInnerHTML: { __html: innerHTML } })) : (React.createElement("div", { className: className }, children));
 };
-var StyledInner = styled(InnerTag)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  position: relative;\n  width: 100%;\n\n  ", "\n"], ["\n  position: relative;\n  width: 100%;\n\n  ",
+var StyledInner = styled(InnerTag)(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  position: relative;\n  width: 100%;\n\n  ", "\n"], ["\n  position: relative;\n  width: 100%;\n\n  ",
     "\n"])), function (props) {
     return props.media.map(function (media, index) {
         return props.hasChildBoxes
-            ? media(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "], ["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "])), props.customStyles && !props.isGrid && props.customStyles[index]) : media(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          ", "\n          ", "\n          ", "\n          ", "\n        "], ["\n          ", "\n          ", "\n          ", "\n          ", "\n        "])), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: " + props.alignX[index] + ";", props.alignY[index] && "align-items: " + props.alignY[index] + ";", props.customStyles && !props.isGrid && props.customStyles[index]);
+            ? media(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "], ["\n          display: flex;\n          align-items: stretch;\n          justify-content: stretch;\n          ", "\n        "])), props.customStyles && !props.isGrid && props.customStyles[index]) : media(templateObject_2$3 || (templateObject_2$3 = __makeTemplateObject(["\n          ", "\n          ", "\n          ", "\n          ", "\n        "], ["\n          ", "\n          ", "\n          ", "\n          ", "\n        "])), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: " + props.alignX[index] + ";", props.alignY[index] && "align-items: " + props.alignY[index] + ";", props.customStyles && !props.isGrid && props.customStyles[index]);
     });
 });
 var Inner = function (_a) {
@@ -178,16 +177,16 @@ var Inner = function (_a) {
         return children;
     return (React.createElement(StyledInner, { className: className, media: media, cssMode: cssMode, alignX: alignX, alignY: alignY, customStyles: customStyles, hasChildBoxes: hasChildBoxes, isGrid: isGrid, innerHTML: innerHTML }, children));
 };
-var templateObject_1$1, templateObject_2, templateObject_3;
+var templateObject_1$4, templateObject_2$3, templateObject_3$2;
 
 var ResetterTag = function (_a) {
     var className = _a.className, children = _a.children;
     return React.createElement("div", { className: className }, children);
 };
-var StyledResetter = styled(ResetterTag)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  ", "\n"], ["\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  ",
+var StyledResetter = styled(ResetterTag)(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  ", "\n"], ["\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  ",
     "\n"])), function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n      width: calc(100% + (", "));      \n      margin-left: calc(-", " / 2);\n      margin-right: calc(-", " / 2);\n      margin-top: calc(-", " / 2);\n      margin-bottom: calc(-", " / 2);\n\n      align-items: ", ";\n      justify-content: ", ";    \n      \n      padding: ", ";\n    "], ["\n      width: calc(100% + (", "));      \n      margin-left: calc(-", " / 2);\n      margin-right: calc(-", " / 2);\n      margin-top: calc(-", " / 2);\n      margin-bottom: calc(-", " / 2);\n\n      align-items: ", ";\n      justify-content: ", ";    \n      \n      padding: ", ";\n    "])), props.gutterX[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.alignY[index], props.alignX[index], props.padding && props.padding[index]);
+        return media(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n      width: calc(100% + (", "));      \n      margin-left: calc(-", " / 2);\n      margin-right: calc(-", " / 2);\n      margin-top: calc(-", " / 2);\n      margin-bottom: calc(-", " / 2);\n\n      align-items: ", ";\n      justify-content: ", ";    \n      \n      padding: ", ";\n    "], ["\n      width: calc(100% + (", "));      \n      margin-left: calc(-", " / 2);\n      margin-right: calc(-", " / 2);\n      margin-top: calc(-", " / 2);\n      margin-bottom: calc(-", " / 2);\n\n      align-items: ", ";\n      justify-content: ", ";    \n      \n      padding: ", ";\n    "])), props.gutterX[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.alignY[index], props.alignX[index], props.padding && props.padding[index]);
     });
 });
 var Resetter = function (props) {
@@ -195,7 +194,7 @@ var Resetter = function (props) {
         return props.children;
     return React.createElement(StyledResetter, __assign({}, props));
 };
-var templateObject_1$2, templateObject_2$1;
+var templateObject_1$3, templateObject_2$2;
 
 function useCssMode(cssModeFromProps) {
     var _a = React.useState("grid"), cssMode = _a[0], setCssMode = _a[1];
@@ -231,16 +230,16 @@ var Container = React.forwardRef(function (_a, ref) {
 });
 
 var controlStyles = "\n  width: 100%;\n  z-index: 10000;\n  left: 0; \n  top: 0; \n  bottom: 0;\n  margin: 0;\n  grid-auto-rows: auto;\n  pointer-events: none;\n";
-var GridLayout = styled(Container)(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  display: grid;\n  grid-auto-rows: min-content;\n  box-sizing: border-box;\n  ", "\n  ", "\n"], ["\n  display: grid;\n  grid-auto-rows: min-content;\n  box-sizing: border-box;\n  ",
+var GridLayout$1 = styled(Container)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  display: grid;\n  grid-auto-rows: min-content;\n  box-sizing: border-box;\n  ", "\n  ", "\n"], ["\n  display: grid;\n  grid-auto-rows: min-content;\n  box-sizing: border-box;\n  ",
     "\n  ", "\n"])), function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n        grid-template-columns: repeat(", ", 1fr);\n        grid-auto-columns: ", "fr;    \n        position: ", ";\n        padding-left: ", ";\n        padding-right: ", ";\n        padding-top: ", ";\n        padding-bottom: ", ";\n        grid-column-gap: ", ";\n        grid-row-gap: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        ", "\n        ", "\n      "], ["\n        grid-template-columns: repeat(", ", 1fr);\n        grid-auto-columns: ", "fr;    \n        position: ", ";\n        padding-left: ", ";\n        padding-right: ", ";\n        padding-top: ", ";\n        padding-bottom: ", ";\n        grid-column-gap: ", ";\n        grid-row-gap: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        ", "\n        ",
+        return media(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n        grid-template-columns: repeat(", ", 1fr);\n        grid-auto-columns: ", "fr;    \n        position: ", ";\n        padding-left: ", ";\n        padding-right: ", ";\n        padding-top: ", ";\n        padding-bottom: ", ";\n        grid-column-gap: ", ";\n        grid-row-gap: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        ", "\n        ", "\n      "], ["\n        grid-template-columns: repeat(", ", 1fr);\n        grid-auto-columns: ", "fr;    \n        position: ", ";\n        padding-left: ", ";\n        padding-right: ", ";\n        padding-top: ", ";\n        padding-bottom: ", ";\n        grid-column-gap: ", ";\n        grid-row-gap: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        ", "\n        ",
             "\n      "])), function (props) { return props.colspan[index]; }, function (props) { return props.colspan[index]; }, props.position[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.gutterX[index], props.gutterY[index], props.alignY[index], props.alignY[index], props.customStyles[index], props.isControl && props.gutterX[index] === "0px"
             ? "grid-column-gap: 1px;"
             : "");
     });
 }, function (props) { return props.isControl && controlStyles; });
-var FlexBox = styled(Container)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  display: flex;\n  align-items: stretch;\n  box-sizing: border-box;\n\n  ", "\n  ", "\n"], ["\n  display: flex;\n  align-items: stretch;\n  box-sizing: border-box;\n\n  ",
+var FlexBox$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  display: flex;\n  align-items: stretch;\n  box-sizing: border-box;\n\n  ", "\n  ", "\n"], ["\n  display: flex;\n  align-items: stretch;\n  box-sizing: border-box;\n\n  ",
     "\n  ", "\n"])), function (props) {
     return props.media.map(function (media, index) {
         return media(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n      position: ", ";\n      padding-left: ", ";\n      padding-right: ", ";\n      padding-top: ", ";\n      padding-bottom: ", ";\n      ", "\n    "], ["\n      position: ", ";\n      padding-left: ", ";\n      padding-right: ", ";\n      padding-top: ", ";\n      padding-bottom: ", ";\n      ", "\n    "])), props.position[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.customStyles[index]);
@@ -249,12 +248,12 @@ var FlexBox = styled(Container)(templateObject_4 || (templateObject_4 = __makeTe
 var StyledGrid = React.forwardRef(function (props, ref) {
     switch (props.cssMode) {
         case "flex":
-            return React.createElement(FlexBox, __assign({}, props, { ref: ref }));
+            return React.createElement(FlexBox$1, __assign({}, props, { ref: ref }));
         case "grid":
-            return React.createElement(GridLayout, __assign({}, props, { ref: ref }));
+            return React.createElement(GridLayout$1, __assign({}, props, { ref: ref }));
     }
 });
-var templateObject_1$3, templateObject_2$2, templateObject_3$1, templateObject_4;
+var templateObject_1$2, templateObject_2$1, templateObject_3$1, templateObject_4$1;
 
 // This alphabet uses `A-Za-z0-9_-` symbols. The genetic algorithm helped
 // optimize the gzip compression for this alphabet.
@@ -297,7 +296,7 @@ function getBreakpointRows(_a) {
         var currentRow = rows[rows.length - 1];
         if (currentRow.width + child.width[index] <= cols) {
             rows[rows.length - 1] = {
-                ids: __spreadArrays(currentRow.ids, [child.id]),
+                ids: __spreadArray(__spreadArray([], currentRow.ids), [child.id]),
                 width: currentRow.width + child.width[index],
             };
         }
@@ -451,14 +450,14 @@ function useResizeObserver(ref, onResize) {
     }, [ref.current]);
 }
 
-var GridLayout$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  box-sizing: border-box;\n  ", ";\n\n  ", "\n  ", "\n    \n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n  ", ";\n\n  ",
+var GridLayout = styled(Container)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  box-sizing: border-box;\n  ", ";\n\n  ", "\n  ", "\n    \n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n  ", ";\n\n  ",
     "\n  ",
     "\n    \n  ",
     "\n\n  ",
     "\n"])), function (props) { return props.hasChildBoxes && "display: grid;"; }, function (props) {
     return props.hasChildBoxes &&
         props.media.map(function (media, index) {
-            return media(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n      grid-template-columns: repeat(", ", 1fr);\n      grid-auto-columns: ", "fr;\n      grid-auto-rows: min-content;\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n    "], ["\n      grid-template-columns: repeat(", ", 1fr);\n      grid-auto-columns: ", "fr;\n      grid-auto-rows: min-content;\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n    "])), function (props) { return props.colspan[index]; }, function (props) { return props.colspan[index]; }, props.gutterX[index], props.gutterY[index]);
+            return media(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n      grid-template-columns: repeat(", ", 1fr);\n      grid-auto-columns: ", "fr;\n      grid-auto-rows: min-content;\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n    "], ["\n      grid-template-columns: repeat(", ", 1fr);\n      grid-auto-columns: ", "fr;\n      grid-auto-rows: min-content;\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n    "])), function (props) { return props.colspan[index]; }, function (props) { return props.colspan[index]; }, props.gutterX[index], props.gutterY[index]);
         });
 }, function (props) {
     return !props.hasChildBoxes &&
@@ -466,18 +465,18 @@ var GridLayout$1 = styled(Container)(templateObject_4$1 || (templateObject_4$1 =
             if (props.alignX[index] === "flex-start" &&
                 props.alignY[index] === "flex-start")
                 return "";
-            return media(templateObject_2$3 || (templateObject_2$3 = __makeTemplateObject(["\n        ", "\n        ", "\n        ", "\n      "], ["\n        ", "\n        ", "\n        ", "\n      "])), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: " + props.alignX[index] + ";", props.alignY[index] && "align-items: " + props.alignY[index] + ";");
+            return media(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        ", "\n        ", "\n        ", "\n      "], ["\n        ", "\n        ", "\n        ", "\n      "])), (props.alignX[index] || props.alignY[index]) && "display: flex;", props.alignX[index] && "justify-content: " + props.alignX[index] + ";", props.alignY[index] && "align-items: " + props.alignY[index] + ";");
         });
 }, function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        height: ", ";\n        ", "\n      "], ["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        height: ", ";\n        ", "\n      "])), !props.colspan[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.padding[index], props.order[index], props.height[index], props.customStyles[index]);
+        return media(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        height: ", ";\n        ", "\n      "], ["\n        ", "\n        position: relative;\n        grid-column: auto / span ", ";\n        left: ", ";\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        align-content: ", ";\n        align-items: ", ";\n        padding: ", ";\n        order: ", ";\n        height: ", ";\n        ", "\n      "])), !props.colspan[index] ? "display: none;" : "", props.cols[index], props.rest[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.alignY[index], props.alignY[index], props.padding[index], props.order[index], props.height[index], props.customStyles[index]);
     });
 }, function (props) {
     return props.tag === "img" &&
         props.controlIsVisible &&
         "\n    box-shadow: 0 0 999em " + props.controlColor + " inset;\n  ";
 });
-var FlexBox$1 = styled(Container)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  display: flex;\n  box-sizing: border-box;\n\n  ", "\n"], ["\n  display: flex;\n  box-sizing: border-box;\n\n  ",
+var FlexBox = styled(Container)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  display: flex;\n  box-sizing: border-box;\n\n  ", "\n"], ["\n  display: flex;\n  box-sizing: border-box;\n\n  ",
     "\n"])), function (props) {
     return props.media.map(function (media, index) {
         return media(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n        width: ", "%;\n        height: ", ";\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n\n        order: ", ";\n      "], ["\n        width: ", "%;\n        height: ", ";\n        \n        padding-left: calc(", " / 2);\n        padding-right: calc(", " / 2);\n        padding-top: calc(", " / 2);\n        padding-bottom: calc(", " / 2);\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n\n        order: ", ";\n      "])), props.cols[index], props.height[index], props.gutterX[index], props.gutterX[index], props.gutterY[index], props.gutterY[index], props.left[index], props.right[index], props.top[index], props.bottom[index], props.order[index]);
@@ -486,12 +485,12 @@ var FlexBox$1 = styled(Container)(templateObject_6 || (templateObject_6 = __make
 var StyledBox = React.forwardRef(function (props, ref) {
     switch (props.cssMode) {
         case "flex":
-            return React.createElement(FlexBox$1, __assign({}, props, { ref: ref }));
+            return React.createElement(FlexBox, __assign({}, props, { ref: ref }));
         case "grid":
-            return React.createElement(GridLayout$1, __assign({}, props, { ref: ref }));
+            return React.createElement(GridLayout, __assign({}, props, { ref: ref }));
     }
 });
-var templateObject_1$4, templateObject_2$3, templateObject_3$2, templateObject_4$1, templateObject_5, templateObject_6;
+var templateObject_1$1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
 function getMarginsPercent(_a) {
     var margin = _a.margin, cols = _a.cols, parentCols = _a.parentCols, cssMode = _a.cssMode, gutterX = _a.gutterX;
@@ -625,7 +624,7 @@ var Box = React.forwardRef(function (_a, ref) {
                             cssMode: cssMode,
                             rest: alignmentXRest,
                             registerChildBox: function (childBox) {
-                                setChildBoxes(function (childBoxes) { return __spreadArrays(childBoxes, [childBox]); });
+                                setChildBoxes(function (childBoxes) { return __spreadArray(__spreadArray([], childBoxes), [childBox]); });
                             },
                         } }, children))))));
 });
@@ -633,13 +632,13 @@ Box.displayName = "Box";
 
 var ControlGrid = function (props) {
     var currentColspan = props.currentColspan, rest = __rest(props, ["currentColspan"]);
-    return (React.createElement(Grid, __assign({}, rest, { position: "absolute", className: "GridControl", alignY: "stretch", isControl: true }), __spreadArrays(Array(currentColspan)).map(function (col, index) { return (React.createElement(Box, { key: index, cols: 1, css: "\n            background-color: " + props.controlColor + ";\n          " })); })));
+    return (React.createElement(Grid, __assign({}, rest, { position: "absolute", className: "GridControl", alignY: "stretch", isControl: true }), __spreadArray([], Array(currentColspan)).map(function (col, index) { return (React.createElement(Box, { key: index, cols: 1, css: "\n            background-color: " + props.controlColor + ";\n          " })); })));
 };
-var StyledControlBox = styled("div")(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"], ["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"])), function (props) { return props.controlColor; });
+var StyledControlBox = styled("div")(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"], ["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"])), function (props) { return props.controlColor; });
 var ControlBox = function (props) {
     return React.createElement(StyledControlBox, __assign({}, props));
 };
-var templateObject_1$5;
+var templateObject_1;
 
 function useCurrentBreakpoint(breakpoints) {
     var _a = React.useState({
@@ -738,7 +737,7 @@ var Grid = React.forwardRef(function (_a, ref) {
                         controlColor: controlColor,
                         rest: alignmentXRest,
                         registerChildBox: function (childBox) {
-                            setChildBoxes(function (childBoxes) { return __spreadArrays(childBoxes, [childBox]); });
+                            setChildBoxes(function (childBoxes) { return __spreadArray(__spreadArray([], childBoxes), [childBox]); });
                         },
                     } }, children)))));
 });
