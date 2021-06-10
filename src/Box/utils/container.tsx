@@ -6,7 +6,6 @@ interface Props {
   tag?: string;
   children: React.ReactNode;
   component?: React.ReactElement;
-  cssMode: "grid" | "flex";
 }
 
 const Container = React.forwardRef<HTMLElement, Props>(
@@ -24,10 +23,7 @@ const Container = React.forwardRef<HTMLElement, Props>(
         className,
         ref,
       },
-      (tag !== "img" && !attrs.dangerouslySetInnerHTML) ||
-        (tag !== "img" && cssMode === "flex")
-        ? children
-        : null
+      tag !== "img" && !attrs.dangerouslySetInnerHTML ? children : null
     );
   }
 );

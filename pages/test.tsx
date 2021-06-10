@@ -14,7 +14,7 @@ const ChildBox = () => {
       // top={0.5}
       // left={0.5}
       cols={2}
-      alignY={"center"}
+      alignV={"center"}
       onClick={() => {
         console.log("HALLO!");
       }}

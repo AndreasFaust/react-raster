@@ -5,12 +5,11 @@ import Grid from "../Grid";
 import Box from "../Box";
 
 interface ControlGridProps {
-  cssMode: "grid" | "flex";
   colspan: number[];
   currentColspan: number;
   breakpoints: number[];
-  gutterX: string | string[];
-  gutterY: string | string[];
+  gapH: string | string[];
+  gapV: string | string[];
   left: string | string[];
   right: string | string[];
   top: string | string[];
@@ -25,7 +24,7 @@ const ControlGrid: React.FC<ControlGridProps> = (props) => {
       {...rest}
       position="absolute"
       className="GridControl"
-      alignY="stretch"
+      alignV="stretch"
       isControl
     >
       {[...Array(currentColspan)].map((col, index) => (

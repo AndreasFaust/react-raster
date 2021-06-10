@@ -5,14 +5,25 @@ export type currentBreakpoint = {
   value: number;
 };
 
-export default function useCurrentBreakpoint(
-  breakpoints: number[]
-): currentBreakpoint {
-  const [currentBp, setCurrentBp] = React.useState<currentBreakpoint>({
-    index: 1,
-    value: 0,
-  });
+interface Props {
+  activateEventListener: boolean;
+  contextBreakpoint: currentBreakpoint;
+  breakpoints: number[];
+}
+
+export default function useCurrentBreakpoint({
+  activateEventListener,
+  contextBreakpoint,
+  breakpoints,
+}: Props): currentBreakpoint {
+  const [currentBp, setCurrentBp] = React.useState<currentBreakpoint>(
+    contextBreakpoint || {
+      index: 1,
+      value: 0,
+    }
+  );
   React.useEffect(() => {
+    if (!activateEventListener) return;
     function onResize() {
       const w = window.innerWidth;
       let bp = { index: 1, value: 0 };

@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import Container from "../utils/container";
+import Container from "../Box/utils/container";
 
 interface Props {
   attrs?: object;
   colspan: number[];
   className: string;
-  gutterX: string[];
-  gutterY: string[];
-  alignX: string[];
-  alignY: string[];
+  gapH: string[];
+  gapV: string[];
+  alignH: string[];
+  alignV: string[];
   media: any[];
   left: string[];
   right: string[];
@@ -20,7 +20,6 @@ interface Props {
   tag: string;
   isControl: boolean;
   children: React.ReactNode;
-  cssMode: "grid" | "flex";
   customStyles: string[];
   component?: React.ReactElement;
 }
@@ -50,13 +49,13 @@ const GridLayout = styled(Container)<Props>`
         padding-right: ${props.right[index]};
         padding-top: ${props.top[index]};
         padding-bottom: ${props.bottom[index]};
-        grid-column-gap: ${props.gutterX[index]};
-        grid-row-gap: ${props.gutterY[index]};
-        align-content: ${props.alignY[index]};
-        align-items: ${props.alignY[index]};
+        grid-column-gap: ${props.gapH[index]};
+        grid-row-gap: ${props.gapV[index]};
+        align-content: ${props.alignV[index]};
+        align-items: ${props.alignV[index]};
         ${props.customStyles[index]}
         ${
-          props.isControl && props.gutterX[index] === "0px"
+          props.isControl && props.gapH[index] === "0px"
             ? "grid-column-gap: 1px;"
             : ""
         }
@@ -65,32 +64,8 @@ const GridLayout = styled(Container)<Props>`
   ${(props) => props.isControl && controlStyles}
 `;
 
-const FlexBox = styled(Container)<Props>`
-  display: flex;
-  align-items: stretch;
-  box-sizing: border-box;
-
-  ${(props) =>
-    props.media.map((media, index) => {
-      return media`
-      position: ${props.position[index]};
-      padding-left: ${props.left[index]};
-      padding-right: ${props.right[index]};
-      padding-top: ${props.top[index]};
-      padding-bottom: ${props.bottom[index]};
-      ${props.customStyles[index]}
-    `;
-    })}
-  ${(props) => props.isControl && controlStyles}
-`;
-
 const StyledGrid = React.forwardRef<HTMLElement, Props>((props, ref) => {
-  switch (props.cssMode) {
-    case "flex":
-      return <FlexBox {...props} ref={ref} />;
-    case "grid":
-      return <GridLayout {...props} ref={ref} />;
-  }
+  return <GridLayout {...props} ref={ref} />;
 });
 
 export default StyledGrid;

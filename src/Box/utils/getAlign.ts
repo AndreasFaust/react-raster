@@ -1,15 +1,15 @@
 interface Props {
   align: string[];
-  cssMode: "grid" | "flex";
+  display: "grid" | "flex" | "block";
   hasChildBoxes: boolean;
 }
 
 export default function getAlign({
   align,
-  cssMode,
+  display,
   hasChildBoxes,
 }: Props): string[] {
-  return cssMode === "grid" && hasChildBoxes
+  return display === "grid" && hasChildBoxes
     ? align.map((al) => {
         switch (al) {
           case "left":

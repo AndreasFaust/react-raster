@@ -39,8 +39,8 @@ export const ExampleTeaser = ({ item }) => (
         height: 400px;
         color: white;
       `}
-      alignY="center"
-      alignX="center"
+      alignV="center"
+      alignH="center"
       component={<motion.a variants={teaserVariants} />}
     >
       <h2>{item}</h2>
@@ -54,8 +54,8 @@ const ExampleGrid = ({ children }) => (
     right={"1.5vw"}
     top={"3vw"}
     bottom={"20vw"}
-    gutterX={"1.5vw"}
-    gutterY={"1.25vw"}
+    gapH={"1.5vw"}
+    gapV={"1.25vw"}
     colspan={[6, 6, 6, 8, 12]}
     control
     component={

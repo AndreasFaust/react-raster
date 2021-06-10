@@ -53,8 +53,8 @@ yarn add react-raster styled-components react react-dom
   right={"2vw"}
   top={"2vw"}
   bottom={"2vw"}
-  gutterX={"2vw"}
-  gutterY={"2vw"}
+  gapH={"2vw"}
+  gapV={"2vw"}
   control
 >
   <Box cols={[6, 6, 3]}>

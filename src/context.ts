@@ -1,14 +1,13 @@
 import React from "react";
 
 interface ContextProps {
-  cssMode?: "grid" | "flex";
   breakpoint?: {
     index: number;
     value: number;
   };
   breakpoints?: number[];
-  gutterX?: string[];
-  gutterY?: string[];
+  gapH?: string[];
+  gapV?: string[];
   colspan?: number;
   parentCols?: number[];
   media?: any[];

@@ -1,8 +1,8 @@
-export type AlignX =
+export type AlignH =
   | "left"
   | "right"
   | "center"
   | "space-between"
   | "space-around";
 
-export type AlignY = "top" | "bottom" | "center" | "stretch" | "baseline";
+export type AlignV = "top" | "bottom" | "center" | "stretch" | "baseline";

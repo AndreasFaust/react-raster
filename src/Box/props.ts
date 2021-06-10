@@ -1,25 +1,76 @@
 import React, { HTMLProps } from "react";
-import { AlignX, AlignY } from "../alignTypes";
+import { AlignH, AlignV } from "../alignTypes";
 
-export interface Props extends Omit<HTMLProps<HTMLElement>, "cols" | "height"> {
-  alignX?: AlignX | AlignX[];
-  alignY?: AlignY | AlignY[];
-  bottom?: number | number[];
-  children?: React.ReactNode;
-  className?: string;
+type CoreProp = number | number[] | string | string[];
+
+export interface Props
+  extends Omit<HTMLProps<HTMLElement>, "height" | "width"> {
+  ////////////////////////////////////////
+  // Core
+  display?: "grid" | "flex" | "block";
+  breakpoints?: number[];
+  width?: CoreProp;
+  height?: CoreProp;
+  colspan?: number | number[];
   cols?: number | number[];
+
+  marginLeft?: CoreProp;
+  marginRight?: CoreProp;
+  marginTop?: CoreProp;
+  marginBottom?: CoreProp;
+
+  paddingLeft?: CoreProp;
+  paddingRight?: CoreProp;
+  paddingTop?: CoreProp;
+  paddingBottom?: CoreProp;
+
+  gapH?: string | string[];
+  gapV?: string | string[];
+
+  ////////////////////////////////////////
+  // Advanced
   component?: React.ReactElement;
-  hasChildBoxes?: boolean;
-  height?: string | string[];
   innerHTML?: string;
-  left?: number | number[];
   onResize?: (element: HTMLElement) => void;
-  order?: number | number[];
-  padding?: string | string[];
-  right?: number | number[];
   css?: string | string[];
   tag?: string;
-  top?: number | number[];
+  control?: boolean;
+  controlColor?: string;
+
+  ////////////////////////////////////////
+  // basic CSS
+  order?: number | number[];
+
+  top?: string | string[];
+  bottom?: string | string[];
+  left?: string | string[];
+  right?: string | string[];
+
+  alignItems: string | string[];
+  alignContent: string | string[];
+  alignSelf: string | string[];
+  justifyContent: string | string[];
+  justifySelf: string | string[];
+
+  background?: string | string[];
+  backgroundColor?: string | string[];
+  backgroundImage?: string | string[];
+  backgroundPosition?: string | string[];
+  backgroundSize?: string | string[];
+  backgroundAttachment?: string | string[];
+
+  border?: string | string[];
+  borderLeft?: string | string[];
+  borderRight?: string | string[];
+  borderTop?: string | string[];
+  borderBottom?: string | string[];
+
+  ////////////////////////////////////////
+  // utility
+  className?: string;
+  children?: React.ReactNode;
+  hasChildBoxes?: boolean;
+  isControl?: boolean;
   // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
   ref?: React.MutableRefObject<HTMLElement>;
 }

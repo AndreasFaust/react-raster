@@ -1,22 +1,24 @@
 import React, { HTMLProps } from "react";
-import { AlignX, AlignY } from "../alignTypes";
+import { AlignH, AlignV } from "../alignTypes";
 
 export interface Props extends HTMLProps<HTMLElement> {
-  alignX?: AlignX | AlignX[];
-  alignY?: AlignY | AlignY[];
+  alignH?: AlignH | AlignH[];
+  alignV?: AlignV | AlignV[];
   attrs?: object;
   bottom?: string | string[];
-  breakpoints?: number[];
   children?: React.ReactNode;
   className?: string;
-  colspan?: number | number[];
   component?: React.ReactElement;
+
+  breakpoints?: number[];
+  colspan?: number | number[];
   control?: boolean;
   controlColor?: string;
-  cssMode?: "grid" | "flex";
-  gutterX?: string | string[];
-  gutterY?: string | string[];
+  gapH?: string | string[];
+  gapV?: string | string[];
+
   isControl?: boolean;
+
   left?: string | string[];
   position?: string | string[];
   right?: string | string[];
