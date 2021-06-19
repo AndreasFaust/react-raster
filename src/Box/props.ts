@@ -1,10 +1,9 @@
 import React, { HTMLProps } from "react";
-import { AlignH, AlignV } from "../alignTypes";
 
 type CoreProp = number | number[] | string | string[];
 
 export interface Props
-  extends Omit<HTMLProps<HTMLElement>, "height" | "width"> {
+  extends Omit<HTMLProps<HTMLElement>, "cols" | "height" | "width"> {
   ////////////////////////////////////////
   // Core
   display?: "grid" | "flex" | "block";
@@ -24,8 +23,8 @@ export interface Props
   paddingTop?: CoreProp;
   paddingBottom?: CoreProp;
 
-  gapH?: string | string[];
-  gapV?: string | string[];
+  rowGap?: string | string[];
+  columnGap?: string | string[];
 
   ////////////////////////////////////////
   // Advanced
@@ -46,11 +45,11 @@ export interface Props
   left?: string | string[];
   right?: string | string[];
 
-  alignItems: string | string[];
-  alignContent: string | string[];
-  alignSelf: string | string[];
-  justifyContent: string | string[];
-  justifySelf: string | string[];
+  alignItems?: string | string[];
+  alignContent?: string | string[];
+  alignSelf?: string | string[];
+  justifyContent?: string | string[];
+  justifySelf?: string | string[];
 
   background?: string | string[];
   backgroundColor?: string | string[];
@@ -69,7 +68,7 @@ export interface Props
   // utility
   className?: string;
   children?: React.ReactNode;
-  hasChildBoxes?: boolean;
+  // hasChildBoxes?: boolean;
   isControl?: boolean;
   // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
   ref?: React.MutableRefObject<HTMLElement>;

@@ -7,65 +7,48 @@ import useNormalize from "./utils/useNormalize";
 
 import Context from "../context";
 import StyledBox from "./StyledBox";
-import { ControlBox } from "../Control";
+// import { ControlBox } from "../Control";
 import { Props } from "./props";
 
 const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const context = useContext(Context);
-  const { breakpoints, breakpoint } = useNormalize(props, context);
+  const propsNormalized = useNormalize(props, context);
   const id = React.useRef(nanoid());
 
-  const controlIsVisible = useControl(control);
+  // const controlIsVisible = useControl(control);
 
   const boxRef = useCombinedRefs(ref);
   useResizeObserver(boxRef, props.onResize);
-
   return (
     <StyledBox
+      id={id}
+      {...propsNormalized}
       component={props.component}
-      breakpoints={breakpoints}
-      className={className ? ["Box", className].join(" ") : "Box"}
-      height={heightNormalized}
-      cols={colsPercent}
-      rest={restPercent}
-      media={media}
-      gapH={gapH}
-      gapV={gapV}
-      colspan={colsNormalized}
-      hasChildBoxes={hasChildBoxesNormalized}
-      alignH={alignHNormalized}
-      alignV={alignVNormalized}
-      tag={tag}
-      left={leftPercent}
-      right={rightPercent}
-      top={topPercent}
-      bottom={bottomPercent}
-      padding={paddingNormalized}
-      controlIsVisible={controlIsVisible}
-      controlColor={controlColor}
-      order={orderNormalized}
-      customStyles={cssNormalized}
+      className={props.className ? ["Box", props.className].join(" ") : "Box"}
+      // controlIsVisible={propsNormalized.controlIsVisible}
       ref={boxRef}
+      // customStyles={propsNormalized.css}
       attrs={{
-        ...undefinedProps,
+        // ...undefinedProps,
         ...(props.innerHTML && {
           dangerouslySetInnerHTML: { __html: props.innerHTML },
         }),
       }}
+      {...propsNormalized}
     >
       <>
-        {controlIsVisible && <ControlBox controlColor={controlColor} />}
+        {/* {controlIsVisible && <ControlBox controlColor={controlColor} />} */}
         <Context.Provider
           value={{
-            breakpoints,
-            breakpoint,
-            gapH,
-            gapV,
-            colspan,
-            media,
-            parentCols: colsNormalized,
-            controlIsVisible,
-            controlColor,
+            breakpoints: propsNormalized.breakpoints,
+            breakpoint: propsNormalized.breakpoint,
+            rowGap: propsNormalized.rowGap,
+            columnGap: propsNormalized.columnGap,
+            colspan: propsNormalized.cols,
+            media: propsNormalized.media,
+            // parentCols: propsNormalized.cols,
+            // controlIsVisible,
+            controlColor: propsNormalized.controlColor,
           }}
         >
           {props.children}

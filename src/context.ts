@@ -6,20 +6,19 @@ interface ContextProps {
     value: number;
   };
   breakpoints?: number[];
-  gapH?: string[];
-  gapV?: string[];
-  colspan?: number;
-  parentCols?: number[];
+  rowGap?: string[];
+  columnGap?: string[];
+  colspan?: number[];
   media?: any[];
   controlIsVisible?: boolean;
   controlColor?: string;
-  rest?: { id: string; width: number[] }[];
-  registerChildBox?: (childBox: {
-    left: number[];
-    right: number[];
-    cols: number[];
-    id: string;
-  }) => void;
+  // rest?: { id: string; width: number[] }[];
+  // registerChildBox?: (childBox: {
+  //   left: number[];
+  //   right: number[];
+  //   cols: number[];
+  //   id: string;
+  // }) => void;
 }
 
 const Context = React.createContext<ContextProps>({

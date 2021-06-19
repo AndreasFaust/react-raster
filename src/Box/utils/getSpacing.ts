@@ -17,8 +17,8 @@ function getSpacingSingle({ display, gap, colspan, breakpoints, prop }) {
 
 export default function getSpacing({
   display,
-  gapH,
-  gapV,
+  rowGap,
+  columnGap,
   colspan,
   breakpoints,
   props,
@@ -27,31 +27,31 @@ export default function getSpacing({
   return {
     left: getSpacingSingle({
       display,
-      gap: gapH,
+      gap: columnGap,
       colspan,
       breakpoints,
       prop: props[`${prop}Left`],
     }),
     right: getSpacingSingle({
       display,
-      gap: gapH,
+      gap: columnGap,
       colspan,
       breakpoints,
-      prop: props[`${prop}right`],
+      prop: props[`${prop}Right`],
     }),
     top: getSpacingSingle({
       display,
-      gap: gapV,
+      gap: rowGap,
       colspan,
       breakpoints,
-      prop: props[`${prop}top`],
+      prop: props[`${prop}Top`],
     }),
     bottom: getSpacingSingle({
       display,
-      gap: gapV,
+      gap: rowGap,
       colspan,
       breakpoints,
-      prop: props[`${prop}bottom`],
+      prop: props[`${prop}Bottom`],
     }),
   };
 }

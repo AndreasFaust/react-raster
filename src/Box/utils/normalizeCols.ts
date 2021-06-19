@@ -3,8 +3,8 @@ import normalizeProps from "./normalizeProps";
 interface Props {
   cols?: number | number[];
   colspan: number[];
-  left: number[];
-  right: number[];
+  marginLeft: number[];
+  marginRight: number[];
   breakpoints: number[];
 }
 
@@ -29,15 +29,19 @@ export default function normalizeCols({
   cols,
   colspan,
   breakpoints,
-  left,
-  right,
+  marginLeft,
+  marginRight,
 }: Props): number[] {
   if (!cols) {
-    return colspan.map((parentCol, index) => {
-      return parentCol - left[index] - right[index];
+    return colspan.map((parentCols, index) => {
+      return parentCols - marginLeft[index] - marginRight[index];
     });
   }
   const colsNormalized = normalizeProps(breakpoints, cols);
-
-  return checkError({ cols: colsNormalized, colspan, left, right });
+  return checkError({
+    cols: colsNormalized,
+    colspan,
+    left: marginLeft,
+    right: marginRight,
+  });
 }

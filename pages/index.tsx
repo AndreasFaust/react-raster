@@ -1,82 +1,89 @@
 import React from "react";
 import Link from "next/link";
-import { Grid, Box } from "../src";
+import { Box } from "../src";
 import { motion } from "framer-motion";
 
-const items = [
-  "Karl Marx",
-  "Friedrich Engels",
-  "Rosa Luxemburg",
-  "Karl Liebknecht",
-  "Clara Zetkin",
-  "Ernst Toller",
-];
+// const items = [
+//   "Karl Marx",
+//   "Friedrich Engels",
+//   "Rosa Luxemburg",
+//   "Karl Liebknecht",
+//   "Clara Zetkin",
+//   "Ernst Toller",
+// ];
 
-const containerVariants = {
-  hidden: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-  show: {
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-};
+// const containerVariants = {
+//   hidden: {
+//     transition: {
+//       staggerChildren: 0.1,
+//     },
+//   },
+//   show: {
+//     transition: {
+//       staggerChildren: 0.3,
+//     },
+//   },
+// };
 
-const teaserVariants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
+// const teaserVariants = {
+//   hidden: { opacity: 0 },
+//   show: { opacity: 1 },
+// };
 
-export const ExampleTeaser = ({ item }) => (
-  <Link href="/test2" passHref>
-    <Box
-      cols={4}
-      css={`
-        background: blue;
-        height: 400px;
-        color: white;
-      `}
-      alignV="center"
-      alignH="center"
-      component={<motion.a variants={teaserVariants} />}
-    >
-      <h2>{item}</h2>
-    </Box>
-  </Link>
-);
+// export const ExampleTeaser = ({ item }) => (
+//   <Link href="/test2" passHref>
+//     <Box
+//       cols={4}
+//       css={`
+//         background: blue;
+//         height: 400px;
+//         color: white;
+//       `}
+//       component={<motion.a variants={teaserVariants} />}
+//     >
+//       <h2>{item}</h2>
+//     </Box>
+//   </Link>
+// );
 
 const ExampleGrid = ({ children }) => (
-  <Grid
-    left={"1.5vw"}
-    right={"1.5vw"}
-    top={"3vw"}
-    bottom={"20vw"}
-    gapH={"1.5vw"}
-    gapV={"1.25vw"}
-    colspan={[6, 6, 6, 8, 12]}
+  <Box
+    display="grid"
+    paddingLeft="5vw"
+    paddingRight="5vw"
+    paddingTop="5vw"
+    paddingBottom="5vw"
+    rowGap={"3rem"}
+    columnGap={"1rem"}
+    colspan={[12]}
     control
-    component={
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-        exit="hidden"
-      />
-    }
+    width="100vw"
+    height="100vh"
+    background="red"
+    // component={
+    //   <motion.div
+    //     variants={containerVariants}
+    //     initial="hidden"
+    //     animate="show"
+    //     exit="hidden"
+    //   />
+    // }
   >
     {children}
-  </Grid>
+  </Box>
 );
 
 const ExamplePage = () => {
   return (
     <ExampleGrid>
-      {items.map((item) => (
+      <Box cols={6} height={3} background="yellow">
+        <Box cols={3} height={2} background="pink">
+          Hallo!
+        </Box>
+      </Box>
+      {/* {items.map((item) => (
         <ExampleTeaser item={item} key={item} />
-      ))}
+      ))} */}
     </ExampleGrid>
   );
 };

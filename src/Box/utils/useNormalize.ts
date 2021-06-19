@@ -4,6 +4,8 @@ import normalizeProps from "./normalizeProps";
 import getSpacing from "./getSpacing";
 import getMediaQueries from "./getMediaQueries";
 import useCurrentBreakpoint from "./useCurrentBreakpoint";
+import normalizeMargin from "./normalizeMargin";
+import normalizeDisplay from "./normalizeDisplay";
 
 export default function useNormalize(props, context) {
   const breakpoints = props.breakpoints ||
@@ -16,21 +18,20 @@ export default function useNormalize(props, context) {
     contextBreakpoint: context.breakpoint,
     breakpoints,
   });
-
   const colspan = normalizeProps(
     breakpoints,
-    props.colspan || context.parentCols || 1
+    props.colspan || context.colspan || 1
   );
-  const display = normalizeProps(breakpoints, props.display || "grid");
+  const display = normalizeDisplay(breakpoints, mergedProps);
 
-  const gapH = normalizeProps(breakpoints, mergedProps.gapH);
-  const gapV = normalizeProps(breakpoints, mergedProps.gapV);
+  const rowGap = normalizeProps(breakpoints, mergedProps.rowGap);
+  const columnGap = normalizeProps(breakpoints, mergedProps.columnGap);
 
   const margin = getSpacing({
     display,
     breakpoints,
-    gapH,
-    gapV,
+    rowGap,
+    columnGap,
     colspan,
     prop: "margin",
     props: mergedProps,
@@ -38,25 +39,28 @@ export default function useNormalize(props, context) {
   const padding = getSpacing({
     display,
     breakpoints,
-    gapH,
-    gapV,
+    rowGap,
+    columnGap,
     colspan,
     prop: "padding",
     props: mergedProps,
   });
 
+  const marginLeftInCols = normalizeMargin(breakpoints, margin.left);
+  const marginRightInCols = normalizeMargin(breakpoints, margin.right);
+
   const cols = normalizeCols({
     cols: props.cols,
     colspan,
     breakpoints,
-    left: margin.left,
-    right: margin.right,
+    marginLeft: marginLeftInCols,
+    marginRight: marginRightInCols,
   });
 
   const colsTotal = getColsTotal({
     cols,
-    left: margin.left,
-    right: margin.right,
+    left: marginLeftInCols,
+    right: marginRightInCols,
   });
 
   return {
@@ -68,6 +72,10 @@ export default function useNormalize(props, context) {
     margin,
     padding,
     display,
+    rowGap,
+    columnGap,
+
+    controlColor: mergedProps.controlColor,
 
     media: getMediaQueries(breakpoints),
     css: normalizeProps(breakpoints, mergedProps.css),
@@ -75,6 +83,7 @@ export default function useNormalize(props, context) {
     width: normalizeProps(breakpoints, mergedProps.width),
     height: normalizeProps(breakpoints, mergedProps.height),
     position: normalizeProps(breakpoints, mergedProps.position),
+
     left: normalizeProps(breakpoints, mergedProps.left),
     right: normalizeProps(breakpoints, mergedProps.right),
     top: normalizeProps(breakpoints, mergedProps.top),
