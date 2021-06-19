@@ -89,6 +89,11 @@ export default function useNormalize(props, context) {
     top: normalizeProps(breakpoints, mergedProps.top),
     bottom: normalizeProps(breakpoints, mergedProps.bottom),
 
+    templateRows: normalizeProps(breakpoints, mergedProps.templateRows),
+    autoRows: normalizeProps(breakpoints, mergedProps.autoRows),
+    templateColumns: normalizeProps(breakpoints, mergedProps.templateColumns),
+    autoFlow: normalizeProps(breakpoints, mergedProps.autoFlow),
+
     order: normalizeProps(breakpoints, mergedProps.order),
     alignItems: normalizeProps(breakpoints, mergedProps.alignItems),
     alignContent: normalizeProps(breakpoints, mergedProps.alignContent),

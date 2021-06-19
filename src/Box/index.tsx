@@ -4,10 +4,11 @@ import { nanoid } from "nanoid/non-secure";
 import useCombinedRefs from "./utils/useCombinedRefs";
 import useResizeObserver from "./utils/useResizeObserver";
 import useNormalize from "./utils/useNormalize";
+import useControl from "./utils/useControl";
 
 import Context from "../context";
 import StyledBox from "./StyledBox";
-// import { ControlBox } from "../Control";
+import Control from "../Control";
 import { Props } from "./props";
 
 const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
@@ -15,7 +16,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const propsNormalized = useNormalize(props, context);
   const id = React.useRef(nanoid());
 
-  // const controlIsVisible = useControl(control);
+  const controlIsVisible = useControl(props.control, context.controlIsVisible);
 
   const boxRef = useCombinedRefs(ref);
   useResizeObserver(boxRef, props.onResize);
@@ -25,7 +26,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
       {...propsNormalized}
       component={props.component}
       className={props.className ? ["Box", props.className].join(" ") : "Box"}
-      // controlIsVisible={propsNormalized.controlIsVisible}
+      controlIsVisible={controlIsVisible}
       ref={boxRef}
       // customStyles={propsNormalized.css}
       attrs={{
@@ -37,7 +38,9 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
       {...propsNormalized}
     >
       <>
-        {/* {controlIsVisible && <ControlBox controlColor={controlColor} />} */}
+        {controlIsVisible && (
+          <Control isNewGrid={!!props.colspan} {...propsNormalized} />
+        )}
         <Context.Provider
           value={{
             breakpoints: propsNormalized.breakpoints,
@@ -46,8 +49,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
             columnGap: propsNormalized.columnGap,
             colspan: propsNormalized.cols,
             media: propsNormalized.media,
-            // parentCols: propsNormalized.cols,
-            // controlIsVisible,
+            controlIsVisible,
             controlColor: propsNormalized.controlColor,
           }}
         >

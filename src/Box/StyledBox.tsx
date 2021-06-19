@@ -14,9 +14,9 @@ const StyledBox = styled(Container)<any>`
   box-sizing: border-box;
 
   ${(props) =>
-    props.media.map((media, index) => {
+    props.media.map((media, index: number) => {
       return media`
-        position: relative;
+        position: ${props.position[index]};
         display: ${props.display[index]};
         grid-column: auto / span ${props.colsTotal[index]};
         width: ${props.width[index]};
@@ -63,11 +63,15 @@ const StyledBox = styled(Container)<any>`
     })}
 
   ${(props) =>
-    props.media.map((media, index) => {
+    props.media.map((media, index: number) => {
       return media`
         grid-template-columns: repeat(${(props) => props.cols[index]}, 1fr);
-        grid-auto-columns: ${(props) => props.cols[index]}fr;
-        grid-auto-rows: min-content;
+        
+        grid-auto-rows: ${(props) => props.autoRows[index]};
+        grid-template-rows: ${(props) => props.templateRows[index]};
+        grid-template-columns: ${(props) => props.templateColumns[index]};
+        grid-auto-flow: ${(props) => props.autoFlow[index]};
+
         grid-column-gap: ${props.columnGap[index]};
         grid-row-gap: ${props.rowGap[index]};
       `;

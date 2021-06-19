@@ -6,7 +6,7 @@ export interface Props
   extends Omit<HTMLProps<HTMLElement>, "cols" | "height" | "width"> {
   ////////////////////////////////////////
   // Core
-  display?: "grid" | "flex" | "block";
+  display?: string | string[];
   breakpoints?: number[];
   width?: CoreProp;
   height?: CoreProp;
@@ -26,6 +26,11 @@ export interface Props
   rowGap?: string | string[];
   columnGap?: string | string[];
 
+  templateRows?: string | string[];
+  autoRows?: string | string[];
+  templateColumns?: string | string[];
+  autoFlow?: string | string[];
+
   ////////////////////////////////////////
   // Advanced
   component?: React.ReactElement;
@@ -40,6 +45,7 @@ export interface Props
   // basic CSS
   order?: number | number[];
 
+  position?: string | string[];
   top?: string | string[];
   bottom?: string | string[];
   left?: string | string[];
@@ -68,8 +74,7 @@ export interface Props
   // utility
   className?: string;
   children?: React.ReactNode;
-  // hasChildBoxes?: boolean;
-  isControl?: boolean;
+  // isControl?: boolean;
   // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
   ref?: React.MutableRefObject<HTMLElement>;
 }
