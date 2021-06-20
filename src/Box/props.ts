@@ -1,6 +1,6 @@
 import React, { HTMLProps } from "react";
 
-type CoreProp = (string | number)[];
+type CoreProp = Array<string | number>;
 
 export interface Props
   extends Omit<HTMLProps<HTMLElement>, "cols" | "height" | "width"> {
