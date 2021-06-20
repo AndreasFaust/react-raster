@@ -1,27 +1,25 @@
 import React, { HTMLProps } from "react";
 
-type CoreProp = Array<string | number>;
-
 export interface Props
   extends Omit<HTMLProps<HTMLElement>, "cols" | "height" | "width"> {
   ////////////////////////////////////////
   // Core
   display?: string | string[];
   breakpoints?: number[];
-  width?: CoreProp;
-  height?: CoreProp;
+  width?: Array<string | number>;
+  height?: Array<string | number>;
   colspan?: number | number[];
   cols?: number | number[];
 
-  marginLeft?: CoreProp;
-  marginRight?: CoreProp;
-  marginTop?: CoreProp;
-  marginBottom?: CoreProp;
+  marginLeft?: Array<string | number>;
+  marginRight?: Array<string | number>;
+  marginTop?: Array<string | number>;
+  marginBottom?: Array<string | number>;
 
-  paddingLeft?: CoreProp;
-  paddingRight?: CoreProp;
-  paddingTop?: CoreProp;
-  paddingBottom?: CoreProp;
+  paddingLeft?: Array<string | number>;
+  paddingRight?: Array<string | number>;
+  paddingTop?: Array<string | number>;
+  paddingBottom?: Array<string | number>;
 
   rowGap?: string | string[];
   columnGap?: string | string[];
@@ -46,7 +44,7 @@ export interface Props
   order?: number | number[];
 
   position?: string | string[];
-  zIndex?: CoreProp;
+  zIndex?: Array<string | number>;
   top?: string | string[];
   bottom?: string | string[];
   left?: string | string[];
