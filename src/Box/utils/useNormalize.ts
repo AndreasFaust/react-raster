@@ -27,27 +27,11 @@ export default function useNormalize(props, context) {
   const rowGap = normalizeProps(breakpoints, mergedProps.rowGap);
   const columnGap = normalizeProps(breakpoints, mergedProps.columnGap);
 
-  const margin = getSpacing({
-    display,
+  const marginLeftInCols = normalizeMargin(breakpoints, mergedProps.marginLeft);
+  const marginRightInCols = normalizeMargin(
     breakpoints,
-    rowGap,
-    columnGap,
-    colspan,
-    prop: "margin",
-    props: mergedProps,
-  });
-  const padding = getSpacing({
-    display,
-    breakpoints,
-    rowGap,
-    columnGap,
-    colspan,
-    prop: "padding",
-    props: mergedProps,
-  });
-
-  const marginLeftInCols = normalizeMargin(breakpoints, margin.left);
-  const marginRightInCols = normalizeMargin(breakpoints, margin.right);
+    mergedProps.marginRight
+  );
 
   const cols = normalizeCols({
     cols: props.cols,
@@ -61,6 +45,25 @@ export default function useNormalize(props, context) {
     cols,
     left: marginLeftInCols,
     right: marginRightInCols,
+  });
+
+  const margin = getSpacing({
+    display,
+    breakpoints,
+    rowGap,
+    columnGap,
+    cols: colsTotal,
+    prop: "margin",
+    props: mergedProps,
+  });
+  const padding = getSpacing({
+    display,
+    breakpoints,
+    rowGap,
+    columnGap,
+    cols: colsTotal,
+    prop: "padding",
+    props: mergedProps,
   });
 
   return {

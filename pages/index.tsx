@@ -76,7 +76,14 @@ const ExampleGrid = ({ children }) => (
 const ExamplePage = () => {
   return (
     <ExampleGrid>
-      <Box cols={6} height={3} marginLeft={1} background="yellow">
+      <Box
+        cols={6}
+        height={3}
+        marginLeft={1}
+        marginTop={1}
+        paddingLeft={1}
+        background="yellow"
+      >
         <Box cols={3} height={2} background="pink">
           Hallo!
         </Box>
