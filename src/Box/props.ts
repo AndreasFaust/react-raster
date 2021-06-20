@@ -6,20 +6,20 @@ export interface Props
   // Core
   display?: string | string[];
   breakpoints?: number[];
-  width?: Array<string | number>;
-  height?: Array<string | number>;
+  width?: string | number | Array<string | number>;
+  height?: string | number | Array<string | number>;
   colspan?: number | number[];
   cols?: number | number[];
 
-  marginLeft?: Array<string | number>;
-  marginRight?: Array<string | number>;
-  marginTop?: Array<string | number>;
-  marginBottom?: Array<string | number>;
+  marginLeft?: string | number | Array<string | number>;
+  marginRight?: string | number | Array<string | number>;
+  marginTop?: string | number | Array<string | number>;
+  marginBottom?: string | number | Array<string | number>;
 
-  paddingLeft?: Array<string | number>;
-  paddingRight?: Array<string | number>;
-  paddingTop?: Array<string | number>;
-  paddingBottom?: Array<string | number>;
+  paddingLeft?: string | number | Array<string | number>;
+  paddingRight?: string | number | Array<string | number>;
+  paddingTop?: string | number | Array<string | number>;
+  paddingBottom?: string | number | Array<string | number>;
 
   rowGap?: string | string[];
   columnGap?: string | string[];
@@ -44,7 +44,7 @@ export interface Props
   order?: number | number[];
 
   position?: string | string[];
-  zIndex?: Array<string | number>;
+  zIndex?: string | number | Array<string | number>;
   top?: string | string[];
   bottom?: string | string[];
   left?: string | string[];
