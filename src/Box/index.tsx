@@ -15,7 +15,7 @@ import { Props } from "./props";
 const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const context = useContext(Context);
   const propsNormalized = useNormalize(props, context);
-  const id = React.useRef(nanoid());
+  const id = React.useRef<string>(nanoid());
 
   const controlIsVisible = useControl(props.control, context.controlIsVisible);
   const boxRef = useCombinedRefs(ref);
@@ -24,8 +24,9 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   useResizeObserver(boxRef, props.onResize);
   return (
     <StyledBox
-      id={id}
       {...propsNormalized}
+      id={id.current}
+      tag={props.as}
       component={props.component}
       className={props.className ? ["Box", props.className].join(" ") : "Box"}
       controlIsVisible={controlIsVisible}

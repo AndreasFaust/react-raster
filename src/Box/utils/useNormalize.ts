@@ -111,6 +111,7 @@ export default function useNormalize(props, context) {
     width: normalizeProps(breakpoints, mergedProps.width),
     height: normalizeProps(breakpoints, mergedProps.height),
     position: normalizeProps(breakpoints, mergedProps.position),
+    zIndex: normalizeProps(breakpoints, mergedProps.zIndex),
 
     left: normalizeProps(breakpoints, mergedProps.left),
     right: normalizeProps(breakpoints, mergedProps.right),

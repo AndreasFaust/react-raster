@@ -1,6 +1,6 @@
 import React, { HTMLProps } from "react";
 
-type CoreProp = number | number[] | string | string[];
+type CoreProp = (string | number)[];
 
 export interface Props
   extends Omit<HTMLProps<HTMLElement>, "cols" | "height" | "width"> {
@@ -37,7 +37,7 @@ export interface Props
   innerHTML?: string;
   onResize?: (element: HTMLElement) => void;
   css?: string | string[];
-  tag?: string;
+  as?: string;
   control?: boolean;
   controlColor?: string;
 
@@ -75,7 +75,6 @@ export interface Props
   // utility
   className?: string;
   children?: React.ReactNode;
-  // isControl?: boolean;
   // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
-  ref?: React.MutableRefObject<HTMLElement>;
+  // ref?: React.MutableRefObject<HTMLElement>;
 }

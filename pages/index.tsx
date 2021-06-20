@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Box } from "../src";
+import Box from "../src";
 import { motion } from "framer-motion";
 
 // const items = [

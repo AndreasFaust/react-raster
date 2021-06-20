@@ -3,16 +3,13 @@ import React from "react";
 interface Props {
   className: string;
   attrs?: any;
-  tag?: string;
+  as?: string;
   children: React.ReactNode;
   component?: React.ReactElement;
 }
 
-const Container = React.forwardRef<HTMLElement, Props>(
-  (
-    { className, children, component, attrs = {}, tag = "div", cssMode },
-    ref
-  ) => {
+const Container = React.forwardRef<HTMLElement, any>(
+  ({ className, children, component, attrs = {}, tag = "div" }, ref) => {
     if (component) {
       return React.cloneElement(component, { children, className, ...attrs });
     }

@@ -1,10 +1,78 @@
 import styled from "styled-components";
-
+import React from "react";
 import Container from "./utils/container";
 
-interface Props {}
+interface Props {
+  position: string[];
+  zIndex: (string | number)[];
+  display: string[];
+  colsTotal: number[];
+  width: string[];
+  height: string[];
 
-const StyledBox = styled(Container)<any>`
+  padding: {
+    left: (string | number)[];
+    right: (string | number)[];
+    top: (string | number)[];
+    bottom: (string | number)[];
+  };
+  margin: {
+    left: (string | number)[];
+    right: (string | number)[];
+    top: (string | number)[];
+    bottom: (string | number)[];
+  };
+
+  order: (string | number)[];
+
+  top: string[];
+  bottom: string[];
+  left: string[];
+  right: string[];
+
+  alignItems: string[];
+  alignContent: string[];
+  alignSelf: string[];
+  justifyContent: string[];
+  justifySelf: string[];
+
+  background: string[];
+  backgroundColor: string[];
+  backgroundImage: string[];
+  backgroundPosition: string[];
+  backgroundSize: string[];
+  backgroundAttachment: string[];
+
+  border: string[];
+  borderLeft: string[];
+  borderRight: string[];
+  borderTop: string[];
+  borderBottom: string[];
+
+  colspan: number[];
+
+  autoRows: string[];
+  templateRows: string[];
+  templateColumns: string[];
+  autoFlow: string[];
+
+  columnGap: string[];
+  rowGap: string[];
+
+  media: any;
+  tag?: string;
+  controlIsVisible: boolean;
+  controlColor: string;
+
+  id: string;
+  component?: React.ReactElement;
+  className: string;
+  css: string[];
+  attrs: any;
+  children: React.ReactNode;
+}
+
+const StyledBoxStyles = styled(Container)<Props>`
   box-sizing: border-box;
 
   ${(props) =>
@@ -74,11 +142,14 @@ const StyledBox = styled(Container)<any>`
 
 
   ${(props) =>
-    props.tag === "img" &&
+    props.as === "img" &&
     props.controlIsVisible &&
     `
     box-shadow: 0 0 999em ${props.controlColor} inset;
   `}
 `;
+const StyledBox = React.forwardRef<HTMLElement, Props>((props, ref) => {
+  return <StyledBoxStyles {...props} ref={ref} />;
+});
 
 export default StyledBox;
