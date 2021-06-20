@@ -110,12 +110,6 @@ export default function useNormalize(props, context) {
 
     width: normalizeProps(breakpoints, mergedProps.width),
     height: normalizeProps(breakpoints, mergedProps.height),
-    // rows: getRows({
-    //   gap: rowGap,
-    //   cols,
-    //   breakpoints,
-    //   prop: mergedProps.rows,
-    // }),
     position: normalizeProps(breakpoints, mergedProps.position),
 
     left: normalizeProps(breakpoints, mergedProps.left),

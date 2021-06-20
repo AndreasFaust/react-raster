@@ -11,18 +11,11 @@ const StyledBox = styled(Container)<any>`
     props.media.map((media, index: number) => {
       return media`
         position: ${props.position[index]};
+        z-index: ${props.zIndex[index]};
         display: ${props.display[index]};
         grid-column: auto / span ${props.colsTotal[index]};
         width: ${props.width[index]};
         height: ${props.height[index]};
-
-
-        &&::after {
-          content: '';
-          grid-column: 1/1;
-          height: 0;
-          padding-top: ${props.rows[index]};
-        }
 
         padding-left: ${props.padding.left[index]};
         padding-right: ${props.padding.right[index]};

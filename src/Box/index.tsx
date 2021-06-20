@@ -5,11 +5,11 @@ import useCombinedRefs from "./utils/useCombinedRefs";
 import useResizeObserver from "./utils/useResizeObserver";
 import useNormalize from "./utils/useNormalize";
 import useControl from "./utils/useControl";
+import useUndefinedProps from "./utils/useUndefinedProps";
 
 import Context from "../context";
 import StyledBox from "./StyledBox";
 import Control from "../Control";
-import Rows from "./Rows";
 import { Props } from "./props";
 
 const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
@@ -19,6 +19,8 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
 
   const controlIsVisible = useControl(props.control, context.controlIsVisible);
   const boxRef = useCombinedRefs(ref);
+  const undefinedProps = useUndefinedProps(props);
+
   useResizeObserver(boxRef, props.onResize);
   return (
     <StyledBox
@@ -28,9 +30,9 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
       className={props.className ? ["Box", props.className].join(" ") : "Box"}
       controlIsVisible={controlIsVisible}
       ref={boxRef}
-      // customStyles={propsNormalized.css}
+      css={propsNormalized.css}
       attrs={{
-        // ...undefinedProps,
+        ...undefinedProps,
         ...(props.innerHTML && {
           dangerouslySetInnerHTML: { __html: props.innerHTML },
         }),
@@ -53,12 +55,6 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
             controlColor: propsNormalized.controlColor,
           }}
         >
-          {/* <Rows
-            rows={propsNormalized.rows}
-            breakpoint={propsNormalized.breakpoint}
-          >
-            {props.children}
-          </Rows> */}
           {props.children}
         </Context.Provider>
       </>
