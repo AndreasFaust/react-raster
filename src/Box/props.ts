@@ -12,6 +12,7 @@ export interface Props
   height?: CoreProp;
   colspan?: number | number[];
   cols?: number | number[];
+  rows?: number | number[];
 
   marginLeft?: CoreProp;
   marginRight?: CoreProp;

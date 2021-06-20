@@ -4,12 +4,6 @@ import Container from "./utils/container";
 
 interface Props {}
 
-// ${
-//   props.isControl && props.rowGap[index] === "0px"
-//     ? "grid-column-gap: 1px;"
-//     : ""
-// }
-
 const StyledBox = styled(Container)<any>`
   box-sizing: border-box;
 
@@ -21,6 +15,14 @@ const StyledBox = styled(Container)<any>`
         grid-column: auto / span ${props.colsTotal[index]};
         width: ${props.width[index]};
         height: ${props.height[index]};
+
+
+        &&::after {
+          content: '';
+          grid-column: 1/1;
+          height: 0;
+          padding-top: ${props.rows[index]};
+        }
 
         padding-left: ${props.padding.left[index]};
         padding-right: ${props.padding.right[index]};
@@ -65,7 +67,7 @@ const StyledBox = styled(Container)<any>`
   ${(props) =>
     props.media.map((media, index: number) => {
       return media`
-        grid-template-columns: repeat(${(props) => props.cols[index]}, 1fr);
+        grid-template-columns: repeat(${(props) => props.colspan[index]}, 1fr);
         
         grid-auto-rows: ${(props) => props.autoRows[index]};
         grid-template-rows: ${(props) => props.templateRows[index]};

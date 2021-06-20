@@ -2,9 +2,10 @@ import getColsTotal from "./getColsTotal";
 import normalizeCols from "./normalizeCols";
 import normalizeProps from "./normalizeProps";
 import getSpacing from "./getSpacing";
+import getRows from "./getRows";
 import getMediaQueries from "./getMediaQueries";
 import useCurrentBreakpoint from "./useCurrentBreakpoint";
-import normalizeMargin from "./normalizeMargin";
+import normalizeSpacing from "./normalizeSpacing";
 import normalizeDisplay from "./normalizeDisplay";
 
 export default function useNormalize(props, context) {
@@ -22,15 +23,31 @@ export default function useNormalize(props, context) {
     breakpoints,
     props.colspan || context.colspan || 1
   );
+  // const colspanOriginal =
+  //   normalizeProps(breakpoints, props.colspan) ||
+  //   mergedProps.colspanOriginal ||
+  //   normalizeProps(breakpoints, 1);
+
   const display = normalizeDisplay(breakpoints, mergedProps);
 
   const rowGap = normalizeProps(breakpoints, mergedProps.rowGap);
   const columnGap = normalizeProps(breakpoints, mergedProps.columnGap);
 
-  const marginLeftInCols = normalizeMargin(breakpoints, mergedProps.marginLeft);
-  const marginRightInCols = normalizeMargin(
+  const marginLeftInCols = normalizeSpacing(
+    breakpoints,
+    mergedProps.marginLeft
+  );
+  const marginRightInCols = normalizeSpacing(
     breakpoints,
     mergedProps.marginRight
+  );
+  const paddingLeftInCols = normalizeSpacing(
+    breakpoints,
+    mergedProps.paddingLeft
+  );
+  const paddingRightInCols = normalizeSpacing(
+    breakpoints,
+    mergedProps.paddingRight
   );
 
   const cols = normalizeCols({
@@ -71,7 +88,15 @@ export default function useNormalize(props, context) {
     breakpoint,
     cols,
     colsTotal,
-    colspan,
+    colspan: normalizeCols({
+      cols: props.cols,
+      colspan,
+      breakpoints,
+      marginLeft: marginLeftInCols,
+      marginRight: marginRightInCols,
+      paddingLeft: paddingLeftInCols,
+      paddingRight: paddingRightInCols,
+    }),
     margin,
     padding,
     display,
@@ -85,6 +110,12 @@ export default function useNormalize(props, context) {
 
     width: normalizeProps(breakpoints, mergedProps.width),
     height: normalizeProps(breakpoints, mergedProps.height),
+    // rows: getRows({
+    //   gap: rowGap,
+    //   cols,
+    //   breakpoints,
+    //   prop: mergedProps.rows,
+    // }),
     position: normalizeProps(breakpoints, mergedProps.position),
 
     left: normalizeProps(breakpoints, mergedProps.left),

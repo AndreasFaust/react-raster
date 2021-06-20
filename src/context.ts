@@ -12,20 +12,9 @@ interface ContextProps {
   media?: any[];
   controlIsVisible?: boolean;
   controlColor?: string;
-  // rest?: { id: string; width: number[] }[];
-  // registerChildBox?: (childBox: {
-  //   left: number[];
-  //   right: number[];
-  //   cols: number[];
-  //   id: string;
-  // }) => void;
 }
 
-const Context = React.createContext<ContextProps>({
-  // breakpoint: { index: 0, value: 0 },
-  // breakpoints: [0],
-  // cssMode: "grid",
-});
+const Context = React.createContext<ContextProps>({});
 
 function useRaster(): ContextProps {
   return React.useContext(Context);

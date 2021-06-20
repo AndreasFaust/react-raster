@@ -53,12 +53,12 @@ const ExampleGrid = ({ children }) => (
     paddingRight="5vw"
     paddingTop="5vw"
     paddingBottom="5vw"
-    rowGap={"3rem"}
+    rowGap={"1rem"}
     columnGap={"1rem"}
     colspan={[12]}
     control
     width="100vw"
-    height="100vh"
+    // height="100vh"
     background="red"
     // component={
     //   <motion.div
@@ -78,14 +78,14 @@ const ExamplePage = () => {
     <ExampleGrid>
       <Box
         cols={6}
-        height={3}
-        marginLeft={1}
+        rows={1}
+        // marginLeft={1}
         marginTop={1}
-        paddingLeft={1}
+        // paddingLeft={1}
         background="yellow"
       >
-        <Box cols={3} height={2} background="pink">
-          Hallo!
+        <Box cols={3} background="pink">
+          {/* Hallo! */}
         </Box>
       </Box>
       {/* {items.map((item) => (

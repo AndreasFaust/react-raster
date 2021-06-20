@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { nanoid } from "nanoid/non-secure";
 
 import useCombinedRefs from "./utils/useCombinedRefs";
@@ -9,6 +9,7 @@ import useControl from "./utils/useControl";
 import Context from "../context";
 import StyledBox from "./StyledBox";
 import Control from "../Control";
+import Rows from "./Rows";
 import { Props } from "./props";
 
 const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
@@ -17,7 +18,6 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const id = React.useRef(nanoid());
 
   const controlIsVisible = useControl(props.control, context.controlIsVisible);
-
   const boxRef = useCombinedRefs(ref);
   useResizeObserver(boxRef, props.onResize);
   return (
@@ -47,12 +47,18 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
             breakpoint: propsNormalized.breakpoint,
             rowGap: propsNormalized.rowGap,
             columnGap: propsNormalized.columnGap,
-            colspan: propsNormalized.cols,
+            colspan: propsNormalized.colspan,
             media: propsNormalized.media,
             controlIsVisible,
             controlColor: propsNormalized.controlColor,
           }}
         >
+          {/* <Rows
+            rows={propsNormalized.rows}
+            breakpoint={propsNormalized.breakpoint}
+          >
+            {props.children}
+          </Rows> */}
           {props.children}
         </Context.Provider>
       </>

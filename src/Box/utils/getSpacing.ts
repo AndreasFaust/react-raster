@@ -1,6 +1,6 @@
 import normalizeProps from "./normalizeProps";
 
-function getSpacingSingle({ display, gap, cols, breakpoints, prop }) {
+export function getSpacingValue({ display, gap, cols, breakpoints, prop }) {
   const propNormalized = normalizeProps(breakpoints, prop);
   return propNormalized.map((propAtBreakpoint, index) => {
     switch (typeof propAtBreakpoint) {
@@ -25,28 +25,28 @@ export default function getSpacing({
   prop,
 }) {
   return {
-    left: getSpacingSingle({
+    left: getSpacingValue({
       display,
       gap: columnGap,
       cols,
       breakpoints,
       prop: props[`${prop}Left`],
     }),
-    right: getSpacingSingle({
+    right: getSpacingValue({
       display,
       gap: columnGap,
       cols,
       breakpoints,
       prop: props[`${prop}Right`],
     }),
-    top: getSpacingSingle({
+    top: getSpacingValue({
       display,
       gap: rowGap,
       cols,
       breakpoints,
       prop: props[`${prop}Top`],
     }),
-    bottom: getSpacingSingle({
+    bottom: getSpacingValue({
       display,
       gap: rowGap,
       cols,
