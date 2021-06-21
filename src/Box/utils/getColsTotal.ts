@@ -13,7 +13,7 @@ export default function getColsTotal({
 }: Props): number[] {
   return cols.map((col, index) => {
     return (
-      (col ? col : colspan[index]) +
+      (typeof col === "number" ? col : colspan[index]) +
       (marginLeft[index] || 0) +
       (marginRight[index] || 0)
     );

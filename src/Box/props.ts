@@ -6,8 +6,12 @@ export interface Props
   // Core
   display?: string | string[];
   breakpoints?: number[];
-  width?: string | number | Array<string | number>;
-  height?: string | number | Array<string | number>;
+  width?: string | string[];
+  minWidth?: string | string[];
+  maxWidth?: string | string[];
+  height?: string | string[];
+  minHeight?: string | string[];
+  maxHeight?: string | string[];
   colspan?: number | number[];
   cols?: number | number[];
 
@@ -45,10 +49,10 @@ export interface Props
 
   position?: string | string[];
   zIndex?: string | number | Array<string | number>;
-  top?: string | string[];
-  bottom?: string | string[];
-  left?: string | string[];
-  right?: string | string[];
+  top?: string | number | Array<string | number>;
+  bottom?: string | number | Array<string | number>;
+  left?: string | number | Array<string | number>;
+  right?: string | number | Array<string | number>;
 
   alignItems?: string | string[];
   alignContent?: string | string[];
@@ -62,6 +66,8 @@ export interface Props
   backgroundPosition?: string | string[];
   backgroundSize?: string | string[];
   backgroundAttachment?: string | string[];
+
+  color?: string | string[];
 
   border?: string | string[];
   borderLeft?: string | string[];

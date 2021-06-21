@@ -55,11 +55,9 @@ export default function useNormalize(props, context) {
     paddingRight: paddingRightInCols,
   });
 
-  const colspan = getColspan(
-    props.colspan ? colspanTotal : colsEffective,
-    paddingLeftInCols,
-    paddingRightInCols
-  );
+  const colspan = props.colspan
+    ? getColspan(colspanTotal, paddingLeftInCols, paddingRightInCols)
+    : colsEffective;
 
   const colsTotal = getColsTotal({
     cols: normalizeProps(breakpoints, mergedProps.cols),
@@ -109,7 +107,11 @@ export default function useNormalize(props, context) {
     css: normalizeProps(breakpoints, mergedProps.css),
 
     width: normalizeProps(breakpoints, mergedProps.width),
+    minWidth: normalizeProps(breakpoints, mergedProps.minWidth),
+    maxWidth: normalizeProps(breakpoints, mergedProps.maxWidth),
     height: normalizeProps(breakpoints, mergedProps.height),
+    minHeight: normalizeProps(breakpoints, mergedProps.minHeight),
+    maxHeight: normalizeProps(breakpoints, mergedProps.maxHeight),
     position: getPosition(normalizeProps(breakpoints, mergedProps.position)),
     zIndex: normalizeProps(breakpoints, mergedProps.zIndex),
 
@@ -148,5 +150,7 @@ export default function useNormalize(props, context) {
       mergedProps.backgroundAttachment
     ),
     backgroundSize: normalizeProps(breakpoints, mergedProps.backgroundSize),
+
+    color: normalizeProps(breakpoints, mergedProps.color),
   };
 }

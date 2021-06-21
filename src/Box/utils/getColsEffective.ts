@@ -11,14 +11,11 @@ export default function getColsEffective({
   paddingLeft,
   paddingRight,
 }: Props): number[] {
-  if (!cols) {
-    return colspan.map((parentCols, index) => {
-      return (
-        parentCols - (paddingLeft[index] || 0) - (paddingRight[index] || 0)
-      );
-    });
-  }
   return cols.map((col, index) => {
-    return col - (paddingLeft[index] || 0) - (paddingRight[index] || 0);
+    return (
+      (typeof col === "number" ? col : colspan[index]) -
+      (paddingLeft[index] || 0) -
+      (paddingRight[index] || 0)
+    );
   });
 }

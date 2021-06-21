@@ -76,23 +76,32 @@ const ExampleGrid = ({ children }) => (
 
 const ExamplePage = () => {
   return (
-    <ExampleGrid>
-      <Box
-        cols={6}
-        rows={1}
-        marginLeft={1}
-        paddingLeft={1}
-        // marginTop={1}
-        background="yellow"
-      >
-        <Box background="pink" marginRight={1} paddingLeft={1}>
-          Hallo!
-        </Box>
-      </Box>
+    <>
+      {/* <ExampleGrid>
+        <Box
+          cols={6}
+          marginLeft={1}
+          paddingLeft={1}
+          // marginTop={1}
+          background="yellow"
+        >
+          <Box background="pink" marginRight={1} paddingLeft={1}>
+            Hallo!
+          </Box>
+        </Box> */}
       {/* {items.map((item) => (
         <ExampleTeaser item={item} key={item} />
       ))} */}
-    </ExampleGrid>
+      {/* </ExampleGrid> */}
+
+      <Box colspan={12}>
+        <Box>
+          <Box paddingLeft={1} paddingRight={1} background="yellow">
+            <Box background="pink">Hallo!</Box>
+          </Box>
+        </Box>
+      </Box>
+    </>
   );
 };
 

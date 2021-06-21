@@ -7,8 +7,13 @@ interface Props {
   zIndex: (string | number)[];
   display: string[];
   colsTotal: number[];
+
   width: string[];
+  minWidth?: string[];
+  maxWidth?: string[];
   height: string[];
+  minHeight?: string[];
+  maxHeight?: string[];
 
   padding: {
     left: (string | number)[];
@@ -25,10 +30,10 @@ interface Props {
 
   order: (string | number)[];
 
-  top: string[];
-  bottom: string[];
-  left: string[];
-  right: string[];
+  top: (string | number)[];
+  bottom: (string | number)[];
+  left: (string | number)[];
+  right: (string | number)[];
 
   alignItems: string[];
   alignContent: string[];
@@ -42,6 +47,8 @@ interface Props {
   backgroundPosition: string[];
   backgroundSize: string[];
   backgroundAttachment: string[];
+
+  color: string[];
 
   border: string[];
   borderLeft: string[];

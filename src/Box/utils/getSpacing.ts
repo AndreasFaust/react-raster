@@ -1,7 +1,6 @@
 import normalizeProps from "./normalizeProps";
 
 export function getSpacingValue({
-  display,
   gap,
   colspan,
   breakpoints,
