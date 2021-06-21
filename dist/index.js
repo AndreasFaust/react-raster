@@ -172,14 +172,12 @@ function normalizeProps(breakpoints, prop, defaultValue) {
 }
 
 function getSpacingValue(_a) {
-    var display = _a.display, gap = _a.gap, colspan = _a.colspan, breakpoints = _a.breakpoints, prop = _a.prop, counterProp = _a.counterProp;
+    _a.display; var gap = _a.gap, colspan = _a.colspan, breakpoints = _a.breakpoints, prop = _a.prop, counterProp = _a.counterProp;
     var propNormalized = normalizeProps(breakpoints, prop);
     var counterPropNormalized = normalizeProps(breakpoints, counterProp);
     return propNormalized.map(function (propAtBreakpoint, index) {
         switch (typeof propAtBreakpoint) {
             case "number":
-                if (display[index] !== "grid")
-                    return null;
                 if (counterPropNormalized[index]) {
                     return "calc(((100% + " + gap[index] + " - " + (typeof counterPropNormalized[index] === "string"
                         ? counterPropNormalized[index]
