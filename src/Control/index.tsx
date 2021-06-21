@@ -19,10 +19,16 @@ import Box from "../Box";
 function getSideBearing(side: string, props: any): any {
   const sideUppercase = side.replace(/^\w/, (c) => c.toUpperCase());
   return props[`padding${sideUppercase}InCols`].map((padding, index) => {
+    if (side === "right") console.log(padding);
     if (typeof padding === "number") {
       return 0;
     }
-    return props.padding[side][index];
+    return props.padding[side][index] || 0;
+  });
+}
+function getTopBottomBearing(side: string, props: any): any {
+  return props.padding[side].map((padding, index) => {
+    return padding || 0;
   });
 }
 
@@ -38,8 +44,8 @@ const ControlGrid: React.FC<any> = (props) => {
       autoRows="100%"
       left={getSideBearing("left", props)}
       right={getSideBearing("right", props)}
-      top={props.padding.top}
-      bottom={props.padding.bottom}
+      top={getTopBottomBearing("top", props)}
+      bottom={getTopBottomBearing("bottom", props)}
       //   isControl
     >
       {[...Array(colspanTotal[breakpoint.index])].map((_, index) => (

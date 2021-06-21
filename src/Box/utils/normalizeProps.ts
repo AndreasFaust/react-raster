@@ -13,7 +13,8 @@ function makeArray(prop?: number | number[] | string | string[]): any[] {
 
 export default function normalizeProps(
   breakpoints: number[],
-  prop?: number | number[] | string | string[]
+  prop?: number | number[] | string | string[],
+  defaultValue?: string | number
 ): any[] {
   const breakpointsLength = breakpoints.length;
   let propArray = makeArray(prop);
@@ -21,5 +22,11 @@ export default function normalizeProps(
     propArray = addValues({ propArray, breakpointsLength });
   if (propArray.length > breakpointsLength)
     propArray = propArray.splice(breakpointsLength);
-  return propArray;
+  return propArray.map((prop) => {
+    if (typeof prop === "undefined") {
+      return defaultValue;
+    } else {
+      return prop;
+    }
+  });
 }

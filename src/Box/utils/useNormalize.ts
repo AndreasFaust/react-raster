@@ -23,8 +23,8 @@ export default function useNormalize(props, context) {
 
   const display = normalizeDisplay(breakpoints, mergedProps);
 
-  const rowGap = normalizeProps(breakpoints, mergedProps.rowGap);
-  const columnGap = normalizeProps(breakpoints, mergedProps.columnGap);
+  const rowGap = normalizeProps(breakpoints, mergedProps.rowGap, 0);
+  const columnGap = normalizeProps(breakpoints, mergedProps.columnGap, 0);
 
   const marginLeftInCols = normalizeSpacing(
     breakpoints,
