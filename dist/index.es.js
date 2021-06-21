@@ -111,8 +111,24 @@ function useResizeObserver(ref, onResize) {
 }
 
 function getColsTotal(_a) {
-    var cols = _a.cols, left = _a.left, right = _a.right;
-    return cols.map(function (col, index) { return col + left[index] + right[index]; });
+    var cols = _a.cols, colspan = _a.colspan, marginLeft = _a.marginLeft, marginRight = _a.marginRight;
+    return cols.map(function (col, index) {
+        return ((col ? col : colspan[index]) +
+            (marginLeft[index] || 0) +
+            (marginRight[index] || 0));
+    });
+}
+
+function getColsEffective(_a) {
+    var cols = _a.cols, colspan = _a.colspan, paddingLeft = _a.paddingLeft, paddingRight = _a.paddingRight;
+    if (!cols) {
+        return colspan.map(function (parentCols, index) {
+            return (parentCols - (paddingLeft[index] || 0) - (paddingRight[index] || 0));
+        });
+    }
+    return cols.map(function (col, index) {
+        return col - (paddingLeft[index] || 0) - (paddingRight[index] || 0);
+    });
 }
 
 function addValues(_a) {
@@ -139,74 +155,68 @@ function normalizeProps(breakpoints, prop) {
     return propArray;
 }
 
-function normalizeCols(_a) {
-    var cols = _a.cols, colspan = _a.colspan, breakpoints = _a.breakpoints, marginLeft = _a.marginLeft, marginRight = _a.marginRight, paddingLeft = _a.paddingLeft, paddingRight = _a.paddingRight;
-    if (!cols) {
-        return colspan.map(function (parentCols, index) {
-            return (parentCols -
-                (marginLeft[index] || 0) -
-                (marginRight[index] || 0) -
-                ((paddingLeft && paddingLeft[index]) || 0) -
-                ((paddingRight && paddingRight[index]) || 0));
-        });
-    }
-    var colsNormalized = normalizeProps(breakpoints, cols);
-    return colsNormalized.map(function (parentCols, index) {
-        return (parentCols -
-            (marginLeft[index] || 0) -
-            (marginRight[index] || 0) -
-            ((paddingLeft && paddingLeft[index]) || 0) -
-            ((paddingRight && paddingRight[index]) || 0));
-    });
-}
-
 function getSpacingValue(_a) {
-    var display = _a.display, gap = _a.gap, cols = _a.cols, breakpoints = _a.breakpoints, prop = _a.prop;
+    var display = _a.display, gap = _a.gap, colspan = _a.colspan, breakpoints = _a.breakpoints, prop = _a.prop, counterProp = _a.counterProp;
     var propNormalized = normalizeProps(breakpoints, prop);
+    var counterPropNormalized = normalizeProps(breakpoints, counterProp);
     return propNormalized.map(function (propAtBreakpoint, index) {
         switch (typeof propAtBreakpoint) {
             case "number":
-                return display[index] === "grid"
-                    ? "calc(((100% + " + gap[index] + ") / " + cols[index] + ") * " + propAtBreakpoint + ")"
-                    : null;
-            case "string":
+                if (display[index] !== "grid")
+                    return null;
+                if (counterPropNormalized[index]) {
+                    return "calc(((100% + " + gap[index] + " - " + (typeof counterPropNormalized[index] === "string"
+                        ? counterPropNormalized[index]
+                        : "0px") + ") / " + colspan[index] + ") * " + propAtBreakpoint + ")";
+                }
+                return "calc(((100% + " + gap[index] + ") / " + colspan[index] + ") * " + propAtBreakpoint + ")";
             default:
                 return propAtBreakpoint;
         }
     });
 }
 function getSpacing(_a) {
-    var display = _a.display, rowGap = _a.rowGap, columnGap = _a.columnGap, cols = _a.cols, breakpoints = _a.breakpoints, props = _a.props, prop = _a.prop;
+    var display = _a.display, rowGap = _a.rowGap, columnGap = _a.columnGap, colspan = _a.colspan, breakpoints = _a.breakpoints, props = _a.props, prop = _a.prop;
     return {
         left: getSpacingValue({
             display: display,
             gap: columnGap,
-            cols: cols,
+            colspan: colspan,
             breakpoints: breakpoints,
             prop: props[prop + "Left"],
+            counterProp: props[prop + "Right"],
         }),
         right: getSpacingValue({
             display: display,
             gap: columnGap,
-            cols: cols,
+            colspan: colspan,
             breakpoints: breakpoints,
             prop: props[prop + "Right"],
+            counterProp: props[prop + "Left"],
         }),
         top: getSpacingValue({
             display: display,
             gap: rowGap,
-            cols: cols,
+            colspan: colspan,
             breakpoints: breakpoints,
             prop: props[prop + "Top"],
         }),
         bottom: getSpacingValue({
             display: display,
             gap: rowGap,
-            cols: cols,
+            colspan: colspan,
             breakpoints: breakpoints,
             prop: props[prop + "Bottom"],
         }),
     };
+}
+
+function getColspan(colspan, paddingLeft, paddingRight) {
+    return colspan.map(function (colspanAtBreakpoint, index) {
+        return (colspanAtBreakpoint -
+            (paddingLeft[index] || 0) -
+            (paddingRight[index] || 0));
+    });
 }
 
 function getMediaQueries(breakpoints) {
@@ -269,6 +279,12 @@ function normalizeDisplay(breakpoints, props) {
     });
 }
 
+function getPosition(position) {
+    return position.map(function (propAtBreakpoint) {
+        return !propAtBreakpoint ? "relative" : propAtBreakpoint;
+    });
+}
+
 function useNormalize(props, context) {
     var breakpoints = props.breakpoints ||
         context.breakpoints || [0, 432, 768, 1024, 1200, 1400];
@@ -278,11 +294,6 @@ function useNormalize(props, context) {
         contextBreakpoint: context.breakpoint,
         breakpoints: breakpoints,
     });
-    var colspan = normalizeProps(breakpoints, props.colspan || context.colspan || 1);
-    // const colspanOriginal =
-    //   normalizeProps(breakpoints, props.colspan) ||
-    //   mergedProps.colspanOriginal ||
-    //   normalizeProps(breakpoints, 1);
     var display = normalizeDisplay(breakpoints, mergedProps);
     var rowGap = normalizeProps(breakpoints, mergedProps.rowGap);
     var columnGap = normalizeProps(breakpoints, mergedProps.columnGap);
@@ -290,24 +301,26 @@ function useNormalize(props, context) {
     var marginRightInCols = normalizeSpacing(breakpoints, mergedProps.marginRight);
     var paddingLeftInCols = normalizeSpacing(breakpoints, mergedProps.paddingLeft);
     var paddingRightInCols = normalizeSpacing(breakpoints, mergedProps.paddingRight);
-    var cols = normalizeCols({
-        cols: props.cols,
-        colspan: colspan,
-        breakpoints: breakpoints,
+    var colspanTotal = normalizeProps(breakpoints, props.colspan || context.colspan || 1);
+    var colsEffective = getColsEffective({
+        cols: normalizeProps(breakpoints, mergedProps.cols),
+        colspan: colspanTotal,
+        paddingLeft: paddingLeftInCols,
+        paddingRight: paddingRightInCols,
+    });
+    var colspan = getColspan(props.colspan ? colspanTotal : colsEffective, paddingLeftInCols, paddingRightInCols);
+    var colsTotal = getColsTotal({
+        cols: normalizeProps(breakpoints, mergedProps.cols),
+        colspan: colspanTotal,
         marginLeft: marginLeftInCols,
         marginRight: marginRightInCols,
-    });
-    var colsTotal = getColsTotal({
-        cols: cols,
-        left: marginLeftInCols,
-        right: marginRightInCols,
     });
     var margin = getSpacing({
         display: display,
         breakpoints: breakpoints,
         rowGap: rowGap,
         columnGap: columnGap,
-        cols: colsTotal,
+        colspan: colsTotal,
         prop: "margin",
         props: mergedProps,
     });
@@ -316,26 +329,21 @@ function useNormalize(props, context) {
         breakpoints: breakpoints,
         rowGap: rowGap,
         columnGap: columnGap,
-        cols: colsTotal,
+        colspan: colsTotal,
         prop: "padding",
         props: mergedProps,
     });
     return {
         breakpoints: breakpoints,
         breakpoint: breakpoint,
-        cols: cols,
+        // cols,
         colsTotal: colsTotal,
-        colspan: normalizeCols({
-            cols: props.cols,
-            colspan: colspan,
-            breakpoints: breakpoints,
-            marginLeft: marginLeftInCols,
-            marginRight: marginRightInCols,
-            paddingLeft: paddingLeftInCols,
-            paddingRight: paddingRightInCols,
-        }),
+        colspanTotal: colspanTotal,
+        colspan: colspan,
         margin: margin,
         padding: padding,
+        paddingLeftInCols: paddingLeftInCols,
+        paddingRightInCols: paddingRightInCols,
         display: display,
         rowGap: rowGap,
         columnGap: columnGap,
@@ -344,7 +352,7 @@ function useNormalize(props, context) {
         css: normalizeProps(breakpoints, mergedProps.css),
         width: normalizeProps(breakpoints, mergedProps.width),
         height: normalizeProps(breakpoints, mergedProps.height),
-        position: normalizeProps(breakpoints, mergedProps.position),
+        position: getPosition(normalizeProps(breakpoints, mergedProps.position)),
         zIndex: normalizeProps(breakpoints, mergedProps.zIndex),
         left: normalizeProps(breakpoints, mergedProps.left),
         right: normalizeProps(breakpoints, mergedProps.right),
@@ -412,11 +420,11 @@ var Container = React.forwardRef(function (_a, ref) {
 
 var StyledBoxStyles = styled(Container)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n\n  ", "\n"], ["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n\n  ", "\n"])), function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n        position: ", ";\n        z-index: ", ";\n        display: ", ";\n        grid-column: auto / span ", ";\n        width: ", ";\n        height: ", ";\n\n        padding-left: ", ";\n        padding-right: ", ";\n        padding-top: ", ";\n        padding-bottom: ", ";\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        \n        order: ", ";\n\n        top: ", ";\n        bottom: ", ";\n        left: ", ";\n        right: ", ";\n\n        align-items: ", ";\n        align-content: ", ";\n        align-self: ", ";\n        justify-content: ", ";\n        justify-Self: ", ";\n\n        background: ", ";\n        background-color: ", ";\n        background-image: ", ";\n        background-position: ", ";\n        background-Size: ", ";\n        background-attachment: ", ";\n\n        border: ", ";\n        border-left: ", ";\n        border-right: ", ";\n        border-top: ", ";\n        border-bottom: ", ";\n\n        ", "\n      "], ["\n        position: ", ";\n        z-index: ", ";\n        display: ", ";\n        grid-column: auto / span ", ";\n        width: ", ";\n        height: ", ";\n\n        padding-left: ", ";\n        padding-right: ", ";\n        padding-top: ", ";\n        padding-bottom: ", ";\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        \n        order: ", ";\n\n        top: ", ";\n        bottom: ", ";\n        left: ", ";\n        right: ", ";\n\n        align-items: ", ";\n        align-content: ", ";\n        align-self: ", ";\n        justify-content: ", ";\n        justify-Self: ", ";\n\n        background: ", ";\n        background-color: ", ";\n        background-image: ", ";\n        background-position: ", ";\n        background-Size: ", ";\n        background-attachment: ", ";\n\n        border: ", ";\n        border-left: ", ";\n        border-right: ", ";\n        border-top: ", ";\n        border-bottom: ", ";\n\n        ", "\n      "])), props.position[index], props.zIndex[index], props.display[index], props.colsTotal[index], props.width[index], props.height[index], props.padding.left[index], props.padding.right[index], props.padding.top[index], props.padding.bottom[index], props.margin.left[index], props.margin.right[index], props.margin.top[index], props.margin.bottom[index], props.order[index], props.top[index], props.bottom[index], props.left[index], props.right[index], props.alignItems[index], props.alignContent[index], props.alignSelf[index], props.justifyContent[index], props.justifySelf[index], props.background[index], props.backgroundColor[index], props.backgroundImage[index], props.backgroundPosition[index], props.backgroundSize[index], props.backgroundAttachment[index], props.border[index], props.borderLeft[index], props.borderRight[index], props.borderTop[index], props.borderBottom[index], props.css[index]);
+        return media(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n        position: ", ";\n        z-index: ", ";\n        display: ", ";\n        width: ", ";\n        height: ", ";\n\n        padding-left: ", ";\n        padding-right: ", ";\n        padding-top: ", ";\n        padding-bottom: ", ";\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        \n        order: ", ";\n\n        top: ", ";\n        bottom: ", ";\n        left: ", ";\n        right: ", ";\n\n        align-items: ", ";\n        align-content: ", ";\n        align-self: ", ";\n        justify-content: ", ";\n        justify-Self: ", ";\n\n        background: ", ";\n        background-color: ", ";\n        background-image: ", ";\n        background-position: ", ";\n        background-Size: ", ";\n        background-attachment: ", ";\n\n        border: ", ";\n        border-left: ", ";\n        border-right: ", ";\n        border-top: ", ";\n        border-bottom: ", ";\n\n        ", "\n      "], ["\n        position: ", ";\n        z-index: ", ";\n        display: ", ";\n        width: ", ";\n        height: ", ";\n\n        padding-left: ", ";\n        padding-right: ", ";\n        padding-top: ", ";\n        padding-bottom: ", ";\n\n        margin-left: ", ";\n        margin-right: ", ";\n        margin-top: ", ";\n        margin-bottom: ", ";\n        \n        order: ", ";\n\n        top: ", ";\n        bottom: ", ";\n        left: ", ";\n        right: ", ";\n\n        align-items: ", ";\n        align-content: ", ";\n        align-self: ", ";\n        justify-content: ", ";\n        justify-Self: ", ";\n\n        background: ", ";\n        background-color: ", ";\n        background-image: ", ";\n        background-position: ", ";\n        background-Size: ", ";\n        background-attachment: ", ";\n\n        border: ", ";\n        border-left: ", ";\n        border-right: ", ";\n        border-top: ", ";\n        border-bottom: ", ";\n\n        ", "\n      "])), props.position[index], props.zIndex[index], props.display[index], props.width[index], props.height[index], props.padding.left[index], props.padding.right[index], props.padding.top[index], props.padding.bottom[index], props.margin.left[index], props.margin.right[index], props.margin.top[index], props.margin.bottom[index], props.order[index], props.top[index], props.bottom[index], props.left[index], props.right[index], props.alignItems[index], props.alignContent[index], props.alignSelf[index], props.justifyContent[index], props.justifySelf[index], props.background[index], props.backgroundColor[index], props.backgroundImage[index], props.backgroundPosition[index], props.backgroundSize[index], props.backgroundAttachment[index], props.border[index], props.borderLeft[index], props.borderRight[index], props.borderTop[index], props.borderBottom[index], props.css[index]);
     });
 }, function (props) {
     return props.media.map(function (media, index) {
-        return media(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        grid-template-columns: repeat(", ", 1fr);\n        \n        grid-auto-rows: ", ";\n        grid-template-rows: ", ";\n        grid-template-columns: ", ";\n        grid-auto-flow: ", ";\n\n        grid-column-gap: ", ";\n        grid-row-gap: ", ";\n      "], ["\n        grid-template-columns: repeat(", ", 1fr);\n        \n        grid-auto-rows: ", ";\n        grid-template-rows: ", ";\n        grid-template-columns: ", ";\n        grid-auto-flow: ", ";\n\n        grid-column-gap: ", ";\n        grid-row-gap: ", ";\n      "])), function (props) { return props.colspan[index]; }, function (props) { return props.autoRows[index]; }, function (props) { return props.templateRows[index]; }, function (props) { return props.templateColumns[index]; }, function (props) { return props.autoFlow[index]; }, props.columnGap[index], props.rowGap[index]);
+        return media(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        grid-template-columns: repeat(", ", 1fr);\n        grid-column: auto / span ", ";\n\n        grid-auto-rows: ", ";\n        grid-template-rows: ", ";\n        grid-template-columns: ", ";\n        grid-auto-flow: ", ";\n\n        grid-column-gap: ", ";\n        grid-row-gap: ", ";\n      "], ["\n        grid-template-columns: repeat(", ", 1fr);\n        grid-column: auto / span ", ";\n\n        grid-auto-rows: ", ";\n        grid-template-rows: ", ";\n        grid-template-columns: ", ";\n        grid-auto-flow: ", ";\n\n        grid-column-gap: ", ";\n        grid-row-gap: ", ";\n      "])), function (props) { return props.colspan[index]; }, props.colsTotal[index], function (props) { return props.autoRows[index]; }, function (props) { return props.templateRows[index]; }, function (props) { return props.templateColumns[index]; }, function (props) { return props.autoFlow[index]; }, props.columnGap[index], props.rowGap[index]);
     });
 }, function (props) {
     return props.as === "img" &&
@@ -440,9 +448,18 @@ var templateObject_1$1, templateObject_2, templateObject_3;
 //   bottom: string | string[];
 //   controlColor: string;
 // }
+function getSideBearing(side, props) {
+    var sideUppercase = side.replace(/^\w/, function (c) { return c.toUpperCase(); });
+    return props["padding" + sideUppercase + "InCols"].map(function (padding, index) {
+        if (typeof padding === "number") {
+            return 0;
+        }
+        return props.padding[side][index];
+    });
+}
 var ControlGrid = function (props) {
-    var breakpoint = props.breakpoint, colspan = props.colspan; __rest(props, ["breakpoint", "colspan"]);
-    return (React.createElement(Box, { position: "absolute", className: "GridControl", colspan: colspan, columnGap: props.columnGap, autoRows: "100%", left: props.padding.left, right: props.padding.right, top: props.padding.top, bottom: props.padding.bottom }, __spreadArray([], Array(colspan[breakpoint.index])).map(function (_, index) { return (React.createElement(Box, { key: index, display: "flex", alignSelf: "stretch", cols: 1, backgroundColor: props.controlColor || "rgba(0,0,0,0.12)" })); })));
+    var breakpoint = props.breakpoint, colspanTotal = props.colspanTotal;
+    return (React.createElement(Box, { position: "absolute", className: "GridControl", zIndex: 1000, colspan: colspanTotal, columnGap: props.columnGap, autoRows: "100%", left: getSideBearing("left", props), right: getSideBearing("right", props), top: props.padding.top, bottom: props.padding.bottom }, __spreadArray([], Array(colspanTotal[breakpoint.index])).map(function (_, index) { return (React.createElement(Box, { key: index, display: "flex", alignSelf: "stretch", cols: 1, backgroundColor: props.controlColor || "rgba(0,0,0,0.12)" })); })));
 };
 var ControlBox = styled("div")(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"], ["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"])), function (props) { return props.controlColor || "rgba(0,0,0,0.12)"; });
 var Control = function (props) {
