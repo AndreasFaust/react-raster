@@ -1,12 +1,13 @@
 import getColsTotal from "./getColsTotal";
-import normalizeCols from "./normalizeCols";
+import getColsEffective from "./getColsEffective";
 import normalizeProps from "./normalizeProps";
 import getSpacing from "./getSpacing";
-import getRows from "./getRows";
+import getColspan from "./getColspan";
 import getMediaQueries from "./getMediaQueries";
 import useCurrentBreakpoint from "./useCurrentBreakpoint";
 import normalizeSpacing from "./normalizeSpacing";
 import normalizeDisplay from "./normalizeDisplay";
+import getPosition from "./getPosition";
 
 export default function useNormalize(props, context) {
   const breakpoints = props.breakpoints ||
@@ -19,14 +20,6 @@ export default function useNormalize(props, context) {
     contextBreakpoint: context.breakpoint,
     breakpoints,
   });
-  const colspan = normalizeProps(
-    breakpoints,
-    props.colspan || context.colspan || 1
-  );
-  // const colspanOriginal =
-  //   normalizeProps(breakpoints, props.colspan) ||
-  //   mergedProps.colspanOriginal ||
-  //   normalizeProps(breakpoints, 1);
 
   const display = normalizeDisplay(breakpoints, mergedProps);
 
@@ -50,18 +43,29 @@ export default function useNormalize(props, context) {
     mergedProps.paddingRight
   );
 
-  const cols = normalizeCols({
-    cols: props.cols,
-    colspan,
+  const colspanTotal = normalizeProps(
     breakpoints,
-    marginLeft: marginLeftInCols,
-    marginRight: marginRightInCols,
+    props.colspan || context.colspan || 1
+  );
+
+  const colsEffective = getColsEffective({
+    cols: normalizeProps(breakpoints, mergedProps.cols),
+    colspan: colspanTotal,
+    paddingLeft: paddingLeftInCols,
+    paddingRight: paddingRightInCols,
   });
 
+  const colspan = getColspan(
+    props.colspan ? colspanTotal : colsEffective,
+    paddingLeftInCols,
+    paddingRightInCols
+  );
+
   const colsTotal = getColsTotal({
-    cols,
-    left: marginLeftInCols,
-    right: marginRightInCols,
+    cols: normalizeProps(breakpoints, mergedProps.cols),
+    colspan: colspanTotal,
+    marginLeft: marginLeftInCols,
+    marginRight: marginRightInCols,
   });
 
   const margin = getSpacing({
@@ -69,16 +73,17 @@ export default function useNormalize(props, context) {
     breakpoints,
     rowGap,
     columnGap,
-    cols: colsTotal,
+    colspan: colsTotal,
     prop: "margin",
     props: mergedProps,
   });
+
   const padding = getSpacing({
     display,
     breakpoints,
     rowGap,
     columnGap,
-    cols: colsTotal,
+    colspan: colsTotal,
     prop: "padding",
     props: mergedProps,
   });
@@ -86,19 +91,14 @@ export default function useNormalize(props, context) {
   return {
     breakpoints,
     breakpoint,
-    cols,
+    // cols,
     colsTotal,
-    colspan: normalizeCols({
-      cols: props.cols,
-      colspan,
-      breakpoints,
-      marginLeft: marginLeftInCols,
-      marginRight: marginRightInCols,
-      paddingLeft: paddingLeftInCols,
-      paddingRight: paddingRightInCols,
-    }),
+    colspanTotal,
+    colspan,
     margin,
     padding,
+    paddingLeftInCols,
+    paddingRightInCols,
     display,
     rowGap,
     columnGap,
@@ -110,7 +110,7 @@ export default function useNormalize(props, context) {
 
     width: normalizeProps(breakpoints, mergedProps.width),
     height: normalizeProps(breakpoints, mergedProps.height),
-    position: normalizeProps(breakpoints, mergedProps.position),
+    position: getPosition(normalizeProps(breakpoints, mergedProps.position)),
     zIndex: normalizeProps(breakpoints, mergedProps.zIndex),
 
     left: normalizeProps(breakpoints, mergedProps.left),

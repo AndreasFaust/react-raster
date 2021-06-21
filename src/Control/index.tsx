@@ -16,22 +16,33 @@ import Box from "../Box";
 //   controlColor: string;
 // }
 
+function getSideBearing(side: string, props: any): any {
+  const sideUppercase = side.replace(/^\w/, (c) => c.toUpperCase());
+  return props[`padding${sideUppercase}InCols`].map((padding, index) => {
+    if (typeof padding === "number") {
+      return 0;
+    }
+    return props.padding[side][index];
+  });
+}
+
 const ControlGrid: React.FC<any> = (props) => {
-  const { breakpoint, colspan, ...rest } = props;
+  const { breakpoint, colspanTotal } = props;
   return (
     <Box
       position="absolute"
       className="GridControl"
-      colspan={colspan}
+      zIndex={1000}
+      colspan={colspanTotal}
       columnGap={props.columnGap}
       autoRows="100%"
-      left={props.padding.left}
-      right={props.padding.right}
+      left={getSideBearing("left", props)}
+      right={getSideBearing("right", props)}
       top={props.padding.top}
       bottom={props.padding.bottom}
       //   isControl
     >
-      {[...Array(colspan[breakpoint.index])].map((_, index) => (
+      {[...Array(colspanTotal[breakpoint.index])].map((_, index) => (
         <Box
           key={index}
           display="flex"

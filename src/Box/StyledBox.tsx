@@ -81,7 +81,6 @@ const StyledBoxStyles = styled(Container)<Props>`
         position: ${props.position[index]};
         z-index: ${props.zIndex[index]};
         display: ${props.display[index]};
-        grid-column: auto / span ${props.colsTotal[index]};
         width: ${props.width[index]};
         height: ${props.height[index]};
 
@@ -129,7 +128,8 @@ const StyledBoxStyles = styled(Container)<Props>`
     props.media.map((media, index: number) => {
       return media`
         grid-template-columns: repeat(${(props) => props.colspan[index]}, 1fr);
-        
+        grid-column: auto / span ${props.colsTotal[index]};
+
         grid-auto-rows: ${(props) => props.autoRows[index]};
         grid-template-rows: ${(props) => props.templateRows[index]};
         grid-template-columns: ${(props) => props.templateColumns[index]};

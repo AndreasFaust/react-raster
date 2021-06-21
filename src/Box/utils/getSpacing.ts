@@ -1,14 +1,27 @@
 import normalizeProps from "./normalizeProps";
 
-export function getSpacingValue({ display, gap, cols, breakpoints, prop }) {
+export function getSpacingValue({
+  display,
+  gap,
+  colspan,
+  breakpoints,
+  prop,
+  counterProp,
+}: any) {
   const propNormalized = normalizeProps(breakpoints, prop);
+  const counterPropNormalized = normalizeProps(breakpoints, counterProp);
   return propNormalized.map((propAtBreakpoint, index) => {
     switch (typeof propAtBreakpoint) {
       case "number":
-        return display[index] === "grid"
-          ? `calc(((100% + ${gap[index]}) / ${cols[index]}) * ${propAtBreakpoint})`
-          : null;
-      case "string":
+        if (display[index] !== "grid") return null;
+        if (counterPropNormalized[index]) {
+          return `calc(((100% + ${gap[index]} - ${
+            typeof counterPropNormalized[index] === "string"
+              ? counterPropNormalized[index]
+              : "0px"
+          }) / ${colspan[index]}) * ${propAtBreakpoint})`;
+        }
+        return `calc(((100% + ${gap[index]}) / ${colspan[index]}) * ${propAtBreakpoint})`;
       default:
         return propAtBreakpoint;
     }
@@ -19,7 +32,7 @@ export default function getSpacing({
   display,
   rowGap,
   columnGap,
-  cols,
+  colspan,
   breakpoints,
   props,
   prop,
@@ -28,28 +41,30 @@ export default function getSpacing({
     left: getSpacingValue({
       display,
       gap: columnGap,
-      cols,
+      colspan,
       breakpoints,
       prop: props[`${prop}Left`],
+      counterProp: props[`${prop}Right`],
     }),
     right: getSpacingValue({
       display,
       gap: columnGap,
-      cols,
+      colspan,
       breakpoints,
       prop: props[`${prop}Right`],
+      counterProp: props[`${prop}Left`],
     }),
     top: getSpacingValue({
       display,
       gap: rowGap,
-      cols,
+      colspan,
       breakpoints,
       prop: props[`${prop}Top`],
     }),
     bottom: getSpacingValue({
       display,
       gap: rowGap,
-      cols,
+      colspan,
       breakpoints,
       prop: props[`${prop}Bottom`],
     }),

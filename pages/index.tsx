@@ -49,8 +49,6 @@ import { motion } from "framer-motion";
 const ExampleGrid = ({ children }) => (
   <Box
     display="grid"
-    paddingLeft="5vw"
-    paddingRight="5vw"
     paddingTop="5vw"
     paddingBottom="5vw"
     rowGap={"1rem"}
@@ -58,6 +56,9 @@ const ExampleGrid = ({ children }) => (
     colspan={[12]}
     control
     width="100vw"
+    paddingLeft={"4rem"}
+    paddingRight={1}
+    // marginLeft={1}
     // height="100vh"
     background="red"
     // component={
@@ -79,13 +80,13 @@ const ExamplePage = () => {
       <Box
         cols={6}
         rows={1}
-        // marginLeft={1}
-        marginTop={1}
-        // paddingLeft={1}
+        marginLeft={1}
+        paddingLeft={1}
+        // marginTop={1}
         background="yellow"
       >
-        <Box cols={3} background="pink">
-          {/* Hallo! */}
+        <Box background="pink" marginRight={1} paddingLeft={1}>
+          Hallo!
         </Box>
       </Box>
       {/* {items.map((item) => (
