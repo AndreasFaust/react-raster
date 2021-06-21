@@ -13,7 +13,6 @@ export function getSpacingValue({
   return propNormalized.map((propAtBreakpoint, index) => {
     switch (typeof propAtBreakpoint) {
       case "number":
-        if (display[index] !== "grid") return null;
         if (counterPropNormalized[index]) {
           return `calc(((100% + ${gap[index]} - ${
             typeof counterPropNormalized[index] === "string"
