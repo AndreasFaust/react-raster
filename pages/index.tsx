@@ -51,8 +51,8 @@ const ExampleGrid = ({ children }) => (
     display="grid"
     paddingTop="5vw"
     paddingBottom="5vw"
-    rowGap={"1rem"}
-    columnGap={"1rem"}
+    // rowGap={"1rem"}
+    // columnGap={"1rem"}
     colspan={[12]}
     control
     width="100vw"

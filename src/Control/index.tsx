@@ -3,23 +3,9 @@ import styled from "styled-components";
 
 import Box from "../Box";
 
-// interface ControlGridProps {
-//   colspan: number[];
-//   currentColspan: number;
-//   breakpoints: number[];
-//   rowGap: string | string[];
-//   columnGap: string | string[];
-//   left: string | string[];
-//   right: string | string[];
-//   top: string | string[];
-//   bottom: string | string[];
-//   controlColor: string;
-// }
-
 function getSideBearing(side: string, props: any): any {
   const sideUppercase = side.replace(/^\w/, (c) => c.toUpperCase());
   return props[`padding${sideUppercase}InCols`].map((padding, index) => {
-    if (side === "right") console.log(padding);
     if (typeof padding === "number") {
       return 0;
     }
@@ -46,7 +32,7 @@ const ControlGrid: React.FC<any> = (props) => {
       right={getSideBearing("right", props)}
       top={getTopBottomBearing("top", props)}
       bottom={getTopBottomBearing("bottom", props)}
-      //   isControl
+      isControl
     >
       {[...Array(colspanTotal[breakpoint.index])].map((_, index) => (
         <Box

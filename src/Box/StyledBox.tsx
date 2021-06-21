@@ -70,6 +70,7 @@ interface Props {
   css: string[];
   attrs: any;
   children: React.ReactNode;
+  isControl: boolean;
 }
 
 const StyledBoxStyles = styled(Container)<Props>`
@@ -137,6 +138,12 @@ const StyledBoxStyles = styled(Container)<Props>`
 
         grid-column-gap: ${props.columnGap[index]};
         grid-row-gap: ${props.rowGap[index]};
+
+        ${
+          props.isControl && props.columnGap[index] === "0px"
+            ? "grid-column-gap: 1px;"
+            : ""
+        }
       `;
     })}
 

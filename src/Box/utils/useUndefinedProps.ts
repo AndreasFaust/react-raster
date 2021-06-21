@@ -52,6 +52,7 @@ export default function useUndefinedProps(props) {
     borderBottom,
     className,
     children,
+    isControl,
     ref,
     ...rest
   } = props;

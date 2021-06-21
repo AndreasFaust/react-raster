@@ -73,6 +73,7 @@ export interface Props
   // utility
   className?: string;
   children?: React.ReactNode;
+  isControl?: boolean;
   // No use. Just to prevent TypeScript-error, when spreading props into a Grid-component.
   ref?: React.MutableRefObject<HTMLElement>;
 }

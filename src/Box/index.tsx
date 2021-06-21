@@ -32,6 +32,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
       controlIsVisible={controlIsVisible}
       ref={boxRef}
       css={propsNormalized.css}
+      isControl={props.isControl}
       attrs={{
         ...undefinedProps,
         ...(props.innerHTML && {
