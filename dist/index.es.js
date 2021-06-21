@@ -113,7 +113,7 @@ function useResizeObserver(ref, onResize) {
 function getColsTotal(_a) {
     var cols = _a.cols, colspan = _a.colspan, marginLeft = _a.marginLeft, marginRight = _a.marginRight;
     return cols.map(function (col, index) {
-        return ((col ? col : colspan[index]) +
+        return ((typeof col === "number" ? col : colspan[index]) +
             (marginLeft[index] || 0) +
             (marginRight[index] || 0));
     });
@@ -121,13 +121,10 @@ function getColsTotal(_a) {
 
 function getColsEffective(_a) {
     var cols = _a.cols, colspan = _a.colspan, paddingLeft = _a.paddingLeft, paddingRight = _a.paddingRight;
-    if (!cols) {
-        return colspan.map(function (parentCols, index) {
-            return (parentCols - (paddingLeft[index] || 0) - (paddingRight[index] || 0));
-        });
-    }
     return cols.map(function (col, index) {
-        return col - (paddingLeft[index] || 0) - (paddingRight[index] || 0);
+        return ((typeof col === "number" ? col : colspan[index]) -
+            (paddingLeft[index] || 0) -
+            (paddingRight[index] || 0));
     });
 }
 
@@ -163,7 +160,7 @@ function normalizeProps(breakpoints, prop, defaultValue) {
 }
 
 function getSpacingValue(_a) {
-    _a.display; var gap = _a.gap, colspan = _a.colspan, breakpoints = _a.breakpoints, prop = _a.prop, counterProp = _a.counterProp;
+    var gap = _a.gap, colspan = _a.colspan, breakpoints = _a.breakpoints, prop = _a.prop, counterProp = _a.counterProp;
     var propNormalized = normalizeProps(breakpoints, prop);
     var counterPropNormalized = normalizeProps(breakpoints, counterProp);
     return propNormalized.map(function (propAtBreakpoint, index) {
@@ -313,7 +310,9 @@ function useNormalize(props, context) {
         paddingLeft: paddingLeftInCols,
         paddingRight: paddingRightInCols,
     });
-    var colspan = getColspan(props.colspan ? colspanTotal : colsEffective, paddingLeftInCols, paddingRightInCols);
+    var colspan = props.colspan
+        ? getColspan(colspanTotal, paddingLeftInCols, paddingRightInCols)
+        : colsEffective;
     var colsTotal = getColsTotal({
         cols: normalizeProps(breakpoints, mergedProps.cols),
         colspan: colspanTotal,
@@ -356,7 +355,11 @@ function useNormalize(props, context) {
         media: getMediaQueries(breakpoints),
         css: normalizeProps(breakpoints, mergedProps.css),
         width: normalizeProps(breakpoints, mergedProps.width),
+        minWidth: normalizeProps(breakpoints, mergedProps.minWidth),
+        maxWidth: normalizeProps(breakpoints, mergedProps.maxWidth),
         height: normalizeProps(breakpoints, mergedProps.height),
+        minHeight: normalizeProps(breakpoints, mergedProps.minHeight),
+        maxHeight: normalizeProps(breakpoints, mergedProps.maxHeight),
         position: getPosition(normalizeProps(breakpoints, mergedProps.position)),
         zIndex: normalizeProps(breakpoints, mergedProps.zIndex),
         left: normalizeProps(breakpoints, mergedProps.left),
@@ -384,6 +387,7 @@ function useNormalize(props, context) {
         backgroundPosition: normalizeProps(breakpoints, mergedProps.backgroundPosition),
         backgroundAttachment: normalizeProps(breakpoints, mergedProps.backgroundAttachment),
         backgroundSize: normalizeProps(breakpoints, mergedProps.backgroundSize),
+        color: normalizeProps(breakpoints, mergedProps.color),
     };
 }
 
