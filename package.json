@@ -1,6 +1,6 @@
 {
   "name": "react-raster",
-  "version": "8.0.0-next.9",
+  "version": "8.0.0-next.10",
   "description": "Advanced Grid-System based on Styled Components, which is highly customizable and ready for server-side-rendering.",
   "author": "AndreasFaust",
   "license": "MIT",
@@ -78,7 +78,7 @@
     "release:major": "yarn build && git add . && changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags && npm publish",
     "release:minor": "yarn build && git add . && changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags && npm publish",
     "release:patch": "yarn build && git add . && changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags && npm publish",
-    "release:dev": "yarn build && git add . && git commit -m 'Do Beta-Release' && git push origin && git push origin --tags && npm version 8.0.0-next.9 && npm publish --tag next",
+    "release:dev": "yarn build && git add . && git commit -m 'Do Beta-Release' && git push origin && git push origin --tags && npm version 8.0.0-next.10 && npm publish --tag next",
     "deploy": "yarn next build && yarn next export && touch out/.nojekyll && gh-pages -t -d out"
   }
 }
