@@ -31,7 +31,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
       className={props.className ? ["Box", props.className].join(" ") : "Box"}
       controlIsVisible={controlIsVisible}
       ref={boxRef}
-      css={propsNormalized.css}
+      styles={propsNormalized.css}
       isControl={props.isControl}
       attrs={{
         ...undefinedProps,

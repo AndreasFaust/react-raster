@@ -152,5 +152,8 @@ export default function useNormalize(props, context) {
     backgroundSize: normalizeProps(breakpoints, mergedProps.backgroundSize),
 
     color: normalizeProps(breakpoints, mergedProps.color),
+    lineHeight: normalizeProps(breakpoints, mergedProps.lineHeight),
+    letterSpacing: normalizeProps(breakpoints, mergedProps.letterSpacing),
+    textDecoration: normalizeProps(breakpoints, mergedProps.textDecoration),
   };
 }

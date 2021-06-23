@@ -49,6 +49,9 @@ interface Props {
   backgroundAttachment: string[];
 
   color: string[];
+  lineHeight: string[];
+  letterSpacing: string[];
+  textDecoration: string[];
 
   border: string[];
   borderLeft: string[];
@@ -74,7 +77,7 @@ interface Props {
   id: string;
   component?: React.ReactElement;
   className: string;
-  css: string[];
+  styles: string[];
   attrs: any;
   children: React.ReactNode;
   isControl: boolean;
@@ -134,8 +137,11 @@ const StyledBoxStyles = styled(Container)<Props>`
         border-bottom: ${props.borderBottom[index]};
 
         color: ${props.color[index]};
+        line-height: ${props.lineHeight[index]};
+        letter-spacing: ${props.letterSpacing[index]};
+        text-decoration: ${props.textDecoration[index]};
 
-        ${props.css[index]}
+        ${props.styles[index]}
       `;
     })}
 

@@ -68,6 +68,9 @@ export interface Props
   backgroundAttachment?: string | string[];
 
   color?: string | string[];
+  lineHeight?: string | string[];
+  letterSpacing?: string | string[];
+  textDecoration?: string | string[];
 
   border?: string | string[];
   borderLeft?: string | string[];
