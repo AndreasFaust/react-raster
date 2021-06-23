@@ -89,8 +89,13 @@ const StyledBoxStyles = styled(Container)<Props>`
         position: ${props.position[index]};
         z-index: ${props.zIndex[index]};
         display: ${props.display[index]};
+
         width: ${props.width[index]};
+        minWidth: ${props.minWidth[index]};
+        maxWidth: ${props.maxWidth[index]};
         height: ${props.height[index]};
+        minHeight: ${props.minHeight[index]};
+        maxHeight: ${props.maxHeight[index]};
 
         padding-left: ${props.padding.left[index]};
         padding-right: ${props.padding.right[index]};
@@ -127,6 +132,8 @@ const StyledBoxStyles = styled(Container)<Props>`
         border-right: ${props.borderRight[index]};
         border-top: ${props.borderTop[index]};
         border-bottom: ${props.borderBottom[index]};
+
+        color: ${props.color[index]};
 
         ${props.css[index]}
       `;
