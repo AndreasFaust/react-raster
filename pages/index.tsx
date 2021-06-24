@@ -51,8 +51,8 @@ const ExampleGrid = ({ children }) => (
     display="grid"
     paddingTop="5vw"
     paddingBottom="5vw"
-    // rowGap={"1rem"}
-    // columnGap={"1rem"}
+    // gridRowGap={"1rem"}
+    // gridColumnGap={"1rem"}
     colspan={[12]}
     control
     width="100vw"
@@ -94,12 +94,18 @@ const ExamplePage = () => {
       ))} */}
       {/* </ExampleGrid> */}
 
-      <Box colspan={12}>
-        <Box>
-          <Box paddingLeft={1} paddingRight={1} background="yellow">
-            <Box background="pink">Hallo!</Box>
+      <Box
+        colspan={12}
+        control
+        padding={[1, "2rem 3 4em", null, "3"]}
+        background="pink"
+        minHeight={"100px"}
+      >
+        <Box background="blue">Hallo!</Box>
+        {/* <Box>
+          <Box height="500px" background="yellow">
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

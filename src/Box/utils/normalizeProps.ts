@@ -7,7 +7,7 @@ function addValues({ propArray, breakpointsLength }) {
 }
 
 function makeArray(prop?: number | number[] | string | string[]): any[] {
-  if (Array.isArray(prop)) return prop;
+  if (Array.isArray(prop)) return [...prop];
   else return [prop];
 }
 

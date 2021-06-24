@@ -26,12 +26,16 @@ const ControlGrid: React.FC<any> = (props) => {
       className="GridControl"
       zIndex={1000}
       colspan={colspanTotal}
-      columnGap={props.columnGap}
-      autoRows="100%"
-      left={getSideBearing("left", props)}
-      right={getSideBearing("right", props)}
-      top={getTopBottomBearing("top", props)}
-      bottom={getTopBottomBearing("bottom", props)}
+      gridColumnGap={props.gridColumnGap}
+      gridAutoRows="100%"
+      top={0}
+      bottom={0}
+      left={0}
+      right={0}
+      marginLeft={getSideBearing("left", props)}
+      marginRight={getSideBearing("right", props)}
+      marginTop={getTopBottomBearing("top", props)}
+      marginBottom={getTopBottomBearing("bottom", props)}
       isControl
     >
       {[...Array(colspanTotal[breakpoint.index])].map((_, index) => (

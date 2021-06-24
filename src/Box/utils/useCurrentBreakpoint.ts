@@ -1,4 +1,5 @@
 import React from "react";
+import debounce from "./debounce";
 
 export type currentBreakpoint = {
   index: number;
@@ -35,8 +36,9 @@ export default function useCurrentBreakpoint({
       setCurrentBp(bp);
     }
     onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const dOnResize = debounce(onResize, 100);
+    window.addEventListener("resize", dOnResize);
+    return () => window.removeEventListener("resize", dOnResize);
   }, []);
   return currentBp;
 }

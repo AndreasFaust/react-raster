@@ -1,4 +1,5 @@
-import normalizeProps from "./normalizeProps";
+import normalizeProps from "../normalizeProps";
+import normalizeShortProp from "./normalizeShortProp";
 
 export function getSpacingValue({
   gap,
@@ -28,43 +29,44 @@ export function getSpacingValue({
 
 export default function getSpacing({
   display,
-  rowGap,
-  columnGap,
+  gridRowGap,
+  gridColumnGap,
   colspan,
   breakpoints,
   props,
   prop,
 }) {
+  const short = normalizeShortProp(props[prop]);
   return {
     left: getSpacingValue({
       display,
-      gap: columnGap,
+      gap: gridColumnGap,
       colspan,
       breakpoints,
-      prop: props[`${prop}Left`],
-      counterProp: props[`${prop}Right`],
+      prop: props[`${prop}Left`] || short.left,
+      counterProp: props[`${prop}Right`] || short.right,
     }),
     right: getSpacingValue({
       display,
-      gap: columnGap,
+      gap: gridColumnGap,
       colspan,
       breakpoints,
-      prop: props[`${prop}Right`],
-      counterProp: props[`${prop}Left`],
+      prop: props[`${prop}Right`] || short.right,
+      counterProp: props[`${prop}Left`] || short.left,
     }),
     top: getSpacingValue({
       display,
-      gap: rowGap,
+      gap: gridRowGap,
       colspan,
       breakpoints,
-      prop: props[`${prop}Top`],
+      prop: props[`${prop}Top`] || short.top,
     }),
     bottom: getSpacingValue({
       display,
-      gap: rowGap,
+      gap: gridRowGap,
       colspan,
       breakpoints,
-      prop: props[`${prop}Bottom`],
+      prop: props[`${prop}Bottom`] || short.bottom,
     }),
   };
 }

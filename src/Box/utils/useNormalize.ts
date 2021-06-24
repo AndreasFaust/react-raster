@@ -16,15 +16,19 @@ export default function useNormalize(props, context) {
   const mergedProps = { ...context, ...props };
 
   const breakpoint = useCurrentBreakpoint({
-    activateEventListener: props.breakpoints,
+    activateEventListener: !!props.breakpoints || !!props.colspan,
     contextBreakpoint: context.breakpoint,
     breakpoints,
   });
 
   const display = normalizeDisplay(breakpoints, mergedProps);
 
-  const rowGap = normalizeProps(breakpoints, mergedProps.rowGap, "0px");
-  const columnGap = normalizeProps(breakpoints, mergedProps.columnGap, "0px");
+  const gridRowGap = normalizeProps(breakpoints, mergedProps.gridRowGap, "0px");
+  const gridColumnGap = normalizeProps(
+    breakpoints,
+    mergedProps.gridColumnGap,
+    "0px"
+  );
 
   const marginLeftInCols = normalizeSpacing(
     breakpoints,
@@ -69,8 +73,8 @@ export default function useNormalize(props, context) {
   const margin = getSpacing({
     display,
     breakpoints,
-    rowGap,
-    columnGap,
+    gridRowGap,
+    gridColumnGap,
     colspan: colsTotal,
     prop: "margin",
     props: mergedProps,
@@ -79,8 +83,8 @@ export default function useNormalize(props, context) {
   const padding = getSpacing({
     display,
     breakpoints,
-    rowGap,
-    columnGap,
+    gridRowGap,
+    gridColumnGap,
     colspan: colsTotal,
     prop: "padding",
     props: mergedProps,
@@ -89,7 +93,6 @@ export default function useNormalize(props, context) {
   return {
     breakpoints,
     breakpoint,
-    // cols,
     colsTotal,
     colspanTotal,
     colspan,
@@ -98,8 +101,8 @@ export default function useNormalize(props, context) {
     paddingLeftInCols,
     paddingRightInCols,
     display,
-    rowGap,
-    columnGap,
+    gridRowGap,
+    gridColumnGap,
 
     controlColor: mergedProps.controlColor,
 
@@ -120,9 +123,13 @@ export default function useNormalize(props, context) {
     top: normalizeProps(breakpoints, mergedProps.top),
     bottom: normalizeProps(breakpoints, mergedProps.bottom),
 
-    templateRows: normalizeProps(breakpoints, mergedProps.templateRows),
-    autoRows: normalizeProps(breakpoints, mergedProps.autoRows),
-    templateColumns: normalizeProps(breakpoints, mergedProps.templateColumns),
+    gridTemplateRows: normalizeProps(breakpoints, mergedProps.gridTemplateRows),
+    gridColumn: normalizeProps(breakpoints, mergedProps.gridColumn),
+    gridAutoRows: normalizeProps(breakpoints, mergedProps.gridAutoRows),
+    gridTemplateColumns: normalizeProps(
+      breakpoints,
+      mergedProps.gridTemplateColumns
+    ),
     autoFlow: normalizeProps(breakpoints, mergedProps.autoFlow),
 
     order: normalizeProps(breakpoints, mergedProps.order),
@@ -130,7 +137,11 @@ export default function useNormalize(props, context) {
     alignContent: normalizeProps(breakpoints, mergedProps.alignContent),
     alignSelf: normalizeProps(breakpoints, mergedProps.alignSelf),
     justifyContent: normalizeProps(breakpoints, mergedProps.justifyContent),
+    justifyItems: normalizeProps(breakpoints, mergedProps.justifyItems),
     justifySelf: normalizeProps(breakpoints, mergedProps.justifySelf),
+
+    flexShrink: normalizeProps(breakpoints, mergedProps.flexShrink),
+    flexGrow: normalizeProps(breakpoints, mergedProps.flexGrow),
 
     border: normalizeProps(breakpoints, mergedProps.border),
     borderLeft: normalizeProps(breakpoints, mergedProps.borderLeft),
@@ -151,6 +162,8 @@ export default function useNormalize(props, context) {
     ),
     backgroundSize: normalizeProps(breakpoints, mergedProps.backgroundSize),
 
+    fontFamily: normalizeProps(breakpoints, mergedProps.fontFamily),
+    fontSize: normalizeProps(breakpoints, mergedProps.fontSize),
     color: normalizeProps(breakpoints, mergedProps.color),
     lineHeight: normalizeProps(breakpoints, mergedProps.lineHeight),
     letterSpacing: normalizeProps(breakpoints, mergedProps.letterSpacing),

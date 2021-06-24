@@ -61,13 +61,13 @@ interface Props {
 
   colspan: number[];
 
-  autoRows: string[];
-  templateRows: string[];
-  templateColumns: string[];
+  gridAutoRows: string[];
+  gridTemplateRows: string[];
+  gridTemplateColumns: string[];
   autoFlow: string[];
 
-  columnGap: string[];
-  rowGap: string[];
+  gridColumnGap: string[];
+  gridRowGap: string[];
 
   media: any;
   tag?: string;
@@ -94,11 +94,11 @@ const StyledBoxStyles = styled(Container)<Props>`
         display: ${props.display[index]};
 
         width: ${props.width[index]};
-        minWidth: ${props.minWidth[index]};
-        maxWidth: ${props.maxWidth[index]};
+        min-width: ${props.minWidth[index]};
+        max-width: ${props.maxWidth[index]};
         height: ${props.height[index]};
-        minHeight: ${props.minHeight[index]};
-        maxHeight: ${props.maxHeight[index]};
+        min-height: ${props.minHeight[index]};
+        max-height: ${props.maxHeight[index]};
 
         padding-left: ${props.padding.left[index]};
         padding-right: ${props.padding.right[index]};
@@ -121,13 +121,17 @@ const StyledBoxStyles = styled(Container)<Props>`
         align-content: ${props.alignContent[index]};
         align-self: ${props.alignSelf[index]};
         justify-content: ${props.justifyContent[index]};
+        justify-items: ${props.justifyItems[index]};
         justify-Self: ${props.justifySelf[index]};
+
+        flex-shrink: ${props.flexShrink[index]};
+        flex-grow: ${props.flexGrow[index]};
 
         background: ${props.background[index]};
         background-color: ${props.backgroundColor[index]};
         background-image: ${props.backgroundImage[index]};
         background-position: ${props.backgroundPosition[index]};
-        background-Size: ${props.backgroundSize[index]};
+        background-size: ${props.backgroundSize[index]};
         background-attachment: ${props.backgroundAttachment[index]};
 
         border: ${props.border[index]};
@@ -136,6 +140,8 @@ const StyledBoxStyles = styled(Container)<Props>`
         border-top: ${props.borderTop[index]};
         border-bottom: ${props.borderBottom[index]};
 
+        font-family: ${props.fontFamily[index]};
+        font-size: ${props.fontSize[index]};
         color: ${props.color[index]};
         line-height: ${props.lineHeight[index]};
         letter-spacing: ${props.letterSpacing[index]};
@@ -151,16 +157,17 @@ const StyledBoxStyles = styled(Container)<Props>`
         grid-template-columns: repeat(${(props) => props.colspan[index]}, 1fr);
         grid-column: auto / span ${props.colsTotal[index]};
 
-        grid-auto-rows: ${(props) => props.autoRows[index]};
-        grid-template-rows: ${(props) => props.templateRows[index]};
-        grid-template-columns: ${(props) => props.templateColumns[index]};
+        grid-auto-rows: ${(props) => props.gridAutoRows[index]};
+        grid-template-rows: ${(props) => props.gridTemplateRows[index]};
+        grid-template-columns: ${(props) => props.gridTemplateColumns[index]};
+        grid-column: ${(props) => props.gridColumn[index]};
         grid-auto-flow: ${(props) => props.autoFlow[index]};
 
-        grid-column-gap: ${props.columnGap[index]};
-        grid-row-gap: ${props.rowGap[index]};
+        grid-column-gap: ${props.gridColumnGap[index]};
+        grid-row-gap: ${props.gridRowGap[index]};
 
         ${
-          props.isControl && props.columnGap[index] === "0px"
+          props.isControl && props.gridColumnGap[index] === "0px"
             ? "grid-column-gap: 1px;"
             : ""
         }

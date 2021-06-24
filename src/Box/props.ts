@@ -15,22 +15,25 @@ export interface Props
   colspan?: number | number[];
   cols?: number | number[];
 
-  marginLeft?: string | number | Array<string | number>;
-  marginRight?: string | number | Array<string | number>;
-  marginTop?: string | number | Array<string | number>;
-  marginBottom?: string | number | Array<string | number>;
+  margin?: string | number | (string | number)[];
+  marginLeft?: string | number | (string | number)[];
+  marginRight?: string | number | (string | number)[];
+  marginTop?: string | number | (string | number)[];
+  marginBottom?: string | number | (string | number)[];
 
-  paddingLeft?: string | number | Array<string | number>;
-  paddingRight?: string | number | Array<string | number>;
-  paddingTop?: string | number | Array<string | number>;
-  paddingBottom?: string | number | Array<string | number>;
+  padding?: string | number | (string | number)[];
+  paddingLeft?: string | number | (string | number)[];
+  paddingRight?: string | number | (string | number)[];
+  paddingTop?: string | number | (string | number)[];
+  paddingBottom?: string | number | (string | number)[];
 
-  rowGap?: string | string[];
-  columnGap?: string | string[];
+  gridRowGap?: string | string[];
+  gridColumnGap?: string | string[];
 
-  templateRows?: string | string[];
-  autoRows?: string | string[];
-  templateColumns?: string | string[];
+  gridTemplateRows?: string | string[];
+  gridAutoRows?: string | string[];
+  gridTemplateColumns?: string | string[];
+  gridColumn?: string | string[];
   autoFlow?: string | string[];
 
   ////////////////////////////////////////
@@ -48,17 +51,21 @@ export interface Props
   order?: number | number[];
 
   position?: string | string[];
-  zIndex?: string | number | Array<string | number>;
-  top?: string | number | Array<string | number>;
-  bottom?: string | number | Array<string | number>;
-  left?: string | number | Array<string | number>;
-  right?: string | number | Array<string | number>;
+  zIndex?: string | number | (string | number)[];
+  top?: string | number | (string | number)[];
+  bottom?: string | number | (string | number)[];
+  left?: string | number | (string | number)[];
+  right?: string | number | (string | number)[];
 
   alignItems?: string | string[];
   alignContent?: string | string[];
   alignSelf?: string | string[];
   justifyContent?: string | string[];
+  justifyItems?: string | string[];
   justifySelf?: string | string[];
+
+  flexShrink?: number | number[];
+  flexGrow?: number | number[];
 
   background?: string | string[];
   backgroundColor?: string | string[];
@@ -68,6 +75,8 @@ export interface Props
   backgroundAttachment?: string | string[];
 
   color?: string | string[];
+  fontFamily?: string | string[];
+  fontSize?: string | string[];
   lineHeight?: string | string[];
   letterSpacing?: string | string[];
   textDecoration?: string | string[];

@@ -11,7 +11,7 @@ const Testpage: NextPage<Props> = (props) => {
     console.log(boxRef.current);
   }, []);
   return (
-    <Box colspan={12} columnGap="5vw" rowGap="5vw">
+    <Box colspan={12} gridColumnGap="5vw" gridRowGap="5vw">
       <Box
         cols={6}
         css={`

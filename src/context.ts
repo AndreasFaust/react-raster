@@ -6,8 +6,8 @@ interface ContextProps {
     value: number;
   };
   breakpoints?: number[];
-  rowGap?: string[];
-  columnGap?: string[];
+  gridRowGap?: string[];
+  gridColumnGap?: string[];
   colspan?: number[];
   media?: any[];
   controlIsVisible?: boolean;

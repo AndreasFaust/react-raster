@@ -21,6 +21,8 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const boxRef = useCombinedRefs(ref);
   const undefinedProps = useUndefinedProps(props);
 
+  const defaultClass = `Box bp-${propsNormalized.breakpoint.value} bp-${propsNormalized.breakpoint.index}`;
+
   useResizeObserver(boxRef, props.onResize);
   return (
     <StyledBox
@@ -28,7 +30,11 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
       id={id.current}
       tag={props.as}
       component={props.component}
-      className={props.className ? ["Box", props.className].join(" ") : "Box"}
+      className={
+        props.className
+          ? [defaultClass, props.className].join(" ")
+          : defaultClass
+      }
       controlIsVisible={controlIsVisible}
       ref={boxRef}
       styles={propsNormalized.css}
@@ -49,8 +55,8 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
           value={{
             breakpoints: propsNormalized.breakpoints,
             breakpoint: propsNormalized.breakpoint,
-            rowGap: propsNormalized.rowGap,
-            columnGap: propsNormalized.columnGap,
+            gridRowGap: propsNormalized.gridRowGap,
+            gridColumnGap: propsNormalized.gridColumnGap,
             colspan: propsNormalized.colspan,
             media: propsNormalized.media,
             controlIsVisible,

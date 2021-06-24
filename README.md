@@ -53,8 +53,8 @@ yarn add react-raster styled-components react react-dom
   right={"2vw"}
   top={"2vw"}
   bottom={"2vw"}
-  rowGap={"2vw"}
-  columnGap={"2vw"}
+  gridRowGap={"2vw"}
+  gridColumnGap={"2vw"}
   control
 >
   <Box cols={[6, 6, 3]}>
