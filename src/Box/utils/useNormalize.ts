@@ -107,7 +107,7 @@ export default function useNormalize(props, context) {
     controlColor: mergedProps.controlColor,
 
     media: getMediaQueries(breakpoints),
-    styles: normalizeProps(breakpoints, mergedProps.css),
+    styles: normalizeProps(breakpoints, mergedProps.styles),
 
     width: normalizeProps(breakpoints, mergedProps.width),
     minWidth: normalizeProps(breakpoints, mergedProps.minWidth),
@@ -170,5 +170,10 @@ export default function useNormalize(props, context) {
     lineHeight: normalizeProps(breakpoints, mergedProps.lineHeight),
     letterSpacing: normalizeProps(breakpoints, mergedProps.letterSpacing),
     textDecoration: normalizeProps(breakpoints, mergedProps.textDecoration),
+
+    transform: normalizeProps(breakpoints, mergedProps.transform),
+    transition: normalizeProps(breakpoints, mergedProps.transition),
+    animation: normalizeProps(breakpoints, mergedProps.animation),
+    opacity: normalizeProps(breakpoints, mergedProps.opacity),
   };
 }

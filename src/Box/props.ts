@@ -1,7 +1,7 @@
 import React, { HTMLProps } from "react";
 
 export interface Props
-  extends Omit<HTMLProps<HTMLElement>, "cols" | "height" | "width"> {
+  extends Omit<HTMLProps<HTMLElement>, "cols" | "height" | "width" | "color"> {
   ////////////////////////////////////////
   // Core
   display?: string | string[];
@@ -41,7 +41,7 @@ export interface Props
   component?: React.ReactElement;
   innerHTML?: string;
   onResize?: (element: HTMLElement) => void;
-  css?: string | string[];
+  styles?: string | string[];
   as?: string;
   control?: boolean;
   controlColor?: string;
@@ -88,6 +88,11 @@ export interface Props
   borderRight?: string | string[];
   borderTop?: string | string[];
   borderBottom?: string | string[];
+
+  transition?: string | string[];
+  animation?: string | string[];
+  transform?: string | string[];
+  opacity?: number | number[];
 
   ////////////////////////////////////////
   // utility

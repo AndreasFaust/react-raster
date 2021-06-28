@@ -75,6 +75,11 @@ interface Props {
   flexGrow: number[];
   flexShrink: number[];
 
+  transition: string[];
+  animation: string[];
+  transform: string[];
+  opacity: number[];
+
   media: any;
   tag?: string;
   controlIsVisible: boolean;
@@ -128,7 +133,7 @@ const StyledBoxStyles = styled(Container)<Props>`
         align-self: ${props.alignSelf[index]};
         justify-content: ${props.justifyContent[index]};
         justify-items: ${props.justifyItems[index]};
-        justify-Self: ${props.justifySelf[index]};
+        justify-self: ${props.justifySelf[index]};
 
         flex-direction: ${props.flexDirection[index]};
         flex-wrap: ${props.flexWrap[index]};
@@ -155,20 +160,25 @@ const StyledBoxStyles = styled(Container)<Props>`
         letter-spacing: ${props.letterSpacing[index]};
         text-decoration: ${props.textDecoration[index]};
 
-        ${props.styles[index]}
+        transition: ${props.transition[index]};
+        transform: ${props.transform[index]};
+        animation: ${props.animation[index]};
+        opacity: ${props.opacity[index]};
+
+        ${props.styles[index] ? props.styles[index] : ""}
       `;
     })}
 
   ${(props) =>
     props.media.map((media, index: number) => {
-      return media`
+      return (
+        props.display[index] === "grid" &&
+        media`
         grid-template-columns: repeat(${(props) => props.colspan[index]}, 1fr);
-        grid-column: auto / span ${props.colsTotal[index]};
 
         grid-auto-rows: ${(props) => props.gridAutoRows[index]};
         grid-template-rows: ${(props) => props.gridTemplateRows[index]};
         grid-template-columns: ${(props) => props.gridTemplateColumns[index]};
-        grid-column: ${(props) => props.gridColumn[index]};
         grid-auto-flow: ${(props) => props.autoFlow[index]};
 
         grid-column-gap: ${props.gridColumnGap[index]};
@@ -179,7 +189,15 @@ const StyledBoxStyles = styled(Container)<Props>`
             ? "grid-column-gap: 1px;"
             : ""
         }
-      `;
+      `
+      );
+    })}
+
+  ${(props) =>
+    props.media.map((media, index: number) => {
+      return media`
+        grid-column: auto / span ${props.colsTotal[index]};
+        grid-column: ${(props) => props.gridColumn[index]};      `;
     })}
 
 
