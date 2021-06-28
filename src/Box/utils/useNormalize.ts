@@ -107,7 +107,7 @@ export default function useNormalize(props, context) {
     controlColor: mergedProps.controlColor,
 
     media: getMediaQueries(breakpoints),
-    css: normalizeProps(breakpoints, mergedProps.css),
+    styles: normalizeProps(breakpoints, mergedProps.css),
 
     width: normalizeProps(breakpoints, mergedProps.width),
     minWidth: normalizeProps(breakpoints, mergedProps.minWidth),
@@ -140,6 +140,8 @@ export default function useNormalize(props, context) {
     justifyItems: normalizeProps(breakpoints, mergedProps.justifyItems),
     justifySelf: normalizeProps(breakpoints, mergedProps.justifySelf),
 
+    flexDirection: normalizeProps(breakpoints, mergedProps.flexDirection),
+    flexWrap: normalizeProps(breakpoints, mergedProps.flexWrap),
     flexShrink: normalizeProps(breakpoints, mergedProps.flexShrink),
     flexGrow: normalizeProps(breakpoints, mergedProps.flexGrow),
 

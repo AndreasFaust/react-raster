@@ -66,6 +66,8 @@ export interface Props
 
   flexShrink?: number | number[];
   flexGrow?: number | number[];
+  flexDirection?: string | string[];
+  flexWrap?: string | string[];
 
   background?: string | string[];
   backgroundColor?: string | string[];

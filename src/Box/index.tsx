@@ -37,7 +37,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
       }
       controlIsVisible={controlIsVisible}
       ref={boxRef}
-      styles={propsNormalized.css}
+      styles={propsNormalized.styles}
       isControl={props.isControl}
       attrs={{
         ...undefinedProps,
@@ -45,7 +45,6 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
           dangerouslySetInnerHTML: { __html: props.innerHTML },
         }),
       }}
-      {...propsNormalized}
     >
       <>
         {controlIsVisible && (

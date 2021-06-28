@@ -38,6 +38,7 @@ interface Props {
   alignItems: string[];
   alignContent: string[];
   alignSelf: string[];
+  justifyItems: string[];
   justifyContent: string[];
   justifySelf: string[];
 
@@ -68,6 +69,11 @@ interface Props {
 
   gridColumnGap: string[];
   gridRowGap: string[];
+
+  flexDirection: string[];
+  flexWrap: string[];
+  flexGrow: number[];
+  flexShrink: number[];
 
   media: any;
   tag?: string;
@@ -124,6 +130,8 @@ const StyledBoxStyles = styled(Container)<Props>`
         justify-items: ${props.justifyItems[index]};
         justify-Self: ${props.justifySelf[index]};
 
+        flex-direction: ${props.flexDirection[index]};
+        flex-wrap: ${props.flexWrap[index]};
         flex-shrink: ${props.flexShrink[index]};
         flex-grow: ${props.flexGrow[index]};
 
