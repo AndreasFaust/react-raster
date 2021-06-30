@@ -56,6 +56,15 @@ export default function useUndefinedProps(props) {
     backgroundPosition,
     backgroundSize,
     backgroundAttachment,
+
+    filter,
+    backdropFilter,
+    mixBlendMode,
+    backgroundBlendMode,
+    textShadow,
+    boxShadow,
+    textStroke,
+
     border,
     borderLeft,
     borderRight,

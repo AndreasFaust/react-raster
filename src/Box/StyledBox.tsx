@@ -49,6 +49,14 @@ interface Props {
   backgroundSize: string[];
   backgroundAttachment: string[];
 
+  filter: string[];
+  backdropFilter: string[];
+  mixBlendMode: string[];
+  backgroundBlendMode: string[];
+  textShadow: string[];
+  boxShadow: string[];
+  textStroke: string[];
+
   color: string[];
   lineHeight: string[];
   letterSpacing: string[];
@@ -147,6 +155,15 @@ const StyledBoxStyles = styled(Container)<Props>`
         background-position: ${props.backgroundPosition[index]};
         background-size: ${props.backgroundSize[index]};
         background-attachment: ${props.backgroundAttachment[index]};
+
+        filter: ${props.filter[index]};
+        backdrop-filter: ${props.backdropFilter[index]};
+        mix-blend-mode: ${props.mixBlendMode[index]};
+        background-blend-mode: ${props.backgroundBlendMode[index]};
+        text-shadow: ${props.textShadow[index]};
+        box-shadow: ${props.boxShadow[index]};
+        -webkit-text-stroke: ${props.textStroke[index]};
+        text-stroke: ${props.textStroke[index]};
 
         border: ${props.border[index]};
         border-left: ${props.borderLeft[index]};

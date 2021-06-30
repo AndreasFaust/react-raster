@@ -76,6 +76,14 @@ export interface Props
   backgroundSize?: string | string[];
   backgroundAttachment?: string | string[];
 
+  filter?: string | string[];
+  backdropFilter?: string | string[];
+  mixBlendMode?: string | string[];
+  backgroundBlendMode?: string | string[];
+  textShadow?: string | string[];
+  boxShadow?: string | string[];
+  textStroke?: string | string[];
+
   color?: string | string[];
   fontFamily?: string | string[];
   fontSize?: string | string[];

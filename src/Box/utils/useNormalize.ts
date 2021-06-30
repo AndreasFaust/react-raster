@@ -164,6 +164,17 @@ export default function useNormalize(props, context) {
     ),
     backgroundSize: normalizeProps(breakpoints, mergedProps.backgroundSize),
 
+    filter: normalizeProps(breakpoints, mergedProps.filter),
+    backdropFilter: normalizeProps(breakpoints, mergedProps.backdropFilter),
+    mixBlendMode: normalizeProps(breakpoints, mergedProps.mixBlendMode),
+    backgroundBlendMode: normalizeProps(
+      breakpoints,
+      mergedProps.backgroundBlendMode
+    ),
+    textShadow: normalizeProps(breakpoints, mergedProps.textShadow),
+    boxShadow: normalizeProps(breakpoints, mergedProps.boxShadow),
+    textStroke: normalizeProps(breakpoints, mergedProps.textStroke),
+
     fontFamily: normalizeProps(breakpoints, mergedProps.fontFamily),
     fontSize: normalizeProps(breakpoints, mergedProps.fontSize),
     color: normalizeProps(breakpoints, mergedProps.color),
