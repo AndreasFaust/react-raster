@@ -193,5 +193,9 @@ export default function useNormalize(
     transition: normalizeProps(breakpoints, mergedProps.transition),
     animation: normalizeProps(breakpoints, mergedProps.animation),
     opacity: normalizeProps(breakpoints, mergedProps.opacity),
+
+    overflow: normalizeProps(breakpoints, mergedProps.overflow),
+    overflowX: normalizeProps(breakpoints, mergedProps.overflowX),
+    overflowY: normalizeProps(breakpoints, mergedProps.overflowY),
   };
 }

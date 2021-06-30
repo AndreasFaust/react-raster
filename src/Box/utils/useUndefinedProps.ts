@@ -28,7 +28,13 @@ export default function useUndefinedProps(props) {
     autoFlow,
     component,
     innerHTML,
+
     onResize,
+    onIntersect,
+    root,
+    rootMargin,
+    threshold,
+
     styles,
     as,
     control,
@@ -77,6 +83,10 @@ export default function useUndefinedProps(props) {
     letterSpacing,
     textDecoration,
     hyphens,
+
+    overflow,
+    overflowX,
+    overflowY,
 
     transition,
     animation,

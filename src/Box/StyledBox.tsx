@@ -94,6 +94,10 @@ interface Props {
   controlIsVisible: boolean;
   controlColor: string;
 
+  overflow?: string[];
+  overflowX?: string[];
+  overflowY?: string[];
+
   id: string;
   component?: React.ReactElement;
   className: string;
@@ -183,6 +187,10 @@ const StyledBoxStyles = styled(Container)<Props>`
         transform: ${props.transform[index]};
         animation: ${props.animation[index]};
         opacity: ${props.opacity[index]};
+
+        overflow: ${props.overflow[index]};
+        overflow-x: ${props.overflowX[index]};
+        overflow-y: ${props.overflowY[index]};
 
         ${props.styles[index] ? props.styles[index] : ""}
       `;

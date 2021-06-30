@@ -36,11 +36,23 @@ export interface Props
   gridColumn?: string | string[];
   autoFlow?: string | string[];
 
+  overflow?: string | string[];
+  overflowX?: string | string[];
+  overflowY?: string | string[];
+
   ////////////////////////////////////////
   // Advanced
   component?: React.ReactElement;
   innerHTML?: string;
   onResize?: (element: HTMLElement) => void;
+  onIntersect?: (
+    IntersectionObserverEntry: IntersectionObserverEntry,
+    observer: IntersectionObserver
+  ) => void;
+  root?: null | HTMLElement;
+  rootMargin?: string;
+  threshold?: number | number[];
+
   styles?: string | string[];
   as?: string;
   control?: boolean;

@@ -6,6 +6,7 @@ import useResizeObserver from "./utils/useResizeObserver";
 import useNormalize from "./utils/useNormalize";
 import useControl from "./utils/useControl";
 import useUndefinedProps from "./utils/useUndefinedProps";
+import useIntersect from "./utils/useIntersect";
 
 import Context from "../context";
 import StyledBox from "./StyledBox";
@@ -32,6 +33,14 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const defaultClass = `Box bp-${propsNormalized.breakpoint.value} bp-${propsNormalized.breakpoint.index}`;
 
   useResizeObserver(boxRef, props.onResize);
+  useIntersect({
+    ref: boxRef,
+    root: props.root,
+    rootMargin: props.rootMargin,
+    threshold: props.threshold,
+    onIntersect: props.onIntersect,
+  });
+
   return (
     <StyledBox
       {...propsNormalized}
