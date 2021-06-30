@@ -9,11 +9,10 @@ import normalizeSpacing from "./normalizeSpacing";
 import normalizeDisplay from "./normalizeDisplay";
 import getPosition from "./getPosition";
 
-import { Props } from "../props";
 import { ContextProps } from "../../context";
 
 export default function useNormalize(
-  props: Props,
+  props,
   context: ContextProps,
   hasChildBoxes: boolean
 ) {
