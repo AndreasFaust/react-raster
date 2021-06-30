@@ -9,7 +9,14 @@ import normalizeSpacing from "./normalizeSpacing";
 import normalizeDisplay from "./normalizeDisplay";
 import getPosition from "./getPosition";
 
-export default function useNormalize(props, context) {
+import { Props } from "../props";
+import { ContextProps } from "../../context";
+
+export default function useNormalize(
+  props: Props,
+  context: ContextProps,
+  hasChildBoxes: boolean
+) {
   const breakpoints = props.breakpoints ||
     context.breakpoints || [0, 432, 768, 1024, 1200, 1400];
 
@@ -21,7 +28,7 @@ export default function useNormalize(props, context) {
     breakpoints,
   });
 
-  const display = normalizeDisplay(breakpoints, mergedProps);
+  const display = normalizeDisplay(breakpoints, mergedProps, hasChildBoxes);
 
   const gridRowGap = normalizeProps(breakpoints, mergedProps.gridRowGap, "0px");
   const gridColumnGap = normalizeProps(

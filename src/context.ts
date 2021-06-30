@@ -1,6 +1,6 @@
 import React from "react";
 
-interface ContextProps {
+export interface ContextProps {
   breakpoint?: {
     index: number;
     value: number;
@@ -12,6 +12,7 @@ interface ContextProps {
   media?: any[];
   controlIsVisible?: boolean;
   controlColor?: string;
+  registerChildBox?: () => void;
 }
 
 const Context = React.createContext<ContextProps>({});

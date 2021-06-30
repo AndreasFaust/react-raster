@@ -14,7 +14,7 @@ const ExamplePage = () => {
       styles="color: red;"
       minHeight={"100px"}
     >
-      <Box background="yellow">Hallo!</Box>
+      <Box background="yellow">Hallo ich bin ein langer Text!!!</Box>
       {/* <Box>
           <Box height="500px" background="yellow">
           </Box>

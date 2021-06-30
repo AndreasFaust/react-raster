@@ -1,9 +1,13 @@
 import normalizeProps from "./normalizeProps";
 
-export default function normalizeDisplay(breakpoints, props) {
+export default function normalizeDisplay(
+  breakpoints: number[],
+  props,
+  hasChildBoxes: boolean
+): string[] {
   const displayNormalized = normalizeProps(breakpoints, props.display);
-  return displayNormalized.map((display, index) => {
+  return displayNormalized.map((display) => {
     if (display) return display;
-    return "grid";
+    return hasChildBoxes ? "grid" : "block";
   });
 }

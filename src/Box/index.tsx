@@ -14,8 +14,16 @@ import { Props } from "./props";
 
 const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const context = useContext(Context);
-  const propsNormalized = useNormalize(props, context);
   const id = React.useRef<string>(nanoid());
+
+  const [hasChildBoxes, registerChildBox] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof context.registerChildBox === "function") {
+      context.registerChildBox();
+    }
+  }, []);
+
+  const propsNormalized = useNormalize(props, context, hasChildBoxes);
 
   const controlIsVisible = useControl(props.control, context.controlIsVisible);
   const boxRef = useCombinedRefs(ref);
@@ -60,6 +68,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
             media: propsNormalized.media,
             controlIsVisible,
             controlColor: propsNormalized.controlColor,
+            registerChildBox: () => registerChildBox(true),
           }}
         >
           {props.children}
