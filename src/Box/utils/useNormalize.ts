@@ -170,6 +170,7 @@ export default function useNormalize(props, context) {
     lineHeight: normalizeProps(breakpoints, mergedProps.lineHeight),
     letterSpacing: normalizeProps(breakpoints, mergedProps.letterSpacing),
     textDecoration: normalizeProps(breakpoints, mergedProps.textDecoration),
+    hyphens: normalizeProps(breakpoints, mergedProps.hyphens),
 
     transform: normalizeProps(breakpoints, mergedProps.transform),
     transition: normalizeProps(breakpoints, mergedProps.transition),

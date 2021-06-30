@@ -82,6 +82,7 @@ export interface Props
   lineHeight?: string | string[];
   letterSpacing?: string | string[];
   textDecoration?: string | string[];
+  hyphens?: string | string[];
 
   border?: string | string[];
   borderLeft?: string | string[];

@@ -6,7 +6,6 @@ import "./css/index.css";
 function MyApp({ Component, pageProps, router }) {
   return (
     <AnimatePresence exitBeforeEnter>
-      <div className="content"></div>
       <Component {...pageProps} key={router.route} />
     </AnimatePresence>
   );

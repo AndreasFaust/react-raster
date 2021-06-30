@@ -53,6 +53,7 @@ interface Props {
   lineHeight: string[];
   letterSpacing: string[];
   textDecoration: string[];
+  hyphens: string[];
 
   border: string[];
   borderLeft: string[];
@@ -159,6 +160,7 @@ const StyledBoxStyles = styled(Container)<Props>`
         line-height: ${props.lineHeight[index]};
         letter-spacing: ${props.letterSpacing[index]};
         text-decoration: ${props.textDecoration[index]};
+        hyphens: ${props.hyphens[index]};
 
         transition: ${props.transition[index]};
         transform: ${props.transform[index]};

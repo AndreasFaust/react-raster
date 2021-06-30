@@ -38,7 +38,7 @@ const ControlGrid: React.FC<any> = (props) => {
       marginBottom={getTopBottomBearing("bottom", props)}
       isControl
     >
-      {[...Array(colspanTotal[breakpoint.index])].map((_, index) => (
+      {[...Array(colspanTotal[breakpoint.index - 1])].map((_, index) => (
         <Box
           key={index}
           display="flex"

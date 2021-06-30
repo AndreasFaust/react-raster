@@ -67,6 +67,7 @@ export default function useUndefinedProps(props) {
     lineHeight,
     letterSpacing,
     textDecoration,
+    hyphens,
 
     transition,
     animation,
