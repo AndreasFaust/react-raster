@@ -116,6 +116,7 @@ const StyledBoxStyles = styled(Container)<Props>`
         position: ${props.position[index]};
         z-index: ${props.zIndex[index]};
         display: ${props.display[index]};
+        pointer-events: ${props.pointerEvents[index]};
 
         width: ${props.width[index]};
         min-width: ${props.minWidth[index]};

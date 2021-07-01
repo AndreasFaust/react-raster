@@ -129,6 +129,8 @@ export default function useNormalize(
     top: normalizeProps(breakpoints, mergedProps.top),
     bottom: normalizeProps(breakpoints, mergedProps.bottom),
 
+    pointerEvents: normalizeProps(breakpoints, mergedProps.pointerEvents),
+
     gridTemplateRows: normalizeProps(breakpoints, mergedProps.gridTemplateRows),
     gridColumn: normalizeProps(breakpoints, mergedProps.gridColumn),
     gridAutoRows: normalizeProps(breakpoints, mergedProps.gridAutoRows),

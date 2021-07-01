@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import Box from "../src";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const buildThresholdArray = () => Array.from(Array(100).keys(), (i) => i / 100);
 
 const ExamplePage = () => {
-  const [opacity, setOpacity] = React.useState(1);
+  const [opacity, setOpacity] = React.useState(false);
   function onIntersect(entry, observer) {
     console.log("INTERSECT");
     // console.log(entry);
@@ -25,8 +25,25 @@ const ExamplePage = () => {
       background="pink"
       styles="color: red;"
       minHeight={"100px"}
+      onClick={() => setOpacity((prev) => !prev)}
     >
-      <Box background="yellow">Hallo ich bin ein langer Text!!!</Box>
+      <AnimatePresence>
+        {opacity && (
+          <Box
+            background="yellow"
+            height="25vh"
+            component={
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              />
+            }
+          >
+            Hallo ich bin ein langer Text!!!
+          </Box>
+        )}
+      </AnimatePresence>
       <Box
         background="yellow"
         marginTop="100vh"

@@ -29,6 +29,8 @@ export default function useUndefinedProps(props) {
     component,
     innerHTML,
 
+    pointerEvents,
+
     onResize,
     onIntersect,
     root,

@@ -39,6 +39,7 @@ export interface Props
   overflow?: string | string[];
   overflowX?: string | string[];
   overflowY?: string | string[];
+  pointerEvents?: string | string[];
 
   ////////////////////////////////////////
   // Advanced
