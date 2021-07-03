@@ -16,6 +16,7 @@ export default function normalizeProps(
   prop?: number | number[] | string | string[],
   defaultValue?: string | number
 ): any[] {
+  if (typeof prop === undefined || typeof prop === null) return [];
   const breakpointsLength = breakpoints.length;
   let propArray = makeArray(prop);
   if (propArray.length < breakpointsLength)

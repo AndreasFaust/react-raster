@@ -5,7 +5,7 @@ export default function normalizeDisplay(
   display: string | string[],
   hasChildBoxes: boolean
 ): string[] {
-  const displayNormalized = normalizeProps(breakpoints, display);
+  const displayNormalized = normalizeProps(breakpoints, display || [null]);
   return displayNormalized.map((displayValue) => {
     if (displayValue) return displayValue;
     return hasChildBoxes ? "grid" : "block";
