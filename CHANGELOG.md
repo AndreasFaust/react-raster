@@ -1,3 +1,9 @@
+#### 8.0.1 (2021-07-03)
+
+##### Other Changes
+
+*  performance optimization (3295e80c)
+
 #### 7.0.7 (2021-03-13)
 
 ##### Documentation Changes
