@@ -40,8 +40,8 @@ yarn add react-raster styled-components react react-dom
 ## Basic Usage
 
 - `react-raster` has only one components called **Box**.
-- `Box` is the element, that gets positioned inside the Grid.
-- Boxes and Grids can be **freely nested inside each other**.
+- Define `brekpoints` and a `colspan` to start a new Grid and nest `Box`-Elements inside each other, preserving the Grid.
+- Further style your `Box`-Elements directly via `props`.
 
 ```jsx
 <Box
@@ -55,15 +55,28 @@ yarn add react-raster styled-components react react-dom
   gridColumnGap={"2vw"}
   control
 >
-  <Box cols={[6, 6, 3]}>
-    <h1>Hello World!</h1>
+  <Box as="h1" cols={[6, 6, 3]} height={["25vh", "200px"]}>
+    Hello World!
   </Box>
-  <Box cols={[6, 6, 3]}>
-    <Box cols={[4, 4, 2]} marginLeft={[2, 2, 1]}>
-      <h2>Stop</h2>
+  <Box cols={[6, 6, 3]} background="blue" height="50vh">
+    <Box
+      as="h2"
+      cols={[4, 4, 2]}
+      marginLeft={[2, 2, 1]}
+      color="white"
+      alignContent="center"
+      justifyContent="center"
+    >
+      Stop
     </Box>
-    <Box cols={[4, 4, 2]} paddingLeft={[2, 2, 1]}>
-      <h2>Wars!</h2>
+    <Box
+      cols={[4, 4, 2]}
+      paddingLeft={[2, 2, 1]}
+      color="white"
+      alignContent="center"
+      justifyContent="center"
+    >
+      Wars!
     </Box>
   </Box>
 </Box>
