@@ -78,7 +78,6 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
             gridRowGap: propsNormalized.gridRowGap,
             gridColumnGap: propsNormalized.gridColumnGap,
             colspan: propsNormalized.colspan,
-            media: propsNormalized.media,
             controlIsVisible,
             controlColor: propsNormalized.controlColor,
             registerChildBox: () => registerChildBox(true),

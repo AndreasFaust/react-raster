@@ -119,7 +119,6 @@ export default function useNormalize(
 
     controlColor: mergedProps.controlColor,
 
-    // media: getMediaQueries(breakpoints),
     styles: normalizeProps(breakpoints, mergedProps.styles),
 
     width: normalizeProps(breakpoints, mergedProps.width),

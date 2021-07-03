@@ -9,7 +9,6 @@ export interface ContextProps {
   gridRowGap?: string[];
   gridColumnGap?: string[];
   colspan?: number[];
-  media?: any[];
   controlIsVisible?: boolean;
   controlColor?: string;
   registerChildBox?: () => void;
