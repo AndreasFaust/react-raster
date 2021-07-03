@@ -1,3 +1,5 @@
+import React from "react";
+
 import getColsTotal from "./getColsTotal";
 import getColsEffective from "./getColsEffective";
 import normalizeProps from "./normalizeProps";
@@ -20,6 +22,7 @@ export default function useNormalize(
     context.breakpoints || [0, 432, 768, 1024, 1200, 1400];
 
   const mergedProps = { ...context, ...props };
+  console.log(mergedProps);
 
   const breakpoint = useCurrentBreakpoint({
     activateEventListener: !!props.breakpoints || !!props.colspan,
@@ -116,7 +119,7 @@ export default function useNormalize(
 
     controlColor: mergedProps.controlColor,
 
-    media: getMediaQueries(breakpoints),
+    // media: getMediaQueries(breakpoints),
     styles: normalizeProps(breakpoints, mergedProps.styles),
 
     width: normalizeProps(breakpoints, mergedProps.width),

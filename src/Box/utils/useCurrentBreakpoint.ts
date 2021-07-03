@@ -17,14 +17,10 @@ export default function useCurrentBreakpoint({
   contextBreakpoint,
   breakpoints,
 }: Props): currentBreakpoint {
-  const [currentBp, setCurrentBp] = React.useState<currentBreakpoint>(
-    contextBreakpoint || {
-      index: 1,
-      value: 0,
-    }
-  );
-  React.useEffect(() => {
-    if (!activateEventListener) return;
+  const [currentBp, setCurrentBp] =
+    React.useState<currentBreakpoint>(contextBreakpoint);
+
+  React.useLayoutEffect(() => {
     function onResize() {
       const w = window.innerWidth;
       let bp = { index: 1, value: 0 };
@@ -35,10 +31,12 @@ export default function useCurrentBreakpoint({
       });
       setCurrentBp(bp);
     }
-    onResize();
-    const dOnResize = debounce(onResize, 100);
-    window.addEventListener("resize", dOnResize);
-    return () => window.removeEventListener("resize", dOnResize);
+    if (!activateEventListener) {
+      onResize();
+      const dOnResize = debounce(onResize, 100);
+      window.addEventListener("resize", dOnResize);
+      return () => window.removeEventListener("resize", dOnResize);
+    }
   }, []);
   return currentBp;
 }

@@ -25,9 +25,16 @@ const ExamplePage = () => {
       background="pink"
       styles="color: red;"
       minHeight={"100px"}
-      onClick={() => setOpacity((prev) => !prev)}
+      // onClick={() => setOpacity((prev) => !prev)}
     >
-      <AnimatePresence>
+      <Box
+        cols={[2, 5, 8, 9]}
+        height="500px"
+        // opacity={opacity ? 1 : 0}
+        background="yellow"
+      ></Box>
+
+      {/* <AnimatePresence>
         {opacity && (
           <Box
             background="yellow"
@@ -48,16 +55,12 @@ const ExamplePage = () => {
         background="yellow"
         marginTop="100vh"
         height="50vh"
-        opacity={opacity}
+        opacity={opacity ? 1 : 0}
         onIntersect={onIntersect}
         // threshold={buildThresholdArray()}
       >
         Intersection!!!
-      </Box>
-      {/* <Box>
-          <Box height="500px" background="yellow">
-          </Box>
-        </Box> */}
+      </Box> */}
     </Box>
   );
 };

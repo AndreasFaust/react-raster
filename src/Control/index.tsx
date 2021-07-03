@@ -36,6 +36,7 @@ const ControlGrid: React.FC<any> = (props) => {
       marginRight={getSideBearing("right", props)}
       marginTop={getTopBottomBearing("top", props)}
       marginBottom={getTopBottomBearing("bottom", props)}
+      pointerEvents="none"
       isControl
     >
       {[...Array(colspanTotal[breakpoint.index - 1])].map((_, index) => (

@@ -15,7 +15,9 @@ export interface ContextProps {
   registerChildBox?: () => void;
 }
 
-const Context = React.createContext<ContextProps>({});
+const Context = React.createContext<ContextProps>({
+  breakpoint: { index: 1, value: 0 },
+});
 
 function useRaster(): ContextProps {
   return React.useContext(Context);

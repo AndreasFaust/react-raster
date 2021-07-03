@@ -1,8 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React from "react";
 import Container from "./utils/container";
 
 interface Props {
+  index: number;
+
   position: string[];
   zIndex: (string | number)[];
   display: string[];
@@ -110,124 +112,112 @@ interface Props {
 const StyledBoxStyles = styled(Container)<Props>`
   box-sizing: border-box;
 
-  ${(props) =>
-    props.media.map((media, index: number) => {
-      return media`
-        position: ${props.position[index]};
-        z-index: ${props.zIndex[index]};
-        display: ${props.display[index]};
-        pointer-events: ${props.pointerEvents[index]};
+  ${(props) => css`
+    position: ${props.position[props.index]};
+    z-index: ${props.zIndex[props.index]};
+    display: ${props.display[props.index]};
+    pointer-events: ${props.pointerEvents[props.index]};
 
-        width: ${props.width[index]};
-        min-width: ${props.minWidth[index]};
-        max-width: ${props.maxWidth[index]};
-        height: ${props.height[index]};
-        min-height: ${props.minHeight[index]};
-        max-height: ${props.maxHeight[index]};
+    width: ${props.width[props.index]};
+    min-width: ${props.minWidth[props.index]};
+    max-width: ${props.maxWidth[props.index]};
+    height: ${props.height[props.index]};
+    min-height: ${props.minHeight[props.index]};
+    max-height: ${props.maxHeight[props.index]};
 
-        padding-left: ${props.padding.left[index]};
-        padding-right: ${props.padding.right[index]};
-        padding-top: ${props.padding.top[index]};
-        padding-bottom: ${props.padding.bottom[index]};
+    padding-left: ${props.padding.left[props.index]};
+    padding-right: ${props.padding.right[props.index]};
+    padding-top: ${props.padding.top[props.index]};
+    padding-bottom: ${props.padding.bottom[props.index]};
 
-        margin-left: ${props.margin.left[index]};
-        margin-right: ${props.margin.right[index]};
-        margin-top: ${props.margin.top[index]};
-        margin-bottom: ${props.margin.bottom[index]};
-        
-        order: ${props.order[index]};
+    margin-left: ${props.margin.left[props.index]};
+    margin-right: ${props.margin.right[props.index]};
+    margin-top: ${props.margin.top[props.index]};
+    margin-bottom: ${props.margin.bottom[props.index]};
 
-        top: ${props.top[index]};
-        bottom: ${props.bottom[index]};
-        left: ${props.left[index]};
-        right: ${props.right[index]};
+    order: ${props.order[props.index]};
 
-        align-items: ${props.alignItems[index]};
-        align-content: ${props.alignContent[index]};
-        align-self: ${props.alignSelf[index]};
-        justify-content: ${props.justifyContent[index]};
-        justify-items: ${props.justifyItems[index]};
-        justify-self: ${props.justifySelf[index]};
+    top: ${props.top[props.index]};
+    bottom: ${props.bottom[props.index]};
+    left: ${props.left[props.index]};
+    right: ${props.right[props.index]};
 
-        flex-direction: ${props.flexDirection[index]};
-        flex-wrap: ${props.flexWrap[index]};
-        flex-shrink: ${props.flexShrink[index]};
-        flex-grow: ${props.flexGrow[index]};
+    align-items: ${props.alignItems[props.index]};
+    align-content: ${props.alignContent[props.index]};
+    align-self: ${props.alignSelf[props.index]};
+    justify-content: ${props.justifyContent[props.index]};
+    justify-items: ${props.justifyItems[props.index]};
+    justify-self: ${props.justifySelf[props.index]};
 
-        background: ${props.background[index]};
-        background-color: ${props.backgroundColor[index]};
-        background-image: ${props.backgroundImage[index]};
-        background-position: ${props.backgroundPosition[index]};
-        background-size: ${props.backgroundSize[index]};
-        background-attachment: ${props.backgroundAttachment[index]};
+    flex-direction: ${props.flexDirection[props.index]};
+    flex-wrap: ${props.flexWrap[props.index]};
+    flex-shrink: ${props.flexShrink[props.index]};
+    flex-grow: ${props.flexGrow[props.index]};
 
-        filter: ${props.filter[index]};
-        backdrop-filter: ${props.backdropFilter[index]};
-        mix-blend-mode: ${props.mixBlendMode[index]};
-        background-blend-mode: ${props.backgroundBlendMode[index]};
-        text-shadow: ${props.textShadow[index]};
-        box-shadow: ${props.boxShadow[index]};
-        -webkit-text-stroke: ${props.textStroke[index]};
-        text-stroke: ${props.textStroke[index]};
+    background: ${props.background[props.index]};
+    background-color: ${props.backgroundColor[props.index]};
+    background-image: ${props.backgroundImage[props.index]};
+    background-position: ${props.backgroundPosition[props.index]};
+    background-size: ${props.backgroundSize[props.index]};
+    background-attachment: ${props.backgroundAttachment[props.index]};
 
-        border: ${props.border[index]};
-        border-left: ${props.borderLeft[index]};
-        border-right: ${props.borderRight[index]};
-        border-top: ${props.borderTop[index]};
-        border-bottom: ${props.borderBottom[index]};
+    filter: ${props.filter[props.index]};
+    backdrop-filter: ${props.backdropFilter[props.index]};
+    mix-blend-mode: ${props.mixBlendMode[props.index]};
+    background-blend-mode: ${props.backgroundBlendMode[props.index]};
+    text-shadow: ${props.textShadow[props.index]};
+    box-shadow: ${props.boxShadow[props.index]};
+    -webkit-text-stroke: ${props.textStroke[props.index]};
+    text-stroke: ${props.textStroke[props.index]};
 
-        font-family: ${props.fontFamily[index]};
-        font-size: ${props.fontSize[index]};
-        color: ${props.color[index]};
-        line-height: ${props.lineHeight[index]};
-        letter-spacing: ${props.letterSpacing[index]};
-        text-decoration: ${props.textDecoration[index]};
-        hyphens: ${props.hyphens[index]};
+    border: ${props.border[props.index]};
+    border-left: ${props.borderLeft[props.index]};
+    border-right: ${props.borderRight[props.index]};
+    border-top: ${props.borderTop[props.index]};
+    border-bottom: ${props.borderBottom[props.index]};
 
-        transition: ${props.transition[index]};
-        transform: ${props.transform[index]};
-        animation: ${props.animation[index]};
-        opacity: ${props.opacity[index]};
+    font-family: ${props.fontFamily[props.index]};
+    font-size: ${props.fontSize[props.index]};
+    color: ${props.color[props.index]};
+    line-height: ${props.lineHeight[props.index]};
+    letter-spacing: ${props.letterSpacing[props.index]};
+    text-decoration: ${props.textDecoration[props.index]};
+    hyphens: ${props.hyphens[props.index]};
 
-        overflow: ${props.overflow[index]};
-        overflow-x: ${props.overflowX[index]};
-        overflow-y: ${props.overflowY[index]};
+    transition: ${props.transition[props.index]};
+    transform: ${props.transform[props.index]};
+    animation: ${props.animation[props.index]};
+    opacity: ${props.opacity[props.index]};
 
-        ${props.styles[index] ? props.styles[index] : ""}
-      `;
-    })}
+    overflow: ${props.overflow[props.index]};
+    overflow-x: ${props.overflowX[props.index]};
+    overflow-y: ${props.overflowY[props.index]};
+
+    ${props.styles[props.index] ? props.styles[props.index] : ""}
+  `}
 
   ${(props) =>
-    props.media.map((media, index: number) => {
-      return (
-        props.display[index] === "grid" &&
-        media`
-        grid-template-columns: repeat(${(props) => props.colspan[index]}, 1fr);
+    props.display[props.index] === "grid" &&
+    css`
+      grid-template-columns: repeat(${props.colspan[props.index]}, 1fr);
 
-        grid-auto-rows: ${(props) => props.gridAutoRows[index]};
-        grid-template-rows: ${(props) => props.gridTemplateRows[index]};
-        grid-template-columns: ${(props) => props.gridTemplateColumns[index]};
-        grid-auto-flow: ${(props) => props.autoFlow[index]};
+      grid-auto-rows: ${props.gridAutoRows[props.index]};
+      grid-template-rows: ${props.gridTemplateRows[props.index]};
+      grid-template-columns: ${props.gridTemplateColumns[props.index]};
+      grid-auto-flow: ${props.autoFlow[props.index]};
 
-        grid-column-gap: ${props.gridColumnGap[index]};
-        grid-row-gap: ${props.gridRowGap[index]};
+      grid-column-gap: ${props.gridColumnGap[props.index]};
+      grid-row-gap: ${props.gridRowGap[props.index]};
 
-        ${
-          props.isControl && props.gridColumnGap[index] === "0px"
-            ? "grid-column-gap: 1px;"
-            : ""
-        }
-      `
-      );
-    })}
+      ${props.isControl && props.gridColumnGap[props.index] === "0px"
+        ? "grid-column-gap: 1px;"
+        : ""}
+    `}
 
-  ${(props) =>
-    props.media.map((media, index: number) => {
-      return media`
-        grid-column: auto / span ${props.colsTotal[index]};
-        grid-column: ${(props) => props.gridColumn[index]};      `;
-    })}
-
+  ${(props) => css`
+    grid-column: auto / span ${props.colsTotal[props.index]};
+    grid-column: ${props.gridColumn[props.index]};
+  `}
 
   ${(props) =>
     props.as === "img" &&

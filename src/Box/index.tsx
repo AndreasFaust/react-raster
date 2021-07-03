@@ -41,10 +41,14 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
     onIntersect: props.onIntersect,
   });
 
+  console.log(context.breakpoint);
+  console.log(propsNormalized.breakpoint);
+
   return (
     <StyledBox
       {...propsNormalized}
       id={id.current}
+      index={propsNormalized.breakpoint.index - 1}
       tag={props.as}
       component={props.component}
       className={
@@ -89,4 +93,4 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
 
 Box.displayName = "Box";
 
-export default React.memo(Box);
+export default Box;
