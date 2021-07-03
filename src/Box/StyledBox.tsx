@@ -91,7 +91,6 @@ interface Props {
   transform: string[];
   opacity: number[];
 
-  media: any;
   tag?: string;
   controlIsVisible: boolean;
   controlColor: string;
