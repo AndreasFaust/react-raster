@@ -27,7 +27,11 @@ export default function useNormalize(
     breakpoints,
   });
 
-  const display = normalizeDisplay(breakpoints, mergedProps, hasChildBoxes);
+  const display = normalizeDisplay(
+    breakpoints,
+    mergedProps.display,
+    hasChildBoxes
+  );
 
   const gridRowGap = normalizeProps(breakpoints, mergedProps.gridRowGap, "0px");
   const gridColumnGap = normalizeProps(

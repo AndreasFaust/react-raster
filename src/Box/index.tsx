@@ -89,5 +89,4 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
 
 Box.displayName = "Box";
 
-export default Box;
-export { Box };
+export default React.memo(Box);
