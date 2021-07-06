@@ -12,6 +12,9 @@ interface Props {
   breakpoints: number[];
 }
 
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 export default function useCurrentBreakpoint({
   activateEventListener,
   contextBreakpoint,
@@ -20,7 +23,7 @@ export default function useCurrentBreakpoint({
   const [currentBp, setCurrentBp] =
     React.useState<currentBreakpoint>(contextBreakpoint);
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     function onResize() {
       const w = window.innerWidth;
       let bp = { index: 1, value: 0 };

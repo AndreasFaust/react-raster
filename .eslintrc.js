@@ -1,5 +1,5 @@
 module.exports = {
-  extends: "react-app",
+  extends: "next",
   rules: {
     quotes: ["error", "single"],
     semi: ["error", "never"],
