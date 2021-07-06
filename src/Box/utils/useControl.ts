@@ -3,16 +3,18 @@ import React from "react";
 const useControl = (control?: boolean, controlIsVisible?: boolean): boolean => {
   const [isVisible, setIsVisible] = React.useState(false);
   React.useEffect(() => {
+    setIsVisible(!!controlIsVisible);
+  }, [controlIsVisible]);
+
+  React.useEffect(() => {
     function onKeyup(event) {
       if (event.keyCode !== 27) return;
       setIsVisible((prevState) => !prevState);
     }
-    if (!control) {
-      setIsVisible(controlIsVisible);
-      return;
+    if (control) {
+      document.addEventListener("keyup", onKeyup);
+      return () => document.removeEventListener("keyup", onKeyup);
     }
-    document.addEventListener("keyup", onKeyup);
-    return () => document.removeEventListener("keyup", onKeyup);
   }, []);
 
   return isVisible;
