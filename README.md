@@ -39,9 +39,9 @@ yarn add react-raster styled-components react react-dom
 
 ## Basic Usage
 
-- `react-raster` has only one components called **Box**.
-- Define `brekpoints` and a `colspan` to start a new Grid and nest `Box`-Elements inside each other, preserving the Grid.
-- Further style your `Box`-Elements directly via `props`.
+- `react-raster` has only one component called **Box**.
+- Define `brekpoints` and a `colspan` to start a new Grid and nest `Box`-Elements inside each other — they will preserve the Grid automatically.
+- Further style your `Box`-Elements directly via `props`. The API is close to CSS, only CamelCase.
 
 ```jsx
 <Box

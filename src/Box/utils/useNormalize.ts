@@ -22,7 +22,6 @@ export default function useNormalize(
     context.breakpoints || [0, 432, 768, 1024, 1200, 1400];
 
   const mergedProps = { ...context, ...props };
-  console.log(mergedProps);
 
   const breakpoint = useCurrentBreakpoint({
     activateEventListener: !!props.breakpoints || !!props.colspan,
