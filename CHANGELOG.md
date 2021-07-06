@@ -1,3 +1,9 @@
+#### 8.0.2 (2021-07-06)
+
+##### Other Changes
+
+*  correct readme. (63e72a3c)
+
 #### 8.0.1 (2021-07-03)
 
 ##### Other Changes

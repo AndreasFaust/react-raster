@@ -382,7 +382,6 @@ function useNormalize(props, context, hasChildBoxes) {
     var breakpoints = props.breakpoints ||
         context.breakpoints || [0, 432, 768, 1024, 1200, 1400];
     var mergedProps = __assign(__assign({}, context), props);
-    console.log(mergedProps);
     var breakpoint = useCurrentBreakpoint({
         activateEventListener: !!props.breakpoints || !!props.colspan,
         contextBreakpoint: context.breakpoint,
@@ -619,8 +618,6 @@ var Box = React__default['default'].forwardRef(function (props, ref) {
         threshold: props.threshold,
         onIntersect: props.onIntersect,
     });
-    console.log(context.breakpoint);
-    console.log(propsNormalized.breakpoint);
     return (React__default['default'].createElement(StyledBox, __assign({}, propsNormalized, { id: id.current, index: propsNormalized.breakpoint.index - 1, tag: props.as, component: props.component, className: props.className
             ? [defaultClass, props.className].join(" ")
             : defaultClass, controlIsVisible: controlIsVisible, ref: boxRef, styles: propsNormalized.styles, isControl: props.isControl, attrs: __assign(__assign({}, undefinedProps), (props.innerHTML && {
