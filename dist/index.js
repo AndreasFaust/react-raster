@@ -331,10 +331,11 @@ function getColspan(colspan, paddingLeft, paddingRight) {
     });
 }
 
+var useIsomorphicLayoutEffect = typeof window !== "undefined" ? React__default['default'].useLayoutEffect : React__default['default'].useEffect;
 function useCurrentBreakpoint(_a) {
     var activateEventListener = _a.activateEventListener, contextBreakpoint = _a.contextBreakpoint, breakpoints = _a.breakpoints;
     var _b = React__default['default'].useState(contextBreakpoint), currentBp = _b[0], setCurrentBp = _b[1];
-    React__default['default'].useLayoutEffect(function () {
+    useIsomorphicLayoutEffect(function () {
         function onResize() {
             var w = window.innerWidth;
             var bp = { index: 1, value: 0 };
@@ -510,17 +511,18 @@ function useNormalize(props, context, hasChildBoxes) {
 var useControl = function (control, controlIsVisible) {
     var _a = React__default['default'].useState(false), isVisible = _a[0], setIsVisible = _a[1];
     React__default['default'].useEffect(function () {
+        setIsVisible(!!controlIsVisible);
+    }, [controlIsVisible]);
+    React__default['default'].useEffect(function () {
         function onKeyup(event) {
             if (event.keyCode !== 27)
                 return;
             setIsVisible(function (prevState) { return !prevState; });
         }
-        if (!control) {
-            setIsVisible(controlIsVisible);
-            return;
+        if (control) {
+            document.addEventListener("keyup", onKeyup);
+            return function () { return document.removeEventListener("keyup", onKeyup); };
         }
-        document.addEventListener("keyup", onKeyup);
-        return function () { return document.removeEventListener("keyup", onKeyup); };
     }, []);
     return isVisible;
 };

@@ -1,3 +1,16 @@
+#### 8.0.3 (2021-07-06)
+
+##### Build System / Dependencies
+
+* **deps:**
+  *  bump hosted-git-info from 2.8.8 to 2.8.9 (40352d24)
+  *  bump elliptic from 6.5.3 to 6.5.4 (69bbfa9f)
+
+##### Bug Fixes
+
+*  fix control (e62f1b38)
+*  add isomorphicLayoutEffect (a48c35c8)
+
 #### 8.0.2 (2021-07-06)
 
 ##### Other Changes
