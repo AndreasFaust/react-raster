@@ -100,6 +100,9 @@ export interface Props
   color?: string | string[];
   fontFamily?: string | string[];
   fontSize?: string | string[];
+  fontWeight?: string | string[];
+  fontStyle?: string | string[];
+  textAlign?: string | string[];
   lineHeight?: string | string[];
   letterSpacing?: string | string[];
   textDecoration?: string | string[];

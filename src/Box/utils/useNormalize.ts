@@ -190,6 +190,9 @@ export default function useNormalize(
 
     fontFamily: normalizeProps(breakpoints, mergedProps.fontFamily),
     fontSize: normalizeProps(breakpoints, mergedProps.fontSize),
+    fontWeight: normalizeProps(breakpoints, mergedProps.fontWeight),
+    fontStyle: normalizeProps(breakpoints, mergedProps.fontStyle),
+    textAlign: normalizeProps(breakpoints, mergedProps.textAlign),
     color: normalizeProps(breakpoints, mergedProps.color),
     lineHeight: normalizeProps(breakpoints, mergedProps.lineHeight),
     letterSpacing: normalizeProps(breakpoints, mergedProps.letterSpacing),

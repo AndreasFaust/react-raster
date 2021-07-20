@@ -60,6 +60,11 @@ interface Props {
   textStroke: string[];
 
   color: string[];
+  fontFamily: string[];
+  fontSize: string[];
+  fontWeight: string[];
+  fontStyle: string[];
+  textAlign: string[];
   lineHeight: string[];
   letterSpacing: string[];
   textDecoration: string[];
@@ -177,6 +182,9 @@ const StyledBoxStyles = styled(Container)<Props>`
 
     font-family: ${props.fontFamily[props.index]};
     font-size: ${props.fontSize[props.index]};
+    font-weight: ${props.fontWeight[props.index]};
+    font-style: ${props.fontStyle[props.index]};
+    text-align: ${props.textAlign[props.index]};
     color: ${props.color[props.index]};
     line-height: ${props.lineHeight[props.index]};
     letter-spacing: ${props.letterSpacing[props.index]};
