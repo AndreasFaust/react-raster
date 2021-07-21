@@ -1,3 +1,9 @@
+#### 8.0.5 (2021-07-21)
+
+##### Bug Fixes
+
+*  remove unnecessary moduls (9adcb911)
+
 #### 8.0.4 (2021-07-20)
 
 ##### New Features
