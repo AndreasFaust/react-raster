@@ -5,7 +5,7 @@
   "author": "AndreasFaust",
   "license": "MIT",
   "repository": "AndreasFaust/react-raster",
-  "homepage": "https://andreasfaust.github.io/react-raster/",
+  "homepage": "https://andreasfaust.github.io/react-raster-docs/",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -40,13 +40,11 @@
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "^17.0.2",
-    "react-select": "^4.3.1",
     "rollup": "^2.52.3",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-typescript2": "^0.30.0",
     "styled-components": "^5.3.0",
-    "tslib": "^2.3.0",
     "typescript": "^4.3.4"
   },
   "peerDependencies": {
