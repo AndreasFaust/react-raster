@@ -3,23 +3,12 @@ import styled from "styled-components";
 
 import Box from "../Box";
 
-function getSideBearing(side: string, props: any): any {
-  const sideUppercase = side.replace(/^\w/, (c) => c.toUpperCase());
-  return props[`padding${sideUppercase}InCols`].map((padding, index) => {
-    if (typeof padding === "number") {
-      return 0;
-    }
-    return props.padding[side][index] || 0;
-  });
-}
-function getTopBottomBearing(side: string, props: any): any {
-  return props.padding[side].map((padding, index) => {
-    return padding || 0;
-  });
+function getSideBearing(padding: string | number): string | number {
+  return typeof padding === "number" ? 0 : padding;
 }
 
 const ControlGrid: React.FC<any> = (props) => {
-  const { breakpoint, colspanTotal } = props;
+  const { colspanTotal } = props;
   return (
     <Box
       position="absolute"
@@ -32,14 +21,14 @@ const ControlGrid: React.FC<any> = (props) => {
       bottom={0}
       left={0}
       right={0}
-      marginLeft={getSideBearing("left", props)}
-      marginRight={getSideBearing("right", props)}
-      marginTop={getTopBottomBearing("top", props)}
-      marginBottom={getTopBottomBearing("bottom", props)}
+      marginLeft={getSideBearing(props.paddingRaw.left)}
+      marginRight={getSideBearing(props.paddingRaw.right)}
+      marginTop={getSideBearing(props.paddingRaw.top)}
+      marginBottom={getSideBearing(props.paddingRaw.bottom)}
       pointerEvents="none"
       isControl
     >
-      {[...Array(colspanTotal[breakpoint])].map((_, index) => (
+      {[...Array(colspanTotal)].map((_, index) => (
         <Box
           key={index}
           display="flex"

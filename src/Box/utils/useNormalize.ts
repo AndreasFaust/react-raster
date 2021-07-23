@@ -164,6 +164,8 @@ export default function useNormalize(
     colspan,
     margin,
     padding,
+    marginRaw,
+    paddingRaw,
     display,
     gap,
     controlColor: props.controlColor || context.controlColor,

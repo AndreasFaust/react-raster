@@ -5,8 +5,9 @@ type ValidProp = number | string;
 
 function convertStringToNumber(prop: ValidProp): ValidProp {
   if (typeof prop !== "string") return prop;
-  if (typeof +prop === "number") return +prop;
-  return prop;
+  const parsed = +prop;
+  if (Object.is(NaN, parsed)) return prop;
+  return parsed;
 }
 
 function getProp(prop: Prop, breakpoint: number): ValidProp {

@@ -3,12 +3,16 @@ import useProp from "../useProp";
 import SpacingObject from "./spacingObject";
 import convertIfNumber from "./convertIfNumber";
 
+function getShortArray(spacing: string | number): (string | number)[] {
+  if (typeof spacing === "number") {
+    return [spacing];
+  }
+  return spacing.split(" ").map((string) => convertIfNumber(string));
+}
+
 function getShortObject(spacing?: string): SpacingObject {
   if (!spacing) return { top: null, bottom: null, left: null, right: null };
-  console.log(spacing);
-  const shortArray = spacing
-    .split(" ")
-    .map((string) => convertIfNumber(string));
+  const shortArray = getShortArray(spacing);
 
   switch (shortArray.length) {
     case 1:
