@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { nanoid } from "nanoid/non-secure";
 
 import useCombinedRefs from "./utils/useCombinedRefs";
 import useResizeObserver from "./utils/useResizeObserver";
@@ -15,7 +14,6 @@ import { Props } from "./props";
 
 const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const context = useContext(Context);
-  const id = React.useRef<string>(nanoid());
 
   const [hasChildBoxes, registerChildBox] = React.useState(false);
   React.useEffect(() => {
@@ -49,8 +47,6 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   return (
     <StyledBox
       {...propsNormalized}
-      id={id.current}
-      index={propsNormalized.breakpoint}
       tag={props.as} // avoid name-collision with styled-component’s "as"
       component={props.component}
       className={
@@ -60,7 +56,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
       }
       controlIsVisible={controlIsVisible}
       ref={boxRef}
-      styles={propsNormalized.styles}
+      styles={propsNormalized.styles as string}
       isControl={props.isControl}
       attrs={{
         ...undefinedProps,
@@ -93,4 +89,4 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
 
 Box.displayName = "Box";
 
-export default Box;
+export default React.memo(Box);

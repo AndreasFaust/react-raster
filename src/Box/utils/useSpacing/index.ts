@@ -9,7 +9,12 @@ export default function useSpacing(
   right?: string | number | (string | number)[],
   top?: string | number | (string | number)[],
   bottom?: string | number | (string | number)[]
-) {
+): {
+  top: string | number;
+  bottom: string | number;
+  left: string | number;
+  right: string | number;
+} {
   const shortNormalized = useSpacingShort(breakpoint, short);
   const leftNormalized = useProp(breakpoint, left);
   const rightNormalized = useProp(breakpoint, right);
@@ -18,10 +23,10 @@ export default function useSpacing(
 
   return React.useMemo(
     () => ({
-      left: leftNormalized || shortNormalized.left,
-      right: rightNormalized || shortNormalized.right,
-      top: topNormalized || shortNormalized.top,
-      bottom: bottomNormalized || shortNormalized.bottom,
+      left: (leftNormalized || shortNormalized.left) as string | number,
+      right: (rightNormalized || shortNormalized.right) as string | number,
+      top: (topNormalized || shortNormalized.top) as string | number,
+      bottom: (bottomNormalized || shortNormalized.bottom) as string | number,
     }),
     [
       shortNormalized,

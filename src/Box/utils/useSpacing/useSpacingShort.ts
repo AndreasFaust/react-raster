@@ -5,6 +5,7 @@ import convertIfNumber from "./convertIfNumber";
 
 function getShortObject(spacing?: string): SpacingObject {
   if (!spacing) return { top: null, bottom: null, left: null, right: null };
+  console.log(spacing);
   const shortArray = spacing
     .split(" ")
     .map((string) => convertIfNumber(string));

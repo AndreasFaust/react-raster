@@ -2,114 +2,113 @@ import styled, { css } from "styled-components";
 import React from "react";
 import Container from "./utils/container";
 
+type ValidProp = string | number;
+
 interface Props {
-  index: number;
+  position: ValidProp;
+  zIndex: ValidProp;
+  display: ValidProp;
+  colsTotal: ValidProp;
 
-  position: string[];
-  zIndex: (string | number)[];
-  display: string[];
-  colsTotal: number[];
-
-  width: string[];
-  minWidth?: string[];
-  maxWidth?: string[];
-  height: string[];
-  minHeight?: string[];
-  maxHeight?: string[];
+  width: ValidProp;
+  minWidth?: ValidProp;
+  maxWidth?: ValidProp;
+  height: ValidProp;
+  minHeight?: ValidProp;
+  maxHeight?: ValidProp;
 
   padding: {
-    left: (string | number)[];
-    right: (string | number)[];
-    top: (string | number)[];
-    bottom: (string | number)[];
+    left: string;
+    right: string;
+    top: string;
+    bottom: string;
   };
   margin: {
-    left: (string | number)[];
-    right: (string | number)[];
-    top: (string | number)[];
-    bottom: (string | number)[];
+    left: string;
+    right: string;
+    top: string;
+    bottom: string;
   };
 
-  order: (string | number)[];
+  order: ValidProp;
 
-  top: (string | number)[];
-  bottom: (string | number)[];
-  left: (string | number)[];
-  right: (string | number)[];
+  top: ValidProp;
+  bottom: ValidProp;
+  left: ValidProp;
+  right: ValidProp;
 
-  alignItems: string[];
-  alignContent: string[];
-  alignSelf: string[];
-  justifyItems: string[];
-  justifyContent: string[];
-  justifySelf: string[];
+  alignItems: ValidProp;
+  alignContent: ValidProp;
+  alignSelf: ValidProp;
+  justifyItems: ValidProp;
+  justifyContent: ValidProp;
+  justifySelf: ValidProp;
 
-  background: string[];
-  backgroundColor: string[];
-  backgroundImage: string[];
-  backgroundPosition: string[];
-  backgroundSize: string[];
-  backgroundAttachment: string[];
+  background: ValidProp;
+  backgroundColor: ValidProp;
+  backgroundImage: ValidProp;
+  backgroundPosition: ValidProp;
+  backgroundSize: ValidProp;
+  backgroundAttachment: ValidProp;
 
-  filter: string[];
-  backdropFilter: string[];
-  mixBlendMode: string[];
-  backgroundBlendMode: string[];
-  textShadow: string[];
-  boxShadow: string[];
-  textStroke: string[];
+  filter: ValidProp;
+  backdropFilter: ValidProp;
+  mixBlendMode: ValidProp;
+  backgroundBlendMode: ValidProp;
+  textShadow: ValidProp;
+  boxShadow: ValidProp;
+  textStroke: ValidProp;
 
-  color: string[];
-  fontFamily: string[];
-  fontSize: string[];
-  fontWeight: string[];
-  fontStyle: string[];
-  textAlign: string[];
-  lineHeight: string[];
-  letterSpacing: string[];
-  textDecoration: string[];
-  hyphens: string[];
+  color: ValidProp;
+  fontFamily: ValidProp;
+  fontSize: ValidProp;
+  fontWeight: ValidProp;
+  fontStyle: ValidProp;
+  textAlign: ValidProp;
+  lineHeight: ValidProp;
+  letterSpacing: ValidProp;
+  textDecoration: ValidProp;
+  hyphens: ValidProp;
 
-  border: string[];
-  borderLeft: string[];
-  borderRight: string[];
-  borderTop: string[];
-  borderBottom: string[];
+  border: ValidProp;
+  borderLeft: ValidProp;
+  borderRight: ValidProp;
+  borderTop: ValidProp;
+  borderBottom: ValidProp;
 
-  colspan: number[];
+  colspan: ValidProp;
 
-  gridAutoRows: string[];
-  gridTemplateRows: string[];
-  gridTemplateColumns: string[];
-  autoFlow: string[];
+  gridAutoRows: ValidProp;
+  gridTemplateRows: ValidProp;
+  gridTemplateColumns: ValidProp;
+  autoFlow: ValidProp;
 
   gap: {
-    row: string[];
-    column: string[];
+    row: string;
+    column: string;
   };
 
-  flexDirection: string[];
-  flexWrap: string[];
-  flexGrow: number[];
-  flexShrink: number[];
+  flexDirection: ValidProp;
+  flexWrap: ValidProp;
+  flexGrow: ValidProp;
+  flexShrink: ValidProp;
 
-  transition: string[];
-  animation: string[];
-  transform: string[];
-  opacity: number[];
+  transition: ValidProp;
+  animation: ValidProp;
+  transform: ValidProp;
+  opacity: ValidProp;
+
+  controlColor: ValidProp;
+
+  overflow?: ValidProp;
+  overflowX?: ValidProp;
+  overflowY?: ValidProp;
 
   tag?: string;
   controlIsVisible: boolean;
-  controlColor: string;
-
-  overflow?: string[];
-  overflowX?: string[];
-  overflowY?: string[];
-
-  id: string;
   component?: React.ReactElement;
   className: string;
-  styles: string[];
+  styles: string;
   attrs: any;
   children: React.ReactNode;
   isControl: boolean;
@@ -119,119 +118,119 @@ const StyledBoxStyles = styled(Container)<Props>`
   box-sizing: border-box;
 
   ${(props) => css`
-    position: ${props.position[props.index]};
-    z-index: ${props.zIndex[props.index]};
-    display: ${props.display[props.index]};
-    pointer-events: ${props.pointerEvents[props.index]};
-    cursor: ${props.cursor[props.index]};
+    position: ${props.position};
+    z-index: ${props.zIndex};
+    display: ${props.display};
+    pointer-events: ${props.pointerEvents};
+    cursor: ${props.cursor};
 
-    width: ${props.width[props.index]};
-    min-width: ${props.minWidth[props.index]};
-    max-width: ${props.maxWidth[props.index]};
-    height: ${props.height[props.index]};
-    min-height: ${props.minHeight[props.index]};
-    max-height: ${props.maxHeight[props.index]};
+    width: ${props.width};
+    min-width: ${props.minWidth};
+    max-width: ${props.maxWidth};
+    height: ${props.height};
+    min-height: ${props.minHeight};
+    max-height: ${props.maxHeight};
 
-    padding-left: ${props.padding.left[props.index]};
-    padding-right: ${props.padding.right[props.index]};
-    padding-top: ${props.padding.top[props.index]};
-    padding-bottom: ${props.padding.bottom[props.index]};
+    padding-left: ${props.padding.left};
+    padding-right: ${props.padding.right};
+    padding-top: ${props.padding.top};
+    padding-bottom: ${props.padding.bottom};
 
-    margin-left: ${props.margin.left[props.index]};
-    margin-right: ${props.margin.right[props.index]};
-    margin-top: ${props.margin.top[props.index]};
-    margin-bottom: ${props.margin.bottom[props.index]};
+    margin-left: ${props.margin.left};
+    margin-right: ${props.margin.right};
+    margin-top: ${props.margin.top};
+    margin-bottom: ${props.margin.bottom};
 
-    order: ${props.order[props.index]};
+    order: ${props.order};
 
-    top: ${props.top[props.index]};
-    bottom: ${props.bottom[props.index]};
-    left: ${props.left[props.index]};
-    right: ${props.right[props.index]};
+    top: ${props.top};
+    bottom: ${props.bottom};
+    left: ${props.left};
+    right: ${props.right};
 
-    align-items: ${props.alignItems[props.index]};
-    align-content: ${props.alignContent[props.index]};
-    align-self: ${props.alignSelf[props.index]};
-    justify-content: ${props.justifyContent[props.index]};
-    justify-items: ${props.justifyItems[props.index]};
-    justify-self: ${props.justifySelf[props.index]};
+    align-items: ${props.alignItems};
+    align-content: ${props.alignContent};
+    align-self: ${props.alignSelf};
+    justify-content: ${props.justifyContent};
+    justify-items: ${props.justifyItems};
+    justify-self: ${props.justifySelf};
 
-    flex-direction: ${props.flexDirection[props.index]};
-    flex-wrap: ${props.flexWrap[props.index]};
-    flex-shrink: ${props.flexShrink[props.index]};
-    flex-grow: ${props.flexGrow[props.index]};
+    flex-direction: ${props.flexDirection};
+    flex-wrap: ${props.flexWrap};
+    flex-shrink: ${props.flexShrink};
+    flex-grow: ${props.flexGrow};
 
-    background: ${props.background[props.index]};
-    background-color: ${props.backgroundColor[props.index]};
-    background-image: ${props.backgroundImage[props.index]};
-    background-position: ${props.backgroundPosition[props.index]};
-    background-size: ${props.backgroundSize[props.index]};
-    background-attachment: ${props.backgroundAttachment[props.index]};
+    background: ${props.background};
+    background-color: ${props.backgroundColor};
+    background-image: ${props.backgroundImage};
+    background-position: ${props.backgroundPosition};
+    background-size: ${props.backgroundSize};
+    background-attachment: ${props.backgroundAttachment};
 
-    filter: ${props.filter[props.index]};
-    backdrop-filter: ${props.backdropFilter[props.index]};
-    mix-blend-mode: ${props.mixBlendMode[props.index]};
-    background-blend-mode: ${props.backgroundBlendMode[props.index]};
-    text-shadow: ${props.textShadow[props.index]};
-    box-shadow: ${props.boxShadow[props.index]};
-    -webkit-text-stroke: ${props.textStroke[props.index]};
-    text-stroke: ${props.textStroke[props.index]};
+    filter: ${props.filter};
+    backdrop-filter: ${props.backdropFilter};
+    mix-blend-mode: ${props.mixBlendMode};
+    background-blend-mode: ${props.backgroundBlendMode};
+    text-shadow: ${props.textShadow};
+    box-shadow: ${props.boxShadow};
+    -webkit-text-stroke: ${props.textStroke};
+    text-stroke: ${props.textStroke};
 
-    border: ${props.border[props.index]};
-    border-left: ${props.borderLeft[props.index]};
-    border-right: ${props.borderRight[props.index]};
-    border-top: ${props.borderTop[props.index]};
-    border-bottom: ${props.borderBottom[props.index]};
+    border: ${props.border};
+    border-left: ${props.borderLeft};
+    border-right: ${props.borderRight};
+    border-top: ${props.borderTop};
+    border-bottom: ${props.borderBottom};
 
-    font-family: ${props.fontFamily[props.index]};
-    font-size: ${props.fontSize[props.index]};
-    font-weight: ${props.fontWeight[props.index]};
-    font-style: ${props.fontStyle[props.index]};
-    text-align: ${props.textAlign[props.index]};
-    color: ${props.color[props.index]};
-    line-height: ${props.lineHeight[props.index]};
-    letter-spacing: ${props.letterSpacing[props.index]};
-    text-decoration: ${props.textDecoration[props.index]};
-    hyphens: ${props.hyphens[props.index]};
+    font-family: ${props.fontFamily};
+    font-size: ${props.fontSize};
+    font-weight: ${props.fontWeight};
+    font-style: ${props.fontStyle};
+    text-align: ${props.textAlign};
+    color: ${props.color};
+    line-height: ${props.lineHeight};
+    letter-spacing: ${props.letterSpacing};
+    text-decoration: ${props.textDecoration};
+    hyphens: ${props.hyphens};
 
-    transition: ${props.transition[props.index]};
-    transform: ${props.transform[props.index]};
-    animation: ${props.animation[props.index]};
-    opacity: ${props.opacity[props.index]};
+    transition: ${props.transition};
+    transform: ${props.transform};
+    animation: ${props.animation};
+    opacity: ${props.opacity};
 
-    overflow: ${props.overflow[props.index]};
-    overflow-x: ${props.overflowX[props.index]};
-    overflow-y: ${props.overflowY[props.index]};
+    overflow: ${props.overflow};
+    overflow-x: ${props.overflowX};
+    overflow-y: ${props.overflowY};
 
-    ${props.styles[props.index] ? props.styles[props.index] : ""}
+    ${props.styles ? props.styles : ""}
   `}
 
   ${(props) =>
-    props.display[props.index] === "grid" &&
+    props.display === "grid" &&
     css`
-      grid-template-columns: repeat(${props.colspan[props.index]}, 1fr);
+      grid-template-columns: repeat(${props.colspan}, 1fr);
 
-      grid-auto-rows: ${props.gridAutoRows[props.index]};
-      grid-template-rows: ${props.gridTemplateRows[props.index]};
-      grid-template-columns: ${props.gridTemplateColumns[props.index]};
-      grid-auto-flow: ${props.autoFlow[props.index]};
+      grid-auto-rows: ${props.gridAutoRows};
+      grid-template-rows: ${props.gridTemplateRows};
+      grid-template-columns: ${props.gridTemplateColumns};
+      grid-auto-flow: ${props.autoFlow};
 
-      grid-gap: ${props.gap.row[props.index]} ${props.gap.column[props.index]};
+      grid-gap: ${props.gap.row} ${props.gap.column};
 
-      ${props.isControl && props.gap.column[props.index] === "0px"
+      ${props.isControl && props.gap.column === "0px"
         ? "grid-column-gap: 1px;"
         : ""}
     `}
 
   ${(props) =>
-    props.display[props.index] === "flex" &&
+    props.display === "flex" &&
     css`
-      gap: ${props.gap.row[props.index]} ${props.gap.column[props.index]};
+      gap: ${props.gap.row} ${props.gap.column};
     `}
 
   ${(props) => css`
-    grid-column: auto / span ${props.colsTotal[props.index]};
-    grid-column: ${props.gridColumn[props.index]};
+    grid-column: auto / span ${props.colsTotal};
+    grid-column: ${props.gridColumn};
   `}
 
   ${(props) =>
@@ -245,4 +244,4 @@ const StyledBox = React.forwardRef<HTMLElement, Props>((props, ref) => {
   return <StyledBoxStyles {...props} ref={ref} />;
 });
 
-export default StyledBox;
+export default React.memo(StyledBox);

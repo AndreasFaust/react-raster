@@ -1,13 +1,12 @@
-import getColsTotal from "./getColsTotal";
-import getColsEffective from "./getColsEffective";
+import useColspanEffective from "./useColspanEffective";
 import useProp from "./useProp";
-import getSpacing from "./getSpacing";
-import getColspan from "./getColspan";
+import useSpacing from "./useSpacing";
+import useColspan from "./useColspan";
 import useBreakpoint from "./useBreakpoint";
-import normalizeSpacing from "./normalizeSpacing";
 import useDisplay from "./useDisplay";
 import useGap from "./useGap";
 import useBreakpoints from "./useBreakpoints";
+import useSpacingCSS from "./useSpacingCSS";
 
 import { ContextProps } from "../../context";
 
@@ -16,19 +15,14 @@ export default function useNormalize(
   context: ContextProps,
   hasChildBoxes: boolean
 ) {
-  const mergedProps = { ...context, ...props };
-
   const breakpoints = useBreakpoints(props.breakpoints, context.breakpoints);
-
   const breakpoint = useBreakpoint(
     breakpoints,
     context.breakpoint,
     props.breakpoints,
     props.colspan
   );
-
-  const display = useDisplay(breakpoint, mergedProps.display, hasChildBoxes);
-
+  const display = useDisplay(breakpoint, props.display, hasChildBoxes);
   const gap = useGap({
     contextGap: context.gap,
     propsGap: props.gap,
@@ -39,12 +33,7 @@ export default function useNormalize(
     gridRowGap: props.gridRowGap,
     breakpoint,
   });
-
-  function useSpacing(breakpoint, short, left, right, top, bottom) {
-    const marginNormalized = useProp(margin);
-  }
-
-  const margin = useSpacing(
+  const marginRaw = useSpacing(
     breakpoint,
     props.margin,
     props.marginLeft,
@@ -52,26 +41,13 @@ export default function useNormalize(
     props.marginTop,
     props.marginBottom
   );
-
-  const marginLeftInCols = normalizeSpacing(
-    breakpoints,
-    mergedProps.marginLeft,
-    mergedProps.margin
-  );
-  const marginRightInCols = normalizeSpacing(
-    breakpoints,
-    mergedProps.marginRight,
-    mergedProps.margin
-  );
-  const paddingLeftInCols = normalizeSpacing(
-    breakpoints,
-    mergedProps.paddingLeft,
-    mergedProps.padding
-  );
-  const paddingRightInCols = normalizeSpacing(
-    breakpoints,
-    mergedProps.paddingRight,
-    mergedProps.padding
+  const paddingRaw = useSpacing(
+    breakpoint,
+    props.padding,
+    props.paddingLeft,
+    props.paddingRight,
+    props.paddingTop,
+    props.paddingBottom
   );
 
   const colspanTotal = useProp(
@@ -79,44 +55,106 @@ export default function useNormalize(
     props.colspan || context.colspan || 1
   );
   const cols = useProp(breakpoint, props.cols);
-
-  const colsEffective = getColsEffective({
-    cols,
-    colspan: colspanTotal,
-    paddingLeft: paddingLeftInCols,
-    paddingRight: paddingRightInCols,
-  });
-
+  const colsEffective = useColspanEffective(
+    cols as number,
+    colspanTotal as number,
+    paddingRaw
+  );
   // this gets applied to StyledBox
-  const colspan = props.colspan
-    ? getColspan(colspanTotal, paddingLeftInCols, paddingRightInCols)
-    : colsEffective;
-
+  const colspan = useColspan(
+    props.colspan,
+    colspanTotal as number,
+    paddingRaw,
+    colsEffective
+  );
   // this gets applied to StyledBox
-  const colsTotal = getColsTotal({
-    cols: normalizeProps(breakpoints, mergedProps.cols, ""),
-    colspan: colspanTotal,
-    marginLeft: marginLeftInCols,
-    marginRight: marginRightInCols,
-  });
+  const colsTotal = useColspanEffective(
+    cols as number,
+    colspanTotal as number,
+    marginRaw
+  );
 
-  const margin = getSpacing({
-    display,
-    breakpoints,
-    gap,
-    colspan: colsTotal,
-    prop: "margin",
-    props: mergedProps,
-  });
+  const margin = useSpacingCSS(gap, colsTotal, marginRaw);
+  const padding = useSpacingCSS(gap, colsTotal, paddingRaw);
 
-  const padding = getSpacing({
-    display,
-    breakpoints,
-    gap,
-    colspan: colsTotal,
-    prop: "padding",
-    props: mergedProps,
-  });
+  const styles = useProp(breakpoint, props.styles);
+
+  const width = useProp(breakpoint, props.width);
+  const minWidth = useProp(breakpoint, props.minWidth);
+  const maxWidth = useProp(breakpoint, props.maxWidth);
+  const height = useProp(breakpoint, props.height);
+  const minHeight = useProp(breakpoint, props.minHeight);
+  const maxHeight = useProp(breakpoint, props.maxHeight);
+  const position = useProp(breakpoint, props.position, "relative");
+  const zIndex = useProp(breakpoint, props.zIndex);
+
+  const left = useProp(breakpoint, props.left);
+  const right = useProp(breakpoint, props.right);
+  const top = useProp(breakpoint, props.top);
+  const bottom = useProp(breakpoint, props.bottom);
+
+  const pointerEvents = useProp(breakpoint, props.pointerEvents);
+  const cursor = useProp(breakpoint, props.cursor);
+
+  const gridTemplateRows = useProp(breakpoint, props.gridTemplateRows);
+  const gridColumn = useProp(breakpoint, props.gridColumn);
+  const gridAutoRows = useProp(breakpoint, props.gridAutoRows);
+  const gridTemplateColumns = useProp(breakpoint, props.gridTemplateColumns);
+  const autoFlow = useProp(breakpoint, props.autoFlow);
+
+  const order = useProp(breakpoint, props.order);
+  const alignItems = useProp(breakpoint, props.alignItems);
+  const alignContent = useProp(breakpoint, props.alignContent);
+  const alignSelf = useProp(breakpoint, props.alignSelf);
+  const justifyContent = useProp(breakpoint, props.justifyContent);
+  const justifyItems = useProp(breakpoint, props.justifyItems);
+  const justifySelf = useProp(breakpoint, props.justifySelf);
+
+  const flexDirection = useProp(breakpoint, props.flexDirection);
+  const flexWrap = useProp(breakpoint, props.flexWrap);
+  const flexShrink = useProp(breakpoint, props.flexShrink);
+  const flexGrow = useProp(breakpoint, props.flexGrow);
+
+  const border = useProp(breakpoint, props.border);
+  const borderLeft = useProp(breakpoint, props.borderLeft);
+  const borderRight = useProp(breakpoint, props.borderRight);
+  const borderTop = useProp(breakpoint, props.borderTop);
+  const borderBottom = useProp(breakpoint, props.borderBottom);
+
+  const background = useProp(breakpoint, props.background);
+  const backgroundColor = useProp(breakpoint, props.backgroundColor);
+  const backgroundImage = useProp(breakpoint, props.backgroundImage);
+  const backgroundPosition = useProp(breakpoint, props.backgroundPosition);
+  const backgroundAttachment = useProp(breakpoint, props.backgroundAttachment);
+  const backgroundSize = useProp(breakpoint, props.backgroundSize);
+
+  const filter = useProp(breakpoint, props.filter);
+  const backdropFilter = useProp(breakpoint, props.backdropFilter);
+  const mixBlendMode = useProp(breakpoint, props.mixBlendMode);
+  const backgroundBlendMode = useProp(breakpoint, props.backgroundBlendMode);
+  const textShadow = useProp(breakpoint, props.textShadow);
+  const boxShadow = useProp(breakpoint, props.boxShadow);
+  const textStroke = useProp(breakpoint, props.textStroke);
+
+  const fontFamily = useProp(breakpoint, props.fontFamily);
+  const fontSize = useProp(breakpoint, props.fontSize);
+  const fontWeight = useProp(breakpoint, props.fontWeight);
+  const fontStyle = useProp(breakpoint, props.fontStyle);
+  const textAlign = useProp(breakpoint, props.textAlign);
+  const color = useProp(breakpoint, props.color);
+  const lineHeight = useProp(breakpoint, props.lineHeight);
+  const letterSpacing = useProp(breakpoint, props.letterSpacing);
+  const textDecoration = useProp(breakpoint, props.textDecoration);
+  const hyphens = useProp(breakpoint, props.hyphens);
+
+  const transform = useProp(breakpoint, props.transform);
+  const transition = useProp(breakpoint, props.transition);
+  const animation = useProp(breakpoint, props.animation);
+  const opacity = useProp(breakpoint, props.opacity);
+
+  const overflow = useProp(breakpoint, props.overflow);
+  const overflowX = useProp(breakpoint, props.overflowX);
+  const overflowY = useProp(breakpoint, props.overflowY);
 
   return {
     breakpoints,
@@ -126,102 +164,87 @@ export default function useNormalize(
     colspan,
     margin,
     padding,
-    paddingLeftInCols,
-    paddingRightInCols,
     display,
     gap,
+    controlColor: props.controlColor || context.controlColor,
 
-    controlColor: mergedProps.controlColor,
+    styles,
 
-    styles: normalizeProps(breakpoints, mergedProps.styles),
+    width,
+    minWidth,
+    maxWidth,
+    height,
+    minHeight,
+    maxHeight,
+    position,
+    zIndex,
 
-    width: normalizeProps(breakpoints, mergedProps.width),
-    minWidth: normalizeProps(breakpoints, mergedProps.minWidth),
-    maxWidth: normalizeProps(breakpoints, mergedProps.maxWidth),
-    height: normalizeProps(breakpoints, mergedProps.height),
-    minHeight: normalizeProps(breakpoints, mergedProps.minHeight),
-    maxHeight: normalizeProps(breakpoints, mergedProps.maxHeight),
-    position: normalizeProps(breakpoints, mergedProps.position, "relative"),
-    zIndex: normalizeProps(breakpoints, mergedProps.zIndex),
+    left,
+    right,
+    top,
+    bottom,
 
-    left: normalizeProps(breakpoints, mergedProps.left),
-    right: normalizeProps(breakpoints, mergedProps.right),
-    top: normalizeProps(breakpoints, mergedProps.top),
-    bottom: normalizeProps(breakpoints, mergedProps.bottom),
+    pointerEvents,
+    cursor,
 
-    pointerEvents: normalizeProps(breakpoints, mergedProps.pointerEvents),
-    cursor: normalizeProps(breakpoints, mergedProps.cursor),
+    gridTemplateRows,
+    gridColumn,
+    gridAutoRows,
+    gridTemplateColumns,
+    autoFlow,
 
-    gridTemplateRows: normalizeProps(breakpoints, mergedProps.gridTemplateRows),
-    gridColumn: normalizeProps(breakpoints, mergedProps.gridColumn),
-    gridAutoRows: normalizeProps(breakpoints, mergedProps.gridAutoRows),
-    gridTemplateColumns: normalizeProps(
-      breakpoints,
-      mergedProps.gridTemplateColumns
-    ),
-    autoFlow: normalizeProps(breakpoints, mergedProps.autoFlow),
+    order,
+    alignItems,
+    alignContent,
+    alignSelf,
+    justifyContent,
+    justifyItems,
+    justifySelf,
 
-    order: normalizeProps(breakpoints, mergedProps.order),
-    alignItems: normalizeProps(breakpoints, mergedProps.alignItems),
-    alignContent: normalizeProps(breakpoints, mergedProps.alignContent),
-    alignSelf: normalizeProps(breakpoints, mergedProps.alignSelf),
-    justifyContent: normalizeProps(breakpoints, mergedProps.justifyContent),
-    justifyItems: normalizeProps(breakpoints, mergedProps.justifyItems),
-    justifySelf: normalizeProps(breakpoints, mergedProps.justifySelf),
+    flexDirection,
+    flexWrap,
+    flexShrink,
+    flexGrow,
 
-    flexDirection: normalizeProps(breakpoints, mergedProps.flexDirection),
-    flexWrap: normalizeProps(breakpoints, mergedProps.flexWrap),
-    flexShrink: normalizeProps(breakpoints, mergedProps.flexShrink),
-    flexGrow: normalizeProps(breakpoints, mergedProps.flexGrow),
+    border,
+    borderLeft,
+    borderRight,
+    borderTop,
+    borderBottom,
 
-    border: normalizeProps(breakpoints, mergedProps.border),
-    borderLeft: normalizeProps(breakpoints, mergedProps.borderLeft),
-    borderRight: normalizeProps(breakpoints, mergedProps.borderRight),
-    borderTop: normalizeProps(breakpoints, mergedProps.borderTop),
-    borderBottom: normalizeProps(breakpoints, mergedProps.borderBottom),
+    background,
+    backgroundColor,
+    backgroundImage,
+    backgroundPosition,
+    backgroundAttachment,
+    backgroundSize,
 
-    background: normalizeProps(breakpoints, mergedProps.background),
-    backgroundColor: normalizeProps(breakpoints, mergedProps.backgroundColor),
-    backgroundImage: normalizeProps(breakpoints, mergedProps.backgroundImage),
-    backgroundPosition: normalizeProps(
-      breakpoints,
-      mergedProps.backgroundPosition
-    ),
-    backgroundAttachment: normalizeProps(
-      breakpoints,
-      mergedProps.backgroundAttachment
-    ),
-    backgroundSize: normalizeProps(breakpoints, mergedProps.backgroundSize),
+    filter,
+    backdropFilter,
+    mixBlendMode,
+    backgroundBlendMode,
+    textShadow,
+    boxShadow,
+    textStroke,
 
-    filter: normalizeProps(breakpoints, mergedProps.filter),
-    backdropFilter: normalizeProps(breakpoints, mergedProps.backdropFilter),
-    mixBlendMode: normalizeProps(breakpoints, mergedProps.mixBlendMode),
-    backgroundBlendMode: normalizeProps(
-      breakpoints,
-      mergedProps.backgroundBlendMode
-    ),
-    textShadow: normalizeProps(breakpoints, mergedProps.textShadow),
-    boxShadow: normalizeProps(breakpoints, mergedProps.boxShadow),
-    textStroke: normalizeProps(breakpoints, mergedProps.textStroke),
+    fontFamily,
+    fontSize,
+    fontWeight,
+    fontStyle,
+    textAlign,
+    color,
+    lineHeight,
+    letterSpacing,
+    textDecoration,
+    hyphens,
 
-    fontFamily: normalizeProps(breakpoints, mergedProps.fontFamily),
-    fontSize: normalizeProps(breakpoints, mergedProps.fontSize),
-    fontWeight: normalizeProps(breakpoints, mergedProps.fontWeight),
-    fontStyle: normalizeProps(breakpoints, mergedProps.fontStyle),
-    textAlign: normalizeProps(breakpoints, mergedProps.textAlign),
-    color: normalizeProps(breakpoints, mergedProps.color),
-    lineHeight: normalizeProps(breakpoints, mergedProps.lineHeight),
-    letterSpacing: normalizeProps(breakpoints, mergedProps.letterSpacing),
-    textDecoration: normalizeProps(breakpoints, mergedProps.textDecoration),
-    hyphens: normalizeProps(breakpoints, mergedProps.hyphens),
+    transform,
+    transition,
+    animation,
+    opacity,
 
-    transform: normalizeProps(breakpoints, mergedProps.transform),
-    transition: normalizeProps(breakpoints, mergedProps.transition),
-    animation: normalizeProps(breakpoints, mergedProps.animation),
-    opacity: normalizeProps(breakpoints, mergedProps.opacity),
-
-    overflow: normalizeProps(breakpoints, mergedProps.overflow),
-    overflowX: normalizeProps(breakpoints, mergedProps.overflowX),
-    overflowY: normalizeProps(breakpoints, mergedProps.overflowY),
+    overflow,
+    overflowX,
+    overflowY,
   };
 }
