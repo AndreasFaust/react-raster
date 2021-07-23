@@ -1,13 +1,12 @@
 import React from "react";
 
 export interface ContextProps {
-  breakpoint?: {
-    index: number;
-    value: number;
-  };
+  breakpoint: number;
   breakpoints?: number[];
-  gridRowGap?: string[];
-  gridColumnGap?: string[];
+  gap?: {
+    row: string[];
+    column: string[];
+  };
   colspan?: number[];
   controlIsVisible?: boolean;
   controlColor?: string;
@@ -15,7 +14,7 @@ export interface ContextProps {
 }
 
 const Context = React.createContext<ContextProps>({
-  breakpoint: { index: 1, value: 0 },
+  breakpoint: 0,
 });
 
 function useRaster(): ContextProps {

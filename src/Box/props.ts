@@ -27,8 +27,12 @@ export interface Props
   paddingTop?: string | number | (string | number)[];
   paddingBottom?: string | number | (string | number)[];
 
+  gap?: string | string[];
+  gridGap?: string | string[];
   gridRowGap?: string | string[];
+  rowGap?: string | string[];
   gridColumnGap?: string | string[];
+  columnGap?: string | string[];
 
   gridTemplateRows?: string | string[];
   gridAutoRows?: string | string[];
@@ -40,6 +44,7 @@ export interface Props
   overflowX?: string | string[];
   overflowY?: string | string[];
   pointerEvents?: string | string[];
+  cursor?: string | string[];
 
   ////////////////////////////////////////
   // Advanced

@@ -39,7 +39,7 @@ const ControlGrid: React.FC<any> = (props) => {
       pointerEvents="none"
       isControl
     >
-      {[...Array(colspanTotal[breakpoint.index - 1])].map((_, index) => (
+      {[...Array(colspanTotal[breakpoint])].map((_, index) => (
         <Box
           key={index}
           display="flex"
@@ -52,7 +52,7 @@ const ControlGrid: React.FC<any> = (props) => {
   );
 };
 
-const ControlBox = styled("div")<{ controlColor: string }>`
+const ControlBox = styled("span")<{ controlColor: string }>`
   position: absolute;
   z-index: 10000;
   left: 0;

@@ -20,8 +20,13 @@ export default function useUndefinedProps(props) {
     paddingRight,
     paddingTop,
     paddingBottom,
+
+    gap,
     gridRowGap,
+    rowGap,
     gridColumnGap,
+    columnGap,
+
     gridTemplateRows,
     gridAutoRows,
     gridTemplateColumns,
@@ -29,6 +34,7 @@ export default function useUndefinedProps(props) {
     component,
     innerHTML,
 
+    cursor,
     pointerEvents,
 
     onResize,

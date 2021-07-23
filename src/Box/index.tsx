@@ -30,7 +30,12 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   const boxRef = useCombinedRefs(ref);
   const undefinedProps = useUndefinedProps(props);
 
-  const defaultClass = `Box bp-${propsNormalized.breakpoint.value} bp-${propsNormalized.breakpoint.index}`;
+  const breakpoint = {
+    index: propsNormalized.breakpoint + 1,
+    value: propsNormalized.breakpoints[propsNormalized.breakpoint],
+  };
+
+  const defaultClass = `Box bp-${breakpoint.value} bp-${breakpoint.index}`;
 
   useResizeObserver(boxRef, props.onResize);
   useIntersect({
@@ -45,8 +50,8 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
     <StyledBox
       {...propsNormalized}
       id={id.current}
-      index={propsNormalized.breakpoint.index - 1}
-      tag={props.as}
+      index={propsNormalized.breakpoint}
+      tag={props.as} // avoid name-collision with styled-component’s "as"
       component={props.component}
       className={
         props.className
@@ -72,8 +77,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
           value={{
             breakpoints: propsNormalized.breakpoints,
             breakpoint: propsNormalized.breakpoint,
-            gridRowGap: propsNormalized.gridRowGap,
-            gridColumnGap: propsNormalized.gridColumnGap,
+            gap: propsNormalized.gap,
             colspan: propsNormalized.colspan,
             controlIsVisible,
             controlColor: propsNormalized.controlColor,

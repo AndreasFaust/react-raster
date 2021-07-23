@@ -83,8 +83,10 @@ interface Props {
   gridTemplateColumns: string[];
   autoFlow: string[];
 
-  gridColumnGap: string[];
-  gridRowGap: string[];
+  gap: {
+    row: string[];
+    column: string[];
+  };
 
   flexDirection: string[];
   flexWrap: string[];
@@ -121,6 +123,7 @@ const StyledBoxStyles = styled(Container)<Props>`
     z-index: ${props.zIndex[props.index]};
     display: ${props.display[props.index]};
     pointer-events: ${props.pointerEvents[props.index]};
+    cursor: ${props.cursor[props.index]};
 
     width: ${props.width[props.index]};
     min-width: ${props.minWidth[props.index]};
@@ -213,12 +216,17 @@ const StyledBoxStyles = styled(Container)<Props>`
       grid-template-columns: ${props.gridTemplateColumns[props.index]};
       grid-auto-flow: ${props.autoFlow[props.index]};
 
-      grid-column-gap: ${props.gridColumnGap[props.index]};
-      grid-row-gap: ${props.gridRowGap[props.index]};
+      grid-gap: ${props.gap.row[props.index]} ${props.gap.column[props.index]};
 
-      ${props.isControl && props.gridColumnGap[props.index] === "0px"
+      ${props.isControl && props.gap.column[props.index] === "0px"
         ? "grid-column-gap: 1px;"
         : ""}
+    `}
+
+  ${(props) =>
+    props.display[props.index] === "flex" &&
+    css`
+      gap: ${props.gap.row[props.index]} ${props.gap.column[props.index]};
     `}
 
   ${(props) => css`
@@ -229,9 +237,9 @@ const StyledBoxStyles = styled(Container)<Props>`
   ${(props) =>
     props.as === "img" &&
     props.controlIsVisible &&
-    `
-    box-shadow: 0 0 999em ${props.controlColor} inset;
-  `}
+    css`
+      box-shadow: 0 0 999em ${props.controlColor} inset;
+    `}
 `;
 const StyledBox = React.forwardRef<HTMLElement, Props>((props, ref) => {
   return <StyledBoxStyles {...props} ref={ref} />;

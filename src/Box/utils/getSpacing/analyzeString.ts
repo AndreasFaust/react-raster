@@ -1,10 +1,5 @@
 import spacingObject from "./spacingObject";
-
-function convertIfNumber(string: string) {
-  const parsed = +string;
-  if (Object.is(NaN, parsed)) return string;
-  return parsed;
-}
+import convertIfNumber from "./convertIfNumber";
 
 export default function analyzeString(short: string): spacingObject {
   const shortArray = short.split(" ").map((string) => convertIfNumber(string));

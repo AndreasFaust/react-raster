@@ -22,13 +22,13 @@ const ExamplePage = () => {
       as="section"
       colspan={12}
       control
-      padding={[1, "2rem 3 4em", null, "3"]}
+      padding={["3"]}
       background="pink"
-      minHeight={"100px"}
+      // minHeight={"100px"}
       // onClick={() => setOpacity((prev) => !prev)}
     >
       <Box
-        cols={[2, 5, 8, 9]}
+        // cols={[2, 5, 8, 9]}
         height="500px"
         as="p"
         // opacity={opacity ? 1 : 0}
@@ -38,10 +38,19 @@ const ExamplePage = () => {
         textAlign="center"
         fontFamily="Avenir"
         fontSize="3rem"
+        // marginBottom="100vh"
       >
         Hallo!
       </Box>
-
+      {/* <Box
+        background="yellow"
+        height="50vh"
+        // opacity={opacity}
+        // onIntersect={onIntersect}
+        // threshold={buildThresholdArray()}
+      >
+        Intersection!!!
+      </Box> */}
       {/* <AnimatePresence>
         {opacity && (
           <Box
@@ -60,16 +69,6 @@ const ExamplePage = () => {
         )}
       </AnimatePresence>
           */}
-      <Box
-        background="yellow"
-        marginTop="100vh"
-        height="50vh"
-        opacity={opacity}
-        onIntersect={onIntersect}
-        threshold={buildThresholdArray()}
-      >
-        Intersection!!!
-      </Box>
     </Box>
   );
 };

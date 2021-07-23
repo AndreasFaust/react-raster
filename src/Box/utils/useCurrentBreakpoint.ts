@@ -1,14 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import debounce from "./debounce";
-
-export type currentBreakpoint = {
-  index: number;
-  value: number;
-};
 
 interface Props {
   activateEventListener: boolean;
-  contextBreakpoint: currentBreakpoint;
+  contextBreakpoint: number;
   breakpoints: number[];
 }
 
@@ -19,27 +14,27 @@ export default function useCurrentBreakpoint({
   activateEventListener,
   contextBreakpoint,
   breakpoints,
-}: Props): currentBreakpoint {
-  const [currentBp, setCurrentBp] =
-    React.useState<currentBreakpoint>(contextBreakpoint);
+}: Props): number {
+  const [currentBp, setCurrentBp] = React.useState(contextBreakpoint);
 
   useIsomorphicLayoutEffect(() => {
     function onResize() {
       const w = window.innerWidth;
-      let bp = { index: 1, value: 0 };
-      breakpoints.forEach((breakpoint, index) => {
-        if (breakpoint <= w) {
-          bp = { index: index + 1, value: breakpoint };
-        }
-      });
-      setCurrentBp(bp);
+      const bp = breakpoints.findIndex((breakpoint) => breakpoint > w) - 1;
+      setCurrentBp(bp === -2 ? breakpoints.length - 1 : bp);
     }
-    if (!activateEventListener) {
+    if (activateEventListener) {
       onResize();
       const dOnResize = debounce(onResize, 100);
       window.addEventListener("resize", dOnResize);
       return () => window.removeEventListener("resize", dOnResize);
     }
   }, []);
+
+  React.useEffect(() => {
+    if (activateEventListener) return;
+    setCurrentBp(contextBreakpoint);
+  }, [contextBreakpoint]);
+
   return currentBp;
 }

@@ -29,8 +29,7 @@ export function getSpacingValue({
 
 export default function getSpacing({
   display,
-  gridRowGap,
-  gridColumnGap,
+  gap,
   colspan,
   breakpoints,
   props,
@@ -40,7 +39,7 @@ export default function getSpacing({
   return {
     left: getSpacingValue({
       display,
-      gap: gridColumnGap,
+      gap: gap.column,
       colspan,
       breakpoints,
       prop: props[`${prop}Left`] || short.left,
@@ -48,7 +47,7 @@ export default function getSpacing({
     }),
     right: getSpacingValue({
       display,
-      gap: gridColumnGap,
+      gap: gap.column,
       colspan,
       breakpoints,
       prop: props[`${prop}Right`] || short.right,
@@ -56,14 +55,14 @@ export default function getSpacing({
     }),
     top: getSpacingValue({
       display,
-      gap: gridRowGap,
+      gap: gap.row,
       colspan,
       breakpoints,
       prop: props[`${prop}Top`] || short.top,
     }),
     bottom: getSpacingValue({
       display,
-      gap: gridRowGap,
+      gap: gap.row,
       colspan,
       breakpoints,
       prop: props[`${prop}Bottom`] || short.bottom,

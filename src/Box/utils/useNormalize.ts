@@ -1,15 +1,12 @@
-import React from "react";
-
 import getColsTotal from "./getColsTotal";
 import getColsEffective from "./getColsEffective";
 import normalizeProps from "./normalizeProps";
 import getSpacing from "./getSpacing";
 import getColspan from "./getColspan";
-import getMediaQueries from "./getMediaQueries";
 import useCurrentBreakpoint from "./useCurrentBreakpoint";
 import normalizeSpacing from "./normalizeSpacing";
 import normalizeDisplay from "./normalizeDisplay";
-import getPosition from "./getPosition";
+import getGap from "./getGap";
 
 import { ContextProps } from "../../context";
 
@@ -35,28 +32,27 @@ export default function useNormalize(
     hasChildBoxes
   );
 
-  const gridRowGap = normalizeProps(breakpoints, mergedProps.gridRowGap, "0px");
-  const gridColumnGap = normalizeProps(
-    breakpoints,
-    mergedProps.gridColumnGap,
-    "0px"
-  );
+  const gap = getGap(props, context, breakpoints);
 
   const marginLeftInCols = normalizeSpacing(
     breakpoints,
-    mergedProps.marginLeft
+    mergedProps.marginLeft,
+    mergedProps.margin
   );
   const marginRightInCols = normalizeSpacing(
     breakpoints,
-    mergedProps.marginRight
+    mergedProps.marginRight,
+    mergedProps.margin
   );
   const paddingLeftInCols = normalizeSpacing(
     breakpoints,
-    mergedProps.paddingLeft
+    mergedProps.paddingLeft,
+    mergedProps.padding
   );
   const paddingRightInCols = normalizeSpacing(
     breakpoints,
-    mergedProps.paddingRight
+    mergedProps.paddingRight,
+    mergedProps.padding
   );
 
   const colspanTotal = normalizeProps(
@@ -65,18 +61,20 @@ export default function useNormalize(
   );
 
   const colsEffective = getColsEffective({
-    cols: normalizeProps(breakpoints, mergedProps.cols),
+    cols: normalizeProps(breakpoints, mergedProps.cols, ""),
     colspan: colspanTotal,
     paddingLeft: paddingLeftInCols,
     paddingRight: paddingRightInCols,
   });
 
+  // this gets applied to StyledBox
   const colspan = props.colspan
     ? getColspan(colspanTotal, paddingLeftInCols, paddingRightInCols)
     : colsEffective;
 
+  // this gets applied to StyledBox
   const colsTotal = getColsTotal({
-    cols: normalizeProps(breakpoints, mergedProps.cols),
+    cols: normalizeProps(breakpoints, mergedProps.cols, ""),
     colspan: colspanTotal,
     marginLeft: marginLeftInCols,
     marginRight: marginRightInCols,
@@ -85,8 +83,7 @@ export default function useNormalize(
   const margin = getSpacing({
     display,
     breakpoints,
-    gridRowGap,
-    gridColumnGap,
+    gap,
     colspan: colsTotal,
     prop: "margin",
     props: mergedProps,
@@ -95,8 +92,7 @@ export default function useNormalize(
   const padding = getSpacing({
     display,
     breakpoints,
-    gridRowGap,
-    gridColumnGap,
+    gap,
     colspan: colsTotal,
     prop: "padding",
     props: mergedProps,
@@ -113,8 +109,7 @@ export default function useNormalize(
     paddingLeftInCols,
     paddingRightInCols,
     display,
-    gridRowGap,
-    gridColumnGap,
+    gap,
 
     controlColor: mergedProps.controlColor,
 
@@ -126,7 +121,7 @@ export default function useNormalize(
     height: normalizeProps(breakpoints, mergedProps.height),
     minHeight: normalizeProps(breakpoints, mergedProps.minHeight),
     maxHeight: normalizeProps(breakpoints, mergedProps.maxHeight),
-    position: getPosition(normalizeProps(breakpoints, mergedProps.position)),
+    position: normalizeProps(breakpoints, mergedProps.position, "relative"),
     zIndex: normalizeProps(breakpoints, mergedProps.zIndex),
 
     left: normalizeProps(breakpoints, mergedProps.left),
@@ -135,6 +130,7 @@ export default function useNormalize(
     bottom: normalizeProps(breakpoints, mergedProps.bottom),
 
     pointerEvents: normalizeProps(breakpoints, mergedProps.pointerEvents),
+    cursor: normalizeProps(breakpoints, mergedProps.cursor),
 
     gridTemplateRows: normalizeProps(breakpoints, mergedProps.gridTemplateRows),
     gridColumn: normalizeProps(breakpoints, mergedProps.gridColumn),
