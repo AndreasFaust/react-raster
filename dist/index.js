@@ -11,7 +11,7 @@ var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
 
 var Context = React__default['default'].createContext({
-    breakpoint: { index: 1, value: 0 },
+    breakpoint: 0,
 });
 function useRaster() {
     return React__default['default'].useContext(Context);
@@ -70,22 +70,6 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 }
 
-// This alphabet uses `A-Za-z0-9_-` symbols. The genetic algorithm helped
-// optimize the gzip compression for this alphabet.
-let urlAlphabet =
-  'ModuleSymbhasOwnPr-0123456789ABCDEFGHNRVfgctiUvz_KqYTJkLxpZXIjQW';
-
-let nanoid = (size = 21) => {
-  let id = '';
-  // A compact alternative for `for (var i = 0; i < step; i++)`.
-  let i = size;
-  while (i--) {
-    // `| 0` is more compact and faster than `Math.floor()`.
-    id += urlAlphabet[(Math.random() * 64) | 0];
-  }
-  return id
-};
-
 function useCombinedRefs(ref) {
     var targetRef = React__default['default'].useRef();
     React__default['default'].useEffect(function () {
@@ -134,55 +118,41 @@ function useResizeObserver(ref, onResize) {
     }, [ref.current]);
 }
 
-function getColsTotal(_a) {
-    var cols = _a.cols, colspan = _a.colspan, marginLeft = _a.marginLeft, marginRight = _a.marginRight;
-    return cols.map(function (col, index) {
-        return ((typeof col === "number" ? col : colspan[index]) +
-            (marginLeft[index] || 0) +
-            (marginRight[index] || 0));
-    });
+function useColspanEffective(cols, colspan, spacing) {
+    return React__default['default'].useMemo(function () {
+        if (typeof cols === "number")
+            return cols;
+        var left = typeof spacing.left === "number" ? spacing.left : 0;
+        var right = typeof spacing.right === "number" ? spacing.right : 0;
+        return colspan - left - right;
+    }, [cols, colspan, spacing.left, spacing.right]);
 }
 
-function getColsEffective(_a) {
-    var cols = _a.cols, colspan = _a.colspan, paddingLeft = _a.paddingLeft, paddingRight = _a.paddingRight;
-    return cols.map(function (col, index) {
-        return ((typeof col === "number" ? col : colspan[index]) -
-            (paddingLeft[index] || 0) -
-            (paddingRight[index] || 0));
-    });
+function convertStringToNumber(prop) {
+    if (typeof prop !== "string")
+        return prop;
+    var parsed = +prop;
+    if (Object.is(NaN, parsed))
+        return prop;
+    return parsed;
 }
-
-function addValues(_a) {
-    var propArray = _a.propArray, breakpointsLength = _a.breakpointsLength;
-    var lastKnownValue = propArray[propArray.length - 1];
-    while (propArray.length < breakpointsLength) {
-        propArray.push(lastKnownValue);
+function getProp(prop, breakpoint) {
+    if (!Array.isArray(prop)) {
+        return prop;
     }
-    return propArray;
+    if (prop.length >= breakpoint)
+        return prop[breakpoint];
+    return prop[prop.length - 1];
 }
-function makeArray(prop) {
-    if (Array.isArray(prop))
-        return __spreadArray([], prop);
-    else
-        return [prop];
+function normalizeProp(breakpoint, prop, defaultValue) {
+    if (typeof prop === "undefined" || prop === null) {
+        return defaultValue;
+    }
+    return convertStringToNumber(getProp(prop, breakpoint));
 }
-function normalizeProps(breakpoints, prop, defaultValue) {
-    if (typeof prop === undefined || typeof prop === null)
-        return [];
-    var breakpointsLength = breakpoints.length;
-    var propArray = makeArray(prop);
-    if (propArray.length < breakpointsLength)
-        propArray = addValues({ propArray: propArray, breakpointsLength: breakpointsLength });
-    if (propArray.length > breakpointsLength)
-        propArray = propArray.splice(breakpointsLength);
-    return propArray.map(function (prop) {
-        if (typeof prop === "undefined") {
-            return defaultValue;
-        }
-        else {
-            return prop;
-        }
-    });
+function useProp(breakpoint, prop, defaultValue) {
+    var validProp = React__default['default'].useMemo(function () { return normalizeProp(breakpoint, prop, defaultValue); }, [breakpoint, prop, defaultValue]);
+    return validProp;
 }
 
 function convertIfNumber(string) {
@@ -191,8 +161,17 @@ function convertIfNumber(string) {
         return string;
     return parsed;
 }
-function analyzeString(short) {
-    var shortArray = short.split(" ").map(function (string) { return convertIfNumber(string); });
+
+function getShortArray(spacing) {
+    if (typeof spacing === "number") {
+        return [spacing];
+    }
+    return spacing.split(" ").map(function (string) { return convertIfNumber(string); });
+}
+function getShortObject(spacing) {
+    if (!spacing)
+        return { top: null, bottom: null, left: null, right: null };
+    var shortArray = getShortArray(spacing);
     switch (shortArray.length) {
         case 1:
             return {
@@ -224,211 +203,251 @@ function analyzeString(short) {
             };
     }
 }
-
-function normalizeShortProp(short) {
-    if (!short)
-        return { left: null, right: null, top: null, bottom: null };
-    if (typeof short === "number") {
-        return {
-            left: short,
-            right: short,
-            top: short,
-            bottom: short,
-        };
-    }
-    if (typeof short === "string") {
-        return analyzeString(short);
-    }
-    if (Array.isArray(short)) {
-        return short.reduce(function (acc, current, index) {
-            if (typeof current === "number") {
-                return {
-                    left: __spreadArray(__spreadArray([], acc.left), [current]),
-                    right: __spreadArray(__spreadArray([], acc.right), [current]),
-                    top: __spreadArray(__spreadArray([], acc.top), [current]),
-                    bottom: __spreadArray(__spreadArray([], acc.bottom), [current]),
-                };
-            }
-            if (typeof current === "string") {
-                var currentObj = analyzeString(current);
-                return {
-                    left: __spreadArray(__spreadArray([], acc.left), [currentObj.left]),
-                    right: __spreadArray(__spreadArray([], acc.right), [currentObj.right]),
-                    top: __spreadArray(__spreadArray([], acc.top), [currentObj.top]),
-                    bottom: __spreadArray(__spreadArray([], acc.bottom), [currentObj.bottom]),
-                };
-            }
-            return {
-                left: __spreadArray(__spreadArray([], acc.left), [acc.left[index - 1]]),
-                right: __spreadArray(__spreadArray([], acc.right), [acc.right[index - 1]]),
-                top: __spreadArray(__spreadArray([], acc.top), [acc.top[index - 1]]),
-                bottom: __spreadArray(__spreadArray([], acc.bottom), [acc.bottom[index - 1]]),
-            };
-        }, { left: [], right: [], top: [], bottom: [] });
-    }
+function useSpacingShort(breakpoint, spacing) {
+    var spacingNormalized = useProp(breakpoint, spacing);
+    var _a = React__default['default'].useState(getShortObject(spacingNormalized)), spacingObject = _a[0], setSpacingObject = _a[1];
+    React__default['default'].useEffect(function () {
+        setSpacingObject(getShortObject(spacingNormalized));
+    }, [spacingNormalized]);
+    return spacingObject;
 }
 
-function getSpacingValue(_a) {
-    var gap = _a.gap, colspan = _a.colspan, breakpoints = _a.breakpoints, prop = _a.prop, counterProp = _a.counterProp;
-    var propNormalized = normalizeProps(breakpoints, prop);
-    var counterPropNormalized = normalizeProps(breakpoints, counterProp);
-    return propNormalized.map(function (propAtBreakpoint, index) {
-        switch (typeof propAtBreakpoint) {
-            case "number":
-                if (counterPropNormalized[index]) {
-                    return "calc(((100% + " + gap[index] + " - " + (typeof counterPropNormalized[index] === "string"
-                        ? counterPropNormalized[index]
-                        : "0px") + ") / " + colspan[index] + ") * " + propAtBreakpoint + ")";
-                }
-                return "calc(((100% + " + gap[index] + ") / " + colspan[index] + ") * " + propAtBreakpoint + ")";
-            default:
-                return propAtBreakpoint;
+function useSpacing(breakpoint, short, left, right, top, bottom) {
+    var shortNormalized = useSpacingShort(breakpoint, short);
+    var leftNormalized = useProp(breakpoint, left);
+    var rightNormalized = useProp(breakpoint, right);
+    var topNormalized = useProp(breakpoint, top);
+    var bottomNormalized = useProp(breakpoint, bottom);
+    return React__default['default'].useMemo(function () { return ({
+        left: (leftNormalized || shortNormalized.left),
+        right: (rightNormalized || shortNormalized.right),
+        top: (topNormalized || shortNormalized.top),
+        bottom: (bottomNormalized || shortNormalized.bottom),
+    }); }, [
+        shortNormalized,
+        leftNormalized,
+        rightNormalized,
+        topNormalized,
+        bottomNormalized,
+    ]);
+}
+
+function useColspan(colspanProps, colspanTotal, padding, colsEffective) {
+    return React__default['default'].useMemo(function () {
+        if (colspanProps) {
+            var left = typeof padding.left === "number" ? padding.left : 0;
+            var right = typeof padding.right === "number" ? padding.right : 0;
+            return colspanTotal - left - right;
         }
-    });
-}
-function getSpacing(_a) {
-    var display = _a.display, gridRowGap = _a.gridRowGap, gridColumnGap = _a.gridColumnGap, colspan = _a.colspan, breakpoints = _a.breakpoints, props = _a.props, prop = _a.prop;
-    var short = normalizeShortProp(props[prop]);
-    return {
-        left: getSpacingValue({
-            display: display,
-            gap: gridColumnGap,
-            colspan: colspan,
-            breakpoints: breakpoints,
-            prop: props[prop + "Left"] || short.left,
-            counterProp: props[prop + "Right"] || short.right,
-        }),
-        right: getSpacingValue({
-            display: display,
-            gap: gridColumnGap,
-            colspan: colspan,
-            breakpoints: breakpoints,
-            prop: props[prop + "Right"] || short.right,
-            counterProp: props[prop + "Left"] || short.left,
-        }),
-        top: getSpacingValue({
-            display: display,
-            gap: gridRowGap,
-            colspan: colspan,
-            breakpoints: breakpoints,
-            prop: props[prop + "Top"] || short.top,
-        }),
-        bottom: getSpacingValue({
-            display: display,
-            gap: gridRowGap,
-            colspan: colspan,
-            breakpoints: breakpoints,
-            prop: props[prop + "Bottom"] || short.bottom,
-        }),
-    };
-}
-
-function getColspan(colspan, paddingLeft, paddingRight) {
-    return colspan.map(function (colspanAtBreakpoint, index) {
-        return (colspanAtBreakpoint -
-            (paddingLeft[index] || 0) -
-            (paddingRight[index] || 0));
-    });
+        return colsEffective;
+    }, [colspanProps, colspanTotal, padding.left, padding.right]);
 }
 
 var useIsomorphicLayoutEffect = typeof window !== "undefined" ? React__default['default'].useLayoutEffect : React__default['default'].useEffect;
-function useCurrentBreakpoint(_a) {
-    var activateEventListener = _a.activateEventListener, contextBreakpoint = _a.contextBreakpoint, breakpoints = _a.breakpoints;
-    var _b = React__default['default'].useState(contextBreakpoint), currentBp = _b[0], setCurrentBp = _b[1];
+function useBreakpoint(breakpoints, contextBreakpoint, propsBreakpoints, propsColspan) {
+    var _a = React__default['default'].useState(contextBreakpoint), currentBp = _a[0], setCurrentBp = _a[1];
     useIsomorphicLayoutEffect(function () {
         function onResize() {
             var w = window.innerWidth;
-            var bp = { index: 1, value: 0 };
-            breakpoints.forEach(function (breakpoint, index) {
-                if (breakpoint <= w) {
-                    bp = { index: index + 1, value: breakpoint };
-                }
-            });
-            setCurrentBp(bp);
+            var bp = breakpoints.findIndex(function (breakpoint) { return breakpoint > w; }) - 1;
+            setCurrentBp(bp === -2 ? breakpoints.length - 1 : bp);
         }
-        if (!activateEventListener) {
+        if (propsBreakpoints || propsColspan) {
             onResize();
             var dOnResize_1 = debounce(onResize, 100);
             window.addEventListener("resize", dOnResize_1);
             return function () { return window.removeEventListener("resize", dOnResize_1); };
         }
     }, []);
+    React__default['default'].useEffect(function () {
+        if (propsBreakpoints || propsColspan)
+            return;
+        setCurrentBp(contextBreakpoint);
+    }, [contextBreakpoint]);
     return currentBp;
 }
 
-function normalizeSpacing(breakpoints, spacing) {
-    return normalizeProps(breakpoints, spacing).map(function (spacingAtBreakpoint) {
-        if (typeof spacingAtBreakpoint !== "number")
-            return null;
-        return spacingAtBreakpoint;
-    });
+function useDisplay(breakpoint, display, hasChildBoxes) {
+    var displayNormalized = useProp(breakpoint, display);
+    return displayNormalized || (hasChildBoxes ? "grid" : "block");
 }
 
-function normalizeDisplay(breakpoints, display, hasChildBoxes) {
-    var displayNormalized = normalizeProps(breakpoints, display || [null]);
-    return displayNormalized.map(function (displayValue) {
-        if (displayValue)
-            return displayValue;
-        return hasChildBoxes ? "grid" : "block";
-    });
+function getGapObject(gap) {
+    if (!gap)
+        return { row: null, column: null };
+    var _a = gap.split(" "), row = _a[0], column = _a[1];
+    return { row: row, column: column };
+}
+function useGapShort(breakpoint, gap) {
+    var gapNormalized = useProp(breakpoint, gap);
+    var _a = React__default['default'].useState(getGapObject(gapNormalized)), gapObject = _a[0], setGapObject = _a[1];
+    React__default['default'].useEffect(function () {
+        setGapObject(getGapObject(gapNormalized));
+    }, [gapNormalized]);
+    return gapObject;
 }
 
-function getPosition(position) {
-    return position.map(function (propAtBreakpoint) {
-        return !propAtBreakpoint ? "relative" : propAtBreakpoint;
-    });
+function getGap(_a) {
+    var contextGap = _a.contextGap, gap = _a.gap, gridGap = _a.gridGap, rowGap = _a.rowGap, columnGap = _a.columnGap, gridColumnGap = _a.gridColumnGap, gridRowGap = _a.gridRowGap;
+    if (!gap &&
+        !gridGap &&
+        !rowGap &&
+        !columnGap &&
+        !gridColumnGap &&
+        !gridRowGap) {
+        return contextGap || { row: "0px", column: "0px" };
+    }
+    return {
+        row: gridRowGap || rowGap || gap.row || gridGap.row || "0px",
+        column: columnGap || gridColumnGap || gap.column || gridGap.column || "0px",
+    };
+}
+
+var useGap = function (props) {
+    var gap = useGapShort(props.breakpoint, props.propsGap);
+    var gridGap = useGapShort(props.breakpoint, props.gridGap);
+    var rowGap = useProp(props.breakpoint, props.rowGap);
+    var columnGap = useProp(props.breakpoint, props.columnGap);
+    var gridColumnGap = useProp(props.breakpoint, props.gridColumnGap);
+    var gridRowGap = useProp(props.breakpoint, props.gridRowGap);
+    return React__default['default'].useMemo(function () {
+        return getGap({
+            contextGap: props.contextGap,
+            gap: gap,
+            gridGap: gridGap,
+            rowGap: rowGap,
+            columnGap: columnGap,
+            gridColumnGap: gridColumnGap,
+            gridRowGap: gridRowGap,
+        });
+    }, [
+        props.contextGap,
+        gap,
+        gridGap,
+        rowGap,
+        columnGap,
+        gridColumnGap,
+        gridRowGap,
+    ]);
+};
+
+function useBreakpoints(propsBreakpoints, contextBreakpoints) {
+    var breakpoints = React__default['default'].useState(propsBreakpoints || contextBreakpoints || [0, 432, 768, 1024, 1200, 1400])[0];
+    return breakpoints;
+}
+
+function useSpacingValue(gap, colspan, prop, counterProp) {
+    return React__default['default'].useMemo(function () {
+        switch (typeof prop) {
+            case "number":
+                if (counterProp) {
+                    return "calc(((100% + " + gap + " - " + (typeof counterProp === "string" ? counterProp : "0px") + ") / " + colspan + ") * " + prop + ")";
+                }
+                return "calc(((100% + " + gap + ") / " + colspan + ") * " + prop + ")";
+            default:
+                return prop;
+        }
+    }, [gap, colspan, prop, counterProp]);
+}
+function useSpacingCSS(gap, colspan, spacing) {
+    var left = useSpacingValue(gap.column, colspan, spacing.left, spacing.right);
+    var right = useSpacingValue(gap.column, colspan, spacing.right, spacing.left);
+    var top = useSpacingValue(gap.column, colspan, spacing.top, spacing.bottom);
+    var bottom = useSpacingValue(gap.column, colspan, spacing.bottom, spacing.top);
+    return { left: left, right: right, top: top, bottom: bottom };
 }
 
 function useNormalize(props, context, hasChildBoxes) {
-    var breakpoints = props.breakpoints ||
-        context.breakpoints || [0, 432, 768, 1024, 1200, 1400];
-    var mergedProps = __assign(__assign({}, context), props);
-    var breakpoint = useCurrentBreakpoint({
-        activateEventListener: !!props.breakpoints || !!props.colspan,
-        contextBreakpoint: context.breakpoint,
-        breakpoints: breakpoints,
+    var breakpoints = useBreakpoints(props.breakpoints, context.breakpoints);
+    var breakpoint = useBreakpoint(breakpoints, context.breakpoint, props.breakpoints, props.colspan);
+    var display = useDisplay(breakpoint, props.display, hasChildBoxes);
+    var gap = useGap({
+        contextGap: context.gap,
+        propsGap: props.gap,
+        gridGap: props.gridGap,
+        rowGap: props.rowGap,
+        columnGap: props.columnGap,
+        gridColumnGap: props.gridColumnGap,
+        gridRowGap: props.gridRowGap,
+        breakpoint: breakpoint,
     });
-    var display = normalizeDisplay(breakpoints, mergedProps.display, hasChildBoxes);
-    var gridRowGap = normalizeProps(breakpoints, mergedProps.gridRowGap, "0px");
-    var gridColumnGap = normalizeProps(breakpoints, mergedProps.gridColumnGap, "0px");
-    var marginLeftInCols = normalizeSpacing(breakpoints, mergedProps.marginLeft);
-    var marginRightInCols = normalizeSpacing(breakpoints, mergedProps.marginRight);
-    var paddingLeftInCols = normalizeSpacing(breakpoints, mergedProps.paddingLeft);
-    var paddingRightInCols = normalizeSpacing(breakpoints, mergedProps.paddingRight);
-    var colspanTotal = normalizeProps(breakpoints, props.colspan || context.colspan || 1);
-    var colsEffective = getColsEffective({
-        cols: normalizeProps(breakpoints, mergedProps.cols),
-        colspan: colspanTotal,
-        paddingLeft: paddingLeftInCols,
-        paddingRight: paddingRightInCols,
-    });
-    var colspan = props.colspan
-        ? getColspan(colspanTotal, paddingLeftInCols, paddingRightInCols)
-        : colsEffective;
-    var colsTotal = getColsTotal({
-        cols: normalizeProps(breakpoints, mergedProps.cols),
-        colspan: colspanTotal,
-        marginLeft: marginLeftInCols,
-        marginRight: marginRightInCols,
-    });
-    var margin = getSpacing({
-        display: display,
-        breakpoints: breakpoints,
-        gridRowGap: gridRowGap,
-        gridColumnGap: gridColumnGap,
-        colspan: colsTotal,
-        prop: "margin",
-        props: mergedProps,
-    });
-    var padding = getSpacing({
-        display: display,
-        breakpoints: breakpoints,
-        gridRowGap: gridRowGap,
-        gridColumnGap: gridColumnGap,
-        colspan: colsTotal,
-        prop: "padding",
-        props: mergedProps,
-    });
+    var marginRaw = useSpacing(breakpoint, props.margin, props.marginLeft, props.marginRight, props.marginTop, props.marginBottom);
+    var paddingRaw = useSpacing(breakpoint, props.padding, props.paddingLeft, props.paddingRight, props.paddingTop, props.paddingBottom);
+    var colspanTotal = useProp(breakpoint, props.colspan || context.colspan || 1);
+    var cols = useProp(breakpoint, props.cols);
+    var colsEffective = useColspanEffective(cols, colspanTotal, paddingRaw);
+    // this gets applied to StyledBox
+    var colspan = useColspan(props.colspan, colspanTotal, paddingRaw, colsEffective);
+    // this gets applied to StyledBox
+    var colsTotal = useColspanEffective(cols, colspanTotal, marginRaw);
+    var margin = useSpacingCSS(gap, colsTotal, marginRaw);
+    var padding = useSpacingCSS(gap, colsTotal, paddingRaw);
+    var styles = useProp(breakpoint, props.styles);
+    var width = useProp(breakpoint, props.width);
+    var minWidth = useProp(breakpoint, props.minWidth);
+    var maxWidth = useProp(breakpoint, props.maxWidth);
+    var height = useProp(breakpoint, props.height);
+    var minHeight = useProp(breakpoint, props.minHeight);
+    var maxHeight = useProp(breakpoint, props.maxHeight);
+    var position = useProp(breakpoint, props.position, "relative");
+    var zIndex = useProp(breakpoint, props.zIndex);
+    var left = useProp(breakpoint, props.left);
+    var right = useProp(breakpoint, props.right);
+    var top = useProp(breakpoint, props.top);
+    var bottom = useProp(breakpoint, props.bottom);
+    var pointerEvents = useProp(breakpoint, props.pointerEvents);
+    var cursor = useProp(breakpoint, props.cursor);
+    var gridTemplateRows = useProp(breakpoint, props.gridTemplateRows);
+    var gridColumn = useProp(breakpoint, props.gridColumn);
+    var gridAutoRows = useProp(breakpoint, props.gridAutoRows);
+    var gridTemplateColumns = useProp(breakpoint, props.gridTemplateColumns);
+    var autoFlow = useProp(breakpoint, props.autoFlow);
+    var order = useProp(breakpoint, props.order);
+    var alignItems = useProp(breakpoint, props.alignItems);
+    var alignContent = useProp(breakpoint, props.alignContent);
+    var alignSelf = useProp(breakpoint, props.alignSelf);
+    var justifyContent = useProp(breakpoint, props.justifyContent);
+    var justifyItems = useProp(breakpoint, props.justifyItems);
+    var justifySelf = useProp(breakpoint, props.justifySelf);
+    var flexDirection = useProp(breakpoint, props.flexDirection);
+    var flexWrap = useProp(breakpoint, props.flexWrap);
+    var flexShrink = useProp(breakpoint, props.flexShrink);
+    var flexGrow = useProp(breakpoint, props.flexGrow);
+    var border = useProp(breakpoint, props.border);
+    var borderLeft = useProp(breakpoint, props.borderLeft);
+    var borderRight = useProp(breakpoint, props.borderRight);
+    var borderTop = useProp(breakpoint, props.borderTop);
+    var borderBottom = useProp(breakpoint, props.borderBottom);
+    var background = useProp(breakpoint, props.background);
+    var backgroundColor = useProp(breakpoint, props.backgroundColor);
+    var backgroundImage = useProp(breakpoint, props.backgroundImage);
+    var backgroundPosition = useProp(breakpoint, props.backgroundPosition);
+    var backgroundAttachment = useProp(breakpoint, props.backgroundAttachment);
+    var backgroundSize = useProp(breakpoint, props.backgroundSize);
+    var filter = useProp(breakpoint, props.filter);
+    var backdropFilter = useProp(breakpoint, props.backdropFilter);
+    var mixBlendMode = useProp(breakpoint, props.mixBlendMode);
+    var backgroundBlendMode = useProp(breakpoint, props.backgroundBlendMode);
+    var textShadow = useProp(breakpoint, props.textShadow);
+    var boxShadow = useProp(breakpoint, props.boxShadow);
+    var textStroke = useProp(breakpoint, props.textStroke);
+    var fontFamily = useProp(breakpoint, props.fontFamily);
+    var fontSize = useProp(breakpoint, props.fontSize);
+    var fontWeight = useProp(breakpoint, props.fontWeight);
+    var fontStyle = useProp(breakpoint, props.fontStyle);
+    var textAlign = useProp(breakpoint, props.textAlign);
+    var color = useProp(breakpoint, props.color);
+    var lineHeight = useProp(breakpoint, props.lineHeight);
+    var letterSpacing = useProp(breakpoint, props.letterSpacing);
+    var textDecoration = useProp(breakpoint, props.textDecoration);
+    var hyphens = useProp(breakpoint, props.hyphens);
+    var transform = useProp(breakpoint, props.transform);
+    var transition = useProp(breakpoint, props.transition);
+    var animation = useProp(breakpoint, props.animation);
+    var opacity = useProp(breakpoint, props.opacity);
+    var overflow = useProp(breakpoint, props.overflow);
+    var overflowX = useProp(breakpoint, props.overflowX);
+    var overflowY = useProp(breakpoint, props.overflowY);
     return {
         breakpoints: breakpoints,
         breakpoint: breakpoint,
@@ -437,77 +456,77 @@ function useNormalize(props, context, hasChildBoxes) {
         colspan: colspan,
         margin: margin,
         padding: padding,
-        paddingLeftInCols: paddingLeftInCols,
-        paddingRightInCols: paddingRightInCols,
+        marginRaw: marginRaw,
+        paddingRaw: paddingRaw,
         display: display,
-        gridRowGap: gridRowGap,
-        gridColumnGap: gridColumnGap,
-        controlColor: mergedProps.controlColor,
-        styles: normalizeProps(breakpoints, mergedProps.styles),
-        width: normalizeProps(breakpoints, mergedProps.width),
-        minWidth: normalizeProps(breakpoints, mergedProps.minWidth),
-        maxWidth: normalizeProps(breakpoints, mergedProps.maxWidth),
-        height: normalizeProps(breakpoints, mergedProps.height),
-        minHeight: normalizeProps(breakpoints, mergedProps.minHeight),
-        maxHeight: normalizeProps(breakpoints, mergedProps.maxHeight),
-        position: getPosition(normalizeProps(breakpoints, mergedProps.position)),
-        zIndex: normalizeProps(breakpoints, mergedProps.zIndex),
-        left: normalizeProps(breakpoints, mergedProps.left),
-        right: normalizeProps(breakpoints, mergedProps.right),
-        top: normalizeProps(breakpoints, mergedProps.top),
-        bottom: normalizeProps(breakpoints, mergedProps.bottom),
-        pointerEvents: normalizeProps(breakpoints, mergedProps.pointerEvents),
-        gridTemplateRows: normalizeProps(breakpoints, mergedProps.gridTemplateRows),
-        gridColumn: normalizeProps(breakpoints, mergedProps.gridColumn),
-        gridAutoRows: normalizeProps(breakpoints, mergedProps.gridAutoRows),
-        gridTemplateColumns: normalizeProps(breakpoints, mergedProps.gridTemplateColumns),
-        autoFlow: normalizeProps(breakpoints, mergedProps.autoFlow),
-        order: normalizeProps(breakpoints, mergedProps.order),
-        alignItems: normalizeProps(breakpoints, mergedProps.alignItems),
-        alignContent: normalizeProps(breakpoints, mergedProps.alignContent),
-        alignSelf: normalizeProps(breakpoints, mergedProps.alignSelf),
-        justifyContent: normalizeProps(breakpoints, mergedProps.justifyContent),
-        justifyItems: normalizeProps(breakpoints, mergedProps.justifyItems),
-        justifySelf: normalizeProps(breakpoints, mergedProps.justifySelf),
-        flexDirection: normalizeProps(breakpoints, mergedProps.flexDirection),
-        flexWrap: normalizeProps(breakpoints, mergedProps.flexWrap),
-        flexShrink: normalizeProps(breakpoints, mergedProps.flexShrink),
-        flexGrow: normalizeProps(breakpoints, mergedProps.flexGrow),
-        border: normalizeProps(breakpoints, mergedProps.border),
-        borderLeft: normalizeProps(breakpoints, mergedProps.borderLeft),
-        borderRight: normalizeProps(breakpoints, mergedProps.borderRight),
-        borderTop: normalizeProps(breakpoints, mergedProps.borderTop),
-        borderBottom: normalizeProps(breakpoints, mergedProps.borderBottom),
-        background: normalizeProps(breakpoints, mergedProps.background),
-        backgroundColor: normalizeProps(breakpoints, mergedProps.backgroundColor),
-        backgroundImage: normalizeProps(breakpoints, mergedProps.backgroundImage),
-        backgroundPosition: normalizeProps(breakpoints, mergedProps.backgroundPosition),
-        backgroundAttachment: normalizeProps(breakpoints, mergedProps.backgroundAttachment),
-        backgroundSize: normalizeProps(breakpoints, mergedProps.backgroundSize),
-        filter: normalizeProps(breakpoints, mergedProps.filter),
-        backdropFilter: normalizeProps(breakpoints, mergedProps.backdropFilter),
-        mixBlendMode: normalizeProps(breakpoints, mergedProps.mixBlendMode),
-        backgroundBlendMode: normalizeProps(breakpoints, mergedProps.backgroundBlendMode),
-        textShadow: normalizeProps(breakpoints, mergedProps.textShadow),
-        boxShadow: normalizeProps(breakpoints, mergedProps.boxShadow),
-        textStroke: normalizeProps(breakpoints, mergedProps.textStroke),
-        fontFamily: normalizeProps(breakpoints, mergedProps.fontFamily),
-        fontSize: normalizeProps(breakpoints, mergedProps.fontSize),
-        fontWeight: normalizeProps(breakpoints, mergedProps.fontWeight),
-        fontStyle: normalizeProps(breakpoints, mergedProps.fontStyle),
-        textAlign: normalizeProps(breakpoints, mergedProps.textAlign),
-        color: normalizeProps(breakpoints, mergedProps.color),
-        lineHeight: normalizeProps(breakpoints, mergedProps.lineHeight),
-        letterSpacing: normalizeProps(breakpoints, mergedProps.letterSpacing),
-        textDecoration: normalizeProps(breakpoints, mergedProps.textDecoration),
-        hyphens: normalizeProps(breakpoints, mergedProps.hyphens),
-        transform: normalizeProps(breakpoints, mergedProps.transform),
-        transition: normalizeProps(breakpoints, mergedProps.transition),
-        animation: normalizeProps(breakpoints, mergedProps.animation),
-        opacity: normalizeProps(breakpoints, mergedProps.opacity),
-        overflow: normalizeProps(breakpoints, mergedProps.overflow),
-        overflowX: normalizeProps(breakpoints, mergedProps.overflowX),
-        overflowY: normalizeProps(breakpoints, mergedProps.overflowY),
+        gap: gap,
+        controlColor: props.controlColor || context.controlColor,
+        styles: styles,
+        width: width,
+        minWidth: minWidth,
+        maxWidth: maxWidth,
+        height: height,
+        minHeight: minHeight,
+        maxHeight: maxHeight,
+        position: position,
+        zIndex: zIndex,
+        left: left,
+        right: right,
+        top: top,
+        bottom: bottom,
+        pointerEvents: pointerEvents,
+        cursor: cursor,
+        gridTemplateRows: gridTemplateRows,
+        gridColumn: gridColumn,
+        gridAutoRows: gridAutoRows,
+        gridTemplateColumns: gridTemplateColumns,
+        autoFlow: autoFlow,
+        order: order,
+        alignItems: alignItems,
+        alignContent: alignContent,
+        alignSelf: alignSelf,
+        justifyContent: justifyContent,
+        justifyItems: justifyItems,
+        justifySelf: justifySelf,
+        flexDirection: flexDirection,
+        flexWrap: flexWrap,
+        flexShrink: flexShrink,
+        flexGrow: flexGrow,
+        border: border,
+        borderLeft: borderLeft,
+        borderRight: borderRight,
+        borderTop: borderTop,
+        borderBottom: borderBottom,
+        background: background,
+        backgroundColor: backgroundColor,
+        backgroundImage: backgroundImage,
+        backgroundPosition: backgroundPosition,
+        backgroundAttachment: backgroundAttachment,
+        backgroundSize: backgroundSize,
+        filter: filter,
+        backdropFilter: backdropFilter,
+        mixBlendMode: mixBlendMode,
+        backgroundBlendMode: backgroundBlendMode,
+        textShadow: textShadow,
+        boxShadow: boxShadow,
+        textStroke: textStroke,
+        fontFamily: fontFamily,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        textAlign: textAlign,
+        color: color,
+        lineHeight: lineHeight,
+        letterSpacing: letterSpacing,
+        textDecoration: textDecoration,
+        hyphens: hyphens,
+        transform: transform,
+        transition: transition,
+        animation: animation,
+        opacity: opacity,
+        overflow: overflow,
+        overflowX: overflowX,
+        overflowY: overflowY,
     };
 }
 
@@ -531,7 +550,7 @@ var useControl = function (control, controlIsVisible) {
 };
 
 function useUndefinedProps(props) {
-    props.display; props.breakpoints; props.width; props.minWidth; props.maxWidth; props.height; props.minHeight; props.maxHeight; props.colspan; props.cols; props.margin; props.marginLeft; props.marginRight; props.marginTop; props.marginBottom; props.padding; props.paddingLeft; props.paddingRight; props.paddingTop; props.paddingBottom; props.gridRowGap; props.gridColumnGap; props.gridTemplateRows; props.gridAutoRows; props.gridTemplateColumns; props.autoFlow; props.component; props.innerHTML; props.pointerEvents; props.onResize; props.onIntersect; props.root; props.rootMargin; props.threshold; props.styles; props.as; props.control; props.controlColor; props.order; props.position; props.zIndex; props.top; props.bottom; props.left; props.right; props.alignItems; props.alignContent; props.alignSelf; props.justifyContent; props.justifyItems; props.justifySelf; props.flexDirection; props.flexWrap; props.flexShrink; props.flexGrow; props.background; props.backgroundColor; props.backgroundImage; props.backgroundPosition; props.backgroundSize; props.backgroundAttachment; props.filter; props.backdropFilter; props.mixBlendMode; props.backgroundBlendMode; props.textShadow; props.boxShadow; props.textStroke; props.border; props.borderLeft; props.borderRight; props.borderTop; props.borderBottom; props.fontFamily; props.fontSize; props.fontWeight; props.fontStyle; props.textAlign; props.color; props.lineHeight; props.letterSpacing; props.textDecoration; props.hyphens; props.overflow; props.overflowX; props.overflowY; props.transition; props.animation; props.opacity; props.transform; props.className; props.children; props.isControl; props.ref; var rest = __rest(props, ["display", "breakpoints", "width", "minWidth", "maxWidth", "height", "minHeight", "maxHeight", "colspan", "cols", "margin", "marginLeft", "marginRight", "marginTop", "marginBottom", "padding", "paddingLeft", "paddingRight", "paddingTop", "paddingBottom", "gridRowGap", "gridColumnGap", "gridTemplateRows", "gridAutoRows", "gridTemplateColumns", "autoFlow", "component", "innerHTML", "pointerEvents", "onResize", "onIntersect", "root", "rootMargin", "threshold", "styles", "as", "control", "controlColor", "order", "position", "zIndex", "top", "bottom", "left", "right", "alignItems", "alignContent", "alignSelf", "justifyContent", "justifyItems", "justifySelf", "flexDirection", "flexWrap", "flexShrink", "flexGrow", "background", "backgroundColor", "backgroundImage", "backgroundPosition", "backgroundSize", "backgroundAttachment", "filter", "backdropFilter", "mixBlendMode", "backgroundBlendMode", "textShadow", "boxShadow", "textStroke", "border", "borderLeft", "borderRight", "borderTop", "borderBottom", "fontFamily", "fontSize", "fontWeight", "fontStyle", "textAlign", "color", "lineHeight", "letterSpacing", "textDecoration", "hyphens", "overflow", "overflowX", "overflowY", "transition", "animation", "opacity", "transform", "className", "children", "isControl", "ref"]);
+    props.display; props.breakpoints; props.width; props.minWidth; props.maxWidth; props.height; props.minHeight; props.maxHeight; props.colspan; props.cols; props.margin; props.marginLeft; props.marginRight; props.marginTop; props.marginBottom; props.padding; props.paddingLeft; props.paddingRight; props.paddingTop; props.paddingBottom; props.gap; props.gridRowGap; props.rowGap; props.gridColumnGap; props.columnGap; props.gridTemplateRows; props.gridAutoRows; props.gridTemplateColumns; props.autoFlow; props.component; props.innerHTML; props.cursor; props.pointerEvents; props.onResize; props.onIntersect; props.root; props.rootMargin; props.threshold; props.styles; props.as; props.control; props.controlColor; props.order; props.position; props.zIndex; props.top; props.bottom; props.left; props.right; props.alignItems; props.alignContent; props.alignSelf; props.justifyContent; props.justifyItems; props.justifySelf; props.flexDirection; props.flexWrap; props.flexShrink; props.flexGrow; props.background; props.backgroundColor; props.backgroundImage; props.backgroundPosition; props.backgroundSize; props.backgroundAttachment; props.filter; props.backdropFilter; props.mixBlendMode; props.backgroundBlendMode; props.textShadow; props.boxShadow; props.textStroke; props.border; props.borderLeft; props.borderRight; props.borderTop; props.borderBottom; props.fontFamily; props.fontSize; props.fontWeight; props.fontStyle; props.textAlign; props.color; props.lineHeight; props.letterSpacing; props.textDecoration; props.hyphens; props.overflow; props.overflowX; props.overflowY; props.transition; props.animation; props.opacity; props.transform; props.className; props.children; props.isControl; props.ref; var rest = __rest(props, ["display", "breakpoints", "width", "minWidth", "maxWidth", "height", "minHeight", "maxHeight", "colspan", "cols", "margin", "marginLeft", "marginRight", "marginTop", "marginBottom", "padding", "paddingLeft", "paddingRight", "paddingTop", "paddingBottom", "gap", "gridRowGap", "rowGap", "gridColumnGap", "columnGap", "gridTemplateRows", "gridAutoRows", "gridTemplateColumns", "autoFlow", "component", "innerHTML", "cursor", "pointerEvents", "onResize", "onIntersect", "root", "rootMargin", "threshold", "styles", "as", "control", "controlColor", "order", "position", "zIndex", "top", "bottom", "left", "right", "alignItems", "alignContent", "alignSelf", "justifyContent", "justifyItems", "justifySelf", "flexDirection", "flexWrap", "flexShrink", "flexGrow", "background", "backgroundColor", "backgroundImage", "backgroundPosition", "backgroundSize", "backgroundAttachment", "filter", "backdropFilter", "mixBlendMode", "backgroundBlendMode", "textShadow", "boxShadow", "textStroke", "border", "borderLeft", "borderRight", "borderTop", "borderBottom", "fontFamily", "fontSize", "fontWeight", "fontStyle", "textAlign", "color", "lineHeight", "letterSpacing", "textDecoration", "hyphens", "overflow", "overflowX", "overflowY", "transition", "animation", "opacity", "transform", "className", "children", "isControl", "ref"]);
     return rest;
 }
 
@@ -563,39 +582,30 @@ var Container = React__default['default'].forwardRef(function (_a, ref) {
     return React__default['default'].createElement(tag, __assign(__assign({}, attrs), { className: className, ref: ref }), tag !== "img" && !attrs.dangerouslySetInnerHTML ? children : null);
 });
 
-var StyledBoxStyles = styled__default['default'](Container)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) { return styled.css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n    position: ", ";\n    z-index: ", ";\n    display: ", ";\n    pointer-events: ", ";\n\n    width: ", ";\n    min-width: ", ";\n    max-width: ", ";\n    height: ", ";\n    min-height: ", ";\n    max-height: ", ";\n\n    padding-left: ", ";\n    padding-right: ", ";\n    padding-top: ", ";\n    padding-bottom: ", ";\n\n    margin-left: ", ";\n    margin-right: ", ";\n    margin-top: ", ";\n    margin-bottom: ", ";\n\n    order: ", ";\n\n    top: ", ";\n    bottom: ", ";\n    left: ", ";\n    right: ", ";\n\n    align-items: ", ";\n    align-content: ", ";\n    align-self: ", ";\n    justify-content: ", ";\n    justify-items: ", ";\n    justify-self: ", ";\n\n    flex-direction: ", ";\n    flex-wrap: ", ";\n    flex-shrink: ", ";\n    flex-grow: ", ";\n\n    background: ", ";\n    background-color: ", ";\n    background-image: ", ";\n    background-position: ", ";\n    background-size: ", ";\n    background-attachment: ", ";\n\n    filter: ", ";\n    backdrop-filter: ", ";\n    mix-blend-mode: ", ";\n    background-blend-mode: ", ";\n    text-shadow: ", ";\n    box-shadow: ", ";\n    -webkit-text-stroke: ", ";\n    text-stroke: ", ";\n\n    border: ", ";\n    border-left: ", ";\n    border-right: ", ";\n    border-top: ", ";\n    border-bottom: ", ";\n\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: ", ";\n    font-style: ", ";\n    text-align: ", ";\n    color: ", ";\n    line-height: ", ";\n    letter-spacing: ", ";\n    text-decoration: ", ";\n    hyphens: ", ";\n\n    transition: ", ";\n    transform: ", ";\n    animation: ", ";\n    opacity: ", ";\n\n    overflow: ", ";\n    overflow-x: ", ";\n    overflow-y: ", ";\n\n    ", "\n  "], ["\n    position: ", ";\n    z-index: ", ";\n    display: ", ";\n    pointer-events: ", ";\n\n    width: ", ";\n    min-width: ", ";\n    max-width: ", ";\n    height: ", ";\n    min-height: ", ";\n    max-height: ", ";\n\n    padding-left: ", ";\n    padding-right: ", ";\n    padding-top: ", ";\n    padding-bottom: ", ";\n\n    margin-left: ", ";\n    margin-right: ", ";\n    margin-top: ", ";\n    margin-bottom: ", ";\n\n    order: ", ";\n\n    top: ", ";\n    bottom: ", ";\n    left: ", ";\n    right: ", ";\n\n    align-items: ", ";\n    align-content: ", ";\n    align-self: ", ";\n    justify-content: ", ";\n    justify-items: ", ";\n    justify-self: ", ";\n\n    flex-direction: ", ";\n    flex-wrap: ", ";\n    flex-shrink: ", ";\n    flex-grow: ", ";\n\n    background: ", ";\n    background-color: ", ";\n    background-image: ", ";\n    background-position: ", ";\n    background-size: ", ";\n    background-attachment: ", ";\n\n    filter: ", ";\n    backdrop-filter: ", ";\n    mix-blend-mode: ", ";\n    background-blend-mode: ", ";\n    text-shadow: ", ";\n    box-shadow: ", ";\n    -webkit-text-stroke: ", ";\n    text-stroke: ", ";\n\n    border: ", ";\n    border-left: ", ";\n    border-right: ", ";\n    border-top: ", ";\n    border-bottom: ", ";\n\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: ", ";\n    font-style: ", ";\n    text-align: ", ";\n    color: ", ";\n    line-height: ", ";\n    letter-spacing: ", ";\n    text-decoration: ", ";\n    hyphens: ", ";\n\n    transition: ", ";\n    transform: ", ";\n    animation: ", ";\n    opacity: ", ";\n\n    overflow: ", ";\n    overflow-x: ", ";\n    overflow-y: ", ";\n\n    ", "\n  "])), props.position[props.index], props.zIndex[props.index], props.display[props.index], props.pointerEvents[props.index], props.width[props.index], props.minWidth[props.index], props.maxWidth[props.index], props.height[props.index], props.minHeight[props.index], props.maxHeight[props.index], props.padding.left[props.index], props.padding.right[props.index], props.padding.top[props.index], props.padding.bottom[props.index], props.margin.left[props.index], props.margin.right[props.index], props.margin.top[props.index], props.margin.bottom[props.index], props.order[props.index], props.top[props.index], props.bottom[props.index], props.left[props.index], props.right[props.index], props.alignItems[props.index], props.alignContent[props.index], props.alignSelf[props.index], props.justifyContent[props.index], props.justifyItems[props.index], props.justifySelf[props.index], props.flexDirection[props.index], props.flexWrap[props.index], props.flexShrink[props.index], props.flexGrow[props.index], props.background[props.index], props.backgroundColor[props.index], props.backgroundImage[props.index], props.backgroundPosition[props.index], props.backgroundSize[props.index], props.backgroundAttachment[props.index], props.filter[props.index], props.backdropFilter[props.index], props.mixBlendMode[props.index], props.backgroundBlendMode[props.index], props.textShadow[props.index], props.boxShadow[props.index], props.textStroke[props.index], props.textStroke[props.index], props.border[props.index], props.borderLeft[props.index], props.borderRight[props.index], props.borderTop[props.index], props.borderBottom[props.index], props.fontFamily[props.index], props.fontSize[props.index], props.fontWeight[props.index], props.fontStyle[props.index], props.textAlign[props.index], props.color[props.index], props.lineHeight[props.index], props.letterSpacing[props.index], props.textDecoration[props.index], props.hyphens[props.index], props.transition[props.index], props.transform[props.index], props.animation[props.index], props.opacity[props.index], props.overflow[props.index], props.overflowX[props.index], props.overflowY[props.index], props.styles[props.index] ? props.styles[props.index] : ""); }, function (props) {
-    return props.display[props.index] === "grid" && styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n\n      ", "\n    "], ["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-column-gap: ", ";\n      grid-row-gap: ", ";\n\n      ", "\n    "])), props.colspan[props.index], props.gridAutoRows[props.index], props.gridTemplateRows[props.index], props.gridTemplateColumns[props.index], props.autoFlow[props.index], props.gridColumnGap[props.index], props.gridRowGap[props.index], props.isControl && props.gridColumnGap[props.index] === "0px"
+var StyledBoxStyles = styled__default['default'](Container)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) { return styled.css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n    position: ", ";\n    z-index: ", ";\n    display: ", ";\n    pointer-events: ", ";\n    cursor: ", ";\n\n    width: ", ";\n    min-width: ", ";\n    max-width: ", ";\n    height: ", ";\n    min-height: ", ";\n    max-height: ", ";\n\n    padding-left: ", ";\n    padding-right: ", ";\n    padding-top: ", ";\n    padding-bottom: ", ";\n\n    margin-left: ", ";\n    margin-right: ", ";\n    margin-top: ", ";\n    margin-bottom: ", ";\n\n    order: ", ";\n\n    top: ", ";\n    bottom: ", ";\n    left: ", ";\n    right: ", ";\n\n    align-items: ", ";\n    align-content: ", ";\n    align-self: ", ";\n    justify-content: ", ";\n    justify-items: ", ";\n    justify-self: ", ";\n\n    flex-direction: ", ";\n    flex-wrap: ", ";\n    flex-shrink: ", ";\n    flex-grow: ", ";\n\n    background: ", ";\n    background-color: ", ";\n    background-image: ", ";\n    background-position: ", ";\n    background-size: ", ";\n    background-attachment: ", ";\n\n    filter: ", ";\n    backdrop-filter: ", ";\n    mix-blend-mode: ", ";\n    background-blend-mode: ", ";\n    text-shadow: ", ";\n    box-shadow: ", ";\n    -webkit-text-stroke: ", ";\n    text-stroke: ", ";\n\n    border: ", ";\n    border-left: ", ";\n    border-right: ", ";\n    border-top: ", ";\n    border-bottom: ", ";\n\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: ", ";\n    font-style: ", ";\n    text-align: ", ";\n    color: ", ";\n    line-height: ", ";\n    letter-spacing: ", ";\n    text-decoration: ", ";\n    hyphens: ", ";\n\n    transition: ", ";\n    transform: ", ";\n    animation: ", ";\n    opacity: ", ";\n\n    overflow: ", ";\n    overflow-x: ", ";\n    overflow-y: ", ";\n\n    ", "\n  "], ["\n    position: ", ";\n    z-index: ", ";\n    display: ", ";\n    pointer-events: ", ";\n    cursor: ", ";\n\n    width: ", ";\n    min-width: ", ";\n    max-width: ", ";\n    height: ", ";\n    min-height: ", ";\n    max-height: ", ";\n\n    padding-left: ", ";\n    padding-right: ", ";\n    padding-top: ", ";\n    padding-bottom: ", ";\n\n    margin-left: ", ";\n    margin-right: ", ";\n    margin-top: ", ";\n    margin-bottom: ", ";\n\n    order: ", ";\n\n    top: ", ";\n    bottom: ", ";\n    left: ", ";\n    right: ", ";\n\n    align-items: ", ";\n    align-content: ", ";\n    align-self: ", ";\n    justify-content: ", ";\n    justify-items: ", ";\n    justify-self: ", ";\n\n    flex-direction: ", ";\n    flex-wrap: ", ";\n    flex-shrink: ", ";\n    flex-grow: ", ";\n\n    background: ", ";\n    background-color: ", ";\n    background-image: ", ";\n    background-position: ", ";\n    background-size: ", ";\n    background-attachment: ", ";\n\n    filter: ", ";\n    backdrop-filter: ", ";\n    mix-blend-mode: ", ";\n    background-blend-mode: ", ";\n    text-shadow: ", ";\n    box-shadow: ", ";\n    -webkit-text-stroke: ", ";\n    text-stroke: ", ";\n\n    border: ", ";\n    border-left: ", ";\n    border-right: ", ";\n    border-top: ", ";\n    border-bottom: ", ";\n\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: ", ";\n    font-style: ", ";\n    text-align: ", ";\n    color: ", ";\n    line-height: ", ";\n    letter-spacing: ", ";\n    text-decoration: ", ";\n    hyphens: ", ";\n\n    transition: ", ";\n    transform: ", ";\n    animation: ", ";\n    opacity: ", ";\n\n    overflow: ", ";\n    overflow-x: ", ";\n    overflow-y: ", ";\n\n    ", "\n  "])), props.position, props.zIndex, props.display, props.pointerEvents, props.cursor, props.width, props.minWidth, props.maxWidth, props.height, props.minHeight, props.maxHeight, props.padding.left, props.padding.right, props.padding.top, props.padding.bottom, props.margin.left, props.margin.right, props.margin.top, props.margin.bottom, props.order, props.top, props.bottom, props.left, props.right, props.alignItems, props.alignContent, props.alignSelf, props.justifyContent, props.justifyItems, props.justifySelf, props.flexDirection, props.flexWrap, props.flexShrink, props.flexGrow, props.background, props.backgroundColor, props.backgroundImage, props.backgroundPosition, props.backgroundSize, props.backgroundAttachment, props.filter, props.backdropFilter, props.mixBlendMode, props.backgroundBlendMode, props.textShadow, props.boxShadow, props.textStroke, props.textStroke, props.border, props.borderLeft, props.borderRight, props.borderTop, props.borderBottom, props.fontFamily, props.fontSize, props.fontWeight, props.fontStyle, props.textAlign, props.color, props.lineHeight, props.letterSpacing, props.textDecoration, props.hyphens, props.transition, props.transform, props.animation, props.opacity, props.overflow, props.overflowX, props.overflowY, props.styles ? props.styles : ""); }, function (props) {
+    return props.display === "grid" && styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "], ["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "])), props.colspan, props.gridAutoRows, props.gridTemplateRows, props.gridTemplateColumns, props.autoFlow, props.gap.row, props.gap.column, props.isControl && props.gap.column === "0px"
         ? "grid-column-gap: 1px;"
         : "");
-}, function (props) { return styled.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n  "], ["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n  "])), props.colsTotal[props.index], props.gridColumn[props.index]); }, function (props) {
+}, function (props) {
+    return props.display === "flex" && styled.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      gap: ", " ", ";\n    "], ["\n      gap: ", " ", ";\n    "])), props.gap.row, props.gap.column);
+}, function (props) { return styled.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n  "], ["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n  "])), props.colsTotal, props.gridColumn); }, function (props) {
     return props.as === "img" &&
-        props.controlIsVisible &&
-        "\n    box-shadow: 0 0 999em " + props.controlColor + " inset;\n  ";
+        props.controlIsVisible && styled.css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n      box-shadow: 0 0 999em ", " inset;\n    "], ["\n      box-shadow: 0 0 999em ", " inset;\n    "])), props.controlColor);
 });
 var StyledBox = React__default['default'].forwardRef(function (props, ref) {
     return React__default['default'].createElement(StyledBoxStyles, __assign({}, props, { ref: ref }));
 });
-var templateObject_1$1, templateObject_2, templateObject_3, templateObject_4;
+var StyledBox$1 = React__default['default'].memo(StyledBox);
+var templateObject_1$1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
-function getSideBearing(side, props) {
-    var sideUppercase = side.replace(/^\w/, function (c) { return c.toUpperCase(); });
-    return props["padding" + sideUppercase + "InCols"].map(function (padding, index) {
-        if (typeof padding === "number") {
-            return 0;
-        }
-        return props.padding[side][index] || 0;
-    });
-}
-function getTopBottomBearing(side, props) {
-    return props.padding[side].map(function (padding, index) {
-        return padding || 0;
-    });
+function getSideBearing(padding) {
+    return typeof padding === "number" ? 0 : padding;
 }
 var ControlGrid = function (props) {
-    var breakpoint = props.breakpoint, colspanTotal = props.colspanTotal;
-    return (React__default['default'].createElement(Box, { position: "absolute", className: "GridControl", zIndex: 1000, colspan: colspanTotal, gridColumnGap: props.gridColumnGap, gridAutoRows: "100%", top: 0, bottom: 0, left: 0, right: 0, marginLeft: getSideBearing("left", props), marginRight: getSideBearing("right", props), marginTop: getTopBottomBearing("top", props), marginBottom: getTopBottomBearing("bottom", props), pointerEvents: "none", isControl: true }, __spreadArray([], Array(colspanTotal[breakpoint.index - 1])).map(function (_, index) { return (React__default['default'].createElement(Box, { key: index, display: "flex", alignSelf: "stretch", cols: 1, backgroundColor: props.controlColor || "rgba(0,0,0,0.12)" })); })));
+    var colspanTotal = props.colspanTotal;
+    return (React__default['default'].createElement(Box$1, { position: "absolute", className: "GridControl", zIndex: 1000, colspan: colspanTotal, gridColumnGap: props.gridColumnGap, gridAutoRows: "100%", top: 0, bottom: 0, left: 0, right: 0, marginLeft: getSideBearing(props.paddingRaw.left), marginRight: getSideBearing(props.paddingRaw.right), marginTop: getSideBearing(props.paddingRaw.top), marginBottom: getSideBearing(props.paddingRaw.bottom), pointerEvents: "none", isControl: true }, __spreadArray([], Array(colspanTotal)).map(function (_, index) { return (React__default['default'].createElement(Box$1, { key: index, display: "flex", alignSelf: "stretch", cols: 1, backgroundColor: props.controlColor || "rgba(0,0,0,0.12)" })); })));
 };
-var ControlBox = styled__default['default']("div")(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"], ["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"])), function (props) { return props.controlColor || "rgba(0,0,0,0.12)"; });
+var ControlBox = styled__default['default']("span")(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"], ["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"])), function (props) { return props.controlColor || "rgba(0,0,0,0.12)"; });
 var Control = function (props) {
     return props.isNewGrid ? (React__default['default'].createElement(ControlGrid, __assign({}, props))) : (React__default['default'].createElement(ControlBox, { controlColor: props.controlColor }));
 };
@@ -603,7 +613,6 @@ var templateObject_1;
 
 var Box = React__default['default'].forwardRef(function (props, ref) {
     var context = React.useContext(Context);
-    var id = React__default['default'].useRef(nanoid());
     var _a = React__default['default'].useState(false), hasChildBoxes = _a[0], registerChildBox = _a[1];
     React__default['default'].useEffect(function () {
         if (typeof context.registerChildBox === "function") {
@@ -614,7 +623,11 @@ var Box = React__default['default'].forwardRef(function (props, ref) {
     var controlIsVisible = useControl(props.control, context.controlIsVisible);
     var boxRef = useCombinedRefs(ref);
     var undefinedProps = useUndefinedProps(props);
-    var defaultClass = "Box bp-" + propsNormalized.breakpoint.value + " bp-" + propsNormalized.breakpoint.index;
+    var breakpoint = {
+        index: propsNormalized.breakpoint + 1,
+        value: propsNormalized.breakpoints[propsNormalized.breakpoint],
+    };
+    var defaultClass = "Box bp-" + breakpoint.value + " bp-" + breakpoint.index;
     useResizeObserver(boxRef, props.onResize);
     onIntersect({
         ref: boxRef,
@@ -623,7 +636,7 @@ var Box = React__default['default'].forwardRef(function (props, ref) {
         threshold: props.threshold,
         onIntersect: props.onIntersect,
     });
-    return (React__default['default'].createElement(StyledBox, __assign({}, propsNormalized, { id: id.current, index: propsNormalized.breakpoint.index - 1, tag: props.as, component: props.component, className: props.className
+    return (React__default['default'].createElement(StyledBox$1, __assign({}, propsNormalized, { tag: props.as, component: props.component, className: props.className
             ? [defaultClass, props.className].join(" ")
             : defaultClass, controlIsVisible: controlIsVisible, ref: boxRef, styles: propsNormalized.styles, isControl: props.isControl, attrs: __assign(__assign({}, undefinedProps), (props.innerHTML && {
             dangerouslySetInnerHTML: { __html: props.innerHTML },
@@ -633,8 +646,7 @@ var Box = React__default['default'].forwardRef(function (props, ref) {
             React__default['default'].createElement(Context.Provider, { value: {
                     breakpoints: propsNormalized.breakpoints,
                     breakpoint: propsNormalized.breakpoint,
-                    gridRowGap: propsNormalized.gridRowGap,
-                    gridColumnGap: propsNormalized.gridColumnGap,
+                    gap: propsNormalized.gap,
                     colspan: propsNormalized.colspan,
                     controlIsVisible: controlIsVisible,
                     controlColor: propsNormalized.controlColor,
@@ -642,7 +654,8 @@ var Box = React__default['default'].forwardRef(function (props, ref) {
                 } }, props.children))));
 });
 Box.displayName = "Box";
+var Box$1 = React__default['default'].memo(Box);
 
-exports.default = Box;
+exports.default = Box$1;
 exports.useRaster = useRaster;
 //# sourceMappingURL=index.js.map

@@ -3,13 +3,11 @@ import useProp from "../useProp";
 import useGapShort from "./useGapShort";
 import getGap from "./getGap";
 
-interface Gap {
-  row: string;
-  column: string;
-}
-
 interface Props {
-  contextGap?: Gap;
+  contextGap?: {
+    row: string;
+    column: string;
+  };
   propsGap?: string | string[];
   gridGap?: string | string[];
   rowGap?: string | string[];
@@ -19,7 +17,12 @@ interface Props {
   breakpoint: number;
 }
 
-const useGap = (props: Props): Gap => {
+const useGap = (
+  props: Props
+): {
+  row: string;
+  column: string;
+} => {
   const gap = useGapShort(props.breakpoint, props.propsGap);
   const gridGap = useGapShort(props.breakpoint, props.gridGap);
   const rowGap = useProp(props.breakpoint, props.rowGap);
