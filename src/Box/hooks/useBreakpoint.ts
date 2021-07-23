@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import debounce from "./debounce";
-
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+import React from "react";
+import debounce from "../utils/debounce";
+import useIsomorphicLayoutEffect from "../utils/useIsomorphicLayoutEffect";
 
 export default function useBreakpoint(
   breakpoints: number[],

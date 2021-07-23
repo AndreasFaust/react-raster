@@ -13,7 +13,7 @@ export interface Props
   minHeight?: string | string[];
   maxHeight?: string | string[];
   colspan?: number | number[];
-  cols?: number | number[];
+  cols?: string | number | (string | number)[];
 
   margin?: string | number | (string | number)[];
   marginLeft?: string | number | (string | number)[];
@@ -38,6 +38,7 @@ export interface Props
   gridAutoRows?: string | string[];
   gridTemplateColumns?: string | string[];
   gridColumn?: string | string[];
+  gridRow?: string | string[];
   autoFlow?: string | string[];
 
   overflow?: string | string[];

@@ -15,7 +15,7 @@ const ControlGrid: React.FC<any> = (props) => {
       className="GridControl"
       zIndex={1000}
       colspan={colspanTotal}
-      gridColumnGap={props.gridColumnGap}
+      gridColumnGap={props.gap.column}
       gridAutoRows="100%"
       top={0}
       bottom={0}

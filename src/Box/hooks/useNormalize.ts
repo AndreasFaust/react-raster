@@ -1,7 +1,7 @@
-import useColspanEffective from "./useColspanEffective";
+import useColsTotal from "./useColsTotal";
+import useColsEffective from "./useColsEffective";
 import useProp from "./useProp";
 import useSpacing from "./useSpacing";
-import useColspan from "./useColspan";
 import useBreakpoint from "./useBreakpoint";
 import useDisplay from "./useDisplay";
 import useGap from "./useGap";
@@ -55,27 +55,21 @@ export default function useNormalize(
     props.colspan || context.colspan || 1
   );
   const cols = useProp(breakpoint, props.cols);
-  const colsEffective = useColspanEffective(
-    cols as number,
-    colspanTotal as number,
-    paddingRaw
-  );
-  // this gets applied to StyledBox
-  const colspan = useColspan(
-    props.colspan,
+
+  // gets applied to StyledBox
+  const colsEffective = useColsEffective(
     colspanTotal as number,
     paddingRaw,
-    colsEffective
+    cols as number
   );
-  // this gets applied to StyledBox
-  const colsTotal = useColspanEffective(
-    cols as number,
+  const colsTotal = useColsTotal(
     colspanTotal as number,
-    marginRaw
+    marginRaw,
+    cols as number
   );
 
-  const margin = useSpacingCSS(gap, colsTotal, marginRaw);
-  const padding = useSpacingCSS(gap, colsTotal, paddingRaw);
+  const margin = useSpacingCSS(gap, colsTotal as number, marginRaw);
+  const padding = useSpacingCSS(gap, colsTotal as number, paddingRaw);
 
   const styles = useProp(breakpoint, props.styles);
 
@@ -98,6 +92,7 @@ export default function useNormalize(
 
   const gridTemplateRows = useProp(breakpoint, props.gridTemplateRows);
   const gridColumn = useProp(breakpoint, props.gridColumn);
+  const gridRow = useProp(breakpoint, props.gridRow);
   const gridAutoRows = useProp(breakpoint, props.gridAutoRows);
   const gridTemplateColumns = useProp(breakpoint, props.gridTemplateColumns);
   const autoFlow = useProp(breakpoint, props.autoFlow);
@@ -156,12 +151,14 @@ export default function useNormalize(
   const overflowX = useProp(breakpoint, props.overflowX);
   const overflowY = useProp(breakpoint, props.overflowY);
 
+  const rootMargin = useProp(breakpoint, props.rootMargin);
+
   return {
     breakpoints,
     breakpoint,
     colsTotal,
     colspanTotal,
-    colspan,
+    colsEffective,
     margin,
     padding,
     marginRaw,
@@ -191,6 +188,7 @@ export default function useNormalize(
 
     gridTemplateRows,
     gridColumn,
+    gridRow,
     gridAutoRows,
     gridTemplateColumns,
     autoFlow,
@@ -248,5 +246,7 @@ export default function useNormalize(
     overflow,
     overflowX,
     overflowY,
+
+    rootMargin,
   };
 }

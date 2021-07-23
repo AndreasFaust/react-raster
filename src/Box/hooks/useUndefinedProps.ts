@@ -30,6 +30,8 @@ export default function useUndefinedProps(props) {
     gridTemplateRows,
     gridAutoRows,
     gridTemplateColumns,
+    gridRow,
+    gridColumn,
     autoFlow,
     component,
     innerHTML,

@@ -21,16 +21,18 @@ const ExamplePage = () => {
     <Box
       as="section"
       colspan={12}
+      gap="1rem 1rem"
       control
-      padding={["3"]}
+      padding={[1]}
       background="pink"
       // minHeight={"100px"}
       // onClick={() => setOpacity((prev) => !prev)}
     >
       <Box
-        // cols={[2, 5, 8, 9]}
+        cols="5"
+        marginRight="2"
+        padding={[1]}
         height="500px"
-        as="p"
         // opacity={opacity ? 1 : 0}
         background="yellow"
         fontStyle="italic"
@@ -40,7 +42,28 @@ const ExamplePage = () => {
         fontSize="3rem"
         // marginBottom="100vh"
       >
-        Hallo!
+        <Box background="pink">
+          <Box background="blue" as="p" marginLeft={1}>
+            Hallo!
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        cols="3"
+        padding={"2rem 2rem 2rem 0"}
+        height="250px"
+        // opacity={opacity ? 1 : 0}
+        background="yellow"
+        fontStyle="italic"
+        fontWeight="bold"
+        textAlign="center"
+        fontFamily="Avenir"
+        fontSize="3rem"
+        // marginBottom="100vh"
+      >
+        <Box background="blue" as="p" marginLeft={1}>
+          Hallo!
+        </Box>
       </Box>
       {/* <Box
         background="yellow"

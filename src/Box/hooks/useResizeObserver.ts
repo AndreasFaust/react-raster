@@ -1,5 +1,5 @@
 import React from "react";
-import debounce from "./debounce";
+import debounce from "../utils/debounce";
 
 export default function useResizeObserver(
   ref: React.RefObject<HTMLElement | null>,

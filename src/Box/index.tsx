@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 
-import useCombinedRefs from "./utils/useCombinedRefs";
-import useResizeObserver from "./utils/useResizeObserver";
-import useNormalize from "./utils/useNormalize";
-import useControl from "./utils/useControl";
-import useUndefinedProps from "./utils/useUndefinedProps";
-import useIntersect from "./utils/useIntersect";
+import useCombinedRefs from "./hooks/useCombinedRefs";
+import useResizeObserver from "./hooks/useResizeObserver";
+import useNormalize from "./hooks/useNormalize";
+import useControl from "./hooks/useControl";
+import useUndefinedProps from "./hooks/useUndefinedProps";
+import useIntersect from "./hooks/useIntersect";
 
 import Context from "../context";
 import StyledBox from "./StyledBox";
@@ -39,7 +39,7 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
   useIntersect({
     ref: boxRef,
     root: props.root,
-    rootMargin: props.rootMargin,
+    rootMargin: propsNormalized.rootMargin as string,
     threshold: props.threshold,
     onIntersect: props.onIntersect,
   });
@@ -73,8 +73,9 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
           value={{
             breakpoints: propsNormalized.breakpoints,
             breakpoint: propsNormalized.breakpoint,
+            currentBreakpoint: breakpoint,
             gap: propsNormalized.gap,
-            colspan: propsNormalized.colspan,
+            colspan: propsNormalized.colsEffective,
             controlIsVisible,
             controlColor: propsNormalized.controlColor,
             registerChildBox: () => registerChildBox(true),

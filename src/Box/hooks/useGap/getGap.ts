@@ -26,8 +26,10 @@ export default function getGap({
   gridRowGap,
 }: Props): { row: string; column: string } {
   if (
-    !gap &&
-    !gridGap &&
+    !gap.row &&
+    !gap.column &&
+    !gridGap.row &&
+    !gridGap.column &&
     !rowGap &&
     !columnGap &&
     !gridColumnGap &&

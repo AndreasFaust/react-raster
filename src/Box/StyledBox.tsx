@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import React from "react";
-import Container from "./utils/container";
+import Container from "./Container";
 
 type ValidProp = string | number;
 
@@ -9,6 +9,7 @@ interface Props {
   zIndex: ValidProp;
   display: ValidProp;
   colsTotal: ValidProp;
+  colsEffective: ValidProp;
 
   width: ValidProp;
   minWidth?: ValidProp;
@@ -76,8 +77,8 @@ interface Props {
   borderTop: ValidProp;
   borderBottom: ValidProp;
 
-  colspan: ValidProp;
-
+  gridColumn: ValidProp;
+  gridRow: ValidProp;
   gridAutoRows: ValidProp;
   gridTemplateRows: ValidProp;
   gridTemplateColumns: ValidProp;
@@ -99,6 +100,9 @@ interface Props {
   opacity: ValidProp;
 
   controlColor: ValidProp;
+
+  pointerEvents: ValidProp;
+  cursor: ValidProp;
 
   overflow?: ValidProp;
   overflowX?: ValidProp;
@@ -208,7 +212,7 @@ const StyledBoxStyles = styled(Container)<Props>`
   ${(props) =>
     props.display === "grid" &&
     css`
-      grid-template-columns: repeat(${props.colspan}, 1fr);
+      grid-template-columns: repeat(${props.colsEffective}, 1fr);
 
       grid-auto-rows: ${props.gridAutoRows};
       grid-template-rows: ${props.gridTemplateRows};
@@ -231,6 +235,7 @@ const StyledBoxStyles = styled(Container)<Props>`
   ${(props) => css`
     grid-column: auto / span ${props.colsTotal};
     grid-column: ${props.gridColumn};
+    grid-row: ${props.gridRow};
   `}
 
   ${(props) =>

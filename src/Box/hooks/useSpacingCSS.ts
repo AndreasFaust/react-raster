@@ -10,12 +10,8 @@ function useSpacingValue(
   return React.useMemo(() => {
     switch (typeof prop) {
       case "number":
-        if (counterProp) {
-          return `calc(((100% + ${gap} - ${
-            typeof counterProp === "string" ? counterProp : "0px"
-          }) / ${colspan}) * ${prop})`;
-        }
-        return `calc(((100% + ${gap}) / ${colspan}) * ${prop})`;
+        const counter = counterProp === "string" ? counterProp : "0px";
+        return `calc(((100% + ${gap} - ${counter}) / ${colspan}) * ${prop})`;
       default:
         return prop;
     }
@@ -39,12 +35,7 @@ export default function useSpacingCSS(
     spacing.right,
     spacing.left
   );
-  const top = useSpacingValue(gap.column, colspan, spacing.top, spacing.bottom);
-  const bottom = useSpacingValue(
-    gap.column,
-    colspan,
-    spacing.bottom,
-    spacing.top
-  );
+  const top = useSpacingValue(gap.row, colspan, spacing.top, spacing.bottom);
+  const bottom = useSpacingValue(gap.row, colspan, spacing.bottom, spacing.top);
   return { left, right, top, bottom };
 }

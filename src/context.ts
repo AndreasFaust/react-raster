@@ -3,6 +3,10 @@ import React from "react";
 export interface ContextProps {
   breakpoint: number;
   breakpoints?: number[];
+  currentBreakpoint?: {
+    index: number;
+    value: number;
+  };
   gap?: {
     row: string;
     column: string;

@@ -1,7 +1,7 @@
 import React from "react";
 
 type Prop = number | string | (number | string)[];
-type ValidProp = number | string;
+type ValidProp = number | string | undefined;
 
 function convertStringToNumber(prop: ValidProp): ValidProp {
   if (typeof prop !== "string") return prop;
