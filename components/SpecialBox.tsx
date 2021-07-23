@@ -1,13 +1,13 @@
 import React from "react";
-import { Box, Types } from "../src";
+import Box, { Props } from "../src";
 
-const SpecialBox: React.FC<Types.Box> = (props) => (
+const SpecialBox: React.FC<Props> = (props) => (
   <Box {...props}>{props.children}</Box>
 );
 
 SpecialBox.defaultProps = {
   cols: [6, 6, 3],
-  css: "background: green;",
+  styles: "background: green;",
 };
 
 export default SpecialBox;

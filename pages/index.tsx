@@ -18,6 +18,16 @@ const ExamplePage = () => {
     setOpacity(entry.intersectionRatio);
   }
   return (
+    // <Box
+    //   as="section"
+    //   colspan={12}
+    //   gap="1rem 1rem"
+    //   margin="0"
+    //   control
+    //   padding="1"
+    //   background="pink"
+    // />
+
     <Box
       as="section"
       colspan={12}
@@ -65,33 +75,6 @@ const ExamplePage = () => {
           Hallo!
         </Box>
       </Box>
-      {/* <Box
-        background="yellow"
-        height="50vh"
-        // opacity={opacity}
-        // onIntersect={onIntersect}
-        // threshold={buildThresholdArray()}
-      >
-        Intersection!!!
-      </Box> */}
-      {/* <AnimatePresence>
-        {opacity && (
-          <Box
-            background="yellow"
-            height="25vh"
-            component={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              />
-            }
-          >
-            Hallo ich bin ein langer Text!!!
-          </Box>
-        )}
-      </AnimatePresence>
-          */}
     </Box>
   );
 };
