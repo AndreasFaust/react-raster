@@ -239,7 +239,7 @@ const StyledBoxStyles = styled(Container)<Props>`
   `}
 
   ${(props) =>
-    props.as === "img" &&
+    props.tag === "img" &&
     props.controlIsVisible &&
     css`
       box-shadow: 0 0 999em ${props.controlColor} inset;
