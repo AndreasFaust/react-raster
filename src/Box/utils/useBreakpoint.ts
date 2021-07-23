@@ -1,20 +1,15 @@
 import React, { useEffect } from "react";
 import debounce from "./debounce";
 
-interface Props {
-  activateEventListener: boolean;
-  contextBreakpoint: number;
-  breakpoints: number[];
-}
-
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
-export default function useCurrentBreakpoint({
-  activateEventListener,
-  contextBreakpoint,
-  breakpoints,
-}: Props): number {
+export default function useBreakpoint(
+  breakpoints: number[],
+  contextBreakpoint?: number,
+  propsBreakpoints?: number[],
+  propsColspan?: number[]
+): number {
   const [currentBp, setCurrentBp] = React.useState(contextBreakpoint);
 
   useIsomorphicLayoutEffect(() => {
@@ -23,7 +18,7 @@ export default function useCurrentBreakpoint({
       const bp = breakpoints.findIndex((breakpoint) => breakpoint > w) - 1;
       setCurrentBp(bp === -2 ? breakpoints.length - 1 : bp);
     }
-    if (activateEventListener) {
+    if (propsBreakpoints || propsColspan) {
       onResize();
       const dOnResize = debounce(onResize, 100);
       window.addEventListener("resize", dOnResize);
@@ -32,7 +27,7 @@ export default function useCurrentBreakpoint({
   }, []);
 
   React.useEffect(() => {
-    if (activateEventListener) return;
+    if (propsBreakpoints || propsColspan) return;
     setCurrentBp(contextBreakpoint);
   }, [contextBreakpoint]);
 

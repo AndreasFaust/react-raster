@@ -1,4 +1,4 @@
-import normalizeProps from "./normalizeProps";
+import normalizeProps from "./useProp";
 import normalizeShortProp from "./getSpacing/normalizeShortProp";
 
 export default function normalizeSpacing(

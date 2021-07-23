@@ -4,10 +4,10 @@ export interface ContextProps {
   breakpoint: number;
   breakpoints?: number[];
   gap?: {
-    row: string[];
-    column: string[];
+    row: string;
+    column: string;
   };
-  colspan?: number[];
+  colspan?: number;
   controlIsVisible?: boolean;
   controlColor?: string;
   registerChildBox?: () => void;

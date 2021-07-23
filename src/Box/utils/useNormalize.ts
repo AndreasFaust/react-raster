@@ -1,12 +1,13 @@
 import getColsTotal from "./getColsTotal";
 import getColsEffective from "./getColsEffective";
-import normalizeProps from "./normalizeProps";
+import useProp from "./useProp";
 import getSpacing from "./getSpacing";
 import getColspan from "./getColspan";
-import useCurrentBreakpoint from "./useCurrentBreakpoint";
+import useBreakpoint from "./useBreakpoint";
 import normalizeSpacing from "./normalizeSpacing";
-import normalizeDisplay from "./normalizeDisplay";
-import getGap from "./getGap";
+import useDisplay from "./useDisplay";
+import useGap from "./useGap";
+import useBreakpoints from "./useBreakpoints";
 
 import { ContextProps } from "../../context";
 
@@ -15,24 +16,42 @@ export default function useNormalize(
   context: ContextProps,
   hasChildBoxes: boolean
 ) {
-  const breakpoints = props.breakpoints ||
-    context.breakpoints || [0, 432, 768, 1024, 1200, 1400];
-
   const mergedProps = { ...context, ...props };
 
-  const breakpoint = useCurrentBreakpoint({
-    activateEventListener: !!props.breakpoints || !!props.colspan,
-    contextBreakpoint: context.breakpoint,
-    breakpoints,
-  });
+  const breakpoints = useBreakpoints(props.breakpoints, context.breakpoints);
 
-  const display = normalizeDisplay(
+  const breakpoint = useBreakpoint(
     breakpoints,
-    mergedProps.display,
-    hasChildBoxes
+    context.breakpoint,
+    props.breakpoints,
+    props.colspan
   );
 
-  const gap = getGap(props, context, breakpoints);
+  const display = useDisplay(breakpoint, mergedProps.display, hasChildBoxes);
+
+  const gap = useGap({
+    contextGap: context.gap,
+    propsGap: props.gap,
+    gridGap: props.gridGap,
+    rowGap: props.rowGap,
+    columnGap: props.columnGap,
+    gridColumnGap: props.gridColumnGap,
+    gridRowGap: props.gridRowGap,
+    breakpoint,
+  });
+
+  function useSpacing(breakpoint, short, left, right, top, bottom) {
+    const marginNormalized = useProp(margin);
+  }
+
+  const margin = useSpacing(
+    breakpoint,
+    props.margin,
+    props.marginLeft,
+    props.marginRight,
+    props.marginTop,
+    props.marginBottom
+  );
 
   const marginLeftInCols = normalizeSpacing(
     breakpoints,
@@ -55,13 +74,14 @@ export default function useNormalize(
     mergedProps.padding
   );
 
-  const colspanTotal = normalizeProps(
-    breakpoints,
+  const colspanTotal = useProp(
+    breakpoint,
     props.colspan || context.colspan || 1
   );
+  const cols = useProp(breakpoint, props.cols);
 
   const colsEffective = getColsEffective({
-    cols: normalizeProps(breakpoints, mergedProps.cols, ""),
+    cols,
     colspan: colspanTotal,
     paddingLeft: paddingLeftInCols,
     paddingRight: paddingRightInCols,
