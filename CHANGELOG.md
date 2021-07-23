@@ -1,3 +1,13 @@
+#### 8.1.1 (2021-07-23)
+
+##### Bug Fixes
+
+*  fix gap and column-inheritance (567d46f5)
+
+##### Other Changes
+
+*  fix prop tag (1e3a0adf)
+
 ### 8.1.0 (2021-07-23)
 
 ##### New Features

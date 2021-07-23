@@ -118,14 +118,25 @@ function useResizeObserver(ref, onResize) {
     }, [ref.current]);
 }
 
-function useColspanEffective(cols, colspan, spacing) {
+function useColsTotal(colspanTotal, margin, cols) {
     return React__default['default'].useMemo(function () {
+        var left = typeof margin.left === "number" ? margin.left : 0;
+        var right = typeof margin.right === "number" ? margin.right : 0;
+        if (typeof cols === "number") {
+            return cols + left + right;
+        }
+        return colspanTotal;
+    }, [cols, margin.left, margin.right]);
+}
+
+function useColsEffective(colspan, padding, cols) {
+    return React__default['default'].useMemo(function () {
+        var left = typeof padding.left === "number" ? padding.left : 0;
+        var right = typeof padding.right === "number" ? padding.right : 0;
         if (typeof cols === "number")
-            return cols;
-        var left = typeof spacing.left === "number" ? spacing.left : 0;
-        var right = typeof spacing.right === "number" ? spacing.right : 0;
+            return cols - left - right;
         return colspan - left - right;
-    }, [cols, colspan, spacing.left, spacing.right]);
+    }, [cols, colspan, padding.left, padding.right]);
 }
 
 function convertStringToNumber(prop) {
@@ -232,18 +243,8 @@ function useSpacing(breakpoint, short, left, right, top, bottom) {
     ]);
 }
 
-function useColspan(colspanProps, colspanTotal, padding, colsEffective) {
-    return React__default['default'].useMemo(function () {
-        if (colspanProps) {
-            var left = typeof padding.left === "number" ? padding.left : 0;
-            var right = typeof padding.right === "number" ? padding.right : 0;
-            return colspanTotal - left - right;
-        }
-        return colsEffective;
-    }, [colspanProps, colspanTotal, padding.left, padding.right]);
-}
-
 var useIsomorphicLayoutEffect = typeof window !== "undefined" ? React__default['default'].useLayoutEffect : React__default['default'].useEffect;
+
 function useBreakpoint(breakpoints, contextBreakpoint, propsBreakpoints, propsColspan) {
     var _a = React__default['default'].useState(contextBreakpoint), currentBp = _a[0], setCurrentBp = _a[1];
     useIsomorphicLayoutEffect(function () {
@@ -289,8 +290,10 @@ function useGapShort(breakpoint, gap) {
 
 function getGap(_a) {
     var contextGap = _a.contextGap, gap = _a.gap, gridGap = _a.gridGap, rowGap = _a.rowGap, columnGap = _a.columnGap, gridColumnGap = _a.gridColumnGap, gridRowGap = _a.gridRowGap;
-    if (!gap &&
-        !gridGap &&
+    if (!gap.row &&
+        !gap.column &&
+        !gridGap.row &&
+        !gridGap.column &&
         !rowGap &&
         !columnGap &&
         !gridColumnGap &&
@@ -340,10 +343,8 @@ function useSpacingValue(gap, colspan, prop, counterProp) {
     return React__default['default'].useMemo(function () {
         switch (typeof prop) {
             case "number":
-                if (counterProp) {
-                    return "calc(((100% + " + gap + " - " + (typeof counterProp === "string" ? counterProp : "0px") + ") / " + colspan + ") * " + prop + ")";
-                }
-                return "calc(((100% + " + gap + ") / " + colspan + ") * " + prop + ")";
+                var counter = counterProp === "string" ? counterProp : "0px";
+                return "calc(((100% + " + gap + " - " + counter + ") / " + colspan + ") * " + prop + ")";
             default:
                 return prop;
         }
@@ -352,8 +353,8 @@ function useSpacingValue(gap, colspan, prop, counterProp) {
 function useSpacingCSS(gap, colspan, spacing) {
     var left = useSpacingValue(gap.column, colspan, spacing.left, spacing.right);
     var right = useSpacingValue(gap.column, colspan, spacing.right, spacing.left);
-    var top = useSpacingValue(gap.column, colspan, spacing.top, spacing.bottom);
-    var bottom = useSpacingValue(gap.column, colspan, spacing.bottom, spacing.top);
+    var top = useSpacingValue(gap.row, colspan, spacing.top, spacing.bottom);
+    var bottom = useSpacingValue(gap.row, colspan, spacing.bottom, spacing.top);
     return { left: left, right: right, top: top, bottom: bottom };
 }
 
@@ -375,11 +376,9 @@ function useNormalize(props, context, hasChildBoxes) {
     var paddingRaw = useSpacing(breakpoint, props.padding, props.paddingLeft, props.paddingRight, props.paddingTop, props.paddingBottom);
     var colspanTotal = useProp(breakpoint, props.colspan || context.colspan || 1);
     var cols = useProp(breakpoint, props.cols);
-    var colsEffective = useColspanEffective(cols, colspanTotal, paddingRaw);
-    // this gets applied to StyledBox
-    var colspan = useColspan(props.colspan, colspanTotal, paddingRaw, colsEffective);
-    // this gets applied to StyledBox
-    var colsTotal = useColspanEffective(cols, colspanTotal, marginRaw);
+    // gets applied to StyledBox
+    var colsEffective = useColsEffective(colspanTotal, paddingRaw, cols);
+    var colsTotal = useColsTotal(colspanTotal, marginRaw, cols);
     var margin = useSpacingCSS(gap, colsTotal, marginRaw);
     var padding = useSpacingCSS(gap, colsTotal, paddingRaw);
     var styles = useProp(breakpoint, props.styles);
@@ -399,6 +398,7 @@ function useNormalize(props, context, hasChildBoxes) {
     var cursor = useProp(breakpoint, props.cursor);
     var gridTemplateRows = useProp(breakpoint, props.gridTemplateRows);
     var gridColumn = useProp(breakpoint, props.gridColumn);
+    var gridRow = useProp(breakpoint, props.gridRow);
     var gridAutoRows = useProp(breakpoint, props.gridAutoRows);
     var gridTemplateColumns = useProp(breakpoint, props.gridTemplateColumns);
     var autoFlow = useProp(breakpoint, props.autoFlow);
@@ -448,12 +448,13 @@ function useNormalize(props, context, hasChildBoxes) {
     var overflow = useProp(breakpoint, props.overflow);
     var overflowX = useProp(breakpoint, props.overflowX);
     var overflowY = useProp(breakpoint, props.overflowY);
+    var rootMargin = useProp(breakpoint, props.rootMargin);
     return {
         breakpoints: breakpoints,
         breakpoint: breakpoint,
         colsTotal: colsTotal,
         colspanTotal: colspanTotal,
-        colspan: colspan,
+        colsEffective: colsEffective,
         margin: margin,
         padding: padding,
         marginRaw: marginRaw,
@@ -478,6 +479,7 @@ function useNormalize(props, context, hasChildBoxes) {
         cursor: cursor,
         gridTemplateRows: gridTemplateRows,
         gridColumn: gridColumn,
+        gridRow: gridRow,
         gridAutoRows: gridAutoRows,
         gridTemplateColumns: gridTemplateColumns,
         autoFlow: autoFlow,
@@ -527,6 +529,7 @@ function useNormalize(props, context, hasChildBoxes) {
         overflow: overflow,
         overflowX: overflowX,
         overflowY: overflowY,
+        rootMargin: rootMargin,
     };
 }
 
@@ -550,7 +553,7 @@ var useControl = function (control, controlIsVisible) {
 };
 
 function useUndefinedProps(props) {
-    props.display; props.breakpoints; props.width; props.minWidth; props.maxWidth; props.height; props.minHeight; props.maxHeight; props.colspan; props.cols; props.margin; props.marginLeft; props.marginRight; props.marginTop; props.marginBottom; props.padding; props.paddingLeft; props.paddingRight; props.paddingTop; props.paddingBottom; props.gap; props.gridRowGap; props.rowGap; props.gridColumnGap; props.columnGap; props.gridTemplateRows; props.gridAutoRows; props.gridTemplateColumns; props.autoFlow; props.component; props.innerHTML; props.cursor; props.pointerEvents; props.onResize; props.onIntersect; props.root; props.rootMargin; props.threshold; props.styles; props.as; props.control; props.controlColor; props.order; props.position; props.zIndex; props.top; props.bottom; props.left; props.right; props.alignItems; props.alignContent; props.alignSelf; props.justifyContent; props.justifyItems; props.justifySelf; props.flexDirection; props.flexWrap; props.flexShrink; props.flexGrow; props.background; props.backgroundColor; props.backgroundImage; props.backgroundPosition; props.backgroundSize; props.backgroundAttachment; props.filter; props.backdropFilter; props.mixBlendMode; props.backgroundBlendMode; props.textShadow; props.boxShadow; props.textStroke; props.border; props.borderLeft; props.borderRight; props.borderTop; props.borderBottom; props.fontFamily; props.fontSize; props.fontWeight; props.fontStyle; props.textAlign; props.color; props.lineHeight; props.letterSpacing; props.textDecoration; props.hyphens; props.overflow; props.overflowX; props.overflowY; props.transition; props.animation; props.opacity; props.transform; props.className; props.children; props.isControl; props.ref; var rest = __rest(props, ["display", "breakpoints", "width", "minWidth", "maxWidth", "height", "minHeight", "maxHeight", "colspan", "cols", "margin", "marginLeft", "marginRight", "marginTop", "marginBottom", "padding", "paddingLeft", "paddingRight", "paddingTop", "paddingBottom", "gap", "gridRowGap", "rowGap", "gridColumnGap", "columnGap", "gridTemplateRows", "gridAutoRows", "gridTemplateColumns", "autoFlow", "component", "innerHTML", "cursor", "pointerEvents", "onResize", "onIntersect", "root", "rootMargin", "threshold", "styles", "as", "control", "controlColor", "order", "position", "zIndex", "top", "bottom", "left", "right", "alignItems", "alignContent", "alignSelf", "justifyContent", "justifyItems", "justifySelf", "flexDirection", "flexWrap", "flexShrink", "flexGrow", "background", "backgroundColor", "backgroundImage", "backgroundPosition", "backgroundSize", "backgroundAttachment", "filter", "backdropFilter", "mixBlendMode", "backgroundBlendMode", "textShadow", "boxShadow", "textStroke", "border", "borderLeft", "borderRight", "borderTop", "borderBottom", "fontFamily", "fontSize", "fontWeight", "fontStyle", "textAlign", "color", "lineHeight", "letterSpacing", "textDecoration", "hyphens", "overflow", "overflowX", "overflowY", "transition", "animation", "opacity", "transform", "className", "children", "isControl", "ref"]);
+    props.display; props.breakpoints; props.width; props.minWidth; props.maxWidth; props.height; props.minHeight; props.maxHeight; props.colspan; props.cols; props.margin; props.marginLeft; props.marginRight; props.marginTop; props.marginBottom; props.padding; props.paddingLeft; props.paddingRight; props.paddingTop; props.paddingBottom; props.gap; props.gridRowGap; props.rowGap; props.gridColumnGap; props.columnGap; props.gridTemplateRows; props.gridAutoRows; props.gridTemplateColumns; props.gridRow; props.gridColumn; props.autoFlow; props.component; props.innerHTML; props.cursor; props.pointerEvents; props.onResize; props.onIntersect; props.root; props.rootMargin; props.threshold; props.styles; props.as; props.control; props.controlColor; props.order; props.position; props.zIndex; props.top; props.bottom; props.left; props.right; props.alignItems; props.alignContent; props.alignSelf; props.justifyContent; props.justifyItems; props.justifySelf; props.flexDirection; props.flexWrap; props.flexShrink; props.flexGrow; props.background; props.backgroundColor; props.backgroundImage; props.backgroundPosition; props.backgroundSize; props.backgroundAttachment; props.filter; props.backdropFilter; props.mixBlendMode; props.backgroundBlendMode; props.textShadow; props.boxShadow; props.textStroke; props.border; props.borderLeft; props.borderRight; props.borderTop; props.borderBottom; props.fontFamily; props.fontSize; props.fontWeight; props.fontStyle; props.textAlign; props.color; props.lineHeight; props.letterSpacing; props.textDecoration; props.hyphens; props.overflow; props.overflowX; props.overflowY; props.transition; props.animation; props.opacity; props.transform; props.className; props.children; props.isControl; props.ref; var rest = __rest(props, ["display", "breakpoints", "width", "minWidth", "maxWidth", "height", "minHeight", "maxHeight", "colspan", "cols", "margin", "marginLeft", "marginRight", "marginTop", "marginBottom", "padding", "paddingLeft", "paddingRight", "paddingTop", "paddingBottom", "gap", "gridRowGap", "rowGap", "gridColumnGap", "columnGap", "gridTemplateRows", "gridAutoRows", "gridTemplateColumns", "gridRow", "gridColumn", "autoFlow", "component", "innerHTML", "cursor", "pointerEvents", "onResize", "onIntersect", "root", "rootMargin", "threshold", "styles", "as", "control", "controlColor", "order", "position", "zIndex", "top", "bottom", "left", "right", "alignItems", "alignContent", "alignSelf", "justifyContent", "justifyItems", "justifySelf", "flexDirection", "flexWrap", "flexShrink", "flexGrow", "background", "backgroundColor", "backgroundImage", "backgroundPosition", "backgroundSize", "backgroundAttachment", "filter", "backdropFilter", "mixBlendMode", "backgroundBlendMode", "textShadow", "boxShadow", "textStroke", "border", "borderLeft", "borderRight", "borderTop", "borderBottom", "fontFamily", "fontSize", "fontWeight", "fontStyle", "textAlign", "color", "lineHeight", "letterSpacing", "textDecoration", "hyphens", "overflow", "overflowX", "overflowY", "transition", "animation", "opacity", "transform", "className", "children", "isControl", "ref"]);
     return rest;
 }
 
@@ -583,13 +586,13 @@ var Container = React__default['default'].forwardRef(function (_a, ref) {
 });
 
 var StyledBoxStyles = styled__default['default'](Container)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) { return styled.css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n    position: ", ";\n    z-index: ", ";\n    display: ", ";\n    pointer-events: ", ";\n    cursor: ", ";\n\n    width: ", ";\n    min-width: ", ";\n    max-width: ", ";\n    height: ", ";\n    min-height: ", ";\n    max-height: ", ";\n\n    padding-left: ", ";\n    padding-right: ", ";\n    padding-top: ", ";\n    padding-bottom: ", ";\n\n    margin-left: ", ";\n    margin-right: ", ";\n    margin-top: ", ";\n    margin-bottom: ", ";\n\n    order: ", ";\n\n    top: ", ";\n    bottom: ", ";\n    left: ", ";\n    right: ", ";\n\n    align-items: ", ";\n    align-content: ", ";\n    align-self: ", ";\n    justify-content: ", ";\n    justify-items: ", ";\n    justify-self: ", ";\n\n    flex-direction: ", ";\n    flex-wrap: ", ";\n    flex-shrink: ", ";\n    flex-grow: ", ";\n\n    background: ", ";\n    background-color: ", ";\n    background-image: ", ";\n    background-position: ", ";\n    background-size: ", ";\n    background-attachment: ", ";\n\n    filter: ", ";\n    backdrop-filter: ", ";\n    mix-blend-mode: ", ";\n    background-blend-mode: ", ";\n    text-shadow: ", ";\n    box-shadow: ", ";\n    -webkit-text-stroke: ", ";\n    text-stroke: ", ";\n\n    border: ", ";\n    border-left: ", ";\n    border-right: ", ";\n    border-top: ", ";\n    border-bottom: ", ";\n\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: ", ";\n    font-style: ", ";\n    text-align: ", ";\n    color: ", ";\n    line-height: ", ";\n    letter-spacing: ", ";\n    text-decoration: ", ";\n    hyphens: ", ";\n\n    transition: ", ";\n    transform: ", ";\n    animation: ", ";\n    opacity: ", ";\n\n    overflow: ", ";\n    overflow-x: ", ";\n    overflow-y: ", ";\n\n    ", "\n  "], ["\n    position: ", ";\n    z-index: ", ";\n    display: ", ";\n    pointer-events: ", ";\n    cursor: ", ";\n\n    width: ", ";\n    min-width: ", ";\n    max-width: ", ";\n    height: ", ";\n    min-height: ", ";\n    max-height: ", ";\n\n    padding-left: ", ";\n    padding-right: ", ";\n    padding-top: ", ";\n    padding-bottom: ", ";\n\n    margin-left: ", ";\n    margin-right: ", ";\n    margin-top: ", ";\n    margin-bottom: ", ";\n\n    order: ", ";\n\n    top: ", ";\n    bottom: ", ";\n    left: ", ";\n    right: ", ";\n\n    align-items: ", ";\n    align-content: ", ";\n    align-self: ", ";\n    justify-content: ", ";\n    justify-items: ", ";\n    justify-self: ", ";\n\n    flex-direction: ", ";\n    flex-wrap: ", ";\n    flex-shrink: ", ";\n    flex-grow: ", ";\n\n    background: ", ";\n    background-color: ", ";\n    background-image: ", ";\n    background-position: ", ";\n    background-size: ", ";\n    background-attachment: ", ";\n\n    filter: ", ";\n    backdrop-filter: ", ";\n    mix-blend-mode: ", ";\n    background-blend-mode: ", ";\n    text-shadow: ", ";\n    box-shadow: ", ";\n    -webkit-text-stroke: ", ";\n    text-stroke: ", ";\n\n    border: ", ";\n    border-left: ", ";\n    border-right: ", ";\n    border-top: ", ";\n    border-bottom: ", ";\n\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: ", ";\n    font-style: ", ";\n    text-align: ", ";\n    color: ", ";\n    line-height: ", ";\n    letter-spacing: ", ";\n    text-decoration: ", ";\n    hyphens: ", ";\n\n    transition: ", ";\n    transform: ", ";\n    animation: ", ";\n    opacity: ", ";\n\n    overflow: ", ";\n    overflow-x: ", ";\n    overflow-y: ", ";\n\n    ", "\n  "])), props.position, props.zIndex, props.display, props.pointerEvents, props.cursor, props.width, props.minWidth, props.maxWidth, props.height, props.minHeight, props.maxHeight, props.padding.left, props.padding.right, props.padding.top, props.padding.bottom, props.margin.left, props.margin.right, props.margin.top, props.margin.bottom, props.order, props.top, props.bottom, props.left, props.right, props.alignItems, props.alignContent, props.alignSelf, props.justifyContent, props.justifyItems, props.justifySelf, props.flexDirection, props.flexWrap, props.flexShrink, props.flexGrow, props.background, props.backgroundColor, props.backgroundImage, props.backgroundPosition, props.backgroundSize, props.backgroundAttachment, props.filter, props.backdropFilter, props.mixBlendMode, props.backgroundBlendMode, props.textShadow, props.boxShadow, props.textStroke, props.textStroke, props.border, props.borderLeft, props.borderRight, props.borderTop, props.borderBottom, props.fontFamily, props.fontSize, props.fontWeight, props.fontStyle, props.textAlign, props.color, props.lineHeight, props.letterSpacing, props.textDecoration, props.hyphens, props.transition, props.transform, props.animation, props.opacity, props.overflow, props.overflowX, props.overflowY, props.styles ? props.styles : ""); }, function (props) {
-    return props.display === "grid" && styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "], ["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "])), props.colspan, props.gridAutoRows, props.gridTemplateRows, props.gridTemplateColumns, props.autoFlow, props.gap.row, props.gap.column, props.isControl && props.gap.column === "0px"
+    return props.display === "grid" && styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "], ["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "])), props.colsEffective, props.gridAutoRows, props.gridTemplateRows, props.gridTemplateColumns, props.autoFlow, props.gap.row, props.gap.column, props.isControl && props.gap.column === "0px"
         ? "grid-column-gap: 1px;"
         : "");
 }, function (props) {
     return props.display === "flex" && styled.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      gap: ", " ", ";\n    "], ["\n      gap: ", " ", ";\n    "])), props.gap.row, props.gap.column);
-}, function (props) { return styled.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n  "], ["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n  "])), props.colsTotal, props.gridColumn); }, function (props) {
-    return props.as === "img" &&
+}, function (props) { return styled.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n    grid-row: ", ";\n  "], ["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n    grid-row: ", ";\n  "])), props.colsTotal, props.gridColumn, props.gridRow); }, function (props) {
+    return props.tag === "img" &&
         props.controlIsVisible && styled.css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n      box-shadow: 0 0 999em ", " inset;\n    "], ["\n      box-shadow: 0 0 999em ", " inset;\n    "])), props.controlColor);
 });
 var StyledBox = React__default['default'].forwardRef(function (props, ref) {
@@ -603,7 +606,7 @@ function getSideBearing(padding) {
 }
 var ControlGrid = function (props) {
     var colspanTotal = props.colspanTotal;
-    return (React__default['default'].createElement(Box$1, { position: "absolute", className: "GridControl", zIndex: 1000, colspan: colspanTotal, gridColumnGap: props.gridColumnGap, gridAutoRows: "100%", top: 0, bottom: 0, left: 0, right: 0, marginLeft: getSideBearing(props.paddingRaw.left), marginRight: getSideBearing(props.paddingRaw.right), marginTop: getSideBearing(props.paddingRaw.top), marginBottom: getSideBearing(props.paddingRaw.bottom), pointerEvents: "none", isControl: true }, __spreadArray([], Array(colspanTotal)).map(function (_, index) { return (React__default['default'].createElement(Box$1, { key: index, display: "flex", alignSelf: "stretch", cols: 1, backgroundColor: props.controlColor || "rgba(0,0,0,0.12)" })); })));
+    return (React__default['default'].createElement(Box$1, { position: "absolute", className: "GridControl", zIndex: 1000, colspan: colspanTotal, gridColumnGap: props.gap.column, gridAutoRows: "100%", top: 0, bottom: 0, left: 0, right: 0, marginLeft: getSideBearing(props.paddingRaw.left), marginRight: getSideBearing(props.paddingRaw.right), marginTop: getSideBearing(props.paddingRaw.top), marginBottom: getSideBearing(props.paddingRaw.bottom), pointerEvents: "none", isControl: true }, __spreadArray([], Array(colspanTotal)).map(function (_, index) { return (React__default['default'].createElement(Box$1, { key: index, display: "flex", alignSelf: "stretch", cols: 1, backgroundColor: props.controlColor || "rgba(0,0,0,0.12)" })); })));
 };
 var ControlBox = styled__default['default']("span")(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"], ["\n  position: absolute;\n  z-index: 10000;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: ", ";\n  pointer-events: none;\n"])), function (props) { return props.controlColor || "rgba(0,0,0,0.12)"; });
 var Control = function (props) {
@@ -632,7 +635,7 @@ var Box = React__default['default'].forwardRef(function (props, ref) {
     onIntersect({
         ref: boxRef,
         root: props.root,
-        rootMargin: props.rootMargin,
+        rootMargin: propsNormalized.rootMargin,
         threshold: props.threshold,
         onIntersect: props.onIntersect,
     });
@@ -646,8 +649,9 @@ var Box = React__default['default'].forwardRef(function (props, ref) {
             React__default['default'].createElement(Context.Provider, { value: {
                     breakpoints: propsNormalized.breakpoints,
                     breakpoint: propsNormalized.breakpoint,
+                    currentBreakpoint: breakpoint,
                     gap: propsNormalized.gap,
-                    colspan: propsNormalized.colspan,
+                    colspan: propsNormalized.colsEffective,
                     controlIsVisible: controlIsVisible,
                     controlColor: propsNormalized.controlColor,
                     registerChildBox: function () { return registerChildBox(true); },
