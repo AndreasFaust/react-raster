@@ -146,6 +146,7 @@ export default function useNormalize(
   const transition = useProp(breakpoint, props.transition);
   const animation = useProp(breakpoint, props.animation);
   const opacity = useProp(breakpoint, props.opacity);
+  const willChange = useProp(breakpoint, props.willChange);
 
   const overflow = useProp(breakpoint, props.overflow);
   const overflowX = useProp(breakpoint, props.overflowX);
@@ -242,6 +243,7 @@ export default function useNormalize(
     transition,
     animation,
     opacity,
+    willChange,
 
     overflow,
     overflowX,
