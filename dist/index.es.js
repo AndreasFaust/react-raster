@@ -117,7 +117,7 @@ function useColsTotal(colspanTotal, margin, cols) {
             return cols + left + right;
         }
         return colspanTotal;
-    }, [cols, margin.left, margin.right]);
+    }, [cols, colspanTotal, margin.left, margin.right]);
 }
 
 function useColsEffective(colspan, padding, cols) {
