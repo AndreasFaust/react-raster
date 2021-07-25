@@ -1,3 +1,18 @@
+#### 8.1.2 (2021-07-25)
+
+##### Documentation Changes
+
+*  add test-pages (cc34d2ec)
+
+##### New Features
+
+*  add will-change (a7b6be2d)
+
+##### Bug Fixes
+
+*  fix willChange (9c3ab52a)
+*  fix useProp array-handling (51d7007c)
+
 #### 8.1.1 (2021-07-23)
 
 ##### Bug Fixes
