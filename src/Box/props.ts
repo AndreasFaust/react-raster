@@ -83,8 +83,8 @@ export interface Props
   justifyItems?: string | string[];
   justifySelf?: string | string[];
 
-  flexShrink?: number | number[];
-  flexGrow?: number | number[];
+  flexShrink?: string | number | (string | number)[];
+  flexGrow?: string | number | (string | number)[];
   flexDirection?: string | string[];
   flexWrap?: string | string[];
 
@@ -123,7 +123,8 @@ export interface Props
   transition?: string | string[];
   animation?: string | string[];
   transform?: string | string[];
-  opacity?: number | number[];
+  opacity?: string | number | (string | number)[];
+  willChange?: string | string[];
 
   ////////////////////////////////////////
   // utility

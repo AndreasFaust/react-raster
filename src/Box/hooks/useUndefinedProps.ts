@@ -105,6 +105,8 @@ export default function useUndefinedProps(props) {
     animation,
     opacity,
     transform,
+    willChange,
+
     className,
     children,
     isControl,

@@ -98,6 +98,7 @@ interface Props {
   animation: ValidProp;
   transform: ValidProp;
   opacity: ValidProp;
+  willChange: ValidProp;
 
   controlColor: ValidProp;
 
@@ -201,6 +202,7 @@ const StyledBoxStyles = styled(Container)<Props>`
     transform: ${props.transform};
     animation: ${props.animation};
     opacity: ${props.opacity};
+    will-change: ${props.willChange};
 
     overflow: ${props.overflow};
     overflow-x: ${props.overflowX};
