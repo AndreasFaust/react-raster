@@ -1,3 +1,9 @@
+#### 8.1.3 (2021-07-25)
+
+##### Bug Fixes
+
+*  remove console-statements (3365b6b2)
+
 #### 8.1.2 (2021-07-25)
 
 ##### Documentation Changes

@@ -209,12 +209,6 @@ function getShortObject(spacing) {
 function useSpacingShort(breakpoint, spacing) {
     var spacingNormalized = useProp(breakpoint, spacing);
     var spacingObject = React.useMemo(function () { return getShortObject(spacingNormalized); }, [breakpoint, spacing]);
-    React.useEffect(function () {
-        console.log("spacing", spacing);
-        console.log("spacingNormalized", spacingNormalized);
-        console.log("spacingObject", spacingObject);
-        console.log("----");
-    });
     return spacingObject;
 }
 
