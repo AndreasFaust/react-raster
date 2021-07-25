@@ -57,11 +57,5 @@ export default function useSpacingShort(
     () => getShortObject(spacingNormalized as string),
     [breakpoint, spacing]
   );
-  React.useEffect(() => {
-    console.log("spacing", spacing);
-    console.log("spacingNormalized", spacingNormalized);
-    console.log("spacingObject", spacingObject);
-    console.log("----");
-  });
   return spacingObject;
 }

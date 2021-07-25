@@ -5,11 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const buildThresholdArray = () => Array.from(Array(100).keys(), (i) => i / 100);
 
+const boxPadding = ["2rem 1", "2rem 1", "1"];
+
 const ExamplePage = () => {
   const [opacity, setOpacity] = React.useState(0);
   function onIntersect(entry, observer) {
-    console.log("INTERSECT");
-    console.log(entry.intersectionRatio);
+    // console.log("INTERSECT");
+    // console.log(entry.intersectionRatio);
     // console.log(entry);
     // console.log(observer);
     if (entry.isIntersecting) {
@@ -17,18 +19,25 @@ const ExamplePage = () => {
     }
     setOpacity(entry.intersectionRatio);
   }
+
   return (
     <Box
       as="section"
       colspan={12}
       gap="1rem 1rem"
       control
-      padding={["2rem 1", "2rem 1", "1"]}
+      padding={boxPadding}
       background="pink"
       // minHeight={"100px"}
       // onClick={() => setOpacity((prev) => !prev)}
     >
-      <Box height={["200px", "200px", "400px"]} background="green">
+      <Box
+        height={["200px", "200px", "400px"]}
+        marginTop="100vw"
+        background="green"
+        // onIntersect={React.useCallback(() => onIntersect, [])}
+        onIntersect={onIntersect}
+      >
         Hallo
       </Box>
       {/* <Box
