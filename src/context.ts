@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface ContextProps {
-  breakpoint: number;
+  breakpoint?: number;
   breakpoints?: number[];
   currentBreakpoint?: {
     index: number;
@@ -17,9 +17,7 @@ export interface ContextProps {
   registerChildBox?: () => void;
 }
 
-const Context = React.createContext<ContextProps>({
-  breakpoint: 0,
-});
+const Context = React.createContext<ContextProps>({});
 
 function useRaster(): ContextProps {
   return React.useContext(Context);

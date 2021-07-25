@@ -27,7 +27,7 @@ export default function useBreakpoint(
   React.useEffect(() => {
     if (propsBreakpoints || propsColspan) return;
     setCurrentBp(contextBreakpoint);
-  }, [contextBreakpoint]);
+  }, [contextBreakpoint, propsBreakpoints, propsColspan]);
 
   return currentBp;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Box from "../src";
+import SpecialBox from "../components/SpecialBox";
 import { motion, AnimatePresence } from "framer-motion";
 
 const buildThresholdArray = () => Array.from(Array(100).keys(), (i) => i / 100);
@@ -31,6 +32,7 @@ const ExamplePage = () => {
       // minHeight={"100px"}
       // onClick={() => setOpacity((prev) => !prev)}
     >
+      <SpecialBox href="/getting-started">Getting Started</SpecialBox>
       <Box
         height={["200px", "200px", "400px"]}
         marginTop="100vw"

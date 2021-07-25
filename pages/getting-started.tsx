@@ -1,12 +1,11 @@
 import React from "react";
-import Link from "next/link";
 import Box from "../src";
 
 const ExamplePage = () => {
   return (
     <Box
       breakpoints={[0, 400, 800, 1200]}
-      colspan={12}
+      colspan={"12"}
       padding={"1rem"}
       gap="0.5rem 1rem"
       control
@@ -38,8 +37,9 @@ const ExamplePage = () => {
           Hello World!
         </Box>
       </Box> */}
-      <Box cols={[12, 12, 6]} height="500px">
-        <Box
+      <Box as="h1" cols="12 | 12 | 6" height="500px" background="orange">
+        Hallo!
+        {/* <Box
           as="p"
           margin="1"
           display="flex"
@@ -51,7 +51,7 @@ const ExamplePage = () => {
           fontWeight="bold"
         >
           Stop
-        </Box>
+        </Box> */}
         {/* <Box
           as="p"
           margin="0px"

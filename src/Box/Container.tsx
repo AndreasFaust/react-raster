@@ -11,7 +11,11 @@ interface Props {
 const Container = React.forwardRef<HTMLElement, Props>(
   ({ className, children, component, attrs = {}, tag = "div" }, ref) => {
     if (component) {
-      return React.cloneElement(component, { children, className, ...attrs });
+      return React.cloneElement(component, {
+        children,
+        className,
+        ...attrs,
+      });
     }
     return React.createElement(
       tag,
@@ -24,5 +28,7 @@ const Container = React.forwardRef<HTMLElement, Props>(
     );
   }
 );
+
+Container.displayName = "Container";
 
 export default Container;

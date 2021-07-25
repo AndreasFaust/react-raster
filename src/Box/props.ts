@@ -12,7 +12,7 @@ export interface Props
   height?: string | string[];
   minHeight?: string | string[];
   maxHeight?: string | string[];
-  colspan?: number | number[];
+  colspan?: string | number | (string | number)[];
   cols?: string | number | (string | number)[];
 
   margin?: string | number | (string | number)[];

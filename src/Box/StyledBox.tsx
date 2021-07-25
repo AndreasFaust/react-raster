@@ -223,9 +223,8 @@ const StyledBoxStyles = styled(Container)<Props>`
 
       grid-gap: ${props.gap.row} ${props.gap.column};
 
-      ${props.isControl && props.gap.column === "0px"
-        ? "grid-column-gap: 1px;"
-        : ""}
+      ${props.isControl &&
+      (props.gap.column === "0px" ? "grid-column-gap: 1px;" : "")}
     `}
 
   ${(props) =>
@@ -250,5 +249,7 @@ const StyledBoxStyles = styled(Container)<Props>`
 const StyledBox = React.forwardRef<HTMLElement, Props>((props, ref) => {
   return <StyledBoxStyles {...props} ref={ref} />;
 });
+
+StyledBox.displayName = "StyledBox";
 
 export default React.memo(StyledBox);

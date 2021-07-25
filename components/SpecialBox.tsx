@@ -1,8 +1,13 @@
 import React from "react";
+import Link from "next/link";
 import Box, { Props } from "../src";
 
 const SpecialBox: React.FC<Props> = (props) => (
-  <Box {...props}>{props.children}</Box>
+  <Link passHref href={props.href}>
+    <Box {...props} as="a">
+      {props.children}
+    </Box>
+  </Link>
 );
 
 SpecialBox.defaultProps = {

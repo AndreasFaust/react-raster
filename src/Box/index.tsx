@@ -65,25 +65,23 @@ const Box = React.forwardRef<HTMLElement, Props>((props, ref) => {
         }),
       }}
     >
-      <>
-        {controlIsVisible && (
-          <Control isNewGrid={!!props.colspan} {...propsNormalized} />
-        )}
-        <Context.Provider
-          value={{
-            breakpoints: propsNormalized.breakpoints,
-            breakpoint: propsNormalized.breakpoint,
-            currentBreakpoint: breakpoint,
-            gap: propsNormalized.gap,
-            colspan: propsNormalized.colsEffective,
-            controlIsVisible,
-            controlColor: propsNormalized.controlColor,
-            registerChildBox: () => registerChildBox(true),
-          }}
-        >
-          {props.children}
-        </Context.Provider>
-      </>
+      {controlIsVisible && (
+        <Control isNewGrid={!!props.colspan} {...propsNormalized} />
+      )}
+      <Context.Provider
+        value={{
+          breakpoints: propsNormalized.breakpoints,
+          breakpoint: propsNormalized.breakpoint,
+          currentBreakpoint: breakpoint,
+          gap: propsNormalized.gap,
+          colspan: propsNormalized.colsEffective,
+          controlIsVisible,
+          controlColor: propsNormalized.controlColor,
+          registerChildBox: () => registerChildBox(true),
+        }}
+      >
+        {props.children}
+      </Context.Provider>
     </StyledBox>
   );
 });

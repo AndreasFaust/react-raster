@@ -10,12 +10,25 @@ function convertStringToNumber(prop: ValidProp): ValidProp {
   return parsed;
 }
 
-function getProp(prop: Prop, breakpoint: number): ValidProp {
-  if (!Array.isArray(prop)) {
-    return prop;
+function checkForStringNotation(prop: string | number, breakpoint: number) {
+  if (typeof prop !== "string") return prop;
+  if (prop.includes(" | ")) {
+    const propArray = prop.split(" | ");
+    return normalizePropArray(propArray, breakpoint);
   }
+  return prop;
+}
+
+function normalizePropArray(prop: (string | number)[], breakpoint: number) {
   if (breakpoint < prop.length) return prop[breakpoint];
   return prop[prop.length - 1];
+}
+
+function getProp(prop: Prop, breakpoint: number): ValidProp {
+  if (!Array.isArray(prop)) {
+    return checkForStringNotation(prop, breakpoint);
+  }
+  return normalizePropArray(prop, breakpoint);
 }
 
 function normalizeProp(
@@ -34,9 +47,8 @@ export default function useProp(
   prop?: Prop,
   defaultValue?: ValidProp
 ): ValidProp {
-  const validProp = React.useMemo(
+  return React.useMemo(
     () => normalizeProp(breakpoint, prop, defaultValue),
-    [breakpoint, prop]
+    [breakpoint, prop, defaultValue]
   );
-  return validProp;
 }
