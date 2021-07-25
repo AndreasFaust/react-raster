@@ -10,9 +10,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
 
-var Context = React__default['default'].createContext({
-    breakpoint: 0,
-});
+var Context = React__default['default'].createContext({});
 function useRaster() {
     return React__default['default'].useContext(Context);
 }
@@ -147,13 +145,25 @@ function convertStringToNumber(prop) {
         return prop;
     return parsed;
 }
-function getProp(prop, breakpoint) {
-    if (!Array.isArray(prop)) {
+function checkForStringNotation(prop, breakpoint) {
+    if (typeof prop !== "string")
         return prop;
+    if (prop.includes(" | ")) {
+        var propArray = prop.split(" | ");
+        return normalizePropArray(propArray, breakpoint);
     }
+    return prop;
+}
+function normalizePropArray(prop, breakpoint) {
     if (breakpoint < prop.length)
         return prop[breakpoint];
     return prop[prop.length - 1];
+}
+function getProp(prop, breakpoint) {
+    if (!Array.isArray(prop)) {
+        return checkForStringNotation(prop, breakpoint);
+    }
+    return normalizePropArray(prop, breakpoint);
 }
 function normalizeProp(breakpoint, prop, defaultValue) {
     if (typeof prop === "undefined" || prop === null) {
@@ -162,8 +172,7 @@ function normalizeProp(breakpoint, prop, defaultValue) {
     return convertStringToNumber(getProp(prop, breakpoint));
 }
 function useProp(breakpoint, prop, defaultValue) {
-    var validProp = React__default['default'].useMemo(function () { return normalizeProp(breakpoint, prop, defaultValue); }, [breakpoint, prop]);
-    return validProp;
+    return React__default['default'].useMemo(function () { return normalizeProp(breakpoint, prop, defaultValue); }, [breakpoint, prop, defaultValue]);
 }
 
 function convertIfNumber(string) {
@@ -262,7 +271,7 @@ function useBreakpoint(breakpoints, contextBreakpoint, propsBreakpoints, propsCo
         if (propsBreakpoints || propsColspan)
             return;
         setCurrentBp(contextBreakpoint);
-    }, [contextBreakpoint]);
+    }, [contextBreakpoint, propsBreakpoints, propsColspan]);
     return currentBp;
 }
 
@@ -584,11 +593,11 @@ var Container = React__default['default'].forwardRef(function (_a, ref) {
     }
     return React__default['default'].createElement(tag, __assign(__assign({}, attrs), { className: className, ref: ref }), tag !== "img" && !attrs.dangerouslySetInnerHTML ? children : null);
 });
+Container.displayName = "Container";
 
 var StyledBoxStyles = styled__default['default'](Container)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"], ["\n  box-sizing: border-box;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) { return styled.css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n    position: ", ";\n    z-index: ", ";\n    display: ", ";\n    pointer-events: ", ";\n    cursor: ", ";\n\n    width: ", ";\n    min-width: ", ";\n    max-width: ", ";\n    height: ", ";\n    min-height: ", ";\n    max-height: ", ";\n\n    padding-left: ", ";\n    padding-right: ", ";\n    padding-top: ", ";\n    padding-bottom: ", ";\n\n    margin-left: ", ";\n    margin-right: ", ";\n    margin-top: ", ";\n    margin-bottom: ", ";\n\n    order: ", ";\n\n    top: ", ";\n    bottom: ", ";\n    left: ", ";\n    right: ", ";\n\n    align-items: ", ";\n    align-content: ", ";\n    align-self: ", ";\n    justify-content: ", ";\n    justify-items: ", ";\n    justify-self: ", ";\n\n    flex-direction: ", ";\n    flex-wrap: ", ";\n    flex-shrink: ", ";\n    flex-grow: ", ";\n\n    background: ", ";\n    background-color: ", ";\n    background-image: ", ";\n    background-position: ", ";\n    background-size: ", ";\n    background-attachment: ", ";\n\n    filter: ", ";\n    backdrop-filter: ", ";\n    mix-blend-mode: ", ";\n    background-blend-mode: ", ";\n    text-shadow: ", ";\n    box-shadow: ", ";\n    -webkit-text-stroke: ", ";\n    text-stroke: ", ";\n\n    border: ", ";\n    border-left: ", ";\n    border-right: ", ";\n    border-top: ", ";\n    border-bottom: ", ";\n\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: ", ";\n    font-style: ", ";\n    text-align: ", ";\n    color: ", ";\n    line-height: ", ";\n    letter-spacing: ", ";\n    text-decoration: ", ";\n    hyphens: ", ";\n\n    transition: ", ";\n    transform: ", ";\n    animation: ", ";\n    opacity: ", ";\n    will-change: ", ";\n\n    overflow: ", ";\n    overflow-x: ", ";\n    overflow-y: ", ";\n\n    ", "\n  "], ["\n    position: ", ";\n    z-index: ", ";\n    display: ", ";\n    pointer-events: ", ";\n    cursor: ", ";\n\n    width: ", ";\n    min-width: ", ";\n    max-width: ", ";\n    height: ", ";\n    min-height: ", ";\n    max-height: ", ";\n\n    padding-left: ", ";\n    padding-right: ", ";\n    padding-top: ", ";\n    padding-bottom: ", ";\n\n    margin-left: ", ";\n    margin-right: ", ";\n    margin-top: ", ";\n    margin-bottom: ", ";\n\n    order: ", ";\n\n    top: ", ";\n    bottom: ", ";\n    left: ", ";\n    right: ", ";\n\n    align-items: ", ";\n    align-content: ", ";\n    align-self: ", ";\n    justify-content: ", ";\n    justify-items: ", ";\n    justify-self: ", ";\n\n    flex-direction: ", ";\n    flex-wrap: ", ";\n    flex-shrink: ", ";\n    flex-grow: ", ";\n\n    background: ", ";\n    background-color: ", ";\n    background-image: ", ";\n    background-position: ", ";\n    background-size: ", ";\n    background-attachment: ", ";\n\n    filter: ", ";\n    backdrop-filter: ", ";\n    mix-blend-mode: ", ";\n    background-blend-mode: ", ";\n    text-shadow: ", ";\n    box-shadow: ", ";\n    -webkit-text-stroke: ", ";\n    text-stroke: ", ";\n\n    border: ", ";\n    border-left: ", ";\n    border-right: ", ";\n    border-top: ", ";\n    border-bottom: ", ";\n\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: ", ";\n    font-style: ", ";\n    text-align: ", ";\n    color: ", ";\n    line-height: ", ";\n    letter-spacing: ", ";\n    text-decoration: ", ";\n    hyphens: ", ";\n\n    transition: ", ";\n    transform: ", ";\n    animation: ", ";\n    opacity: ", ";\n    will-change: ", ";\n\n    overflow: ", ";\n    overflow-x: ", ";\n    overflow-y: ", ";\n\n    ", "\n  "])), props.position, props.zIndex, props.display, props.pointerEvents, props.cursor, props.width, props.minWidth, props.maxWidth, props.height, props.minHeight, props.maxHeight, props.padding.left, props.padding.right, props.padding.top, props.padding.bottom, props.margin.left, props.margin.right, props.margin.top, props.margin.bottom, props.order, props.top, props.bottom, props.left, props.right, props.alignItems, props.alignContent, props.alignSelf, props.justifyContent, props.justifyItems, props.justifySelf, props.flexDirection, props.flexWrap, props.flexShrink, props.flexGrow, props.background, props.backgroundColor, props.backgroundImage, props.backgroundPosition, props.backgroundSize, props.backgroundAttachment, props.filter, props.backdropFilter, props.mixBlendMode, props.backgroundBlendMode, props.textShadow, props.boxShadow, props.textStroke, props.textStroke, props.border, props.borderLeft, props.borderRight, props.borderTop, props.borderBottom, props.fontFamily, props.fontSize, props.fontWeight, props.fontStyle, props.textAlign, props.color, props.lineHeight, props.letterSpacing, props.textDecoration, props.hyphens, props.transition, props.transform, props.animation, props.opacity, props.willChange, props.overflow, props.overflowX, props.overflowY, props.styles ? props.styles : ""); }, function (props) {
-    return props.display === "grid" && styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "], ["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "])), props.colsEffective, props.gridAutoRows, props.gridTemplateRows, props.gridTemplateColumns, props.autoFlow, props.gap.row, props.gap.column, props.isControl && props.gap.column === "0px"
-        ? "grid-column-gap: 1px;"
-        : "");
+    return props.display === "grid" && styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "], ["\n      grid-template-columns: repeat(", ", 1fr);\n\n      grid-auto-rows: ", ";\n      grid-template-rows: ", ";\n      grid-template-columns: ", ";\n      grid-auto-flow: ", ";\n\n      grid-gap: ", " ", ";\n\n      ", "\n    "])), props.colsEffective, props.gridAutoRows, props.gridTemplateRows, props.gridTemplateColumns, props.autoFlow, props.gap.row, props.gap.column, props.isControl &&
+        (props.gap.column === "0px" ? "grid-column-gap: 1px;" : ""));
 }, function (props) {
     return props.display === "flex" && styled.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      gap: ", " ", ";\n    "], ["\n      gap: ", " ", ";\n    "])), props.gap.row, props.gap.column);
 }, function (props) { return styled.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n    grid-row: ", ";\n  "], ["\n    grid-column: auto / span ", ";\n    grid-column: ", ";\n    grid-row: ", ";\n  "])), props.colsTotal, props.gridColumn, props.gridRow); }, function (props) {
@@ -598,6 +607,7 @@ var StyledBoxStyles = styled__default['default'](Container)(templateObject_6 || 
 var StyledBox = React__default['default'].forwardRef(function (props, ref) {
     return React__default['default'].createElement(StyledBoxStyles, __assign({}, props, { ref: ref }));
 });
+StyledBox.displayName = "StyledBox";
 var StyledBox$1 = React__default['default'].memo(StyledBox);
 var templateObject_1$1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
@@ -644,18 +654,17 @@ var Box = React__default['default'].forwardRef(function (props, ref) {
             : defaultClass, controlIsVisible: controlIsVisible, ref: boxRef, styles: propsNormalized.styles, isControl: props.isControl, attrs: __assign(__assign({}, undefinedProps), (props.innerHTML && {
             dangerouslySetInnerHTML: { __html: props.innerHTML },
         })) }),
-        React__default['default'].createElement(React__default['default'].Fragment, null,
-            controlIsVisible && (React__default['default'].createElement(Control, __assign({ isNewGrid: !!props.colspan }, propsNormalized))),
-            React__default['default'].createElement(Context.Provider, { value: {
-                    breakpoints: propsNormalized.breakpoints,
-                    breakpoint: propsNormalized.breakpoint,
-                    currentBreakpoint: breakpoint,
-                    gap: propsNormalized.gap,
-                    colspan: propsNormalized.colsEffective,
-                    controlIsVisible: controlIsVisible,
-                    controlColor: propsNormalized.controlColor,
-                    registerChildBox: function () { return registerChildBox(true); },
-                } }, props.children))));
+        controlIsVisible && (React__default['default'].createElement(Control, __assign({ isNewGrid: !!props.colspan }, propsNormalized))),
+        React__default['default'].createElement(Context.Provider, { value: {
+                breakpoints: propsNormalized.breakpoints,
+                breakpoint: propsNormalized.breakpoint,
+                currentBreakpoint: breakpoint,
+                gap: propsNormalized.gap,
+                colspan: propsNormalized.colsEffective,
+                controlIsVisible: controlIsVisible,
+                controlColor: propsNormalized.controlColor,
+                registerChildBox: function () { return registerChildBox(true); },
+            } }, props.children)));
 });
 Box.displayName = "Box";
 var Box$1 = React__default['default'].memo(Box);
