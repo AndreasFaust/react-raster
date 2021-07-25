@@ -14,7 +14,7 @@ function getProp(prop: Prop, breakpoint: number): ValidProp {
   if (!Array.isArray(prop)) {
     return prop;
   }
-  if (prop.length >= breakpoint) return prop[breakpoint];
+  if (breakpoint < prop.length) return prop[breakpoint];
   return prop[prop.length - 1];
 }
 
@@ -36,7 +36,7 @@ export default function useProp(
 ): ValidProp {
   const validProp = React.useMemo(
     () => normalizeProp(breakpoint, prop, defaultValue),
-    [breakpoint, prop, defaultValue]
+    [breakpoint, prop]
   );
   return validProp;
 }

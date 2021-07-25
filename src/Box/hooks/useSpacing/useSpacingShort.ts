@@ -11,7 +11,9 @@ function getShortArray(spacing: string | number): (string | number)[] {
 }
 
 function getShortObject(spacing?: string): SpacingObject {
-  if (!spacing) return { top: null, bottom: null, left: null, right: null };
+  if (typeof spacing === "undefined" || spacing === "null" || spacing === "") {
+    return { top: null, bottom: null, left: null, right: null };
+  }
   const shortArray = getShortArray(spacing);
 
   switch (shortArray.length) {
@@ -48,15 +50,18 @@ function getShortObject(spacing?: string): SpacingObject {
 
 export default function useSpacingShort(
   breakpoint: number,
-  spacing?: string | string[]
+  spacing?: string | number | (string | number)[]
 ): SpacingObject {
   const spacingNormalized = useProp(breakpoint, spacing);
-  const [spacingObject, setSpacingObject] = React.useState(
-    getShortObject(spacingNormalized as string)
+  const spacingObject = React.useMemo(
+    () => getShortObject(spacingNormalized as string),
+    [breakpoint, spacing]
   );
   React.useEffect(() => {
-    setSpacingObject(getShortObject(spacingNormalized as string));
-  }, [spacingNormalized]);
-
+    console.log("spacing", spacing);
+    console.log("spacingNormalized", spacingNormalized);
+    console.log("spacingObject", spacingObject);
+    console.log("----");
+  });
   return spacingObject;
 }

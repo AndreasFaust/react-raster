@@ -18,27 +18,20 @@ const ExamplePage = () => {
     setOpacity(entry.intersectionRatio);
   }
   return (
-    // <Box
-    //   as="section"
-    //   colspan={12}
-    //   gap="1rem 1rem"
-    //   margin="0"
-    //   control
-    //   padding="1"
-    //   background="pink"
-    // />
-
     <Box
       as="section"
       colspan={12}
       gap="1rem 1rem"
       control
-      padding={[1]}
+      padding={["2rem 1", "2rem 1", "1"]}
       background="pink"
       // minHeight={"100px"}
       // onClick={() => setOpacity((prev) => !prev)}
     >
-      <Box
+      <Box height={["200px", "200px", "400px"]} background="green">
+        Hallo
+      </Box>
+      {/* <Box
         cols="5"
         marginRight="2"
         padding={[1]}
@@ -74,7 +67,7 @@ const ExamplePage = () => {
         <Box background="blue" as="p" marginLeft={1}>
           Hallo!
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
