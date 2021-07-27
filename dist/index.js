@@ -127,14 +127,16 @@ function useColsTotal(colspanTotal, margin, cols) {
     }, [cols, colspanTotal, margin.left, margin.right]);
 }
 
-function useColsEffective(colspan, padding, cols) {
+function useColsEffective(colspan, margin, padding, cols) {
     return React__default['default'].useMemo(function () {
-        var left = typeof padding.left === "number" ? padding.left : 0;
-        var right = typeof padding.right === "number" ? padding.right : 0;
+        var paddingLeft = typeof padding.left === "number" ? padding.left : 0;
+        var paddingRight = typeof padding.right === "number" ? padding.right : 0;
+        var marginLeft = typeof margin.left === "number" ? margin.left : 0;
+        var marginRight = typeof margin.right === "number" ? margin.right : 0;
         if (typeof cols === "number")
-            return cols - left - right;
-        return colspan - left - right;
-    }, [cols, colspan, padding.left, padding.right]);
+            return cols - paddingLeft - paddingRight;
+        return colspan - paddingLeft - paddingRight - marginLeft - marginRight;
+    }, [cols, colspan, padding.left, padding.right, margin.left, margin.right]);
 }
 
 function convertStringToNumber(prop) {
@@ -384,7 +386,7 @@ function useNormalize(props, context, hasChildBoxes) {
     var colspanTotal = useProp(breakpoint, props.colspan || context.colspan || 1);
     var cols = useProp(breakpoint, props.cols);
     // gets applied to StyledBox
-    var colsEffective = useColsEffective(colspanTotal, paddingRaw, cols);
+    var colsEffective = useColsEffective(colspanTotal, marginRaw, paddingRaw, cols);
     var colsTotal = useColsTotal(colspanTotal, marginRaw, cols);
     var margin = useSpacingCSS(gap, colsTotal, marginRaw);
     var padding = useSpacingCSS(gap, colsTotal, paddingRaw);

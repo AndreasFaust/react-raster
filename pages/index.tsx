@@ -22,30 +22,43 @@ const ExamplePage = () => {
   }
 
   return (
-    <Box
-      as="section"
-      colspan={12}
-      gap="1rem 1rem"
-      control
-      padding={boxPadding}
-      background="pink"
-      // minHeight={"100px"}
-      // onClick={() => setOpacity((prev) => !prev)}
-    >
-      {/* <SpecialBox href="/getting-started">Getting Started</SpecialBox> */}
+    <>
       <Box
-        height={["200px", "200px", "400px"]}
-        // marginTop="100vw"
-        background="green"
-        // // onIntersect={React.useCallback(() => onIntersect, [])}
-        // onIntersect={onIntersect}
-        marginLeft={2}
-        marginRight={2}
-        padding={"0 1"}
+        as="section"
+        colspan={48}
+        gap="1rem 1rem"
+        control
+        padding={boxPadding}
+        background="yellow"
+        // minHeight={"100px"}
+        // onClick={() => setOpacity((prev) => !prev)}
       >
         Hallo
       </Box>
-      {/* <Box
+      <Box
+        as="section"
+        colspan={12}
+        gap="1rem 1rem"
+        control
+        padding={boxPadding}
+        background="pink"
+        // minHeight={"100px"}
+        // onClick={() => setOpacity((prev) => !prev)}
+      >
+        {/* <SpecialBox href="/getting-started">Getting Started</SpecialBox> */}
+        <Box
+          height={["200px", "200px", "400px"]}
+          // marginTop="100vw"
+          background="green"
+          // // onIntersect={React.useCallback(() => onIntersect, [])}
+          // onIntersect={onIntersect}
+          marginLeft={2}
+          marginRight={2}
+          padding={"0 1"}
+        >
+          Hallo
+        </Box>
+        {/* <Box
         cols="5"
         marginRight="2"
         padding={[1]}
@@ -82,7 +95,8 @@ const ExamplePage = () => {
           Hallo!
         </Box>
       </Box> */}
-    </Box>
+      </Box>
+    </>
   );
 };
 
