@@ -32,13 +32,16 @@ const ExamplePage = () => {
       // minHeight={"100px"}
       // onClick={() => setOpacity((prev) => !prev)}
     >
-      <SpecialBox href="/getting-started">Getting Started</SpecialBox>
+      {/* <SpecialBox href="/getting-started">Getting Started</SpecialBox> */}
       <Box
         height={["200px", "200px", "400px"]}
-        marginTop="100vw"
+        // marginTop="100vw"
         background="green"
-        // onIntersect={React.useCallback(() => onIntersect, [])}
-        onIntersect={onIntersect}
+        // // onIntersect={React.useCallback(() => onIntersect, [])}
+        // onIntersect={onIntersect}
+        marginLeft={2}
+        marginRight={2}
+        padding={"0 1"}
       >
         Hallo
       </Box>

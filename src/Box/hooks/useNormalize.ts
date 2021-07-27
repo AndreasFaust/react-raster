@@ -59,6 +59,7 @@ export default function useNormalize(
   // gets applied to StyledBox
   const colsEffective = useColsEffective(
     colspanTotal as number,
+    marginRaw,
     paddingRaw,
     cols as number
   );
